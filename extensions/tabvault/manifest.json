@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "TabVault — Save & Restore Tabs",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Save all your tabs with one click. Reliable storage with automatic backups — your tabs are never lost. Free OneTab alternative.",
   "permissions": ["storage", "tabs"],
   "commands": {
