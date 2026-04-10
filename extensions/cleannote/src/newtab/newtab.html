@@ -20,11 +20,23 @@
     <span id="save-status">Ready</span>
     <div class="status-right">
       <span id="word-count">0 words</span>
-      <button id="btn-export" class="icon-btn" title="Download as .txt" aria-label="Download as text file">
+      <button id="btn-import" class="icon-btn" title="Import note" aria-label="Import note">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M8 2v8M5 7l3 3 3-3M3 12h10"/>
+          <path d="M8 10V2M5 5l3-3 3 3M3 12h10"/>
         </svg>
       </button>
+      <div class="export-dropdown" id="export-dropdown">
+        <button id="btn-export" class="icon-btn" title="Export note" aria-label="Export note">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M8 2v8M5 7l3 3 3-3M3 12h10"/>
+          </svg>
+        </button>
+        <div class="dropdown-menu hidden" id="export-menu">
+          <button id="export-txt" class="dropdown-item">Export as .txt</button>
+          <button id="export-md" class="dropdown-item">Export as .md</button>
+        </div>
+      </div>
+      <input type="file" id="import-file" accept=".txt,.md,.markdown" style="display: none;">
       <button id="btn-settings" class="icon-btn" title="Settings" aria-label="Settings">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
           <circle cx="8" cy="8" r="2.5"/>
