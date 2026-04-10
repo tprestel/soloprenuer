@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TabVault</title>
+  <link rel="stylesheet" href="vault.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>TabVault</h1>
+      <div class="header-actions">
+        <div class="dropdown">
+          <button id="export-btn" class="btn btn-secondary">Export</button>
+          <div id="export-menu" class="dropdown-menu hidden">
+            <button data-format="json">Export as JSON</button>
+            <button data-format="markdown">Export as Markdown</button>
+            <button data-format="html">Export as HTML</button>
+          </div>
+        </div>
+        <label class="btn btn-secondary import-label">
+          Import
+          <input type="file" id="import-input" accept=".json,.txt,.text" hidden>
+        </label>
+      </div>
+    </header>
+
+    <div id="empty-state" class="empty-state hidden">
+      <p>No saved tab groups yet.</p>
+      <p class="subtle">Click the TabVault icon or press <kbd>Alt+Shift+T</kbd> to save your open tabs.</p>
+    </div>
+
+    <div id="groups-list" class="groups-list"></div>
+  </div>
+
+  <script src="vault.js" type="module"></script>
+</body>
+</html>
