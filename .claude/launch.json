@@ -1,0 +1,47 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "deliverables",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "clients/adrenaline-fix-karting/deliverables", "-p", "3030", "--no-clipboard"],
+      "port": 3030
+    },
+    {
+      "name": "super-laundry",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "clients/super-laundry", "-p", "3031", "--no-clipboard"],
+      "port": 3031
+    },
+    {
+      "name": "jeff-hill",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "clients/jeff-hill-trailer-sales/deliverables", "-p", "3033", "--no-clipboard"],
+      "port": 3033
+    },
+    {
+      "name": "templates",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "templates", "-p", "3034", "--no-clipboard"],
+      "port": 3034
+    },
+    {
+      "name": "tabquill",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "extensions/tabquill", "-p", "3035", "--no-clipboard"],
+      "port": 3035
+    },
+    {
+      "name": "tabsafe",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "extensions/tabsafe", "-p", "3036", "--no-clipboard"],
+      "port": 3036
+    },
+    {
+      "name": "freshtab",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "extensions/freshtab", "-p", "3037", "--no-clipboard"],
+      "port": 3037
+    }
+  ]
+}
