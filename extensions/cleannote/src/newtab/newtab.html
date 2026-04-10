@@ -7,44 +7,97 @@
   <title>New Tab</title>
 </head>
 <body>
-  <div class="editor-wrap">
-    <div
-      id="editor"
-      contenteditable="true"
-      spellcheck="true"
-      data-placeholder="Start typing..."
-    ></div>
-  </div>
-
-  <footer class="status-bar">
-    <span id="save-status">Ready</span>
-    <div class="status-right">
-      <span id="word-count">0 words</span>
-      <button id="btn-import" class="icon-btn" title="Import note" aria-label="Import note">
+  <!-- Sidebar (notebooks) -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <span class="sidebar-title">Notebooks</span>
+      <button id="btn-toggle-sidebar" class="icon-btn sidebar-close" title="Close sidebar" aria-label="Close sidebar">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M8 10V2M5 5l3-3 3 3M3 12h10"/>
-        </svg>
-      </button>
-      <div class="export-dropdown" id="export-dropdown">
-        <button id="btn-export" class="icon-btn" title="Export note" aria-label="Export note">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M8 2v8M5 7l3 3 3-3M3 12h10"/>
-          </svg>
-        </button>
-        <div class="dropdown-menu hidden" id="export-menu">
-          <button id="export-txt" class="dropdown-item">Export as .txt</button>
-          <button id="export-md" class="dropdown-item">Export as .md</button>
-        </div>
-      </div>
-      <input type="file" id="import-file" accept=".txt,.md,.markdown" style="display: none;">
-      <button id="btn-settings" class="icon-btn" title="Settings" aria-label="Settings">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="8" cy="8" r="2.5"/>
-          <path d="M8 1v2M8 13v2M1 8h2M13 8h2M2.93 2.93l1.41 1.41M11.66 11.66l1.41 1.41M2.93 13.07l1.41-1.41M11.66 4.34l1.41-1.41"/>
+          <path d="M11 4L5 8l6 4"/>
         </svg>
       </button>
     </div>
-  </footer>
+
+    <!-- Search -->
+    <div class="sidebar-search">
+      <div class="search-input-wrap">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="7" cy="7" r="4.5"/>
+          <path d="M10.5 10.5L14 14"/>
+        </svg>
+        <input id="search-input" type="text" placeholder="Search notebooks..." class="search-input">
+        <span id="search-pro-badge" class="pro-badge hidden">PRO</span>
+      </div>
+      <div id="search-results" class="search-results hidden"></div>
+    </div>
+
+    <div id="notebook-list" class="notebook-list"></div>
+
+    <button id="btn-new-notebook" class="btn-new-notebook">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M8 3v10M3 8h10"/>
+      </svg>
+      New Notebook
+      <span id="new-nb-pro-badge" class="pro-badge hidden">PRO</span>
+    </button>
+  </aside>
+
+  <!-- Main content area -->
+  <div id="main-area" class="main-area">
+    <div class="editor-wrap">
+      <div
+        id="editor"
+        contenteditable="true"
+        spellcheck="true"
+        data-placeholder="Start typing..."
+      ></div>
+      <div id="markdown-preview" class="markdown-preview hidden"></div>
+    </div>
+
+    <footer class="status-bar">
+      <div class="status-left">
+        <button id="btn-open-sidebar" class="icon-btn" title="Open sidebar" aria-label="Open sidebar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M2 4h12M2 8h12M2 12h12"/>
+          </svg>
+        </button>
+        <span id="save-status">Ready</span>
+      </div>
+      <div class="status-right">
+        <span id="word-count">0 words</span>
+
+        <!-- Markdown toggle -->
+        <button id="btn-md-toggle" class="icon-btn md-toggle-btn" title="Toggle Markdown Preview" aria-label="Toggle Markdown Preview">
+          <span class="md-toggle-label">Preview</span>
+          <span id="md-pro-badge" class="pro-badge hidden">PRO</span>
+        </button>
+
+        <button id="btn-import" class="icon-btn" title="Import note" aria-label="Import note">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M8 10V2M5 5l3-3 3 3M3 12h10"/>
+          </svg>
+        </button>
+        <div class="export-dropdown" id="export-dropdown">
+          <button id="btn-export" class="icon-btn" title="Export note" aria-label="Export note">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M8 2v8M5 7l3 3 3-3M3 12h10"/>
+            </svg>
+          </button>
+          <div class="dropdown-menu hidden" id="export-menu">
+            <button id="export-txt" class="dropdown-item">Export as .txt</button>
+            <button id="export-md" class="dropdown-item">Export as .md</button>
+          </div>
+        </div>
+        <input type="file" id="import-file" accept=".txt,.md,.markdown" style="display: none;">
+        <button id="btn-settings" class="icon-btn" title="Settings" aria-label="Settings">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="8" cy="8" r="2.5"/>
+            <path d="M8 1v2M8 13v2M1 8h2M13 8h2M2.93 2.93l1.41 1.41M11.66 11.66l1.41 1.41M2.93 13.07l1.41-1.41M11.66 4.34l1.41-1.41"/>
+          </svg>
+        </button>
+      </div>
+    </footer>
+  </div>
 
   <!-- Settings panel (hidden by default) -->
   <div id="settings-panel" class="settings-panel hidden">
@@ -70,8 +123,38 @@
         <option value="light">Light</option>
         <option value="dark">Dark</option>
         <option value="sepia">Sepia</option>
+        <option value="custom">Custom</option>
       </select>
+      <span id="theme-pro-badge" class="pro-badge hidden">PRO</span>
     </div>
+
+    <!-- Custom theme color pickers (hidden by default) -->
+    <div id="custom-theme-options" class="custom-theme-options hidden">
+      <div class="setting-row">
+        <label for="custom-bg">Background</label>
+        <input id="custom-bg" type="color" value="#ffffff">
+      </div>
+      <div class="setting-row">
+        <label for="custom-text">Text</label>
+        <input id="custom-text" type="color" value="#1a1a1a">
+      </div>
+      <div class="setting-row">
+        <label for="custom-accent">Accent</label>
+        <input id="custom-accent" type="color" value="#4a90d9">
+      </div>
+    </div>
+
+    <div class="setting-divider"></div>
+
+    <div class="setting-row">
+      <label for="setting-premium">Premium</label>
+      <label class="toggle-switch">
+        <input id="setting-premium" type="checkbox">
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+    <p class="setting-hint">Toggle premium features (ExtensionPay integration coming soon)</p>
+
     <button id="btn-close-settings" class="btn-close">Done</button>
   </div>
 

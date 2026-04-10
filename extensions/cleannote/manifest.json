@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "CleanNote — Instant Notepad",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A beautiful, distraction-free notepad that opens with one click. Your notes save automatically and never leave your browser.",
   "permissions": ["storage", "tabs"],
   "background": {
