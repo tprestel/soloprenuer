@@ -1,0 +1,13 @@
+{
+  "name": "freshtab",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A beautiful new tab with time, weather, daily focus, and inspiring backgrounds.",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "vitest": "^3.1.1"
+  }
+}
