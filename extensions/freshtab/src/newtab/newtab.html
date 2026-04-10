@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="newtab.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <title>New Tab</title>
+</head>
+<body>
+  <div class="backdrop"></div>
+  <div class="noise-overlay"></div>
+
+  <div class="container">
+    <!-- Weather — top right -->
+    <div class="weather" id="weather-widget">
+      <span class="weather-icon" id="weather-icon"></span>
+      <span class="weather-temp" id="weather-temp"></span>
+      <span class="weather-desc" id="weather-desc"></span>
+    </div>
+
+    <!-- Hero: Time + Date + Greeting -->
+    <div class="hero">
+      <div class="time" id="time"></div>
+      <div class="date" id="date"></div>
+      <div class="greeting" id="greeting"></div>
+    </div>
+
+    <!-- Focus -->
+    <div class="focus-section" id="focus-section">
+      <label class="focus-label" id="focus-label">What is your main focus today?</label>
+      <input type="text" id="focus-input" class="focus-input" placeholder="Type your focus..." maxlength="100" autocomplete="off">
+      <div class="focus-display hidden" id="focus-display">
+        <span class="focus-text" id="focus-text"></span>
+        <button class="focus-clear" id="focus-clear" title="Clear focus">&times;</button>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="quick-links" id="quick-links"></div>
+
+    <!-- Quote — bottom -->
+    <div class="quote-section" id="quote-section">
+      <p class="quote-text" id="quote-text"></p>
+      <p class="quote-author" id="quote-author"></p>
+    </div>
+
+    <!-- Settings toggle -->
+    <button class="settings-btn" id="btn-settings" title="Settings">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="10" cy="10" r="3"/>
+        <path d="M10 1v3M10 16v3M1 10h3M16 10h3M3.93 3.93l2.12 2.12M13.95 13.95l2.12 2.12M3.93 16.07l2.12-2.12M13.95 6.05l2.12-2.12"/>
+      </svg>
+    </button>
+
+    <!-- Settings Panel -->
+    <div class="settings-overlay hidden" id="settings-overlay"></div>
+    <div class="settings-panel hidden" id="settings-panel">
+      <h2>Settings</h2>
+      <div class="setting-row">
+        <label for="setting-name">Your name</label>
+        <input type="text" id="setting-name" placeholder="Enter your name" maxlength="30">
+      </div>
+      <div class="setting-row">
+        <label class="toggle-label">
+          <input type="checkbox" id="setting-weather" checked>
+          <span class="toggle-switch"></span>
+          Show weather
+        </label>
+      </div>
+      <div class="setting-row">
+        <label class="toggle-label">
+          <input type="checkbox" id="setting-quote" checked>
+          <span class="toggle-switch"></span>
+          Show quote
+        </label>
+      </div>
+      <div class="setting-row">
+        <label class="toggle-label">
+          <input type="checkbox" id="setting-focus" checked>
+          <span class="toggle-switch"></span>
+          Show focus
+        </label>
+      </div>
+      <div class="setting-row">
+        <label for="setting-temp-unit">Temperature</label>
+        <select id="setting-temp-unit">
+          <option value="F">Fahrenheit</option>
+          <option value="C">Celsius</option>
+        </select>
+      </div>
+      <h3>Quick Links</h3>
+      <div id="links-list"></div>
+      <button id="btn-add-link" class="btn-add">+ Add Link</button>
+      <button id="btn-close-settings" class="btn-done">Done</button>
+    </div>
+  </div>
+
+  <script type="module" src="newtab.js"></script>
+</body>
+</html>
