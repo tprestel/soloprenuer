@@ -11,14 +11,36 @@ const settingFont = document.getElementById('setting-font');
 const settingSize = document.getElementById('setting-size');
 const settingSizeValue = document.getElementById('setting-size-value');
 const settingTheme = document.getElementById('setting-theme');
+const wordCount = document.getElementById('word-count');
+const btnExport = document.getElementById('btn-export');
 
 let saveTimeout = null;
 let overlay = null;
+
+// --- Word Count ---
+function updateWordCount() {
+  const text = editor.innerText.trim();
+  const count = text ? text.split(/\s+/).length : 0;
+  wordCount.textContent = `${count} word${count !== 1 ? 's' : ''}`;
+}
+
+// --- Export ---
+btnExport.addEventListener('click', () => {
+  const text = editor.innerText;
+  const blob = new Blob([text], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `cleannote-${new Date().toISOString().split('T')[0]}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
+});
 
 // --- Autosave ---
 function scheduleSave() {
   if (saveTimeout) clearTimeout(saveTimeout);
   saveStatus.textContent = 'Typing...';
+  updateWordCount();
 
   saveTimeout = setTimeout(async () => {
     await saveNote(editor.innerText);
@@ -134,6 +156,7 @@ async function init() {
   }
 
   editor.focus();
+  updateWordCount();
   saveStatus.textContent = 'Ready';
 }
 
