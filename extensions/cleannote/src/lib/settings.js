@@ -1,6 +1,6 @@
 import { storageGet, storageSet } from './storage.js';
 
-const SETTINGS_KEY = 'cleannote_settings';
+const SETTINGS_KEY = 'tabquill_settings';
 
 export const DEFAULTS = {
   fontFamily: 'Georgia',

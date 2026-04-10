@@ -69,7 +69,7 @@ describe('notebooks', () => {
 
   describe('migrateFromSingleNote', () => {
     it('migrates existing single note to notebooks format', async () => {
-      mockStore['cleannote_content'] = 'My old note content';
+      mockStore['tabquill_content'] = 'My old note content';
       const data = await migrateFromSingleNote();
       expect(data.notebooks).toHaveLength(1);
       expect(data.notebooks[0].name).toBe('Notes');
@@ -83,7 +83,7 @@ describe('notebooks', () => {
         activeNotebookId: 'nb_1'
       };
       mockStore[NOTEBOOKS_KEY] = existing;
-      mockStore['cleannote_content'] = 'Old content';
+      mockStore['tabquill_content'] = 'Old content';
       const data = await migrateFromSingleNote();
       expect(data.notebooks[0].name).toBe('Existing');
       expect(data.notebooks[0].content).toBe('keep');

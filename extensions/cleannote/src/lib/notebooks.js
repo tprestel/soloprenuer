@@ -1,7 +1,7 @@
 import { storageGet, storageSet } from './storage.js';
 
-export const NOTEBOOKS_KEY = 'cleannote_notebooks';
-const OLD_NOTE_KEY = 'cleannote_content';
+export const NOTEBOOKS_KEY = 'tabquill_notebooks';
+const OLD_NOTE_KEY = 'tabquill_content';
 
 function generateId() {
   return 'nb_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
@@ -101,6 +101,15 @@ export async function updateNotebookContent(id, content) {
   if (!nb) throw new Error('Notebook not found');
   nb.content = content;
   nb.updatedAt = Date.now();
+  await saveNotebooks(data);
+  return data;
+}
+
+export async function setNotebookTag(id, tag) {
+  const data = await loadNotebooks();
+  const nb = data.notebooks.find(n => n.id === id);
+  if (!nb) throw new Error('Notebook not found');
+  nb.tag = tag || null;
   await saveNotebooks(data);
   return data;
 }

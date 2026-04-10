@@ -1,6 +1,6 @@
 import { storageGet, storageSet } from './storage.js';
 
-const PREMIUM_KEY = 'cleannote_premium';
+const PREMIUM_KEY = 'tabquill_premium';
 
 export async function isPremium() {
   const val = await storageGet(PREMIUM_KEY);

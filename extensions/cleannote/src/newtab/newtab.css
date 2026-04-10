@@ -603,6 +603,10 @@ body {
   line-height: 1.4;
 }
 
+.setting-row .setting-hint {
+  margin: 3px 0 0;
+}
+
 /* Toggle switch */
 .toggle-switch {
   position: relative;
@@ -778,6 +782,158 @@ body {
 .btn-confirm-delete:hover {
   opacity: 0.85;
 }
+
+/* ==================== Feature 1: Word Count Toggle / Read Time ==================== */
+
+.word-count-toggle { cursor: pointer; user-select: none; }
+.word-count-toggle:hover { color: #888; }
+.read-time { font-size: 13px; color: #aaa; margin-left: 2px; }
+
+/* ==================== Feature 3: Typewriter Mode ==================== */
+
+body.typewriter-active .editor-wrap {
+  padding-bottom: 60vh;
+}
+.typewriter-btn.active {
+  color: var(--accent);
+  background: rgba(0,0,0,0.05);
+  border-radius: 4px;
+}
+
+/* ==================== Feature 4: Focus Mode ==================== */
+
+body.focus-mode #sidebar { display: none; }
+body.focus-mode .status-bar { opacity: 0; transition: opacity 0.3s; }
+body.focus-mode:hover .status-bar,
+body.focus-mode .status-bar:focus-within { opacity: 1; }
+body.focus-mode .main-area { margin-left: 0; }
+.focus-btn.active { color: var(--accent); background: rgba(0,0,0,0.05); border-radius: 4px; }
+
+/* ==================== Feature 6: Writing Goals ==================== */
+
+.writing-goal-bar {
+  position: relative;
+  height: 3px;
+  background: #eee;
+  border-radius: 0 0 4px 4px;
+  overflow: hidden;
+}
+.writing-goal-progress {
+  height: 100%;
+  background: var(--accent, #4a90d9);
+  transition: width 0.3s;
+  border-radius: 0 0 4px 4px;
+}
+.writing-goal-bar.goal-complete .writing-goal-progress { background: #22C55E; }
+.writing-goal-label {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: #999;
+  white-space: nowrap;
+}
+.goal-input-wrap { display: flex; align-items: center; gap: 6px; }
+.goal-input { width: 80px; padding: 4px 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 13px; }
+.goal-unit { font-size: 13px; color: #888; }
+
+/* ==================== Feature 7: Version History ==================== */
+
+.history-panel {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 280px;
+  background: var(--panel-bg);
+  border-left: 1px solid var(--border);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+}
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.history-header h3 { font-size: 14px; font-weight: 600; }
+.history-list { flex: 1; overflow-y: auto; }
+.history-item {
+  padding: 12px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+}
+.history-item:hover { background: var(--sidebar-hover); }
+.history-item-date { font-size: 12px; font-weight: 500; color: var(--text); }
+.history-item-preview { font-size: 11px; color: #999; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.history-restore-btn { font-size: 11px; color: var(--accent); background: none; border: none; cursor: pointer; margin-top: 4px; padding: 0; }
+.history-btn { position: relative; }
+
+/* ==================== Feature 8: Notebook Tags ==================== */
+
+.nb-tag-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; cursor: pointer; }
+.nb-tag-dot-empty { border: 1.5px dashed #ccc; background: transparent; }
+.nb-color-picker { position: fixed; background: var(--panel-bg); border: 1px solid var(--border); border-radius: 8px; padding: 8px; display: flex; gap: 6px; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.nb-color-btn { width: 16px; height: 16px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform 0.15s; }
+.nb-color-btn:hover { transform: scale(1.2); }
+.nb-color-btn-clear { width: 16px; height: 16px; background: #f3f4f6; border: 1px solid #d1d5db; font-size: 10px; display: flex; align-items: center; justify-content: center; color: #9CA3AF; border-radius: 50%; cursor: pointer; padding: 0; }
+
+/* ==================== Feature 9: Focus Paragraph Mode ==================== */
+
+body.focus-para-active #editor > * {
+  opacity: 0.2;
+  transition: opacity 0.2s;
+}
+body.focus-para-active #editor > *.focused-para {
+  opacity: 1;
+}
+body.focus-para-active #editor:not(:focus-within) > * {
+  opacity: 1;
+}
+.focus-para-btn.active { color: var(--accent); background: rgba(0,0,0,0.05); border-radius: 4px; }
+
+/* ==================== Feature 10: Google Keep Modal ==================== */
+
+.btn-keep-sync {
+  padding: 6px 14px;
+  background: #FBBC04;
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-keep-sync:hover { background: #F9A900; }
+
+.keep-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+.keep-modal {
+  background: var(--panel-bg);
+  border-radius: 12px;
+  padding: 28px;
+  max-width: 340px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+.keep-modal-icon { margin-bottom: 16px; }
+.keep-modal h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+.keep-modal p { font-size: 13px; color: #666; margin-bottom: 20px; line-height: 1.5; }
+.keep-modal-actions { display: flex; gap: 10px; justify-content: center; }
+.keep-notify-btn { padding: 8px 18px; background: #FBBC04; color: #333; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.keep-dismiss-btn { padding: 8px 18px; background: #f3f4f6; color: #555; border: none; border-radius: 6px; font-size: 13px; cursor: pointer; }
 
 /* ==================== Mobile Responsive ==================== */
 

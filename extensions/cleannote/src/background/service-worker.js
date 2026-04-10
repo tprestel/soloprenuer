@@ -1,5 +1,5 @@
-// Open CleanNote in a dedicated tab when the extension icon is clicked.
-// If a CleanNote tab already exists, switch to it instead of opening a duplicate.
+// Open TabQuill in a dedicated tab when the extension icon is clicked.
+// If a TabQuill tab already exists, switch to it instead of opening a duplicate.
 chrome.action.onClicked.addListener(async () => {
   const noteUrl = chrome.runtime.getURL('src/newtab/newtab.html');
   const tabs = await chrome.tabs.query({});

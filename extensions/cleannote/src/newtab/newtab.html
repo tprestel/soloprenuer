@@ -52,6 +52,10 @@
         data-placeholder="Start typing..."
       ></div>
       <div id="markdown-preview" class="markdown-preview hidden"></div>
+      <div id="writing-goal-bar" class="writing-goal-bar hidden">
+        <div id="writing-goal-progress" class="writing-goal-progress"></div>
+        <span id="writing-goal-label" class="writing-goal-label">0 / 500 words</span>
+      </div>
     </div>
 
     <footer class="status-bar">
@@ -64,7 +68,42 @@
         <span id="save-status">Ready</span>
       </div>
       <div class="status-right">
-        <span id="word-count">0 words</span>
+        <span id="word-count" class="word-count-toggle" title="Click to toggle character count">0 words</span>
+        <span id="read-time" class="read-time">· ~0m read</span>
+
+        <!-- Typewriter mode -->
+        <button id="btn-typewriter" class="icon-btn typewriter-btn" title="Typewriter mode" aria-label="Typewriter mode">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="4" width="12" height="8" rx="1"/>
+            <path d="M5 10h6M8 7v3"/>
+          </svg>
+        </button>
+
+        <!-- Focus mode -->
+        <button id="btn-focus" class="icon-btn focus-btn" title="Focus mode (hides sidebar &amp; toolbar)" aria-label="Focus mode">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M1 4V2h3M12 2h3v2M1 12v2h3M12 14h3v-2"/>
+          </svg>
+        </button>
+
+        <!-- Focus paragraph mode -->
+        <button id="btn-focus-para" class="icon-btn focus-para-btn" title="Focus paragraph mode" aria-label="Focus paragraph mode">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M2 5h12M2 8h8M2 11h10" opacity="0.3"/>
+            <path d="M2 8h12"/>
+          </svg>
+        </button>
+        <span id="focus-para-pro-badge" class="pro-badge hidden">PRO</span>
+
+        <!-- Version history -->
+        <button id="btn-history" class="icon-btn history-btn" title="Version history" aria-label="Version history">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M1 8a7 7 0 1 0 7-7"/>
+            <path d="M1 1v4h4"/>
+            <path d="M8 5v3l2 2"/>
+          </svg>
+          <span id="history-pro-badge" class="pro-badge hidden">PRO</span>
+        </button>
 
         <!-- Markdown toggle -->
         <button id="btn-md-toggle" class="icon-btn md-toggle-btn" title="Toggle Markdown Preview" aria-label="Toggle Markdown Preview">
@@ -155,7 +194,36 @@
     </div>
     <p class="setting-hint">Toggle premium features (ExtensionPay integration coming soon)</p>
 
+    <div class="setting-divider"></div>
+
+    <div class="setting-row" id="writing-goal-row">
+      <label for="setting-goal">Daily word goal</label>
+      <div class="goal-input-wrap">
+        <input id="setting-goal" type="number" min="0" max="50000" step="50" value="0" class="goal-input">
+        <span class="goal-unit">words</span>
+        <span id="goal-pro-badge" class="pro-badge hidden">PRO</span>
+      </div>
+    </div>
+
+    <div class="setting-divider"></div>
+    <div class="setting-row">
+      <div>
+        <span class="setting-label">Google Keep sync</span>
+        <p class="setting-hint">Import and sync notes with Google Keep</p>
+      </div>
+      <button id="btn-keep-sync" class="btn-keep-sync">Connect</button>
+    </div>
+
     <button id="btn-close-settings" class="btn-close">Done</button>
+  </div>
+
+  <!-- Version history panel -->
+  <div id="history-panel" class="history-panel hidden">
+    <div class="history-header">
+      <h3>Version History</h3>
+      <button id="btn-close-history" class="icon-btn">×</button>
+    </div>
+    <div id="history-list" class="history-list"></div>
   </div>
 
   <script type="module" src="newtab.js"></script>

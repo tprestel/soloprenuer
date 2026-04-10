@@ -1,7 +1,7 @@
 import { storageGet, storageSet } from './storage.js';
 
-export const NOTE_KEY = 'cleannote_content';
-const TIMESTAMP_KEY = 'cleannote_lastSaved';
+export const NOTE_KEY = 'tabquill_content';
+const TIMESTAMP_KEY = 'tabquill_lastSaved';
 
 export async function loadNote() {
   const content = await storageGet(NOTE_KEY);

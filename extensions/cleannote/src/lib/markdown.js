@@ -1,5 +1,5 @@
 /**
- * Lightweight markdown parser for CleanNote.
+ * Lightweight markdown parser for TabQuill.
  * Handles: headings, bold, italic, links, lists, code blocks,
  * inline code, blockquotes, horizontal rules, paragraphs.
  */
