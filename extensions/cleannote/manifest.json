@@ -1,13 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "CleanNote — New Tab Notepad",
-  "version": "0.1.0",
-  "description": "Replace your new tab with a beautiful, distraction-free notepad. Your notes save automatically and never leave your browser.",
-  "permissions": [
-    "storage"
-  ],
-  "chrome_url_overrides": {
-    "newtab": "src/newtab/newtab.html"
+  "name": "CleanNote — Instant Notepad",
+  "version": "0.2.0",
+  "description": "A beautiful, distraction-free notepad that opens with one click. Your notes save automatically and never leave your browser.",
+  "permissions": ["storage", "tabs"],
+  "background": {
+    "service_worker": "src/background/service-worker.js"
   },
   "action": {
     "default_icon": {
