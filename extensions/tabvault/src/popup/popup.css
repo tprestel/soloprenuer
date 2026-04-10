@@ -50,6 +50,31 @@ body {
   background: #1D4ED8;
 }
 
+.btn-secondary-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 9px 16px;
+  background: #fff;
+  color: #374151;
+  border: 1px solid #D1D5DB;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.btn-secondary-action:hover {
+  background: #F3F4F6;
+  border-color: #9CA3AF;
+}
+
+.btn-secondary-action:active {
+  background: #E5E7EB;
+}
+
 .status {
   padding: 10px 14px;
   background: #ECFDF5;

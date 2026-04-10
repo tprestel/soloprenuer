@@ -15,7 +15,8 @@ const settingsPanel = document.getElementById('settings-panel');
 const cleanupSelect = document.getElementById('cleanup-select');
 const cleanupProBadge = document.getElementById('cleanup-pro-badge');
 const autosaveProBadge = document.getElementById('autosave-pro-badge');
-const autosaveStatus = document.getElementById('autosave-status');
+const autosaveToggle = document.getElementById('autosave-toggle');
+const colorSortBar = document.getElementById('color-sort-bar');
 const searchInput = document.getElementById('search-input');
 const searchClear = document.getElementById('search-clear');
 const searchProOverlay = document.getElementById('search-pro-overlay');
@@ -34,8 +35,12 @@ const COLOR_HEX = {
   gray: '#6B7280',
 };
 
+const AUTOSAVE_KEY = 'tabsafe_autosave_enabled';
+
 let allGroups = [];
 let premium = false;
+let activeColorFilter = 'all';
+let activeSortOrder = 'newest';
 
 // ── Render ──────────────────────────────────────────────
 
@@ -52,9 +57,35 @@ async function render(searchQuery = '') {
   emptyState.classList.add('hidden');
 
   let displayGroups = allGroups;
-  if (searchQuery.trim()) {
-    displayGroups = searchGroups(allGroups, searchQuery);
+
+  // Apply color filter (premium only)
+  if (premium && activeColorFilter !== 'all') {
+    if (activeColorFilter === 'none') {
+      displayGroups = displayGroups.filter((g) => !g.color);
+    } else {
+      displayGroups = displayGroups.filter((g) => g.color === activeColorFilter);
+    }
   }
+
+  if (searchQuery.trim()) {
+    displayGroups = searchGroups(displayGroups, searchQuery);
+  }
+
+  // Apply sort order
+  if (activeSortOrder === 'oldest') {
+    displayGroups = [...displayGroups].sort((a, b) => a.createdAt - b.createdAt);
+  } else if (activeSortOrder === 'tabs') {
+    displayGroups = [...displayGroups].sort((a, b) => b.tabs.length - a.tabs.length);
+  } else {
+    // newest (default)
+    displayGroups = [...displayGroups].sort((a, b) => b.createdAt - a.createdAt);
+  }
+
+  // Always float starred groups to the top
+  displayGroups = [
+    ...displayGroups.filter((g) => g.starred),
+    ...displayGroups.filter((g) => !g.starred),
+  ];
 
   if (displayGroups.length === 0) {
     noResults.classList.remove('hidden');
@@ -92,6 +123,10 @@ function groupCard(group, searchQuery = '') {
     })
     .join('');
 
+  const deleteBtn = group.locked
+    ? ''
+    : `<button class="btn btn-danger btn-sm delete-btn" data-id="${group.id}">Delete</button>`;
+
   return `
   <div class="group-card" data-group-id="${group.id}">
     <div class="group-header">
@@ -102,9 +137,20 @@ function groupCard(group, searchQuery = '') {
         ${!premium && !group.customName ? proRenameBadge : ''}
       </div>
       <div class="group-actions">
+        <button class="btn btn-sm star-btn ${group.starred ? 'starred' : ''}" data-id="${group.id}" title="${group.starred ? 'Unstar' : 'Star'}">${group.starred ? '★' : '☆'}</button>
+        <button class="btn btn-sm duplicate-btn" data-id="${group.id}" title="Duplicate group">⧉</button>
+        <button class="btn btn-sm lock-btn ${group.locked ? 'locked' : ''}" data-id="${group.id}" title="${group.locked ? 'Unlock group' : 'Lock group'}">${group.locked ? '🔒' : '🔓'}</button>
         <button class="btn btn-primary btn-sm restore-btn" data-id="${group.id}">Restore All</button>
-        <button class="btn btn-danger btn-sm delete-btn" data-id="${group.id}">Delete</button>
+        ${deleteBtn}
       </div>
+    </div>
+    <div class="group-note-area">
+      ${group.note
+        ? `<div class="group-note ${premium ? 'group-note-editable' : ''}" data-group-id="${group.id}">${escapeHTML(group.note)}</div>`
+        : premium
+          ? `<div class="group-note-placeholder" data-group-id="${group.id}">+ Add note...</div>`
+          : ''
+      }
     </div>
     <div class="group-tabs hidden" data-tabs-for="${group.id}">
       ${tabsHTML}
@@ -225,11 +271,110 @@ function attachGroupListeners() {
       }
     });
   });
+
+  // Star
+  document.querySelectorAll('.star-btn').forEach((btn) => {
+    btn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      const id = btn.dataset.id;
+      if (!premium) {
+        showToast('Upgrade to PRO to star groups');
+        return;
+      }
+      const group = allGroups.find((g) => g.id === id);
+      if (group) {
+        await updateGroupField(id, 'starred', !group.starred);
+        await render(searchInput.value);
+      }
+    });
+  });
+
+  // Duplicate
+  document.querySelectorAll('.duplicate-btn').forEach((btn) => {
+    btn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      const id = btn.dataset.id;
+      if (!premium) {
+        showToast('Upgrade to PRO to duplicate groups');
+        return;
+      }
+      const result = await chrome.storage.local.get('tabsafe_groups');
+      const groups = result.tabsafe_groups || [];
+      const original = groups.find((g) => g.id === id);
+      if (original) {
+        const now = Date.now();
+        const copy = {
+          ...JSON.parse(JSON.stringify(original)),
+          id: `group_${now}`,
+          createdAt: now,
+          title: `Copy of ${original.customName || original.title}`,
+          customName: original.customName ? `Copy of ${original.customName}` : undefined,
+          starred: false,
+          locked: false,
+        };
+        if (!copy.customName) delete copy.customName;
+        groups.unshift(copy);
+        await chrome.storage.local.set({ tabsafe_groups: groups });
+        await render(searchInput.value);
+      }
+    });
+  });
+
+  // Lock
+  document.querySelectorAll('.lock-btn').forEach((btn) => {
+    btn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      const id = btn.dataset.id;
+      if (!premium) {
+        showToast('Upgrade to PRO to lock groups');
+        return;
+      }
+      const group = allGroups.find((g) => g.id === id);
+      if (group) {
+        await updateGroupField(id, 'locked', !group.locked);
+        await render(searchInput.value);
+      }
+    });
+  });
+
+  // Group notes — editable note and placeholder
+  document.querySelectorAll('.group-note-editable, .group-note-placeholder').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const groupId = el.dataset.groupId;
+      const currentNote = el.classList.contains('group-note-placeholder') ? '' : el.textContent;
+
+      const textarea = document.createElement('textarea');
+      textarea.className = 'group-note-input';
+      textarea.value = currentNote;
+      textarea.rows = 2;
+      el.replaceWith(textarea);
+      textarea.focus();
+
+      const saveNote = async () => {
+        const trimmed = textarea.value.trim() || null;
+        await updateGroupField(groupId, 'note', trimmed);
+        await render(searchInput.value);
+      };
+
+      textarea.addEventListener('blur', saveNote);
+      textarea.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Enter' && !ev.shiftKey) {
+          ev.preventDefault();
+          textarea.blur();
+        }
+        if (ev.key === 'Escape') {
+          textarea.value = currentNote;
+          textarea.blur();
+        }
+      });
+    });
+  });
 }
 
 async function updateGroupField(groupId, field, value) {
-  const result = await chrome.storage.local.get('tabvault_groups');
-  const groups = result.tabvault_groups || [];
+  const result = await chrome.storage.local.get('tabsafe_groups');
+  const groups = result.tabsafe_groups || [];
   const group = groups.find((g) => g.id === groupId);
   if (group) {
     if (value === null || value === undefined) {
@@ -237,7 +382,7 @@ async function updateGroupField(groupId, field, value) {
     } else {
       group[field] = value;
     }
-    await chrome.storage.local.set({ tabvault_groups: groups });
+    await chrome.storage.local.set({ tabsafe_groups: groups });
   }
 }
 
@@ -279,6 +424,40 @@ cleanupSelect.addEventListener('change', async () => {
   showToast(days > 0 ? `Auto-cleanup set to ${days} days` : 'Auto-cleanup disabled');
 });
 
+// ── Auto-save Toggle ───────────────────────────────────
+
+autosaveToggle.addEventListener('change', async () => {
+  if (!premium) {
+    autosaveToggle.checked = false;
+    showToast('Upgrade to PRO to enable auto-save');
+    return;
+  }
+  await chrome.storage.local.set({ [AUTOSAVE_KEY]: autosaveToggle.checked });
+  showToast(autosaveToggle.checked ? 'Auto-save enabled' : 'Auto-save disabled');
+});
+
+// ── Color Filter ───────────────────────────────────────
+
+document.querySelectorAll('.color-filter-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    activeColorFilter = btn.dataset.filter;
+    document.querySelectorAll('.color-filter-btn').forEach((b) => b.classList.remove('active'));
+    btn.classList.add('active');
+    render(searchInput.value);
+  });
+});
+
+// ── Sort Bar ───────────────────────────────────────────
+
+document.querySelectorAll('.sort-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    activeSortOrder = btn.dataset.sort;
+    document.querySelectorAll('.sort-btn').forEach((b) => b.classList.remove('active'));
+    btn.classList.add('active');
+    render(searchInput.value);
+  });
+});
+
 // ── Premium Toggle (Dev) ────────────────────────────────
 
 premiumToggle.addEventListener('change', async () => {
@@ -293,7 +472,18 @@ function updatePremiumUI() {
   cleanupProBadge.classList.toggle('hidden', premium);
   autosaveProBadge.classList.toggle('hidden', premium);
   cleanupSelect.disabled = !premium;
-  autosaveStatus.textContent = premium ? 'Enabled' : 'Disabled';
+  autosaveToggle.disabled = !premium;
+
+  // Color sort bar — only show for premium
+  colorSortBar.classList.toggle('hidden', !premium);
+
+  // Reset color filter if not premium
+  if (!premium) {
+    autosaveToggle.checked = false;
+    activeColorFilter = 'all';
+    document.querySelectorAll('.color-filter-btn').forEach((b) => b.classList.remove('active'));
+    document.querySelector('.color-filter-btn[data-filter="all"]').classList.add('active');
+  }
 
   // Update search
   if (premium) {
@@ -368,7 +558,7 @@ importInput.addEventListener('change', async (e) => {
   let importedGroups = [];
 
   try {
-    // Try JSON first (TabVault format)
+    // Try JSON first (TabSafe format)
     const parsed = JSON.parse(text);
     if (Array.isArray(parsed)) {
       importedGroups = parsed;
@@ -403,10 +593,10 @@ importInput.addEventListener('change', async (e) => {
 
   if (importedGroups.length > 0) {
     // Merge with existing
-    const result = await chrome.storage.local.get('tabvault_groups');
-    const existing = result.tabvault_groups || [];
+    const result = await chrome.storage.local.get('tabsafe_groups');
+    const existing = result.tabsafe_groups || [];
     const merged = [...importedGroups, ...existing];
-    await chrome.storage.local.set({ tabvault_groups: merged });
+    await chrome.storage.local.set({ tabsafe_groups: merged });
     await createBackup();
     await render(searchInput.value);
     updateBadge();
@@ -500,6 +690,10 @@ async function init() {
   // Load cleanup setting
   const cleanupDays = await getCleanupSetting();
   cleanupSelect.value = String(cleanupDays);
+
+  // Load auto-save setting
+  const autosaveResult = await chrome.storage.local.get(AUTOSAVE_KEY);
+  autosaveToggle.checked = premium && autosaveResult[AUTOSAVE_KEY] === true;
 
   // Run cleanup on load if premium
   if (premium && cleanupDays > 0) {

@@ -2,8 +2,8 @@
  * Cleanup module — auto-delete old tab groups based on user setting
  */
 
-const GROUPS_KEY = 'tabvault_groups';
-const CLEANUP_KEY = 'tabvault_cleanup_days';
+const GROUPS_KEY = 'tabsafe_groups';
+const CLEANUP_KEY = 'tabsafe_cleanup_days';
 
 export const CLEANUP_OPTIONS = [
   { label: 'Off', days: 0 },

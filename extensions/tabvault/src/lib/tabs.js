@@ -2,7 +2,7 @@
  * Tab group CRUD — save, load, delete, restore tab groups
  */
 
-const STORAGE_KEY = 'tabvault_groups';
+const STORAGE_KEY = 'tabsafe_groups';
 
 const FILTERED_PREFIXES = ['chrome://', 'chrome-extension://', 'about:'];
 
@@ -55,4 +55,25 @@ export async function restoreGroup(groupId) {
   const groups = result[STORAGE_KEY] || [];
   const group = groups.find((g) => g.id === groupId);
   return group ? group.tabs : null;
+}
+
+/**
+ * Check if the tabs being saved are duplicates of an existing group.
+ * Returns an array of group names where >50% of the tabs match by URL.
+ */
+export function checkForDuplicates(tabs, existingGroups) {
+  const incomingUrls = new Set(tabs.map((t) => t.url).filter(Boolean));
+  if (incomingUrls.size === 0) return [];
+
+  const matches = [];
+  for (const group of existingGroups) {
+    const groupUrls = (group.tabs || []).map((t) => t.url).filter(Boolean);
+    if (groupUrls.length === 0) continue;
+    const overlap = groupUrls.filter((url) => incomingUrls.has(url)).length;
+    const overlapRatio = overlap / incomingUrls.size;
+    if (overlapRatio > 0.5) {
+      matches.push(group.customName || group.title);
+    }
+  }
+  return matches;
 }

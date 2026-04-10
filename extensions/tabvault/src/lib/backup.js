@@ -2,8 +2,8 @@
  * Backup module — automatic local JSON backups of tab groups
  */
 
-const GROUPS_KEY = 'tabvault_groups';
-const BACKUPS_KEY = 'tabvault_backups';
+const GROUPS_KEY = 'tabsafe_groups';
+const BACKUPS_KEY = 'tabsafe_backups';
 const MAX_BACKUPS = 5;
 
 export async function createBackup() {

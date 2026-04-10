@@ -1,19 +1,19 @@
-# TabVault — Chrome Web Store Listing
+# TabSafe — Chrome Web Store Listing
 
 ## Name
-TabVault — Save & Restore Tabs
+TabSafe — Save & Restore Tabs
 
 ## Short Description (132 characters max — this shows in search results)
 Save all your tabs with one click. Automatic backups keep your tabs safe. Export, import, and never lose a tab again. Free.
 
 ## Full Description
-TabVault saves your open tabs so you can close them without worry.
+TabSafe saves your open tabs so you can close them without worry.
 
 One click to save. One click to restore. Your tabs are always backed up.
 
 HOW IT WORKS
 • Click "Save All Tabs" to save every tab in your current window
-• Open TabVault to see all your saved tab groups
+• Open TabSafe to see all your saved tab groups
 • Click any tab to reopen it, or restore the entire group at once
 
 FEATURES
@@ -27,7 +27,7 @@ FEATURES
 • Clean UI — organized vault page to manage all your saved tabs
 
 YOUR DATA STAYS WITH YOU
-TabVault stores everything locally in your browser. Nothing is sent to any server. No analytics. No tracking. No data collection of any kind.
+TabSafe stores everything locally in your browser. Nothing is sent to any server. No analytics. No tracking. No data collection of any kind.
 
 Stop worrying about losing your tabs. Save them, close them, get them back whenever you need them.
 

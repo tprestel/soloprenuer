@@ -7,7 +7,7 @@ export function exportAsJSON(groups) {
 }
 
 export function exportAsMarkdown(groups) {
-  let md = '# TabVault Export\n\n';
+  let md = '# TabSafe Export\n\n';
 
   for (const group of groups) {
     md += `## ${group.title}\n\n`;
@@ -43,7 +43,7 @@ export function exportAsHTML(groups) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TabVault Export</title>
+  <title>TabSafe Export</title>
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; color: #1a1a1a; }
     h1 { font-size: 1.5rem; }
@@ -55,7 +55,7 @@ export function exportAsHTML(groups) {
   </style>
 </head>
 <body>
-  <h1>TabVault Export</h1>
+  <h1>TabSafe Export</h1>
   ${groupsHTML}
 </body>
 </html>`;

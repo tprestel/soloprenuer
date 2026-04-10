@@ -1,9 +1,9 @@
 /**
- * Premium module — feature gating for TabVault PRO
+ * Premium module — feature gating for TabSafe PRO
  * Currently uses a local flag. Will integrate ExtensionPay later.
  */
 
-const PREMIUM_KEY = 'tabvault_premium';
+const PREMIUM_KEY = 'tabsafe_premium';
 
 export async function isPremium() {
   const result = await chrome.storage.local.get(PREMIUM_KEY);

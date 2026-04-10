@@ -228,6 +228,109 @@ body {
   font-weight: 500;
 }
 
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: #D1D5DB;
+  border-radius: 20px;
+  transition: background 0.2s;
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 2px;
+  bottom: 2px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background: #3B82F6;
+}
+
+.toggle-switch input:checked + .toggle-slider::before {
+  transform: translateX(16px);
+}
+
+.toggle-switch input:disabled + .toggle-slider {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Color Sort Bar */
+.color-sort-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.color-sort-label {
+  font-size: 12px;
+  color: #6B7280;
+  font-weight: 500;
+  margin-right: 4px;
+}
+
+.color-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border: 1px solid #E5E7EB;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 12px;
+  color: #6B7280;
+  cursor: pointer;
+  transition: all 0.15s;
+  min-width: 32px;
+  height: 28px;
+}
+
+.color-filter-btn:hover {
+  border-color: #9CA3AF;
+  background: #F9FAFB;
+}
+
+.color-filter-btn.active {
+  border-color: #3B82F6;
+  background: #EFF6FF;
+  color: #1D4ED8;
+  font-weight: 600;
+}
+
+.filter-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
 /* PRO Badge */
 .pro-badge {
   display: inline-flex;
@@ -616,6 +719,52 @@ body {
   gap: 8px;
   justify-content: flex-end;
 }
+
+/* Sort Bar */
+.sort-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 1rem;
+}
+
+.sort-label {
+  font-size: 12px;
+  color: #6B7280;
+  font-weight: 500;
+}
+
+.sort-btn {
+  padding: 4px 10px;
+  border: 1px solid #E5E7EB;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 12px;
+  color: #6B7280;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.sort-btn:hover { border-color: #9CA3AF; background: #F9FAFB; }
+.sort-btn.active { border-color: #3B82F6; background: #EFF6FF; color: #1D4ED8; font-weight: 600; }
+
+/* Star Button */
+.star-btn { color: #9CA3AF; border: none; background: none; cursor: pointer; padding: 4px 6px; font-size: 14px; line-height: 1; }
+.star-btn.starred { color: #F59E0B; }
+
+/* Group Notes */
+.group-note-area { padding: 0 18px 8px; }
+.group-note { font-size: 12px; color: #6B7280; cursor: text; padding: 2px 4px; border-radius: 4px; }
+.group-note-editable:hover { background: #F9FAFB; border-radius: 4px; }
+.group-note-placeholder { font-size: 12px; color: #D1D5DB; cursor: pointer; padding: 2px 4px; }
+.group-note-input { width: 100%; font-size: 12px; color: #374151; border: 1px solid #D1D5DB; border-radius: 4px; padding: 4px 8px; resize: none; font-family: inherit; }
+
+/* Lock Button */
+.lock-btn { border: none; background: none; font-size: 14px; padding: 4px 6px; cursor: pointer; }
+.lock-btn.locked { opacity: 1; }
+
+/* Duplicate Button */
+.duplicate-btn { font-size: 15px; }
 
 /* Responsive */
 @media (max-width: 768px) {

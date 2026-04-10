@@ -1,11 +1,12 @@
 /**
- * TabVault Service Worker
+ * TabSafe Service Worker
  * Handles keyboard shortcut, badge count updates, auto-save on window close
  */
 
-const GROUPS_KEY = 'tabvault_groups';
-const BACKUPS_KEY = 'tabvault_backups';
-const PREMIUM_KEY = 'tabvault_premium';
+const GROUPS_KEY = 'tabsafe_groups';
+const BACKUPS_KEY = 'tabsafe_backups';
+const PREMIUM_KEY = 'tabsafe_premium';
+const AUTOSAVE_KEY = 'tabsafe_autosave_enabled';
 const MAX_BACKUPS = 5;
 const FILTERED_PREFIXES = ['chrome://', 'chrome-extension://', 'about:'];
 
@@ -49,18 +50,13 @@ chrome.commands.onCommand.addListener(async (command) => {
 // ── Auto-Save on Window Close (Premium) ────────────────
 
 chrome.windows.onRemoved.addListener(async (windowId) => {
-  // Check if premium
-  const premiumResult = await chrome.storage.local.get(PREMIUM_KEY);
+  // Check if premium and auto-save is enabled
+  const premiumResult = await chrome.storage.local.get([PREMIUM_KEY, AUTOSAVE_KEY]);
   if (premiumResult[PREMIUM_KEY] !== true) return;
+  if (premiumResult[AUTOSAVE_KEY] !== true) return;
 
-  // Check if there are any remaining windows — if none, this was the last window
   const remainingWindows = await chrome.windows.getAll();
   if (remainingWindows.length > 0) return;
-
-  // Get all tabs from all windows before they close
-  // At this point the window is already gone, so we save what we had
-  // We use the onRemoved event which fires after the window is closed
-  // Instead, we track tabs proactively
 });
 
 // Track open tabs for auto-save — store a snapshot periodically
@@ -84,8 +80,9 @@ chrome.tabs.onCreated.addListener(() => updateTabSnapshot());
 
 // Auto-save when last window is closing
 chrome.windows.onRemoved.addListener(async () => {
-  const premiumResult = await chrome.storage.local.get(PREMIUM_KEY);
+  const premiumResult = await chrome.storage.local.get([PREMIUM_KEY, AUTOSAVE_KEY]);
   if (premiumResult[PREMIUM_KEY] !== true) return;
+  if (premiumResult[AUTOSAVE_KEY] !== true) return;
 
   try {
     const remainingWindows = await chrome.windows.getAll();
