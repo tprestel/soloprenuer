@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="newtab.css">
+  <title>New Tab</title>
+</head>
+<body>
+  <div class="editor-wrap">
+    <div
+      id="editor"
+      contenteditable="true"
+      spellcheck="true"
+      data-placeholder="Start typing..."
+    ></div>
+  </div>
+
+  <footer class="status-bar">
+    <span id="save-status">Ready</span>
+    <div class="status-right">
+      <button id="btn-settings" class="icon-btn" title="Settings" aria-label="Settings">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="8" cy="8" r="2.5"/>
+          <path d="M8 1v2M8 13v2M1 8h2M13 8h2M2.93 2.93l1.41 1.41M11.66 11.66l1.41 1.41M2.93 13.07l1.41-1.41M11.66 4.34l1.41-1.41"/>
+        </svg>
+      </button>
+    </div>
+  </footer>
+
+  <!-- Settings panel (hidden by default) -->
+  <div id="settings-panel" class="settings-panel hidden">
+    <h2>Settings</h2>
+    <div class="setting-row">
+      <label for="setting-font">Font</label>
+      <select id="setting-font">
+        <option value="Georgia">Georgia</option>
+        <option value="'Times New Roman', serif">Times New Roman</option>
+        <option value="system-ui, sans-serif">System UI</option>
+        <option value="'Courier New', monospace">Courier New</option>
+        <option value="'Charter', Georgia, serif">Charter</option>
+      </select>
+    </div>
+    <div class="setting-row">
+      <label for="setting-size">Size</label>
+      <input id="setting-size" type="range" min="14" max="28" step="1" value="18">
+      <span id="setting-size-value">18px</span>
+    </div>
+    <div class="setting-row">
+      <label for="setting-theme">Theme</label>
+      <select id="setting-theme">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="sepia">Sepia</option>
+      </select>
+    </div>
+    <button id="btn-close-settings" class="btn-close">Done</button>
+  </div>
+
+  <script type="module" src="newtab.js"></script>
+</body>
+</html>
