@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "TubeScrapeBoogie",
+  "version": "0.1.0",
+  "description": "Instantly grab YouTube video transcripts for content research. No API keys needed.",
+  "permissions": ["storage", "unlimitedStorage", "activeTab"],
+  "host_permissions": ["https://www.youtube.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/watch*"],
+      "js": ["src/content/youtube-parser.js", "src/content/sidebar.js"],
+      "css": ["src/content/sidebar.css"]
+    }
+  ],
+  "background": {
+    "service_worker": "src/background/service-worker.js"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
