@@ -3,7 +3,7 @@
   "name": "TubeScrapeBoogie",
   "version": "0.1.0",
   "description": "Instantly grab YouTube video transcripts for content research. No API keys needed.",
-  "permissions": ["storage", "unlimitedStorage", "activeTab"],
+  "permissions": ["storage", "unlimitedStorage", "activeTab", "scripting"],
   "host_permissions": ["https://www.youtube.com/*"],
   "content_scripts": [
     {

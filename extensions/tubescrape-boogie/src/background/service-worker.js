@@ -1,6 +1,19 @@
 chrome.action.onClicked.addListener(async (tab) => {
   if (tab.url?.includes('youtube.com/watch')) {
-    await chrome.tabs.sendMessage(tab.id, { type: 'TOGGLE_SIDEBAR' });
+    try {
+      await chrome.tabs.sendMessage(tab.id, { type: 'TOGGLE_SIDEBAR' });
+    } catch {
+      // Content script not ready — inject it and try again
+      await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        files: ['src/content/youtube-parser.js', 'src/content/sidebar.js'],
+      });
+      await chrome.scripting.insertCSS({
+        target: { tabId: tab.id },
+        files: ['src/content/sidebar.css'],
+      });
+      setTimeout(() => chrome.tabs.sendMessage(tab.id, { type: 'TOGGLE_SIDEBAR' }), 200);
+    }
   } else {
     chrome.tabs.create({ url: chrome.runtime.getURL('src/dashboard/dashboard.html') });
   }
