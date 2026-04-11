@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TubeScrapeBoogie — Library Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+
+  <!-- ─── Top Nav ──────────────────────────────────────────────────── -->
+  <header id="tsb-dash-nav">
+    <div id="tsb-dash-brand">
+      Tube<span class="tsb-brand-accent">Scrape</span>Boogie
+    </div>
+    <nav id="tsb-dash-tabs" role="tablist" aria-label="Dashboard sections">
+      <button class="tsb-tab tsb-tab-active" data-view="library" role="tab" aria-selected="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Library
+      </button>
+      <button class="tsb-tab" data-view="batch" role="tab" aria-selected="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        Batch
+      </button>
+      <button class="tsb-tab" data-view="keywords" role="tab" aria-selected="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+        Keywords
+      </button>
+      <button class="tsb-tab" data-view="analytics" role="tab" aria-selected="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Analytics
+      </button>
+    </nav>
+    <div id="tsb-dash-nav-end">
+      <span id="tsb-dash-count" class="tsb-mono-label">0 transcripts</span>
+    </div>
+  </header>
+
+  <!-- ─── App Shell ────────────────────────────────────────────────── -->
+  <div id="tsb-dash-shell">
+
+    <!-- Left sidebar: collections / folders -->
+    <aside id="tsb-dash-folders" aria-label="Collections">
+      <div class="tsb-folders-header">
+        <span class="tsb-section-label">Collections</span>
+        <button id="tsb-add-folder-btn" class="tsb-icon-btn" title="New collection" aria-label="Add collection">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+      </div>
+      <ul id="tsb-folder-list" role="listbox" aria-label="Collections">
+        <li class="tsb-folder-item tsb-folder-active" data-folder-id="all" role="option" aria-selected="true">
+          <svg viewBox="0 0 24 24" class="tsb-folder-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          <span>All Transcripts</span>
+          <span class="tsb-folder-count" id="tsb-folder-all-count">0</span>
+        </li>
+      </ul>
+      <div id="tsb-add-folder-form" class="tsb-hidden">
+        <input type="text" id="tsb-folder-name-input" class="tsb-text-input" placeholder="Collection name…" maxlength="50" />
+        <div class="tsb-form-row">
+          <button id="tsb-folder-save-btn" class="tsb-btn tsb-btn-primary tsb-btn-sm">Create</button>
+          <button id="tsb-folder-cancel-btn" class="tsb-btn tsb-btn-ghost tsb-btn-sm">Cancel</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main content area -->
+    <main id="tsb-dash-main">
+
+      <!-- ── Library View ─────────────────────────────────────── -->
+      <section id="tsb-view-library" class="tsb-view tsb-view-active" role="tabpanel" aria-label="Library">
+        <div class="tsb-view-toolbar">
+          <div class="tsb-search-wrap">
+            <svg class="tsb-search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input type="text" id="tsb-lib-search" class="tsb-text-input tsb-search-input" placeholder="Search transcripts, channels, tags…" />
+          </div>
+          <div class="tsb-toolbar-right">
+            <label class="tsb-mono-label" for="tsb-lib-sort">Sort</label>
+            <select id="tsb-lib-sort" class="tsb-select">
+              <option value="date_saved">Date Saved</option>
+              <option value="date_published">Date Published</option>
+              <option value="channel">Channel</option>
+              <option value="keyword_matches">Keyword Matches</option>
+            </select>
+          </div>
+        </div>
+        <div id="tsb-lib-grid" class="tsb-card-grid"></div>
+        <div id="tsb-lib-empty" class="tsb-empty-state tsb-hidden">
+          <div class="tsb-empty-icon">
+            <svg viewBox="0 0 24 24"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
+          </div>
+          <p class="tsb-empty-title">No transcripts yet</p>
+          <p class="tsb-empty-sub">Open a YouTube video and click the extension icon to scrape your first transcript.</p>
+        </div>
+      </section>
+
+      <!-- ── Batch View ────────────────────────────────────────── -->
+      <section id="tsb-view-batch" class="tsb-view tsb-hidden" role="tabpanel" aria-label="Batch scrape">
+        <div class="tsb-view-header">
+          <h2 class="tsb-view-title">Batch Scrape</h2>
+          <p class="tsb-view-desc">Paste YouTube video URLs, playlist URLs, or channel URLs — one per line.</p>
+        </div>
+        <div class="tsb-batch-form">
+          <div class="tsb-textarea-wrap">
+            <label class="tsb-mono-label" for="tsb-batch-input">URLs</label>
+            <textarea id="tsb-batch-input" class="tsb-textarea" placeholder="https://www.youtube.com/watch?v=...&#10;https://www.youtube.com/playlist?list=...&#10;https://www.youtube.com/@channel/videos" rows="8" spellcheck="false"></textarea>
+          </div>
+          <div class="tsb-batch-actions">
+            <button id="tsb-batch-scrape-btn" class="tsb-btn tsb-btn-primary">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Scrape All
+            </button>
+            <div id="tsb-batch-progress" class="tsb-hidden">
+              <div class="tsb-progress-bar-wrap">
+                <div id="tsb-batch-progress-fill" class="tsb-progress-fill"></div>
+              </div>
+              <span id="tsb-batch-progress-text" class="tsb-mono-label">0 / 0</span>
+            </div>
+          </div>
+        </div>
+        <div id="tsb-batch-results" class="tsb-batch-results"></div>
+      </section>
+
+      <!-- ── Keywords View ─────────────────────────────────────── -->
+      <section id="tsb-view-keywords" class="tsb-view tsb-hidden" role="tabpanel" aria-label="Keywords">
+        <div class="tsb-view-header">
+          <h2 class="tsb-view-title">Keyword Watchlist</h2>
+          <p class="tsb-view-desc">Track terms across your entire library. Each keyword gets a color for highlighting.</p>
+        </div>
+        <div class="tsb-keyword-add-form">
+          <input type="text" id="tsb-keyword-input" class="tsb-text-input" placeholder="Add keyword or phrase…" maxlength="80" />
+          <input type="color" id="tsb-keyword-color" class="tsb-color-input" value="#e3b341" title="Pick keyword color" />
+          <button id="tsb-keyword-add-btn" class="tsb-btn tsb-btn-primary">Add</button>
+        </div>
+        <div id="tsb-keyword-chips" class="tsb-keyword-chips"></div>
+        <div class="tsb-section-divider">
+          <span class="tsb-section-label">Frequency across library</span>
+        </div>
+        <div id="tsb-keyword-chart" class="tsb-frequency-chart"></div>
+        <div id="tsb-keywords-empty" class="tsb-empty-state tsb-hidden">
+          <p class="tsb-empty-title">No keywords yet</p>
+          <p class="tsb-empty-sub">Add keywords above to track them across all your saved transcripts.</p>
+        </div>
+      </section>
+
+      <!-- ── Analytics View ────────────────────────────────────── -->
+      <section id="tsb-view-analytics" class="tsb-view tsb-hidden" role="tabpanel" aria-label="Analytics">
+        <div class="tsb-view-header">
+          <h2 class="tsb-view-title">Analytics</h2>
+          <p class="tsb-view-desc">Patterns across your transcript library.</p>
+        </div>
+        <div class="tsb-analytics-grid">
+          <div class="tsb-analytics-card tsb-analytics-wide">
+            <div class="tsb-analytics-card-header">
+              <span class="tsb-section-label">Top Words</span>
+              <span class="tsb-mono-label tsb-muted">stop words excluded</span>
+            </div>
+            <div id="tsb-top-words-chart" class="tsb-frequency-chart"></div>
+            <div id="tsb-analytics-empty" class="tsb-empty-state tsb-hidden">
+              <p class="tsb-empty-title">No data yet</p>
+              <p class="tsb-empty-sub">Save some transcripts to see word frequency analysis.</p>
+            </div>
+          </div>
+          <div class="tsb-analytics-card tsb-analytics-wide">
+            <div class="tsb-analytics-card-header">
+              <span class="tsb-section-label">Keyword Density by Channel</span>
+            </div>
+            <div id="tsb-channel-density" class="tsb-channel-density-grid"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Detail View ───────────────────────────────────────── -->
+      <section id="tsb-view-detail" class="tsb-view tsb-hidden" role="tabpanel" aria-label="Transcript detail">
+        <div class="tsb-detail-header">
+          <button id="tsb-detail-back" class="tsb-btn tsb-btn-ghost tsb-btn-sm">
+            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            Back
+          </button>
+          <div class="tsb-detail-meta">
+            <h2 id="tsb-detail-title" class="tsb-detail-title"></h2>
+            <div id="tsb-detail-info" class="tsb-detail-info"></div>
+            <div id="tsb-detail-tags" class="tsb-tag-list tsb-tag-list-inline"></div>
+          </div>
+          <div class="tsb-detail-actions">
+            <button id="tsb-detail-add-tag-btn" class="tsb-btn tsb-btn-ghost tsb-btn-sm">+ Tag</button>
+            <button id="tsb-detail-export-btn" class="tsb-btn tsb-btn-ghost tsb-btn-sm">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export
+            </button>
+            <button id="tsb-detail-delete-btn" class="tsb-btn tsb-btn-danger tsb-btn-sm">
+              <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+              Delete
+            </button>
+          </div>
+        </div>
+        <div id="tsb-tag-input-wrap" class="tsb-tag-input-wrap tsb-hidden">
+          <input type="text" id="tsb-tag-input" class="tsb-text-input" placeholder="Tag name…" maxlength="30" />
+          <button id="tsb-tag-add-confirm" class="tsb-btn tsb-btn-primary tsb-btn-sm">Add</button>
+          <button id="tsb-tag-cancel" class="tsb-btn tsb-btn-ghost tsb-btn-sm">Cancel</button>
+        </div>
+        <div id="tsb-detail-columns" class="tsb-detail-columns">
+          <!-- Transcript panel -->
+          <div class="tsb-transcript-panel">
+            <div class="tsb-panel-header">
+              <span class="tsb-section-label">Transcript</span>
+              <span id="tsb-detail-word-count" class="tsb-mono-label tsb-muted"></span>
+            </div>
+            <div id="tsb-detail-transcript" class="tsb-transcript-body"></div>
+          </div>
+          <!-- Notes panel -->
+          <div class="tsb-notes-panel">
+            <div class="tsb-panel-header">
+              <span class="tsb-section-label">Notes</span>
+            </div>
+            <div id="tsb-notes-list" class="tsb-notes-list"></div>
+            <form id="tsb-note-form" class="tsb-note-form">
+              <input type="text" id="tsb-note-timestamp" class="tsb-text-input tsb-mono-input" placeholder="0:00" maxlength="10" />
+              <textarea id="tsb-note-text" class="tsb-textarea tsb-textarea-sm" placeholder="Add a note…" rows="3"></textarea>
+              <button type="submit" class="tsb-btn tsb-btn-primary tsb-btn-sm">Save Note</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ─── Toast ─────────────────────────────────────────────────────── -->
+  <div id="tsb-dash-toast" role="status" aria-live="polite"></div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
