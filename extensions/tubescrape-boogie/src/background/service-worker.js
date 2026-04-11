@@ -37,7 +37,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 
 async function fetchTranscriptFromUrl(captionUrl) {
-  const response = await fetch(captionUrl);
+  // Ensure we request XML format (YouTube may return JSON by default)
+  const url = new URL(captionUrl);
+  url.searchParams.set('fmt', 'srv3');
+  const response = await fetch(url.toString());
   if (!response.ok) throw new Error(`Caption fetch failed: ${response.status}`);
   const xml = await response.text();
   return parseTimedTextXml(xml);
@@ -78,13 +81,30 @@ async function fetchVideoData(videoId) {
 function parseTimedTextXml(xml) {
   const ENTITIES = { '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&apos;': "'", '&#39;': "'" };
   function decode(text) {
-    return text.replace(/&(?:amp|lt|gt|quot|apos|#39);/g, m => ENTITIES[m] || m);
+    return text.replace(/&(?:amp|lt|gt|quot|apos|#39);/g, m => ENTITIES[m] || m).replace(/<[^>]+>/g, '');
   }
   const segments = [];
-  const regex = /<text\s+start="([^"]+)"\s+dur="([^"]+)"[^>]*>([\s\S]*?)<\/text>/g;
+
+  // Try srv3 format first: <p t="start_ms" d="duration_ms">text</p>
+  const srv3Regex = /<p\s[^>]*?t="(\d+)"[^>]*?d="(\d+)"[^>]*>([\s\S]*?)<\/p>/g;
   let m;
-  while ((m = regex.exec(xml)) !== null) {
-    segments.push({ start: parseFloat(m[1]), duration: parseFloat(m[2]), text: decode(m[3].trim()) });
+  while ((m = srv3Regex.exec(xml)) !== null) {
+    const text = decode(m[3].trim());
+    if (text) {
+      segments.push({ start: parseInt(m[1]) / 1000, duration: parseInt(m[2]) / 1000, text });
+    }
   }
+
+  // Fallback: legacy format <text start="secs" dur="secs">text</text>
+  if (segments.length === 0) {
+    const legacyRegex = /<text\s+start="([^"]+)"\s+dur="([^"]+)"[^>]*>([\s\S]*?)<\/text>/g;
+    while ((m = legacyRegex.exec(xml)) !== null) {
+      const text = decode(m[3].trim());
+      if (text) {
+        segments.push({ start: parseFloat(m[1]), duration: parseFloat(m[2]), text });
+      }
+    }
+  }
+
   return segments;
 }
