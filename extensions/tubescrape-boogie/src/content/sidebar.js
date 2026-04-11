@@ -257,6 +257,11 @@
 
   // ─── Extract Data Directly From Page ───────────────────────────
   function getPlayerResponseFromPage() {
+    // YouTube updates window.ytInitialPlayerResponse on every SPA navigation
+    if (window.ytInitialPlayerResponse && window.ytInitialPlayerResponse.videoDetails) {
+      return window.ytInitialPlayerResponse;
+    }
+    // Fallback: parse from script tags (first load only)
     const scripts = document.querySelectorAll('script');
     for (const script of scripts) {
       const text = script.textContent;

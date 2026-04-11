@@ -37,10 +37,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 
 async function fetchTranscriptFromUrl(captionUrl) {
-  // Ensure we request XML format (YouTube may return JSON by default)
-  const url = new URL(captionUrl);
-  url.searchParams.set('fmt', 'srv3');
-  const response = await fetch(url.toString());
+  const response = await fetch(captionUrl);
   if (!response.ok) throw new Error(`Caption fetch failed: ${response.status}`);
   const xml = await response.text();
   return parseTimedTextXml(xml);
