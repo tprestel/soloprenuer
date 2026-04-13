@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TabSnap</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+  <!-- Idle: format picker -->
+  <div id="idle-view">
+    <div class="header">
+      <div class="logo">&#128247;</div>
+      <h1>TabSnap</h1>
+      <p class="sub">Full-page screenshot</p>
+    </div>
+    <div class="buttons">
+      <button id="btn-png" class="btn btn-primary">PNG</button>
+      <button id="btn-jpg" class="btn btn-primary">JPG</button>
+      <button id="btn-pdf" class="btn btn-primary">PDF</button>
+    </div>
+  </div>
+
+  <!-- Capturing: progress -->
+  <div id="capturing-view" hidden>
+    <p id="progress-text">Preparing…</p>
+    <div class="progress-track">
+      <div id="progress-bar" class="progress-fill"></div>
+    </div>
+  </div>
+
+  <!-- Done -->
+  <div id="done-view" hidden>
+    <div class="done-icon">&#10003;</div>
+    <p id="filename-text"></p>
+    <button id="btn-again" class="btn btn-secondary">Take another</button>
+  </div>
+
+  <!-- Error -->
+  <div id="error-view" hidden>
+    <div class="error-icon">&#9888;</div>
+    <p id="error-text">Something went wrong.</p>
+    <button id="btn-retry" class="btn btn-secondary">Try again</button>
+  </div>
+
+  <script src="../lib/jspdf.umd.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
