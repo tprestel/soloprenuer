@@ -138,7 +138,8 @@ function formatTimestamp() {
   const dd   = String(d.getDate()).padStart(2, '0');
   const hh   = String(d.getHours()).padStart(2, '0');
   const mm   = String(d.getMinutes()).padStart(2, '0');
-  return `${yyyy}-${mo}-${dd}-${hh}${mm}`;
+  const ss   = String(d.getSeconds()).padStart(2, '0');
+  return `${yyyy}-${mo}-${dd}-${hh}${mm}${ss}`;
 }
 
 // Hide all position:fixed and position:sticky elements so they don't repeat
@@ -290,9 +291,9 @@ async function capture(format) {
       ext = 'pdf';
     }
 
-    // 9. Build filename — prepend shoot folder if session is active
+    // 9. Build filename — in photo shoot mode, prefix with folder name for uniqueness
     const shootFolder  = await getShootFolder();
-    const baseName     = `tabsnap-${ts}.${ext}`;
+    const baseName     = shootFolder ? `${shootFolder}-${ts}.${ext}` : `tabsnap-${ts}.${ext}`;
     const filename     = shootFolder ? `${shootFolder}/${baseName}` : baseName;
     const displayLabel = shootFolder
       ? `Saved to Downloads/${shootFolder}/\n${baseName}`
