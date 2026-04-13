@@ -3,44 +3,88 @@
 // ── jsPDF ──────────────────────────────────────────────────────────────────
 const { jsPDF } = window.jspdf;
 
-// ── DOM refs ───────────────────────────────────────────────────────────────
-const idleView      = document.getElementById('idle-view');
-const capturingView = document.getElementById('capturing-view');
-const doneView      = document.getElementById('done-view');
-const errorView     = document.getElementById('error-view');
-const progressBar   = document.getElementById('progress-bar');
-const progressText  = document.getElementById('progress-text');
-const filenameText  = document.getElementById('filename-text');
-const errorText     = document.getElementById('error-text');
+// ── Storage key ────────────────────────────────────────────────────────────
+const SHOOT_KEY = 'tabsnap_shoot_folder';
 
-// ── UI state ───────────────────────────────────────────────────────────────
-function showIdle() {
-  idleView.hidden      = false;
-  capturingView.hidden = true;
-  doneView.hidden      = true;
-  errorView.hidden     = true;
+// ── DOM refs ───────────────────────────────────────────────────────────────
+const idleView       = document.getElementById('idle-view');
+const shootSetupView = document.getElementById('shoot-setup-view');
+const capturingView  = document.getElementById('capturing-view');
+const doneView       = document.getElementById('done-view');
+const errorView      = document.getElementById('error-view');
+const shootBar       = document.getElementById('shoot-bar');
+const shootBarLabel  = document.getElementById('shoot-bar-label');
+const progressBar    = document.getElementById('progress-bar');
+const progressText   = document.getElementById('progress-text');
+const filenameText   = document.getElementById('filename-text');
+const errorText      = document.getElementById('error-text');
+const folderInput    = document.getElementById('folder-input');
+
+// ── View helpers ───────────────────────────────────────────────────────────
+function hideAll() {
+  idleView.hidden       = true;
+  shootSetupView.hidden = true;
+  capturingView.hidden  = true;
+  doneView.hidden       = true;
+  errorView.hidden      = true;
 }
+
+async function showIdle() {
+  hideAll();
+  idleView.hidden = false;
+  await refreshShootBar();
+}
+
+function showSetup() {
+  hideAll();
+  shootSetupView.hidden = false;
+  folderInput.value = '';
+  setTimeout(() => folderInput.focus(), 50);
+}
+
 function showCapturing() {
-  idleView.hidden      = true;
+  hideAll();
   capturingView.hidden = false;
-  doneView.hidden      = true;
-  errorView.hidden     = true;
   progressBar.style.width = '0%';
   progressText.textContent = 'Preparing…';
 }
-function showDone(filename) {
-  idleView.hidden      = true;
-  capturingView.hidden = true;
-  doneView.hidden      = false;
-  errorView.hidden     = true;
-  filenameText.textContent = filename;
+
+function showDone(label) {
+  hideAll();
+  doneView.hidden = false;
+  filenameText.textContent = label;
 }
+
 function showError(msg) {
-  idleView.hidden      = true;
-  capturingView.hidden = true;
-  doneView.hidden      = true;
-  errorView.hidden     = false;
+  hideAll();
+  errorView.hidden = false;
   errorText.textContent = msg;
+}
+
+// ── Photo Shoot session ────────────────────────────────────────────────────
+async function getShootFolder() {
+  const result = await chrome.storage.session.get(SHOOT_KEY);
+  return result[SHOOT_KEY] || null;
+}
+
+async function startSession(folderName) {
+  await chrome.storage.session.set({ [SHOOT_KEY]: folderName });
+}
+
+async function endSession() {
+  await chrome.storage.session.remove(SHOOT_KEY);
+}
+
+async function refreshShootBar() {
+  const folder = await getShootFolder();
+  if (folder) {
+    shootBarLabel.textContent = `📁 ${folder}`;
+    shootBar.hidden = false;
+    document.getElementById('btn-start-shoot').hidden = true;
+  } else {
+    shootBar.hidden = true;
+    document.getElementById('btn-start-shoot').hidden = false;
+  }
 }
 
 // ── Event listeners ────────────────────────────────────────────────────────
@@ -49,6 +93,29 @@ document.getElementById('btn-jpg').addEventListener('click', () => capture('jpg'
 document.getElementById('btn-pdf').addEventListener('click', () => capture('pdf'));
 document.getElementById('btn-again').addEventListener('click', showIdle);
 document.getElementById('btn-retry').addEventListener('click', showIdle);
+
+document.getElementById('btn-start-shoot').addEventListener('click', showSetup);
+document.getElementById('btn-cancel-shoot').addEventListener('click', showIdle);
+
+document.getElementById('btn-end-session').addEventListener('click', async () => {
+  await endSession();
+  await showIdle();
+});
+
+document.getElementById('btn-confirm-shoot').addEventListener('click', async () => {
+  const raw = folderInput.value.trim();
+  if (!raw) { folderInput.focus(); return; }
+  // Sanitize: strip path separators and leading dots
+  const safe = raw.replace(/[/\\]/g, '-').replace(/^\.+/, '');
+  if (!safe) { folderInput.focus(); return; }
+  await startSession(safe);
+  await showIdle();
+});
+
+// Allow Enter key in folder input
+folderInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('btn-confirm-shoot').click();
+});
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 function delay(ms) {
@@ -74,17 +141,56 @@ function formatTimestamp() {
   return `${yyyy}-${mo}-${dd}-${hh}${mm}`;
 }
 
+// Hide all position:fixed and position:sticky elements so they don't repeat
+// in each stitched chunk. Saves original visibility on a data attribute.
+async function hideFixedElements(tabId) {
+  try {
+    await chrome.scripting.executeScript({
+      target: { tabId },
+      func: () => {
+        document.querySelectorAll('*').forEach(el => {
+          const pos = window.getComputedStyle(el).position;
+          if (pos === 'fixed' || pos === 'sticky') {
+            el.dataset.tabsnapVis = el.style.visibility || '';
+            el.style.setProperty('visibility', 'hidden', 'important');
+          }
+        });
+      },
+    });
+    await delay(60); // let browser repaint without the fixed elements
+  } catch (_) {
+    // Page may not allow scripting (e.g. chrome:// pages) — proceed anyway
+  }
+}
+
+// Restore visibility on all elements hidden by hideFixedElements.
+async function restoreFixedElements(tabId) {
+  try {
+    await chrome.scripting.executeScript({
+      target: { tabId },
+      func: () => {
+        document.querySelectorAll('[data-tabsnap-vis]').forEach(el => {
+          el.style.visibility = el.dataset.tabsnapVis;
+          delete el.dataset.tabsnapVis;
+        });
+      },
+    });
+  } catch (_) { /* ignore */ }
+}
+
 // ── Capture ────────────────────────────────────────────────────────────────
 async function capture(format) {
   showCapturing();
 
+  let tabId;
   try {
     // 1. Active tab
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    tabId = tab.id;
 
     // 2. Page dimensions + current scroll position
     const [{ result: dims }] = await chrome.scripting.executeScript({
-      target: { tabId: tab.id },
+      target: { tabId },
       func: () => ({
         scrollWidth:    Math.max(document.body.scrollWidth,    document.documentElement.scrollWidth),
         scrollHeight:   Math.max(document.body.scrollHeight,   document.documentElement.scrollHeight),
@@ -108,83 +214,99 @@ async function capture(format) {
 
     // 4. Stitching canvas
     const canvas = document.createElement('canvas');
-    canvas.width  = scrollWidth  * dpr;
-    canvas.height = scrollHeight * dpr;
+    canvas.width  = canvasW;
+    canvas.height = canvasH;
     const ctx = canvas.getContext('2d');
 
-    // 5. Scroll-capture loop
-    const steps = Math.ceil(scrollHeight / viewportHeight);
+    // 5. Hide fixed/sticky elements so they don't appear in every chunk
+    await hideFixedElements(tabId);
 
-    for (let i = 0; i < steps; i++) {
-      const targetY = i * viewportHeight;
+    try {
+      // 6. Scroll-capture loop
+      const steps = Math.ceil(scrollHeight / viewportHeight);
 
-      // Scroll and get the actual scroll position (browser clamps at bottom)
-      const [{ result: actualY }] = await chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        func: (x, y) => { window.scrollTo(x, y); return window.scrollY; },
-        args:  [0, targetY],
-      });
+      for (let i = 0; i < steps; i++) {
+        const targetY = i * viewportHeight;
 
-      // Wait for layout / lazy-load settle
-      await delay(150);
+        // Scroll and read back actual position (browser clamps near bottom)
+        const [{ result: actualY }] = await chrome.scripting.executeScript({
+          target: { tabId },
+          func: (x, y) => { window.scrollTo(x, y); return window.scrollY; },
+          args:  [0, targetY],
+        });
 
-      // Capture visible area
-      const dataUrl = await chrome.tabs.captureVisibleTab({ format: 'png' });
+        // Wait for lazy-load / layout settle
+        await delay(150);
 
-      // Draw chunk at the actual scroll position, clipping to canvas bounds
-      const img  = await loadImage(dataUrl);
-      const drawY = actualY * dpr;
-      const srcH  = Math.min(img.naturalHeight, canvas.height - drawY);
-      ctx.drawImage(img, 0, 0, img.naturalWidth, srcH, 0, drawY, img.naturalWidth, srcH);
+        // Capture visible area
+        const dataUrl = await chrome.tabs.captureVisibleTab({ format: 'png' });
 
-      // Update progress bar
-      const pct = Math.round(((i + 1) / steps) * 100);
-      progressBar.style.width = pct + '%';
-      progressText.textContent = `Capturing… ${i + 1} of ${steps}`;
+        // Stitch chunk — clip src height so we never overdraw the canvas bottom
+        const img   = await loadImage(dataUrl);
+        const drawY = actualY * dpr;
+        const srcH  = Math.min(img.naturalHeight, canvas.height - drawY);
+        ctx.drawImage(img, 0, 0, img.naturalWidth, srcH, 0, drawY, img.naturalWidth, srcH);
+
+        // Progress
+        const pct = Math.round(((i + 1) / steps) * 100);
+        progressBar.style.width = pct + '%';
+        progressText.textContent = `Capturing… ${i + 1} of ${steps}`;
+      }
+    } finally {
+      // Always restore fixed elements, even if the loop threw
+      await restoreFixedElements(tabId);
     }
 
-    // 6. Restore original scroll position
+    // 7. Restore original scroll position
     await chrome.scripting.executeScript({
-      target: { tabId: tab.id },
+      target: { tabId },
       func:   (x, y) => window.scrollTo(x, y),
       args:   [origX, origY],
     });
 
-    // 7. Export — yield to browser to repaint before blocking toDataURL/jsPDF calls
+    // 8. Export — yield before blocking toDataURL / jsPDF calls
     progressText.textContent = 'Encoding…';
     await delay(0);
+
     const ts = formatTimestamp();
-    let downloadUrl, filename;
+    let downloadUrl, ext;
 
     if (format === 'png') {
       downloadUrl = canvas.toDataURL('image/png');
-      filename    = `tabsnap-${ts}.png`;
-
+      ext = 'png';
     } else if (format === 'jpg') {
       downloadUrl = canvas.toDataURL('image/jpeg', 0.92);
-      filename    = `tabsnap-${ts}.jpg`;
-
+      ext = 'jpg';
     } else {
-      // PDF — orient by aspect ratio, fit image to page
       const orientation = scrollHeight > scrollWidth ? 'portrait' : 'landscape';
       const pdf = new jsPDF({
         orientation,
-        unit:   'px',
-        format: [scrollWidth, scrollHeight],
+        unit:     'px',
+        format:   [scrollWidth, scrollHeight],
         hotfixes: ['px_scaling'],
       });
-      const jpegUrl = canvas.toDataURL('image/jpeg', 0.92);
-      pdf.addImage(jpegUrl, 'JPEG', 0, 0, scrollWidth, scrollHeight);
+      pdf.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, scrollWidth, scrollHeight);
       downloadUrl = pdf.output('datauristring');
-      filename    = `tabsnap-${ts}.pdf`;
+      ext = 'pdf';
     }
 
-    // 8. Download
+    // 9. Build filename — prepend shoot folder if session is active
+    const shootFolder  = await getShootFolder();
+    const baseName     = `tabsnap-${ts}.${ext}`;
+    const filename     = shootFolder ? `${shootFolder}/${baseName}` : baseName;
+    const displayLabel = shootFolder
+      ? `Saved to Downloads/${shootFolder}/\n${baseName}`
+      : baseName;
+
+    // 10. Download
     await chrome.downloads.download({ url: downloadUrl, filename });
 
-    showDone(filename);
+    showDone(displayLabel);
 
   } catch (err) {
     showError(err.message || 'Something went wrong. Try reloading the page.');
   }
 }
+
+// ── Init ───────────────────────────────────────────────────────────────────
+showIdle();

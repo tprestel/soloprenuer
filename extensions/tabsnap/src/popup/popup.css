@@ -101,6 +101,76 @@ h1 {
   line-height: 1.5;
 }
 
+/* ── Photo Shoot banner ───────────────────── */
+#shoot-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f0f7ff;
+  border-bottom: 1px solid #d0e8ff;
+  padding: 7px 14px;
+  font-size: 12px;
+  color: #1d6fba;
+}
+#shoot-bar-label {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 160px;
+}
+.shoot-end-btn {
+  background: none;
+  border: 1px solid #a0c8f0;
+  border-radius: 5px;
+  color: #1d6fba;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.shoot-end-btn:hover { background: #d8eeff; }
+
+/* ── Photo Shoot link row ─────────────────── */
+.shoot-link-row {
+  padding: 0 16px 14px;
+  text-align: center;
+}
+.shoot-link {
+  background: none;
+  border: none;
+  font-size: 12px;
+  color: #888;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+.shoot-link:hover { color: #1a1a1a; background: #f5f5f5; }
+
+/* ── Photo Shoot setup view ───────────────── */
+#shoot-setup-view .header { border-bottom: 1px solid #f0f0f0; }
+.shoot-form {
+  padding: 16px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.shoot-label {
+  font-size: 11px;
+  color: #777;
+  font-weight: 500;
+}
+.shoot-input {
+  padding: 9px 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 13px;
+  outline: none;
+  width: 100%;
+}
+.shoot-input:focus { border-color: #1a1a1a; }
+
 /* ── Error ────────────────────────────────── */
 #error-view {
   padding: 28px 16px 20px;

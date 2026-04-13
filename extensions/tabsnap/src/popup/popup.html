@@ -14,10 +14,33 @@
       <h1>TabSnap</h1>
       <p class="sub">Full-page screenshot</p>
     </div>
+    <!-- Active photo shoot banner (hidden when no session) -->
+    <div id="shoot-bar" hidden>
+      <span id="shoot-bar-label"></span>
+      <button id="btn-end-session" class="shoot-end-btn">End</button>
+    </div>
     <div class="buttons">
       <button id="btn-png" class="btn btn-primary">PNG</button>
       <button id="btn-jpg" class="btn btn-primary">JPG</button>
       <button id="btn-pdf" class="btn btn-primary">PDF</button>
+    </div>
+    <div class="shoot-link-row">
+      <button id="btn-start-shoot" class="shoot-link">&#128193; Photo Shoot</button>
+    </div>
+  </div>
+
+  <!-- Photo Shoot Setup -->
+  <div id="shoot-setup-view" hidden>
+    <div class="header">
+      <div class="logo">&#128193;</div>
+      <h1>Photo Shoot</h1>
+      <p class="sub">All screenshots save to one folder</p>
+    </div>
+    <div class="shoot-form">
+      <label class="shoot-label" for="folder-input">Folder name (inside Downloads)</label>
+      <input id="folder-input" class="shoot-input" type="text" placeholder="e.g. tripshot-audit" maxlength="60" />
+      <button id="btn-confirm-shoot" class="btn btn-primary">Start Session</button>
+      <button id="btn-cancel-shoot" class="btn btn-secondary">Cancel</button>
     </div>
   </div>
 
