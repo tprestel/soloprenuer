@@ -42,6 +42,24 @@
       "runtimeExecutable": "npx",
       "runtimeArgs": ["serve", "extensions/freshtab", "-p", "3037", "--no-clipboard"],
       "port": 3037
+    },
+    {
+      "name": "tabsnap",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "extensions/tabsnap", "-p", "3039", "--no-clipboard"],
+      "port": 3039
+    },
+    {
+      "name": "tubescrape-boogie",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", ".worktrees/tubescrape-boogie/extensions/tubescrape-boogie", "-p", "3038", "--no-clipboard"],
+      "port": 3038
+    },
+    {
+      "name": "share-fixed-route",
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": ["-Command", "Set-Location 'C:\\Users\\tp\\OneDrive\\Desktop\\SHARE Mobility\\share-fixed-route'; npm run dev"],
+      "port": 3001
     }
   ]
 }
