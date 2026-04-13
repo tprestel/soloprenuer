@@ -80,7 +80,7 @@ async function nextSeq() {
 }
 
 async function endSession() {
-  await chrome.storage.session.remove(SHOOT_KEY);
+  await chrome.storage.session.remove([SHOOT_KEY, SHOOT_SEQ_KEY]);
 }
 
 async function refreshShootBar() {
