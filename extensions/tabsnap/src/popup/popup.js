@@ -65,11 +65,13 @@ function loadImage(src) {
 }
 
 function formatTimestamp() {
-  const d = new Date();
-  const date = d.toISOString().slice(0, 10);
-  const hh   = d.getHours().toString().padStart(2, '0');
-  const mm   = d.getMinutes().toString().padStart(2, '0');
-  return `${date}-${hh}${mm}`;
+  const d    = new Date();
+  const yyyy = String(d.getFullYear());
+  const mo   = String(d.getMonth() + 1).padStart(2, '0');
+  const dd   = String(d.getDate()).padStart(2, '0');
+  const hh   = String(d.getHours()).padStart(2, '0');
+  const mm   = String(d.getMinutes()).padStart(2, '0');
+  return `${yyyy}-${mo}-${dd}-${hh}${mm}`;
 }
 
 // ── Capture ────────────────────────────────────────────────────────────────
@@ -125,11 +127,13 @@ async function capture(format) {
       await delay(150);
 
       // Capture visible area
-      const dataUrl = await chrome.tabs.captureVisibleTab(null, { format: 'png' });
+      const dataUrl = await chrome.tabs.captureVisibleTab({ format: 'png' });
 
-      // Draw chunk at the actual scroll position
-      const img = await loadImage(dataUrl);
-      ctx.drawImage(img, 0, actualY * dpr);
+      // Draw chunk at the actual scroll position, clipping to canvas bounds
+      const img  = await loadImage(dataUrl);
+      const drawY = actualY * dpr;
+      const srcH  = Math.min(img.naturalHeight, canvas.height - drawY);
+      ctx.drawImage(img, 0, 0, img.naturalWidth, srcH, 0, drawY, img.naturalWidth, srcH);
 
       // Update progress bar
       const pct = Math.round(((i + 1) / steps) * 100);
@@ -144,7 +148,9 @@ async function capture(format) {
       args:   [origX, origY],
     });
 
-    // 7. Export
+    // 7. Export — yield to browser to repaint before blocking toDataURL/jsPDF calls
+    progressText.textContent = 'Encoding…';
+    await delay(0);
     const ts = formatTimestamp();
     let downloadUrl, filename;
 
