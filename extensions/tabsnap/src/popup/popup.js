@@ -98,9 +98,11 @@ async function capture(format) {
 
     const { scrollWidth, scrollHeight, viewportHeight, dpr, origX, origY } = dims;
 
-    // 3. Canvas size guard (browser canvas limit ~16384px in either dimension)
-    if (scrollHeight * dpr > 16384 || scrollWidth * dpr > 16384) {
-      showError(`Page dimensions exceed canvas limits (${scrollWidth}×${scrollHeight}px @${dpr}x). Try zooming out the page first.`);
+    // 3. Canvas size guard (Chrome limit: 32767px per dimension, ~268M total pixels)
+    const canvasW = scrollWidth * dpr;
+    const canvasH = scrollHeight * dpr;
+    if (canvasW > 32767 || canvasH > 32767 || canvasW * canvasH > 268_000_000) {
+      showError(`Page is too large to capture (${scrollWidth}×${scrollHeight}px @${dpr}x). Try zooming out the page first.`);
       return;
     }
 
