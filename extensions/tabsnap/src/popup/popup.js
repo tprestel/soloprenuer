@@ -4,7 +4,8 @@
 const { jsPDF } = window.jspdf;
 
 // ── Storage key ────────────────────────────────────────────────────────────
-const SHOOT_KEY = 'tabsnap_shoot_folder';
+const SHOOT_KEY     = 'tabsnap_shoot_folder';
+const SHOOT_SEQ_KEY = 'tabsnap_shoot_seq';
 
 // ── DOM refs ───────────────────────────────────────────────────────────────
 const idleView       = document.getElementById('idle-view');
@@ -68,7 +69,14 @@ async function getShootFolder() {
 }
 
 async function startSession(folderName) {
-  await chrome.storage.session.set({ [SHOOT_KEY]: folderName });
+  await chrome.storage.session.set({ [SHOOT_KEY]: folderName, [SHOOT_SEQ_KEY]: 0 });
+}
+
+async function nextSeq() {
+  const result = await chrome.storage.session.get(SHOOT_SEQ_KEY);
+  const next = (result[SHOOT_SEQ_KEY] || 0) + 1;
+  await chrome.storage.session.set({ [SHOOT_SEQ_KEY]: next });
+  return next;
 }
 
 async function endSession() {
@@ -291,10 +299,19 @@ async function capture(format) {
       ext = 'pdf';
     }
 
-    // 9. Build filename — in photo shoot mode, prefix with folder name for uniqueness
-    const shootFolder  = await getShootFolder();
-    const baseName     = shootFolder ? `${shootFolder}-${ts}.${ext}` : `tabsnap-${ts}.${ext}`;
-    const filename     = shootFolder ? `${shootFolder}/${baseName}` : baseName;
+    // 9. Build filename
+    const shootFolder = await getShootFolder();
+    let baseName, filename;
+    if (shootFolder) {
+      const seq  = await nextSeq();
+      const date = ts.slice(0, 10); // YYYY-MM-DD only
+      const n    = String(seq).padStart(3, '0');
+      baseName   = `${shootFolder}-${date}-${n}.${ext}`;
+      filename   = `${shootFolder}/${baseName}`;
+    } else {
+      baseName = `tabsnap-${ts}.${ext}`;
+      filename = baseName;
+    }
     const displayLabel = shootFolder
       ? `Saved to Downloads/${shootFolder}/\n${baseName}`
       : baseName;
