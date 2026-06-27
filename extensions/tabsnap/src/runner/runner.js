@@ -1,4 +1,4 @@
-/* global TabSnapSitemap, TabSnapTree */
+/* global TabSnapSitemap, TabSnapTree, TabSnapNaming, TabSnapEngine */
 
 async function init() {
   const { tabsnap_runner_origin: origin } = await chrome.storage.session.get('tabsnap_runner_origin');
@@ -102,6 +102,7 @@ async function startCapture() {
   document.getElementById('progress').hidden = false;
   const line = document.getElementById('prog-line');
   const list = document.getElementById('prog-list');
+  list.innerHTML = ''; // clear any rows from a previous run (e.g. retry)
   TabSnapEngine.setProgressSink((m) => { line.textContent = m; });
   document.getElementById('cancel').onclick = () => { cancelled = true; };
 
