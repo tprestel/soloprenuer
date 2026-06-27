@@ -14,6 +14,9 @@ init();
 
 const selected = new Set(); // selected page URLs
 
+let cancelled = false;
+const failures = [];
+
 function renderPicker(urls) {
   urls.forEach(u => selected.add(u)); // default: all selected
   const root = TabSnapTree.buildTree(urls);
@@ -86,7 +89,86 @@ function wireOptions() {
   document.getElementById('start').addEventListener('click', startCapture);
 }
 
-// Replaced in the next task (capture orchestration).
-function startCapture() {
-  document.getElementById('total').textContent = `Would capture ${selected.size} pages × ${viewportCount()} viewport(s).`;
+async function startCapture() {
+  const folder = (document.getElementById('folder').value.trim() || 'tabsnap').replace(/[/\\]/g, '-');
+  const viewports = chosenViewports();
+  const pages = TabSnapNaming.assignUniqueSlugs([...selected]);
+  const totalShots = pages.length * viewports.length;
+  if (totalShots > 100 &&
+      !confirm(`${totalShots} screenshots (~${Math.ceil(totalShots * 4 / 60)} min). Continue?`)) return;
+
+  document.getElementById('picker').hidden = true;
+  document.getElementById('progress').hidden = false;
+  const line = document.getElementById('prog-line');
+  const list = document.getElementById('prog-list');
+  TabSnapEngine.setProgressSink((m) => { line.textContent = m; });
+  document.getElementById('cancel').addEventListener('click', () => { cancelled = true; });
+
+  const win = await chrome.windows.create({ url: 'about:blank', focused: false, width: 1500, height: 1000 });
+  const tabId = win.tabs[0].id;
+
+  let done = 0;
+  for (const { url, slug } of pages) {
+    if (cancelled) break;
+    for (const vp of viewports) {
+      if (cancelled) break;
+      done++;
+      line.textContent = `Capturing ${done}/${totalShots}: ${url} (${vp.name})`;
+      try {
+        await navigateAndSettle(tabId, url);
+        const { downloadUrl, ext } = await TabSnapEngine.captureSingleShot(tabId, 'png', { width: vp.width, mobile: vp.mobile });
+        await chrome.downloads.download({ url: downloadUrl, filename: `${folder}/${vp.name}/${slug}.${ext}` });
+        addRow(list, `✓ ${vp.name}/${slug}.${ext}`);
+      } catch (e) {
+        failures.push({ url, viewport: vp.name, error: String(e && e.message || e) });
+        addRow(list, `✗ ${vp.name} ${slug} — ${e.message || e}`);
+      }
+      await delay(500); // politeness
+    }
+  }
+  try { await chrome.windows.remove(win.id); } catch (_) {}
+  showSummary(done, totalShots);
+}
+
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function addRow(list, text) {
+  const li = document.createElement('li'); li.textContent = text; list.appendChild(li);
+  li.scrollIntoView({ block: 'nearest' });
+}
+
+// Navigate the capture tab and wait for load (bounded) + a short settle.
+function navigateAndSettle(tabId, url, timeoutMs = 30000) {
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    const onUpdated = (id, info) => {
+      if (id === tabId && info.status === 'complete') { cleanup(); setTimeout(resolve, 600); }
+    };
+    const timer = setTimeout(() => { cleanup(); reject(new Error('load timeout')); }, timeoutMs);
+    function cleanup() { if (settled) return; settled = true; clearTimeout(timer); chrome.tabs.onUpdated.removeListener(onUpdated); }
+    chrome.tabs.onUpdated.addListener(onUpdated);
+    chrome.tabs.update(tabId, { url }).catch(err => { cleanup(); reject(err); });
+  });
+}
+
+function showSummary(done, total) {
+  document.getElementById('progress').hidden = true;
+  const el = document.getElementById('summary');
+  el.hidden = false;
+  const ok = done - failures.length;
+  el.innerHTML = `<h2>Done</h2><p>${ok} captured, ${failures.length} failed${cancelled ? ' (cancelled)' : ''}.</p>`;
+  if (failures.length) {
+    const ul = document.createElement('ul');
+    failures.forEach(f => { const li = document.createElement('li'); li.textContent = `${f.viewport} ${f.url} — ${f.error}`; ul.appendChild(li); });
+    el.appendChild(ul);
+    const retry = document.createElement('button'); retry.className = 'btn'; retry.textContent = 'Retry failed';
+    retry.addEventListener('click', () => {
+      const urls = [...new Set(failures.map(f => f.url))];
+      selected.clear(); urls.forEach(u => selected.add(u));
+      failures.length = 0; cancelled = false;
+      document.getElementById('summary').hidden = true;
+      startCapture();
+    });
+    el.appendChild(retry);
+  }
 }
