@@ -68,6 +68,34 @@ section {
   line-height: 1.4;
 }
 
+.caret {
+  flex: 0 0 18px;
+  width: 18px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #888;
+  font-size: 11px;
+  line-height: 1;
+}
+
+.caret-spacer { visibility: hidden; cursor: default; }
+
+.lbl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.vp-note {
+  font-size: 13px;
+  color: #777;
+}
+
 /* ── Options ──────────────────────────────── */
 .options {
   display: flex;

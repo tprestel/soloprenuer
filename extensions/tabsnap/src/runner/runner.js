@@ -33,7 +33,19 @@ function renderPicker(urls) {
 function renderNode(node) {
   const wrap = document.createElement('div');
   wrap.className = 'node';
-  const row = document.createElement('label'); row.className = 'row';
+  const row = document.createElement('div'); row.className = 'row';
+  const hasKids = node.children.length > 0;
+
+  // Caret toggles the folder's children (collapsed by default). Leaf nodes get
+  // an invisible spacer so labels stay aligned.
+  const caret = document.createElement('button');
+  caret.type = 'button';
+  caret.className = hasKids ? 'caret' : 'caret caret-spacer';
+  caret.textContent = hasKids ? '▸' : '';
+  if (!hasKids) caret.disabled = true;
+  row.appendChild(caret);
+
+  const label = document.createElement('label'); label.className = 'lbl';
   const cb = document.createElement('input'); cb.type = 'checkbox';
   const pages = TabSnapTree.pagesUnder(node);
   cb.checked = pages.every(u => selected.has(u));
@@ -42,18 +54,25 @@ function renderNode(node) {
     pages.forEach(u => cb.checked ? selected.add(u) : selected.delete(u));
     refreshChecks(); updateTotal();
   });
-  cb.dataset.path = node.path;
-  const label = document.createElement('span');
-  label.textContent = node.children.length
+  cb._pages = pages; // for refreshChecks
+  const name = document.createElement('span');
+  name.textContent = hasKids
     ? `${node.segment === '/' ? '/' : '/' + node.segment + '/'} (${node.pages})`
     : '/' + node.segment;
-  row.append(cb, label); wrap.append(row);
-  if (node.children.length) {
+  label.append(cb, name);
+  row.append(label);
+  wrap.append(row);
+
+  if (hasKids) {
     const kids = document.createElement('div'); kids.className = 'children';
+    kids.hidden = true; // collapsed by default
     node.children.forEach(c => kids.appendChild(renderNode(c)));
     wrap.append(kids);
+    caret.addEventListener('click', () => {
+      kids.hidden = !kids.hidden;
+      caret.textContent = kids.hidden ? '▸' : '▾';
+    });
   }
-  cb._pages = pages; // for refreshChecks
   return wrap;
 }
 
@@ -67,25 +86,19 @@ function refreshChecks() {
 
 function updateTotal() {
   const pages = selected.size;
-  const shots = pages * viewportCount();
-  document.getElementById('total').textContent = `Capture ${pages} pages → ${shots} shots.`;
-  document.getElementById('start').disabled = pages === 0 || viewportCount() === 0;
+  document.getElementById('total').textContent = `Capture ${pages} page${pages === 1 ? '' : 's'}.`;
+  document.getElementById('start').disabled = pages === 0;
 }
 
-const VIEWPORTS = { desktop: { name: 'desktop', width: 1440, mobile: false },
-                    mobile:  { name: 'mobile',  width: 390,  mobile: true } };
-
-function chosenViewports() {
-  const out = [];
-  if (document.getElementById('vp-desktop').checked) out.push(VIEWPORTS.desktop);
-  if (document.getElementById('vp-mobile').checked) out.push(VIEWPORTS.mobile);
-  return out;
-}
-function viewportCount() { return chosenViewports().length; }
+// Desktop-only capture. Mobile emulation was removed: because each page is
+// loaded at desktop width before the viewport is shrunk, it produced a narrowed
+// desktop page rather than a true mobile render. A proper mobile mode would need
+// to load each page under emulation (emulate → reload → capture).
+const DESKTOP = { name: 'desktop', width: 1440, mobile: false };
+function chosenViewports() { return [DESKTOP]; }
+function viewportCount() { return 1; }
 
 function wireOptions() {
-  document.getElementById('vp-desktop').addEventListener('change', updateTotal);
-  document.getElementById('vp-mobile').addEventListener('change', updateTotal);
   document.getElementById('start').addEventListener('click', startCapture);
 }
 
