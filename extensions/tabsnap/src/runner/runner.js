@@ -90,6 +90,7 @@ function wireOptions() {
 }
 
 async function startCapture() {
+  cancelled = false;
   const folder = (document.getElementById('folder').value.trim() || 'tabsnap').replace(/[/\\]/g, '-');
   const viewports = chosenViewports();
   const pages = TabSnapNaming.assignUniqueSlugs([...selected]);
@@ -102,31 +103,36 @@ async function startCapture() {
   const line = document.getElementById('prog-line');
   const list = document.getElementById('prog-list');
   TabSnapEngine.setProgressSink((m) => { line.textContent = m; });
-  document.getElementById('cancel').addEventListener('click', () => { cancelled = true; });
-
-  const win = await chrome.windows.create({ url: 'about:blank', focused: false, width: 1500, height: 1000 });
-  const tabId = win.tabs[0].id;
+  document.getElementById('cancel').onclick = () => { cancelled = true; };
 
   let done = 0;
-  for (const { url, slug } of pages) {
-    if (cancelled) break;
-    for (const vp of viewports) {
+  let win;
+  try {
+    win = await chrome.windows.create({ url: 'about:blank', focused: false, width: 1500, height: 1000 });
+    const tabId = win.tabs[0].id;
+    for (const { url, slug } of pages) {
       if (cancelled) break;
-      done++;
-      line.textContent = `Capturing ${done}/${totalShots}: ${url} (${vp.name})`;
-      try {
-        await navigateAndSettle(tabId, url);
-        const { downloadUrl, ext } = await TabSnapEngine.captureSingleShot(tabId, 'png', { width: vp.width, mobile: vp.mobile });
-        await chrome.downloads.download({ url: downloadUrl, filename: `${folder}/${vp.name}/${slug}.${ext}` });
-        addRow(list, `✓ ${vp.name}/${slug}.${ext}`);
-      } catch (e) {
-        failures.push({ url, viewport: vp.name, error: String(e && e.message || e) });
-        addRow(list, `✗ ${vp.name} ${slug} — ${e.message || e}`);
+      for (const vp of viewports) {
+        if (cancelled) break;
+        done++;
+        line.textContent = `Capturing ${done}/${totalShots}: ${url} (${vp.name})`;
+        try {
+          await navigateAndSettle(tabId, url);
+          const { downloadUrl, ext } = await TabSnapEngine.captureSingleShot(tabId, 'png', { width: vp.width, mobile: vp.mobile });
+          await chrome.downloads.download({ url: downloadUrl, filename: `${folder}/${vp.name}/${slug}.${ext}` });
+          addRow(list, `✓ ${vp.name}/${slug}.${ext}`);
+        } catch (e) {
+          failures.push({ url, viewport: vp.name, error: String(e && e.message || e) });
+          addRow(list, `✗ ${vp.name} ${slug} — ${e.message || e}`);
+        }
+        await delay(500); // politeness
       }
-      await delay(500); // politeness
     }
+  } catch (e) {
+    addRow(list, `✗ could not start capture — ${e && e.message || e}`);
+  } finally {
+    if (win) { try { await chrome.windows.remove(win.id); } catch (_) {} }
   }
-  try { await chrome.windows.remove(win.id); } catch (_) {}
   showSummary(done, totalShots);
 }
 
