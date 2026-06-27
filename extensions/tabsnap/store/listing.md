@@ -17,6 +17,7 @@ TabSnap lets you screenshot an entire web page — not just what's visible, but 
 **Why TabSnap:**
 - Full-page capture (not just the visible viewport)
 - Three export formats: PNG, JPG, PDF
+- Batch capture entire sites from their sitemap — pick pages from a path tree and capture at desktop and/or mobile widths into one folder
 - No account, no cloud, no data collection
 - Works on any page
 
