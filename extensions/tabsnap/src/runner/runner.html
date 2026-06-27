@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TabSnap — Sitemap Capture</title>
+<link rel="stylesheet" href="runner.css"></head>
+<body>
+  <header><h1>Capture from sitemap</h1><p id="origin" class="sub"></p></header>
+  <section id="discovering">Finding sitemap…</section>
+  <section id="picker" hidden>
+    <div id="tree" class="tree"></div>
+    <div class="options">
+      <label><input type="checkbox" id="vp-desktop" checked> Desktop (1440px)</label>
+      <label><input type="checkbox" id="vp-mobile"> Mobile (390px)</label>
+      <label class="folder">Folder <input id="folder" type="text"></label>
+    </div>
+    <button id="start" class="btn">Capture</button>
+    <p id="total" class="sub"></p>
+  </section>
+  <section id="progress" hidden>
+    <p id="prog-line"></p>
+    <ul id="prog-list"></ul>
+    <button id="cancel" class="btn btn-secondary">Cancel</button>
+  </section>
+  <section id="summary" hidden></section>
+  <script src="../lib/jspdf.umd.min.js"></script>
+  <script src="../lib/naming.js"></script>
+  <script src="../lib/path-tree.js"></script>
+  <script src="../lib/sitemap.js"></script>
+  <script src="../lib/capture-engine.js"></script>
+  <script src="runner.js"></script>
+</body></html>

@@ -449,5 +449,18 @@ async function capture(format) {
   }
 }
 
+document.getElementById('btn-sitemap').addEventListener('click', async () => {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  let origin = '';
+  try { origin = new URL(tab.url).origin; } catch (_) {}
+  if (!origin) { showError('Open a website tab first.'); return; }
+  await chrome.storage.session.set({ tabsnap_runner_origin: origin });
+  await chrome.windows.create({
+    url: chrome.runtime.getURL('src/runner/runner.html'),
+    type: 'popup', width: 520, height: 720,
+  });
+  window.close();
+});
+
 // ── Init ───────────────────────────────────────────────────────────────────
 showIdle();
