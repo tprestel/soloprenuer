@@ -1,4 +1,4 @@
-/* global jspdf */
+/* global jspdf, TabSnapEngine */
 
 // ── jsPDF ──────────────────────────────────────────────────────────────────
 const { jsPDF } = window.jspdf;
@@ -20,6 +20,9 @@ const progressText   = document.getElementById('progress-text');
 const filenameText   = document.getElementById('filename-text');
 const errorText      = document.getElementById('error-text');
 const folderInput    = document.getElementById('folder-input');
+
+// ── Engine progress sink ────────────────────────────────────────────────────
+TabSnapEngine.setProgressSink((msg) => { progressText.textContent = msg; });
 
 // ── View helpers ───────────────────────────────────────────────────────────
 function hideAll() {
@@ -187,22 +190,89 @@ async function restoreFixedElements(tabId) {
   } catch (_) { /* ignore */ }
 }
 
-// ── Capture ────────────────────────────────────────────────────────────────
-async function capture(format) {
-  showCapturing();
-
-  let tabId;
+// Force instant scrolling during capture. Many sites set
+// `scroll-behavior: smooth`, which turns window.scrollTo into a ~1s animation —
+// the capture loop would then read a scroll position that lags the pixels it
+// captures, producing misaligned chunks and black gaps. An injected !important
+// style overrides it for the duration of the capture.
+async function forceInstantScroll(tabId) {
   try {
-    // 1. Active tab
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    tabId = tab.id;
+    await chrome.scripting.executeScript({
+      target: { tabId },
+      func: () => {
+        if (!document.getElementById('tabsnap-scroll-style')) {
+          const s = document.createElement('style');
+          s.id = 'tabsnap-scroll-style';
+          s.textContent = 'html,body{scroll-behavior:auto !important;}';
+          document.documentElement.appendChild(s);
+        }
+      },
+    });
+  } catch (_) { /* ignore */ }
+}
 
-    // 2. Page dimensions + current scroll position
+// Remove the instant-scroll override added by forceInstantScroll.
+async function restoreScrollBehavior(tabId) {
+  try {
+    await chrome.scripting.executeScript({
+      target: { tabId },
+      func: () => {
+        const s = document.getElementById('tabsnap-scroll-style');
+        if (s) s.remove();
+      },
+    });
+  } catch (_) { /* ignore */ }
+}
+
+// Extract a filename-safe site root (domain) from a tab URL, e.g.
+// "https://www.newo.ai/pricing" → "newo.ai". Returns '' if unavailable
+// (e.g. chrome:// or file:// pages with no hostname).
+function siteRootFromUrl(url) {
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, '');
+    return host.replace(/[^a-z0-9.-]/gi, '-');
+  } catch (_) {
+    return '';
+  }
+}
+
+// ── Filename + download (shared by both engines) ─────────────────────────────
+async function finalizeDownload(format, ext, downloadUrl, siteRoot) {
+  const ts = formatTimestamp();
+  const shootFolder = await getShootFolder();
+  let baseName, filename;
+  if (shootFolder) {
+    const seq  = await nextSeq();
+    const date = ts.slice(0, 10); // YYYY-MM-DD only
+    const n    = String(seq).padStart(3, '0');
+    const site = siteRoot ? `${siteRoot}-` : '';
+    baseName   = `${shootFolder}-${site}${date}-${n}.${ext}`;
+    filename   = `${shootFolder}/${baseName}`;
+  } else {
+    baseName = `${siteRoot || 'tabsnap'}-${ts}.${ext}`;
+    filename = baseName;
+  }
+  const displayLabel = shootFolder
+    ? `Saved to Downloads/${shootFolder}/\n${baseName}`
+    : baseName;
+
+  await chrome.downloads.download({ url: downloadUrl, filename });
+  showDone(displayLabel);
+}
+
+// ── Stitch engine (fallback) ─────────────────────────────────────────────────
+// Scrolls the page in viewport-height steps and stitches each captureVisibleTab
+// chunk onto one canvas. Used when the single-shot engine can't attach. Cannot
+// faithfully capture animated / parallax content (chunks are taken at different
+// moments), which is why single-shot is preferred.
+async function captureStitch(tabId, format) {
+    // Page dimensions + current scroll position
     const [{ result: dims }] = await chrome.scripting.executeScript({
       target: { tabId },
       func: () => ({
         scrollWidth:    Math.max(document.body.scrollWidth,    document.documentElement.scrollWidth),
         scrollHeight:   Math.max(document.body.scrollHeight,   document.documentElement.scrollHeight),
+        clientWidth:    document.documentElement.clientWidth,
         viewportWidth:  window.innerWidth,
         viewportHeight: window.innerHeight,
         dpr:            window.devicePixelRatio || 1,
@@ -211,14 +281,19 @@ async function capture(format) {
       }),
     });
 
-    const { scrollWidth, scrollHeight, viewportHeight, dpr, origX, origY } = dims;
+    const { scrollHeight, clientWidth, viewportHeight, dpr, origX, origY } = dims;
+
+    // Width is the viewport (clientWidth), not scrollWidth: captureVisibleTab only
+    // ever returns the visible viewport, and we never scroll horizontally, so any
+    // horizontal overflow (e.g. parallax images) would just become an undrawn
+    // black strip on the right. Capture exactly what each chunk can contain.
+    const captureWidth = clientWidth;
 
     // 3. Canvas size guard (Chrome limit: 32767px per dimension, ~268M total pixels)
-    const canvasW = scrollWidth * dpr;
+    const canvasW = captureWidth * dpr;
     const canvasH = scrollHeight * dpr;
     if (canvasW > 32767 || canvasH > 32767 || canvasW * canvasH > 268_000_000) {
-      showError(`Page is too large to capture (${scrollWidth}×${scrollHeight}px @${dpr}x). Try zooming out the page first.`);
-      return;
+      throw new Error(`Page is too large to capture (${captureWidth}×${scrollHeight}px @${dpr}x). Try zooming out the page first.`);
     }
 
     // 4. Stitching canvas
@@ -227,34 +302,68 @@ async function capture(format) {
     canvas.height = canvasH;
     const ctx = canvas.getContext('2d');
 
-    // 5. Hide fixed/sticky elements so they don't appear in every chunk
-    await hideFixedElements(tabId);
+    // 5. Override smooth scrolling so scrollTo is synchronous (see helper).
+    await forceInstantScroll(tabId);
+
+    // Track how far down the canvas we actually painted, so we can crop any
+    // trailing blank space (canvas is sized from the reported scrollHeight,
+    // which can exceed the height that is actually scrollable/painted).
+    let maxDrawnY    = 0;
+    let fixedHidden  = false;
 
     try {
       // 6. Scroll-capture loop
       const steps = Math.ceil(scrollHeight / viewportHeight);
+      let prevActualY = -1;
 
       for (let i = 0; i < steps; i++) {
         const targetY = i * viewportHeight;
 
-        // Scroll and read back actual position (browser clamps near bottom)
-        const [{ result: actualY }] = await chrome.scripting.executeScript({
+        // Scroll. behavior:'instant' (plus the injected style above) defeats any
+        // page-level `scroll-behavior: smooth`, which would otherwise animate the
+        // scroll and leave window.scrollY lagging behind the captured pixels.
+        await chrome.scripting.executeScript({
           target: { tabId },
-          func: (x, y) => { window.scrollTo(x, y); return window.scrollY; },
+          func: (x, y) => window.scrollTo({ left: x, top: y, behavior: 'instant' }),
           args:  [0, targetY],
         });
 
-        // Wait for lazy-load / layout settle
+        // Wait for the scroll to land + lazy-load / layout settle
         await delay(150);
 
-        // Capture visible area
+        // Read the ACTUAL scroll position at capture time (browser clamps near
+        // the bottom). Reading AFTER the settle guarantees drawY matches the
+        // pixels we are about to capture.
+        const [{ result: actualY }] = await chrome.scripting.executeScript({
+          target: { tabId },
+          func: () => window.scrollY,
+        });
+
+        // Bottom reached: no further progress means the previous chunk already
+        // painted the end of the page. Stop before redrawing it.
+        if (i > 0 && actualY <= prevActualY) break;
+
+        // Capture visible area. The first (top) chunk is captured with fixed/
+        // sticky elements visible so the header/nav appears once; they are then
+        // hidden so they don't repeat in every subsequent chunk.
         const dataUrl = await chrome.tabs.captureVisibleTab({ format: 'png' });
 
         // Stitch chunk — clip src height so we never overdraw the canvas bottom
         const img   = await loadImage(dataUrl);
-        const drawY = actualY * dpr;
+        const drawY = Math.round(actualY * dpr);
         const srcH  = Math.min(img.naturalHeight, canvas.height - drawY);
-        ctx.drawImage(img, 0, 0, img.naturalWidth, srcH, 0, drawY, img.naturalWidth, srcH);
+        if (srcH > 0) {
+          ctx.drawImage(img, 0, 0, img.naturalWidth, srcH, 0, drawY, img.naturalWidth, srcH);
+          maxDrawnY = Math.max(maxDrawnY, drawY + srcH);
+        }
+
+        // Hide fixed/sticky elements now that the top chunk is captured.
+        if (!fixedHidden) {
+          await hideFixedElements(tabId);
+          fixedHidden = true;
+        }
+
+        prevActualY = actualY;
 
         // Progress
         const pct = Math.round(((i + 1) / steps) * 100);
@@ -262,8 +371,9 @@ async function capture(format) {
         progressText.textContent = `Capturing… ${i + 1} of ${steps}`;
       }
     } finally {
-      // Always restore fixed elements, even if the loop threw
-      await restoreFixedElements(tabId);
+      // Always restore page state, even if the loop threw
+      if (fixedHidden) await restoreFixedElements(tabId);
+      await restoreScrollBehavior(tabId);
     }
 
     // 7. Restore original scroll position
@@ -273,54 +383,67 @@ async function capture(format) {
       args:   [origX, origY],
     });
 
+    // 7b. Crop trailing blank space down to what we actually painted, so the
+    //     image has no black tail when scrollHeight overestimates real content.
+    let outCanvas    = canvas;
+    let outHeightCss = scrollHeight;
+    if (maxDrawnY > 0 && maxDrawnY < canvas.height - 1) {
+      outCanvas = document.createElement('canvas');
+      outCanvas.width  = canvas.width;
+      outCanvas.height = maxDrawnY;
+      outCanvas.getContext('2d').drawImage(canvas, 0, 0);
+      outHeightCss = Math.round(maxDrawnY / dpr);
+    }
+
     // 8. Export — yield before blocking toDataURL / jsPDF calls
     progressText.textContent = 'Encoding…';
     await delay(0);
 
-    const ts = formatTimestamp();
     let downloadUrl, ext;
 
     if (format === 'png') {
-      downloadUrl = canvas.toDataURL('image/png');
+      downloadUrl = outCanvas.toDataURL('image/png');
       ext = 'png';
     } else if (format === 'jpg') {
-      downloadUrl = canvas.toDataURL('image/jpeg', 0.92);
+      downloadUrl = outCanvas.toDataURL('image/jpeg', 0.92);
       ext = 'jpg';
     } else {
-      const orientation = scrollHeight > scrollWidth ? 'portrait' : 'landscape';
+      const orientation = outHeightCss > captureWidth ? 'portrait' : 'landscape';
       const pdf = new jsPDF({
         orientation,
         unit:     'px',
-        format:   [scrollWidth, scrollHeight],
+        format:   [captureWidth, outHeightCss],
         hotfixes: ['px_scaling'],
       });
-      pdf.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, scrollWidth, scrollHeight);
+      pdf.addImage(outCanvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, captureWidth, outHeightCss);
       downloadUrl = pdf.output('datauristring');
       ext = 'pdf';
     }
 
-    // 9. Build filename
-    const shootFolder = await getShootFolder();
-    let baseName, filename;
-    if (shootFolder) {
-      const seq  = await nextSeq();
-      const date = ts.slice(0, 10); // YYYY-MM-DD only
-      const n    = String(seq).padStart(3, '0');
-      baseName   = `${shootFolder}-${date}-${n}.${ext}`;
-      filename   = `${shootFolder}/${baseName}`;
-    } else {
-      baseName = `tabsnap-${ts}.${ext}`;
-      filename = baseName;
+    return { downloadUrl, ext };
+}
+
+// ── Capture orchestrator ─────────────────────────────────────────────────────
+async function capture(format) {
+  showCapturing();
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    const tabId = tab.id;
+    const siteRoot = siteRootFromUrl(tab.url || '');
+
+    let result;
+    try {
+      // Preferred: single-shot full-page render (handles animation/parallax/video).
+      result = await TabSnapEngine.captureSingleShot(tabId, format, { mobile: false });
+    } catch (e) {
+      // Pages the debugger can't attach to (chrome://, Web Store, DevTools open)
+      // or any single-shot failure fall back to the scroll-and-stitch engine.
+      console.warn('TabSnap: single-shot capture failed, using stitch fallback:', e);
+      showCapturing();
+      result = await captureStitch(tabId, format);
     }
-    const displayLabel = shootFolder
-      ? `Saved to Downloads/${shootFolder}/\n${baseName}`
-      : baseName;
 
-    // 10. Download
-    await chrome.downloads.download({ url: downloadUrl, filename });
-
-    showDone(displayLabel);
-
+    await finalizeDownload(format, result.ext, result.downloadUrl, siteRoot);
   } catch (err) {
     showError(err.message || 'Something went wrong. Try reloading the page.');
   }
