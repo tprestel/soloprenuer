@@ -69,26 +69,51 @@ section {
 }
 
 .caret {
-  flex: 0 0 18px;
-  width: 18px;
-  height: 22px;
+  flex: 0 0 22px;
+  width: 22px;
+  align-self: stretch;
   padding: 0;
   border: none;
   background: none;
   cursor: pointer;
-  color: #888;
-  font-size: 11px;
+  color: #555;
+  font-size: 13px;
   line-height: 1;
 }
 
+.caret:hover { color: #1a1a1a; }
 .caret-spacer { visibility: hidden; cursor: default; }
 
-.lbl {
+.cb-wrap {
   display: flex;
   align-items: center;
-  gap: 8px;
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+
+.cb-wrap input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.name {
   flex: 1;
   min-width: 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.folder-name {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.folder-name:hover { text-decoration: underline; }
+
+.page-name {
+  cursor: pointer;
+  color: #333;
 }
 
 .vp-note {

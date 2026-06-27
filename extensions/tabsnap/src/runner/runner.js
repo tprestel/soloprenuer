@@ -37,15 +37,17 @@ function renderNode(node) {
   const hasKids = node.children.length > 0;
 
   // Caret toggles the folder's children (collapsed by default). Leaf nodes get
-  // an invisible spacer so labels stay aligned.
+  // an invisible spacer so checkboxes stay aligned.
   const caret = document.createElement('button');
   caret.type = 'button';
   caret.className = hasKids ? 'caret' : 'caret caret-spacer';
   caret.textContent = hasKids ? '▸' : '';
-  if (!hasKids) caret.disabled = true;
+  caret.disabled = !hasKids;
   row.appendChild(caret);
 
-  const label = document.createElement('label'); label.className = 'lbl';
+  // Checkbox lives in its own bare label so the name (next to it) can have its
+  // own click behavior instead of always toggling the checkbox.
+  const cbWrap = document.createElement('label'); cbWrap.className = 'cb-wrap';
   const cb = document.createElement('input'); cb.type = 'checkbox';
   const pages = TabSnapTree.pagesUnder(node);
   cb.checked = pages.every(u => selected.has(u));
@@ -55,12 +57,15 @@ function renderNode(node) {
     refreshChecks(); updateTotal();
   });
   cb._pages = pages; // for refreshChecks
+  cbWrap.appendChild(cb);
+  row.appendChild(cbWrap);
+
   const name = document.createElement('span');
+  name.className = 'name';
   name.textContent = hasKids
     ? `${node.segment === '/' ? '/' : '/' + node.segment + '/'} (${node.pages})`
     : '/' + node.segment;
-  label.append(cb, name);
-  row.append(label);
+  row.appendChild(name);
   wrap.append(row);
 
   if (hasKids) {
@@ -68,10 +73,16 @@ function renderNode(node) {
     kids.hidden = true; // collapsed by default
     node.children.forEach(c => kids.appendChild(renderNode(c)));
     wrap.append(kids);
-    caret.addEventListener('click', () => {
+    const toggle = () => {
       kids.hidden = !kids.hidden;
       caret.textContent = kids.hidden ? '▸' : '▾';
-    });
+    };
+    caret.addEventListener('click', toggle);
+    name.classList.add('folder-name');   // bold + clickable to expand/collapse
+    name.addEventListener('click', toggle);
+  } else {
+    name.classList.add('page-name');      // clicking a page name toggles its checkbox
+    name.addEventListener('click', () => { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); });
   }
   return wrap;
 }
