@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HubSpot Metadata Reference — Super Laundry Cincinnati</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-dark: #1C4A25;
+      --green: #2D7F3C;
+      --green-light: #4A9B58;
+      --green-pale: #EAF4EC;
+      --lime: #B5D300;
+      --cream: #F5F1E8;
+      --warm-white: #FAFAF7;
+      --text-dark: #1A2B1C;
+      --text-body: #3C4A3E;
+      --text-muted: #6B7F6D;
+      --border: #DDD8CE;
+      --border-green: rgba(45,127,60,0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--warm-white);
+      color: var(--text-body);
+      min-height: 100vh;
+    }
+
+    /* ===== HEADER ===== */
+    .site-header {
+      background: var(--green-dark);
+      padding: 40px 0 36px;
+      border-bottom: 4px solid var(--lime);
+    }
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .header-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 10px;
+    }
+    .header-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.15;
+    }
+    .header-meta {
+      text-align: right;
+    }
+    .header-meta p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.8;
+    }
+    .header-meta strong {
+      color: rgba(255,255,255,0.8);
+      font-weight: 600;
+    }
+
+    /* ===== INSTRUCTIONS ===== */
+    .instructions {
+      background: var(--green-pale);
+      border-bottom: 1px solid var(--border-green);
+      padding: 16px 0;
+    }
+    .instructions-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .instructions-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #fff;
+      font-size: 14px;
+    }
+    .instructions p {
+      font-size: 13px;
+      color: var(--green-dark);
+      line-height: 1.55;
+    }
+    .instructions strong { font-weight: 700; }
+
+    /* ===== MAIN ===== */
+    .main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 32px 80px;
+    }
+
+    /* ===== SECTION ===== */
+    .section {
+      margin-bottom: 56px;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--border);
+    }
+    .section-pill {
+      background: var(--green-dark);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+    .section-count {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ===== PAGE CARD ===== */
+    .page-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .page-card:hover {
+      box-shadow: 0 4px 20px rgba(28,74,37,0.08);
+    }
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px 12px;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      gap: 16px;
+    }
+    .page-name {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .page-url {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--green);
+      background: var(--green-pale);
+      padding: 3px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .card-fields {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .field {
+      display: grid;
+      grid-template-columns: 110px 1fr auto;
+      gap: 12px;
+      align-items: start;
+    }
+    .field-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding-top: 3px;
+    }
+    .field-value {
+      font-size: 14px;
+      color: var(--text-dark);
+      line-height: 1.5;
+      font-weight: 500;
+    }
+    .field-value.title-val {
+      font-weight: 600;
+      color: var(--green-dark);
+    }
+    .field-actions {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .char-count {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .char-count.good { background: var(--green-pale); color: var(--green-dark); }
+    .char-count.warn { background: #FFF8E1; color: #856400; }
+    .char-count.over { background: #FDECEA; color: #C62828; }
+
+    .copy-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 3px 10px;
+      font-size: 11px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .copy-btn:hover {
+      background: var(--green-dark);
+      border-color: var(--green-dark);
+      color: #fff;
+    }
+    .copy-btn.copied {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+
+    /* ===== FOOTER ===== */
+    .doc-footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 32px;
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .doc-footer p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .legend {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+    }
+    .legend-dot.good { background: var(--green); }
+    .legend-dot.warn { background: #F59E0B; }
+    .legend-dot.over { background: #EF4444; }
+
+    @media (max-width: 640px) {
+      .header-inner { flex-direction: column; align-items: flex-start; }
+      .header-meta { text-align: left; }
+      .field { grid-template-columns: 1fr; }
+      .card-top { flex-direction: column; align-items: flex-start; }
+      .field-actions { flex-direction: row; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div>
+        <p class="header-label">Internal Reference</p>
+        <h1 class="header-title">HubSpot Metadata<br>Reference</h1>
+      </div>
+      <div class="header-meta">
+        <p><strong>Super Laundry Cincinnati</strong></p>
+        <p>superlaundry24.com</p>
+        <p>20 pages · 3 sections</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="instructions">
+    <div class="instructions-inner">
+      <div class="instructions-icon">i</div>
+      <p>Copy each value into HubSpot's <strong>Page Settings → SEO</strong> tab. HubSpot's UI overrides what's in the HTML — these values need to be entered manually per page. Character counts shown for meta descriptions (target: 150–160).</p>
+    </div>
+  </div>
+
+  <main class="main">
+
+    <!-- HOME -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-pill">Home</span>
+        <span class="section-count">1 page</span>
+      </div>
+
+      <div class="page-card">
+        <div class="card-top">
+          <span class="page-name">Homepage</span>
+          <span class="page-url">/</span>
+        </div>
+        <div class="card-fields">
+          <div class="field">
+            <span class="field-label">Internal Name</span>
+            <span class="field-value" style="font-family:'IBM Plex Mono',monospace;font-size:13px;">Home</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Home')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Page Title</span>
+            <span class="field-value title-val">Laundromat in Cincinnati — Super Laundry | Open 24/7, 6 Locations</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Laundromat in Cincinnati — Super Laundry | Open 24/7, 6 Locations')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Meta Desc</span>
+            <span class="field-value">Cincinnati's largest laundromat network. 6 locations across Avondale, Bond Hill, Westwood, North College Hill, Springdale &amp; Allison St. 4 locations open 24 hours. 100+ machines. Cash · Card · Tap.</span>
+            <div class="field-actions">
+              <span class="char-count good" id="cc-home-desc">166</span>
+              <button class="copy-btn" onclick="copyText(this, 'Cincinnati\'s largest laundromat network. 6 locations across Avondale, Bond Hill, Westwood, North College Hill, Springdale & Allison St. 4 locations open 24 hours. 100+ machines. Cash · Card · Tap.')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOCATIONS -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-pill">Locations</span>
+        <span class="section-count">7 pages</span>
+      </div>
+
+      <!-- Locations Hub -->
+      <div class="page-card">
+        <div class="card-top">
+          <span class="page-name">All Locations</span>
+          <span class="page-url">/locations</span>
+        </div>
+        <div class="card-fields">
+          <div class="field">
+            <span class="field-label">Internal Name</span>
+            <span class="field-value" style="font-family:'IBM Plex Mono',monospace;font-size:13px;">Locations | Hub</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Locations | Hub')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Page Title</span>
+            <span class="field-value title-val">All Locations — Super Laundry Cincinnati | 6 Laundromats Open 24/7</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'All Locations — Super Laundry Cincinnati | 6 Laundromats Open 24/7')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Meta Desc</span>
+            <span class="field-value">6 Super Laundry locations across Cincinnati — Springdale, Avondale, Bond Hill, Westwood, North College Hill, and Allison Street. Most open 24/7. 100+ machines. Free parking at every door.</span>
+            <div class="field-actions">
+              <span class="char-count good">189</span>
+              <button class="copy-btn" onclick="copyText(this, '6 Super Laundry locations across Cincinnati — Springdale, Avondale, Bond Hill, Westwood, North College Hill, and Allison Street. Most open 24/7. 100+ machines. Free parking at every door.')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Westwood -->
+      <div class="page-card">
+        <div class="card-top">
+          <span class="page-name">Westwood</span>
+          <span class="page-url">/locations/westwood</span>
+        </div>
+        <div class="card-fields">
+          <div class="field">
+            <span class="field-label">Internal Name</span>
+            <span class="field-value" style="font-family:'IBM Plex Mono',monospace;font-size:13px;">Locations | Westwood</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Locations | Westwood')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Page Title</span>
+            <span class="field-value title-val">24-Hour Laundromat in Westwood — Open 24/7</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, '24-Hour Laundromat in Westwood — Open 24/7')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Meta Desc</span>
+            <span class="field-value">Super Laundry Westwood — 2455 Harrison Ave. Open 24 hours, 7 days a week. Self-service laundry and wash-dry-fold drop-off. Laundry Love host. CASH-CARD-TAP.</span>
+            <div class="field-actions">
+              <span class="char-count good">162</span>
+              <button class="copy-btn" onclick="copyText(this, 'Super Laundry Westwood — 2455 Harrison Ave. Open 24 hours, 7 days a week. Self-service laundry and wash-dry-fold drop-off. Laundry Love host. CASH-CARD-TAP.')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Avondale -->
+      <div class="page-card">
+        <div class="card-top">
+          <span class="page-name">Avondale</span>
+          <span class="page-url">/locations/avondale</span>
+        </div>
+        <div class="card-fields">
+          <div class="field">
+            <span class="field-label">Internal Name</span>
+            <span class="field-value" style="font-family:'IBM Plex Mono',monospace;font-size:13px;">Locations | Avondale</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Locations | Avondale')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Page Title</span>
+            <span class="field-value title-val">24-Hour Laundromat in Avondale — Open 24/7</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, '24-Hour Laundromat in Avondale — Open 24/7')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Meta Desc</span>
+            <span class="field-value">Super Laundry Avondale — 3545 Reading Rd. Open 24 hours, 7 days a week. Self-service laundry and wash-dry-fold drop-off. Laundry Love host. CASH-CARD-TAP.</span>
+            <div class="field-actions">
+              <span class="char-count good">161</span>
+              <button class="copy-btn" onclick="copyText(this, 'Super Laundry Avondale — 3545 Reading Rd. Open 24 hours, 7 days a week. Self-service laundry and wash-dry-fold drop-off. Laundry Love host. CASH-CARD-TAP.')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bond Hill -->
+      <div class="page-card">
+        <div class="card-top">
+          <span class="page-name">Bond Hill</span>
+          <span class="page-url">/locations/bond-hill</span>
+        </div>
+        <div class="card-fields">
+          <div class="field">
+            <span class="field-label">Internal Name</span>
+            <span class="field-value" style="font-family:'IBM Plex Mono',monospace;font-size:13px;">Locations | Bond Hill</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Locations | Bond Hill')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Page Title</span>
+            <span class="field-value title-val">24-Hour Laundromat in Bond Hill — Open 24/7</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, '24-Hour Laundromat in Bond Hill — Open 24/7')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Meta Desc</span>
+            <span class="field-value">Super Laundry Bond Hill — 4368 Reading Rd. Open 24 hours, 7 days a week. Self-service laundry and wash-dry-fold drop-off. CASH-CARD-TAP.</span>
+            <div class="field-actions">
+              <span class="char-count good">148</span>
+              <button class="copy-btn" onclick="copyText(this, 'Super Laundry Bond Hill — 4368 Reading Rd. Open 24 hours, 7 days a week. Self-service laundry and wash-dry-fold drop-off. CASH-CARD-TAP.')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- North College Hill -->
+      <div class="page-card">
+        <div class="card-top">
+          <span class="page-name">North College Hill</span>
+          <span class="page-url">/locations/north-college-hill</span>
+        </div>
+        <div class="card-fields">
+          <div class="field">
+            <span class="field-label">Internal Name</span>
+            <span class="field-value" style="font-family:'IBM Plex Mono',monospace;font-size:13px;">Locations | North College Hill</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Locations | North College Hill')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Page Title</span>
+            <span class="field-value title-val">24-Hour Laundromat in North College Hill — Open 24/7</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, '24-Hour Laundromat in North College Hill — Open 24/7')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Meta Desc</span>
+            <span class="field-value">Super Laundry North College Hill — 1585 Goodman Ave. Open 24 hours, 7 days a week. Self-service laundry and wash-dry-fold drop-off. CASH-CARD-TAP.</span>
+            <div class="field-actions">
+              <span class="char-count good">158</span>
+              <button class="copy-btn" onclick="copyText(this, 'Super Laundry North College Hill — 1585 Goodman Ave. Open 24 hours, 7 days a week. Self-service laundry and wash-dry-fold drop-off. CASH-CARD-TAP.')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Springdale -->
+      <div class="page-card">
+        <div class="card-top">
+          <span class="page-name">Springdale</span>
+          <span class="page-url">/locations/springdale</span>
+        </div>
+        <div class="card-fields">
+          <div class="field">
+            <span class="field-label">Internal Name</span>
+            <span class="field-value" style="font-family:'IBM Plex Mono',monospace;font-size:13px;">Locations | Springdale</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Locations | Springdale')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Page Title</span>
+            <span class="field-value title-val">Laundromat in Springdale, OH — Open 7 AM–10 PM Daily</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Laundromat in Springdale, OH — Open 7 AM–10 PM Daily')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Meta Desc</span>
+            <span class="field-value">Super Laundry Springdale — 11627 Springfield Pike. Open 7 AM to 10 PM every day. Self-service, wash-dry-fold drop-off, and pickup &amp; delivery. CASH-CARD-TAP.</span>
+            <div class="field-actions">
+              <span class="char-count good">163</span>
+              <button class="copy-btn" onclick="copyText(this, 'Super Laundry Springdale — 11627 Springfield Pike. Open 7 AM to 10 PM every day. Self-service, wash-dry-fold drop-off, and pickup & delivery. CASH-CARD-TAP.')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Allison Street -->
+      <div class="page-card">
+        <div class="card-top">
+          <span class="page-name">Allison Street</span>
+          <span class="page-url">/locations/allison-street</span>
+        </div>
+        <div class="card-fields">
+          <div class="field">
+            <span class="field-label">Internal Name</span>
+            <span class="field-value" style="font-family:'IBM Plex Mono',monospace;font-size:13px;">Locations | Allison Street</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Locations | Allison Street')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Page Title</span>
+            <span class="field-value title-val">Coin Laundromat Near Me | Super Laundry Allison Street Cincinnati</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Coin Laundromat Near Me | Super Laundry Allison Street Cincinnati')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Meta Desc</span>
+            <span class="field-value">Coin-operated laundromat at 4522 Allison St, Cincinnati OH 45212. Open 6 AM to 11 PM daily. 100+ washers and dryers. Self-service, no appointment needed. CASH · CARD · TAP.</span>
+            <div class="field-actions">
+              <span class="char-count good">163</span>
+              <button class="copy-btn" onclick="copyText(this, 'Coin-operated laundromat at 4522 Allison St, Cincinnati OH 45212. Open 6 AM to 11 PM daily. 100+ washers and dryers. Self-service, no appointment needed. CASH · CARD · TAP.')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-pill">Services</span>
+        <span class="section-count">5 pages</span>
+      </div>
+
+      <!-- Services Hub -->
+      <div class="page-card">
+        <div class="card-top">
+          <span class="page-name">Services Hub</span>
+          <span class="page-url">/services</span>
+        </div>
+        <div class="card-fields">
+          <div class="field">
+            <span class="field-label">Internal Name</span>
+            <span class="field-value" style="font-family:'IBM Plex Mono',monospace;font-size:13px;">Services | Hub</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Services | Hub')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Page Title</span>
+            <span class="field-value title-val">Laundry Services in Cincinnati | Super Laundry</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Laundry Services in Cincinnati | Super Laundry')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Meta Desc</span>
+            <span class="field-value">Self-service laundry, wash-dry-fold drop-off, and pickup &amp; delivery — three ways to get your laundry done at Super Laundry Cincinnati's 6 locations.</span>
+            <div class="field-actions">
+              <span class="char-count good">157</span>
+              <button class="copy-btn" onclick="copyText(this, 'Self-service laundry, wash-dry-fold drop-off, and pickup & delivery — three ways to get your laundry done at Super Laundry Cincinnati\'s 6 locations.')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Self-Service -->
+      <div class="page-card">
+        <div class="card-top">
+          <span class="page-name">Self-Service Laundry</span>
+          <span class="page-url">/services/self-service</span>
+        </div>
+        <div class="card-fields">
+          <div class="field">
+            <span class="field-label">Internal Name</span>
+            <span class="field-value" style="font-family:'IBM Plex Mono',monospace;font-size:13px;">Services | Self-Service</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Services | Self-Service')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Page Title</span>
+            <span class="field-value title-val">Self-Service Laundry in Cincinnati — 100+ Washers &amp; Dryers</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Self-Service Laundry in Cincinnati — 100+ Washers & Dryers')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Meta Desc</span>
+            <span class="field-value">Self-service coin-operated laundry at 6 Cincinnati locations. 100+ washers and dryers, 2-load to 8-load capacity. Open 24/7 at most locations. Cash, card, and tap accepted.</span>
+            <div class="field-actions">
+              <span class="char-count good">180</span>
+              <button class="copy-btn" onclick="copyText(this, 'Self-service coin-operated laundry at 6 Cincinnati locations. 100+ washers and dryers, 2-load to 8-load capacity. Open 24/7 at most locations. Cash, card, and tap accepted.')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wash and Fold -->
+      <div class="page-card">
+        <div class="card-top">
+          <span class="page-name">Wash &amp; Fold</span>
+          <span class="page-url">/services/wash-and-fold</span>
+        </div>
+        <div class="card-fields">
+          <div class="field">
+            <span class="field-label">Internal Name</span>
+            <span class="field-value" style="font-family:'IBM Plex Mono',monospace;font-size:13px;">Services | Wash &amp; Fold</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Services | Wash & Fold')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Page Title</span>
+            <span class="field-value title-val">Wash and Fold Near You in Cincinnati | Super Laundry</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Wash and Fold Near You in Cincinnati | Super Laundry')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Meta Desc</span>
+            <span class="field-value">Drop off your laundry and pick it up clean, dry, and folded. Super Laundry offers wash-dry-fold drop-off at 5 Cincinnati locations — no appointment needed.</span>
+            <div class="field-actions">
+              <span class="char-count good">158</span>
+              <button class="copy-btn" onclick="copyText(this, 'Drop off your laundry and pick it up clean, dry, and folded. Super Laundry offers wash-dry-fold drop-off at 5 Cincinnati locations — no appointment needed.')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 24-Hour -->
+      <div class="page-card">
+        <div class="card-top">
+          <span class="page-name">24-Hour Laundry</span>
+          <span class="page-url">/services/24-hour-laundry</span>
+        </div>
+        <div class="card-fields">
+          <div class="field">
+            <span class="field-label">Internal Name</span>
+            <span class="field-value" style="font-family:'IBM Plex Mono',monospace;font-size:13px;">Services | 24-Hour Laundry</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Services | 24-Hour Laundry')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Page Title</span>
+            <span class="field-value title-val">24 Hour Laundry Near Me in Cincinnati | Super Laundry</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, '24 Hour Laundry Near Me in Cincinnati | Super Laundry')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Meta Desc</span>
+            <span class="field-value">Super Laundry has 4 Cincinnati locations open 24 hours a day, 7 days a week. 100+ machines, cash · card · tap payment. Self-service laundry when you need it.</span>
+            <div class="field-actions">
+              <span class="char-count good">162</span>
+              <button class="copy-btn" onclick="copyText(this, 'Super Laundry has 4 Cincinnati locations open 24 hours a day, 7 days a week. 100+ machines, cash · card · tap payment. Self-service laundry when you need it.')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pickup & Delivery -->
+      <div class="page-card">
+        <div class="card-top">
+          <span class="page-name">Pickup &amp; Delivery</span>
+          <span class="page-url">/services/pickup-delivery</span>
+        </div>
+        <div class="card-fields">
+          <div class="field">
+            <span class="field-label">Internal Name</span>
+            <span class="field-value" style="font-family:'IBM Plex Mono',monospace;font-size:13px;">Services | Pickup &amp; Delivery</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Services | Pickup & Delivery')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Page Title</span>
+            <span class="field-value title-val">Laundry Pickup &amp; Delivery in Cincinnati — Springdale</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Laundry Pickup & Delivery in Cincinnati — Springdale')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Meta Desc</span>
+            <span class="field-value">Laundry pickup and delivery service in Cincinnati. We pick up, wash, dry, fold, and deliver back to your door. Served from our Springdale location on Springfield Pike.</span>
+            <div class="field-actions">
+              <span class="char-count good">170</span>
+              <button class="copy-btn" onclick="copyText(this, 'Laundry pickup and delivery service in Cincinnati. We pick up, wash, dry, fold, and deliver back to your door. Served from our Springdale location on Springfield Pike.')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPANY -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-pill">Company</span>
+        <span class="section-count">7 pages</span>
+      </div>
+
+      <!-- About -->
+      <div class="page-card">
+        <div class="card-top">
+          <span class="page-name">About</span>
+          <span class="page-url">/about</span>
+        </div>
+        <div class="card-fields">
+          <div class="field">
+            <span class="field-label">Internal Name</span>
+            <span class="field-value" style="font-family:'IBM Plex Mono',monospace;font-size:13px;">About</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'About')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Page Title</span>
+            <span class="field-value title-val">About Super Laundry Cincinnati — Locally Owned, 6 Locations</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'About Super Laundry Cincinnati — Locally Owned, 6 Locations')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Meta Desc</span>
+            <span class="field-value">Super Laundry Cincinnati is locally owned, not a franchise. 6 neighborhood locations, 100+ machines each, open when you need us. Named Best Laundromat in Cincinnati — BusinessRate Best of 2025.</span>
+            <div class="field-actions">
+              <span class="char-count good">198</span>
+              <button class="copy-btn" onclick="copyText(this, 'Super Laundry Cincinnati is locally owned, not a franchise. 6 neighborhood locations, 100+ machines each, open when you need us. Named Best Laundromat in Cincinnati — BusinessRate Best of 2025.')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="page-card">
+        <div class="card-top">
+          <span class="page-name">Contact</span>
+          <span class="page-url">/contact</span>
+        </div>
+        <div class="card-fields">
+          <div class="field">
+            <span class="field-label">Internal Name</span>
+            <span class="field-value" style="font-family:'IBM Plex Mono',monospace;font-size:13px;">Contact</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Contact')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Page Title</span>
+            <span class="field-value title-val">Contact Us — Super Laundry Cincinnati</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Contact Us — Super Laundry Cincinnati')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Meta Desc</span>
+            <span class="field-value">Contact Super Laundry Cincinnati. Questions about services, hours, or your neighborhood location? Call, email, or send us a message. 6 locations across Cincinnati.</span>
+            <div class="field-actions">
+              <span class="char-count good">163</span>
+              <button class="copy-btn" onclick="copyText(this, 'Contact Super Laundry Cincinnati. Questions about services, hours, or your neighborhood location? Call, email, or send us a message. 6 locations across Cincinnati.')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Careers -->
+      <div class="page-card">
+        <div class="card-top">
+          <span class="page-name">Careers</span>
+          <span class="page-url">/careers</span>
+        </div>
+        <div class="card-fields">
+          <div class="field">
+            <span class="field-label">Internal Name</span>
+            <span class="field-value" style="font-family:'IBM Plex Mono',monospace;font-size:13px;">Careers</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Careers')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Page Title</span>
+            <span class="field-value title-val">Careers — Join the Super Laundry Cincinnati Team</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Careers — Join the Super Laundry Cincinnati Team')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Meta Desc</span>
+            <span class="field-value">Now hiring Laundromat Team Members at Super Laundry Cincinnati. Flexible hours, competitive pay, 6 neighborhood locations. No experience required — apply in under 2 minutes.</span>
+            <div class="field-actions">
+              <span class="char-count good">177</span>
+              <button class="copy-btn" onclick="copyText(this, 'Now hiring Laundromat Team Members at Super Laundry Cincinnati. Flexible hours, competitive pay, 6 neighborhood locations. No experience required — apply in under 2 minutes.')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="page-card">
+        <div class="card-top">
+          <span class="page-name">FAQ</span>
+          <span class="page-url">/faq</span>
+        </div>
+        <div class="card-fields">
+          <div class="field">
+            <span class="field-label">Internal Name</span>
+            <span class="field-value" style="font-family:'IBM Plex Mono',monospace;font-size:13px;">FAQ</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'FAQ')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Page Title</span>
+            <span class="field-value title-val">FAQ — Super Laundry Cincinnati</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'FAQ — Super Laundry Cincinnati')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Meta Desc</span>
+            <span class="field-value">Everything you need to know about Super Laundry Cincinnati — hours, payments, drop-off service, pickup &amp; delivery, machines, and store policies.</span>
+            <div class="field-actions">
+              <span class="char-count good">148</span>
+              <button class="copy-btn" onclick="copyText(this, 'Everything you need to know about Super Laundry Cincinnati — hours, payments, drop-off service, pickup & delivery, machines, and store policies.')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Store Policies -->
+      <div class="page-card">
+        <div class="card-top">
+          <span class="page-name">Store Policies</span>
+          <span class="page-url">/store-policies</span>
+        </div>
+        <div class="card-fields">
+          <div class="field">
+            <span class="field-label">Internal Name</span>
+            <span class="field-value" style="font-family:'IBM Plex Mono',monospace;font-size:13px;">Store Policies</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Store Policies')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Page Title</span>
+            <span class="field-value title-val">Store Policies — Super Laundry Cincinnati</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Store Policies — Super Laundry Cincinnati')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Meta Desc</span>
+            <span class="field-value">Super Laundry Cincinnati store policies — machine use, drop-off service, unattended laundry, refunds, lost &amp; found, and conduct guidelines.</span>
+            <div class="field-actions">
+              <span class="char-count good">140</span>
+              <button class="copy-btn" onclick="copyText(this, 'Super Laundry Cincinnati store policies — machine use, drop-off service, unattended laundry, refunds, lost & found, and conduct guidelines.')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Partnership -->
+      <div class="page-card">
+        <div class="card-top">
+          <span class="page-name">Partnership Opportunities</span>
+          <span class="page-url">/partner</span>
+        </div>
+        <div class="card-fields">
+          <div class="field">
+            <span class="field-label">Internal Name</span>
+            <span class="field-value" style="font-family:'IBM Plex Mono',monospace;font-size:13px;">Partner</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Partner')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Page Title</span>
+            <span class="field-value title-val">Partnership Opportunities — Super Laundry Cincinnati</span>
+            <div class="field-actions">
+              <button class="copy-btn" onclick="copyText(this, 'Partnership Opportunities — Super Laundry Cincinnati')">Copy</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Meta Desc</span>
+            <span class="field-value">Partner with Super Laundry Cincinnati. Advertise to thousands of neighborhood residents or collaborate on community initiatives. 6 locations across Cincinnati.</span>
+            <div class="field-actions">
+              <span class="char-count good">161</span>
+              <button class="copy-btn" onclick="copyText(this, 'Partner with Super Laundry Cincinnati. Advertise to thousands of neighborhood residents or collaborate on community initiatives. 6 locations across Cincinnati.')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer style="border-top: 1px solid var(--border); padding: 24px 32px; max-width: 960px; margin: 0 auto;">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+      <p style="font-size:12px; color:var(--text-muted);">Super Laundry Cincinnati · HubSpot Metadata Reference · 20 pages</p>
+      <div style="display:flex; gap:16px; align-items:center;">
+        <div style="display:flex; align-items:center; gap:6px; font-size:11px; color:var(--text-muted);">
+          <div style="width:8px;height:8px;border-radius:2px;background:var(--green);"></div> 130–170 chars
+        </div>
+        <div style="display:flex; align-items:center; gap:6px; font-size:11px; color:var(--text-muted);">
+          <div style="width:8px;height:8px;border-radius:2px;background:#F59E0B;"></div> 170–200 chars (may truncate)
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Calculate and update char counts dynamically
+    document.querySelectorAll('.field').forEach(field => {
+      const label = field.querySelector('.field-label');
+      const value = field.querySelector('.field-value');
+      const charCount = field.querySelector('.char-count');
+      if (label && label.textContent.includes('Meta') && charCount) {
+        const len = value.textContent.trim().length;
+        charCount.textContent = len;
+        charCount.className = 'char-count';
+        if (len <= 170) charCount.classList.add('good');
+        else if (len <= 200) charCount.classList.add('warn');
+        else charCount.classList.add('over');
+      }
+    });
+
+    function copyText(btn, text) {
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>

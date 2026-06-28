@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage Audit — Super Laundry Cincinnati</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #111A12;
+      --bg2: #182019;
+      --bg3: #1E2A1F;
+      --border: rgba(255,255,255,0.08);
+      --lime: #B5D300;
+      --green: #4A9B58;
+      --green-pale: rgba(74,155,88,0.12);
+      --text: #F0EDE6;
+      --text-dim: rgba(240,237,230,0.55);
+      --text-muted: rgba(240,237,230,0.35);
+      --red: #F87171;
+      --red-bg: rgba(248,113,113,0.1);
+      --orange: #FB923C;
+      --orange-bg: rgba(251,146,60,0.1);
+      --yellow: #FCD34D;
+      --yellow-bg: rgba(252,211,77,0.1);
+      --blue: #60A5FA;
+      --blue-bg: rgba(96,165,250,0.1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      padding: 48px 40px 36px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .header-left .eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 10px;
+    }
+    .header-left h1 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    .header-left h1 em {
+      font-style: italic;
+      color: var(--lime);
+    }
+    .header-left .url {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+    .header-right {
+      text-align: right;
+    }
+    .overall-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 52px;
+      font-weight: 600;
+      color: var(--lime);
+      line-height: 1;
+    }
+    .overall-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* ── BODY ── */
+    .body {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 40px 64px;
+    }
+
+    /* ── SCORE ROW ── */
+    .scores {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 32px;
+    }
+    .score-cell {
+      background: var(--bg2);
+      padding: 18px 16px;
+      text-align: center;
+    }
+    .score-cell .n {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+    .score-cell .n.good { color: var(--green); }
+    .score-cell .n.ok   { color: var(--yellow); }
+    .score-cell .n.bad  { color: var(--red); }
+    .score-cell .l {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      margin-top: 44px;
+    }
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-head h2 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .section-head .count {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    /* ── ISSUE CARDS ── */
+    .issues { display: flex; flex-direction: column; gap: 10px; }
+
+    .issue {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 18px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 14px;
+      align-items: start;
+    }
+    .issue-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      margin-top: 1px;
+    }
+    .issue-badge.high   { background: var(--red-bg);    color: var(--red); }
+    .issue-badge.medium { background: var(--orange-bg); color: var(--orange); }
+    .issue-badge.low    { background: var(--blue-bg);   color: var(--blue); }
+
+    .issue-body .title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .issue-body .desc {
+      font-size: 12.5px;
+      color: var(--text-dim);
+      line-height: 1.55;
+    }
+    .issue-body .fix {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--lime);
+      font-weight: 600;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .issue-effort {
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      font-family: 'IBM Plex Mono', monospace;
+      margin-top: 2px;
+    }
+
+    /* ── DATA BLOCK ── */
+    .data-block {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 16px;
+    }
+    .data-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 16px;
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+      font-size: 12.5px;
+    }
+    .data-row:last-child { border-bottom: none; }
+    .data-label {
+      font-weight: 600;
+      color: var(--text-dim);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding-top: 1px;
+    }
+    .data-val { color: var(--text); font-family: 'IBM Plex Mono', monospace; font-size: 12px; }
+    .data-val.err { color: var(--red); }
+    .data-val.warn { color: var(--orange); }
+    .data-val.ok { color: var(--green); }
+
+    /* ── QUICK FIX BOX ── */
+    .fix-box {
+      background: rgba(181,211,0,0.06);
+      border: 1px solid rgba(181,211,0,0.2);
+      border-radius: 8px;
+      padding: 20px 20px;
+      margin-top: 16px;
+    }
+    .fix-box h3 {
+      font-family: 'Lora', serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--lime);
+      margin-bottom: 12px;
+    }
+    .fix-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 8px;
+      font-size: 12.5px;
+      color: var(--text-dim);
+    }
+    .fix-item:last-child { margin-bottom: 0; }
+    .fix-item .num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: var(--lime);
+      background: rgba(181,211,0,0.1);
+      padding: 2px 6px;
+      border-radius: 3px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px 40px 40px;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .header, .body { padding-left: 20px; padding-right: 20px; }
+      .header { flex-direction: column; align-items: flex-start; }
+      .header-right { text-align: left; }
+      .scores { grid-template-columns: repeat(2, 1fr); }
+      .issue { grid-template-columns: auto 1fr; }
+      .issue-effort { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-left">
+      <div class="eyebrow">Page-Level SEO Audit · March 2026</div>
+      <h1>Homepage<br><em>Improvement Opportunities</em></h1>
+      <div class="url">superlaundry24.com &nbsp;/&nbsp; staging: 244988351.hs-sites-na2.com</div>
+    </div>
+    <div class="header-right">
+      <div class="overall-num">69</div>
+      <div class="overall-label">Overall Score / 100</div>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- SCORES -->
+    <div class="scores">
+      <div class="score-cell">
+        <div class="n ok">72</div>
+        <div class="l">Title Tag</div>
+      </div>
+      <div class="score-cell">
+        <div class="n bad">48</div>
+        <div class="l">Meta Desc</div>
+      </div>
+      <div class="score-cell">
+        <div class="n bad">38</div>
+        <div class="l">Performance</div>
+      </div>
+      <div class="score-cell">
+        <div class="n good">88</div>
+        <div class="l">Schema</div>
+      </div>
+    </div>
+
+    <!-- WHAT WE FOUND -->
+    <div class="section">
+      <div class="section-head">
+        <h2>Page Snapshot</h2>
+      </div>
+      <div class="data-block">
+        <div class="data-row">
+          <div class="data-label">Title</div>
+          <div class="data-val warn">Laundromat in Cincinnati — Super Laundry | Open 24/7, 6 Locations <span style="color:var(--orange);font-size:11px;">(65 chars — 5 over)</span></div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">Meta Description</div>
+          <div class="data-val err">197 chars — 37 over limit. Contains "Allison Rd" (wrong — should be Allison St).</div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">H1</div>
+          <div class="data-val ok">Cincinnati's Biggest &amp; Best Laundromats ✓</div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">H2 Structure</div>
+          <div class="data-val" style="color:var(--text-dim)">Four Ways to Get It Done · Free Laundry Days · Earn Rewards · 6 Locations · Built for Cincinnati Neighborhoods · 1,700+ Google Reviews · Common Questions · News, Deals &amp; Updates</div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">Canonical</div>
+          <div class="data-val ok">https://superlaundry24.com/ ✓</div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">Schema</div>
+          <div class="data-val ok">LaundryOrDryCleaning (aggregateRating + location) + FAQPage ✓</div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">Word Count</div>
+          <div class="data-val ok">~1,070 words ✓</div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">Images</div>
+          <div class="data-val err">14 total — 0 with loading="lazy" ✗</div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">Internal Links</div>
+          <div class="data-val ok">20 unique links — full site coverage ✓</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ISSUES -->
+    <div class="section">
+      <div class="section-head">
+        <h2>Issues Found</h2>
+        <div class="count">5 total · 2 high · 2 medium · 1 low</div>
+      </div>
+      <div class="issues">
+
+        <div class="issue">
+          <span class="issue-badge high">High</span>
+          <div class="issue-body">
+            <div class="title">Meta description is 197 chars — Google truncates at ~160</div>
+            <div class="desc">The current meta is 37 characters over the display limit. Google will cut it mid-sentence in search results, likely after "4 locations open 24 hours. 100+ machines." — dropping the Cash · Card · Tap line entirely. Also contains "Allison Rd" which should be "Allison St."</div>
+            <div class="fix">→ Trim to ≤155 chars and fix "Allison Rd" → "Allison St"</div>
+          </div>
+          <div class="issue-effort">5 min</div>
+        </div>
+
+        <div class="issue">
+          <span class="issue-badge high">High</span>
+          <div class="issue-body">
+            <div class="title">0 of 14 images have loading="lazy"</div>
+            <div class="desc">Every image on the page loads eagerly, including location exterior shots far below the fold. This directly hurts Largest Contentful Paint (LCP) — a Core Web Vitals signal Google uses in ranking. The hero images can stay eager; everything else should be lazy-loaded.</div>
+            <div class="fix">→ Add loading="lazy" to all images except the first hero image</div>
+          </div>
+          <div class="issue-effort">15 min</div>
+        </div>
+
+        <div class="issue">
+          <span class="issue-badge medium">Medium</span>
+          <div class="issue-body">
+            <div class="title">Title is 65 chars — 5 over the soft limit</div>
+            <div class="desc">Google's title display typically truncates around 60 characters in desktop results and slightly less on mobile. "| Open 24/7, 6 Locations" gets cut first. Either trim the pipe section or rearrange to front-load the keyword.</div>
+            <div class="fix">→ Consider: "Laundromat in Cincinnati | Super Laundry — Open 24/7" (53 chars)</div>
+          </div>
+          <div class="issue-effort">5 min</div>
+        </div>
+
+        <div class="issue">
+          <span class="issue-badge medium">Medium</span>
+          <div class="issue-body">
+            <div class="title">/partner URL slug doesn't match canonical</div>
+            <div class="desc">The Partnership Opportunities page is served at <code style="font-size:11px;color:var(--orange)">/partner</code> in HubSpot but the HTML canonical tag points to <code style="font-size:11px;color:var(--orange)">/partnership-opportunities</code>. Google will index <code>/partner</code> as the live URL but see a canonical pointing elsewhere — creating a signal conflict. Update the canonical in the HTML to match the actual HubSpot slug.</div>
+            <div class="fix">→ Change canonical in partnership-opportunities.html to https://superlaundry24.com/partner</div>
+          </div>
+          <div class="issue-effort">2 min</div>
+        </div>
+
+        <div class="issue">
+          <span class="issue-badge low">Low</span>
+          <div class="issue-body">
+            <div class="title">"Four Ways to Get It Done" H2 has no keyword value</div>
+            <div class="desc">The services section H2 is engaging brand copy but passes on an opportunity to reinforce the page's keyword targets. A minor rewrite can preserve the voice while adding semantic value for service-related searches.</div>
+            <div class="fix">→ Consider: "Self-Service, Drop-Off, Pickup &amp; Delivery — Four Ways to Do Laundry in Cincinnati"</div>
+          </div>
+          <div class="issue-effort">2 min</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- WHAT'S WORKING -->
+    <div class="section">
+      <div class="section-head">
+        <h2>What's Working</h2>
+      </div>
+      <div class="data-block">
+        <div class="data-row">
+          <div class="data-label">Canonical</div>
+          <div class="data-val ok">Correctly set to superlaundry24.com — canonical tag is live and resolving to production domain ✓</div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">Schema</div>
+          <div class="data-val ok">LaundryOrDryCleaning with aggregateRating (1,700+ reviews) + FAQPage — strong structured data foundation ✓</div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">H1</div>
+          <div class="data-val ok">Clear, brand-differentiated, includes primary geo signal ✓</div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">Internal Linking</div>
+          <div class="data-val ok">All 6 locations + all 4 services + contact, FAQ, careers — comprehensive sitewide coverage ✓</div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">Content Depth</div>
+          <div class="data-val ok">~1,070 words covering services, locations, rewards, reviews, FAQ — solid for a homepage ✓</div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">Page Structure</div>
+          <div class="data-val ok">Logical H2 hierarchy, FAQ section, reviews section, location section — all signal-rich ✓</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK FIXES -->
+    <div class="section">
+      <div class="section-head">
+        <h2>Recommended Fixes</h2>
+        <div class="count">ordered by impact</div>
+      </div>
+      <div class="fix-box">
+        <h3>Do These Before Republishing</h3>
+
+        <div class="fix-item">
+          <span class="num">01</span>
+          <span><strong style="color:var(--text)">Rewrite meta description to ≤155 chars.</strong> Fix "Allison Rd" → "Allison St". Suggested: <em style="color:var(--text-dim)">"Cincinnati's laundromat network — 6 locations in Avondale, Bond Hill, Westwood, North College Hill, Springdale &amp; Allison St. 4 open 24/7. 100+ machines. Cash · Card · Tap."</em> (155 chars)</span>
+        </div>
+
+        <div class="fix-item">
+          <span class="num">02</span>
+          <span><strong style="color:var(--text)">Add loading="lazy" to all images below the fold.</strong> Keep the first hero/service image eager. Add <code style="font-size:11px">loading="lazy"</code> to all location exterior images and anything that renders below the visible viewport on load.</span>
+        </div>
+
+        <div class="fix-item">
+          <span class="num">03</span>
+          <span><strong style="color:var(--text)">Fix the partnership-opportunities.html canonical.</strong> Change the canonical tag value from <code style="font-size:11px">/partnership-opportunities</code> to <code style="font-size:11px">/partner</code> to match the actual HubSpot URL slug.</span>
+        </div>
+
+        <div class="fix-item">
+          <span class="num">04</span>
+          <span><strong style="color:var(--text)">Trim the title by 5–10 chars.</strong> Move the brand name earlier or drop the pipe section. Suggested: <em style="color:var(--text-dim)">"Laundromat in Cincinnati | Super Laundry — Open 24/7"</em></span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span>Super Laundry Cincinnati · Homepage Audit · March 2026</span>
+    <span>Soloprenuer</span>
+  </div>
+
+</body>
+</html>

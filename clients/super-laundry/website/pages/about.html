@@ -1,0 +1,1192 @@
+<!--
+  templateType: "page"
+  isAvailableForNewContent: true
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/webp" href="https://244988351.fs1.hubspotusercontent-na2.net/hubfs/244988351/logos/superlaundry_favicon.webp">
+  <title>About Super Laundry Cincinnati — Locally Owned, 6 Locations</title>
+  <meta name="description" content="Locally owned laundromat network — 6 Cincinnati locations, 100+ machines each. Best Laundromat in Cincinnati 2025. Self-service, wash &amp; fold, pickup &amp; delivery.">
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.superlaundry24.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "About",
+        "item": "https://www.superlaundry24.com/about"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Super Laundry Cincinnati",
+    "url": "https://www.superlaundry24.com",
+    "telephone": "(513) 873-5939",
+    "email": "info@superlaundry24.com",
+    "description": "Locally owned laundromat network with 6 locations across Cincinnati's neighborhoods. Self-service, wash-dry-fold, and pickup & delivery.",
+    "areaServed": {
+      "@type": "City",
+      "name": "Cincinnati",
+      "addressRegion": "OH"
+    },
+    "numberOfLocations": 6,
+    "award": "BusinessRate Best of 2025 — Best Laundromat in Cincinnati"
+  }
+  </script>
+
+  <link rel="canonical" href="https://www.superlaundry24.com/about">
+  {{ standard_header_includes }}
+
+</head>
+<body>
+
+  {% include "SuperLaundry/partials/header.html" %}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== DESIGN SYSTEM ===== */
+    :root {
+      --green-dark: #1C4A25;
+      --green: #2D7F3C;
+      --green-light: #4A9B58;
+      --green-pale: #EAF4EC;
+      --cream: #F5F1E8;
+      --warm-white: #FAFAF6;
+      --text-dark: #1A2B1C;
+      --text-body: #3C4A3E;
+      --text-muted: #4E6150;
+      --border: #DDD8CE;
+      --shadow-sm: 0 2px 8px rgba(28,74,37,0.08);
+      --shadow-md: 0 4px 20px rgba(28,74,37,0.12);
+      --shadow-lg: 0 8px 40px rgba(28,74,37,0.16);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-body);
+      background: var(--warm-white);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== REVIEW BANNER ===== */
+    .review-banner {
+      background: var(--green-dark);
+      border-bottom: 3px solid var(--green);
+      padding: 10px 24px;
+      text-align: center;
+    }
+    .review-banner p {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+    .review-banner span { color: #A8E6B0; }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      background: var(--green-dark);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 68px;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .nav-logo img {
+      height: 44px;
+      width: auto;
+      mix-blend-mode: screen;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a.active {
+      color: #fff;
+      font-weight: 700;
+    }
+        .nav-cta {
+      background: var(--green) !important;
+      color: #fff !important;
+      padding: 10px 20px !important;
+      border-radius: 6px !important;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--green-light) !important; }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 2px;
+    }
+    .nav-mobile {
+      display: none;
+      background: var(--green-dark);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 12px 24px 20px;
+    }
+    .nav-mobile.open { display: block; }
+    .nav-mobile a {
+      display: block;
+      padding: 12px 0;
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      min-height: 44px;
+    }
+    .nav-mobile a:last-child { border-bottom: none; }
+    .nav-mobile a.active { color: #fff; font-weight: 700; }
+
+    /* ===== BREADCRUMB ===== */
+    .breadcrumb-bar {
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+    }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+    .breadcrumb a { color: var(--green); font-weight: 500; }
+    .breadcrumb a:hover { color: var(--green-dark); }
+    .breadcrumb-sep { color: var(--border); font-size: 16px; line-height: 1; }
+    .breadcrumb-bar nav { background: transparent; position: static; box-shadow: none; z-index: auto; }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      background: var(--cream);
+      padding: 56px 0 52px;
+    }
+    .page-hero-text {
+      text-align: center;
+      max-width: 780px;
+      margin: 0 auto 40px;
+    }
+    .page-hero-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--green);
+      background: var(--green-pale);
+      padding: 5px 14px;
+      border-radius: 4px;
+      margin-bottom: 18px;
+    }
+    .page-hero h1 {
+      font-size: clamp(28px, 3.8vw, 48px);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 18px;
+      color: var(--text-dark);
+    }
+    .page-hero-sub {
+      font-size: clamp(16px, 2vw, 18px);
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* Photo strip */
+    .photo-strip {
+      display: flex;
+      gap: 16px;
+    }
+    .photo-strip-item {
+      flex: 1;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      height: 200px;
+    }
+    .photo-strip-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      background: var(--green-dark);
+      padding: 36px 0;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 16px 24px;
+      border-right: 1px solid rgba(255,255,255,0.12);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800;
+      color: #A8E6B0;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.35;
+    }
+
+    /* ===== OUR STORY ===== */
+    .story-section {
+      background: var(--warm-white);
+      padding: 72px 0;
+    }
+    .story-inner {
+      display: grid;
+      grid-template-columns: 1fr 480px;
+      gap: 64px;
+      align-items: center;
+    }
+    .story-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 12px;
+    }
+    .story-content h2 {
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.15;
+    }
+    .story-content p {
+      font-size: 16px;
+      color: var(--text-body);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .story-content p:last-child { margin-bottom: 0; }
+    .story-photo {
+      position: relative;
+    }
+    .story-photo img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: var(--radius);
+      border: 4px solid var(--cream);
+      box-shadow: var(--shadow-md);
+    }
+    .story-photo-badge {
+      position: absolute;
+      bottom: -16px;
+      right: -16px;
+      background: var(--green-dark);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      padding: 14px 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .story-photo-badge .badge-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: #A8E6B0;
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+    .story-photo-badge .badge-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.72);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ===== LAUNDRY LOVE ===== */
+    .laundry-love {
+      background: linear-gradient(135deg, #0F2E17 0%, #1C4A25 60%, #2D7F3C 100%);
+      padding: 64px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .laundry-love::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(74,155,88,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .laundry-love::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: -60px;
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(168,230,176,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .love-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .love-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 14px;
+    }
+    .love-content h2 {
+      font-size: clamp(26px, 3vw, 40px);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 18px;
+      line-height: 1.15;
+    }
+    .love-content p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.72;
+      margin-bottom: 16px;
+    }
+    .love-details {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius-sm);
+      padding: 20px 22px;
+      margin: 24px 0 28px;
+    }
+    .love-detail-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.88);
+    }
+    .love-detail-row:last-child { margin-bottom: 0; }
+    .love-detail-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .love-detail-text strong {
+      display: block;
+      font-weight: 700;
+      font-size: 13px;
+      color: #A8E6B0;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 1px;
+    }
+    .btn-love {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      border-bottom: 2px solid rgba(255,255,255,0.45);
+      padding-bottom: 2px;
+      transition: border-color 0.2s;
+      min-height: 44px;
+    }
+    .btn-love:hover { border-color: #fff; }
+    .love-visual {
+      position: relative;
+    }
+    .love-photo-wrap {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+    }
+    .love-photo-wrap img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      display: block;
+    }
+    .love-photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15,46,23,0.75) 0%, rgba(15,46,23,0.1) 55%, transparent 100%);
+    }
+    .love-photo-caption {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+    }
+    .love-photo-caption strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .love-photo-caption span {
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* ===== AWARD SECTION ===== */
+    .award-section {
+      background: var(--cream);
+      padding: 64px 0;
+    }
+    .award-center {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 48px;
+    }
+    .award-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 14px;
+    }
+    .award-center h2 {
+      font-size: clamp(26px, 3.2vw, 40px);
+      font-weight: 700;
+      margin-bottom: 14px;
+      line-height: 1.15;
+    }
+    .award-center p {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+    .award-badge-large {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      background: #fff;
+      border: 2px solid var(--green);
+      border-radius: 60px;
+      padding: 14px 28px 14px 20px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 48px;
+    }
+    .award-badge-icon {
+      font-size: 36px;
+      line-height: 1;
+    }
+    .award-badge-text strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--green-dark);
+    }
+    .award-badge-text span {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .award-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+    .award-scores {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .score-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+    }
+    .score-location {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+    .score-stars {
+      font-size: 20px;
+      color: #F5A623;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      line-height: 1;
+    }
+    .score-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--green-dark);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .score-count {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .google-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+    .google-g {
+      font-weight: 700;
+      color: #4285F4;
+      font-size: 13px;
+    }
+
+    /* ===== SERVICES OVERVIEW ===== */
+    .services-section {
+      background: var(--warm-white);
+      padding: 72px 0;
+    }
+    .section-header {
+      margin-bottom: 48px;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(26px, 3.2vw, 38px);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.65;
+    }
+    .services-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .svc-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .svc-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+    }
+    .svc-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--green-pale);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 18px;
+      flex-shrink: 0;
+    }
+    .svc-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+    .svc-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 16px;
+    }
+    .svc-avail {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--green-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 16px;
+    }
+    .svc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--green);
+      margin-top: auto;
+      transition: color 0.2s;
+      min-height: 44px;
+    }
+    .svc-link:hover { color: var(--green-dark); }
+
+    /* ===== FINAL CTA ===== */
+    .final-cta {
+      background: var(--green);
+      padding: 60px 0;
+    }
+    .final-cta-inner {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .final-cta h2 {
+      font-size: clamp(26px, 3.2vw, 40px);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+      line-height: 1.15;
+    }
+    .final-cta p {
+      font-size: 17px;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 32px;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      color: var(--green-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 28px;
+      border-radius: 8px;
+      transition: background 0.2s, transform 0.15s;
+      min-height: 48px;
+    }
+    .btn-white:hover { background: var(--cream); transform: translateY(-1px); }
+    .btn-white-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 13px 28px;
+      border-radius: 8px;
+      border: 2px solid rgba(255,255,255,0.6);
+      transition: border-color 0.2s, background 0.2s;
+      min-height: 48px;
+    }
+    .btn-white-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--green-dark);
+      padding: 64px 0 0;
+    }
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    .footer-brand img {
+      height: 40px;
+      width: auto;
+      mix-blend-mode: screen;
+      margin-bottom: 16px;
+    }
+    .footer-brand p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.58);
+      line-height: 1.65;
+      max-width: 260px;
+      margin-bottom: 20px;
+    }
+    .footer-social {
+      display: flex;
+      gap: 10px;
+    }
+    .social-link {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.7);
+      font-size: 13px;
+      font-weight: 700;
+      transition: background 0.2s;
+    }
+    .social-link:hover { background: var(--green); color: #fff; }
+    .footer-col h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.58);
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: rgba(255,255,255,0.9); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media screen and (max-width: 960px) {
+      .story-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .story-photo-badge {
+        bottom: 12px;
+        right: 12px;
+      }
+      .love-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .award-scores {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .services-row {
+        grid-template-columns: 1fr 1fr;
+      }
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .stat-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.12);
+      }
+      .stat-item:nth-child(2n) { border-bottom: 1px solid rgba(255,255,255,0.12); }
+      .stat-item:nth-child(3),
+      .stat-item:nth-child(4) { border-bottom: none; }
+    }
+
+    @media screen and (max-width: 768px) {
+      .page-hero { padding: 40px 0 36px; }
+      .award-scores { grid-template-columns: 1fr; }
+      .services-row { grid-template-columns: 1fr; }
+      .story-section { padding: 52px 0; }
+      .laundry-love { padding: 48px 0; }
+      .award-section { padding: 48px 0; }
+      .services-section { padding: 52px 0; }
+    }
+
+    @media screen and (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .photo-strip { flex-direction: column; }
+      .photo-strip-item { height: 220px; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+      .btn-white, .btn-white-outline { width: 100%; justify-content: center; }
+      .story-photo-badge { display: none; }
+      .award-badge-large { flex-direction: column; text-align: center; border-radius: var(--radius); padding: 20px 24px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media screen and (max-width: 480px) {
+      .photo-strip {
+        display: block;
+      }
+      .photo-strip-item {
+        display: none;
+      }
+      .photo-strip-item:first-child {
+        display: block;
+        height: 200px;
+      }
+    }
+
+    @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      .review-banner { display: none; }
+    }
+  </style>
+
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb-bar">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>About</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-text">
+        <span class="page-hero-label">About Super Laundry Cincinnati</span>
+        <h1>Cincinnati's Biggest &amp; Best Laundromats — Locally Owned, Neighborhood-Rooted</h1>
+        <p class="page-hero-sub">6 locations. 100+ machines each. Open when you need us — most locations around the clock. This is your laundromat.</p>
+      </div>
+
+      <!-- Photo Strip -->
+      <div class="photo-strip">
+        <div class="photo-strip-item">
+          <img src="/hubfs/244988351/images/springdale-web.webp" alt="Super Laundry Springdale location" loading="lazy">
+        </div>
+        <div class="photo-strip-item">
+          <img src="/hubfs/244988351/images/westwood-ext.webp" alt="Super Laundry Westwood location" loading="lazy">
+        </div>
+        <div class="photo-strip-item">
+          <img src="/hubfs/244988351/images/avondale-ext.webp" alt="Super Laundry Avondale location" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">6</div>
+          <div class="stat-label">Neighborhood Locations</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100+</div>
+          <div class="stat-label">Machines per Location</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">At 4 Locations</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">5</div>
+          <div class="stat-label">Ways to Pay</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUR STORY -->
+  <section class="story-section">
+    <div class="container">
+      <div class="story-inner">
+        <div class="story-content">
+          <p class="story-label">Our Story</p>
+          <h2>A laundromat network built for Cincinnati's neighborhoods</h2>
+          <p>Super Laundry is locally owned — not a franchise, not a chain. Every location is part of Cincinnati, placed where people actually live and work: Springdale, Avondale, Bond Hill, Westwood, North College Hill, and Allison Street.</p>
+          <p>We built this network for working families, shift workers, and anyone who needs clean laundry without a complicated process. Big machines, flexible hours, every way to pay. Most locations are open around the clock because laundry doesn't wait for business hours.</p>
+          <p>When your neighbors choose us, we take that seriously. That's why we invest in the communities we're in — from keeping our facilities clean and well-maintained to hosting events like Laundry Love that give back to families who need it most.</p>
+        </div>
+        <div class="story-photo">
+          <img src="/hubfs/244988351/images/north-college-int.webp" alt="Inside Super Laundry North College Hill — washers and dryers ready" loading="lazy">
+          <div class="story-photo-badge">
+            <div class="badge-num">6</div>
+            <div class="badge-label">Cincinnati Locations</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAUNDRY LOVE -->
+  <section class="laundry-love">
+    <div class="container">
+      <div class="love-inner">
+        <div class="love-content">
+          <p class="love-eyebrow">Community</p>
+          <h2>Giving back to the neighbors who need it most</h2>
+          <p>Our Westwood and Avondale locations host Laundry Love Cincinnati every month — a nonprofit event that provides free laundry to families facing financial hardship. Clean clothes aren't a luxury. They're a foundation for getting to work, keeping kids in school, and holding a household together.</p>
+          <p>We're proud to open our doors for this. No cost, no judgment, just clean laundry for the people who need it.</p>
+
+          <div class="love-details">
+            <div class="love-detail-row">
+              <span class="love-detail-icon">📍</span>
+              <div class="love-detail-text">
+                <strong>Locations</strong>
+                Westwood — 2455 Harrison Ave &nbsp;·&nbsp; Avondale — 3545 Reading Rd
+              </div>
+            </div>
+            <div class="love-detail-row">
+              <span class="love-detail-icon">📅</span>
+              <div class="love-detail-text">
+                <strong>When</strong>
+                2nd Wednesday of every month, 6–8 PM
+              </div>
+            </div>
+            <div class="love-detail-row">
+              <span class="love-detail-icon">🧺</span>
+              <div class="love-detail-text">
+                <strong>Free Loads</strong>
+                Individuals: up to 2 loads &nbsp;·&nbsp; Families: up to 4 loads
+              </div>
+            </div>
+          </div>
+
+          <a href="https://www.laundrylove.org" target="_blank" rel="noopener noreferrer" class="btn-love">
+            Learn more about Laundry Love Cincinnati
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="love-visual">
+          <div class="love-photo-wrap">
+            <img src="/hubfs/244988351/images/westwood-int.webp" alt="Inside Super Laundry Westwood, host of Laundry Love Cincinnati" loading="lazy">
+            <div class="love-photo-overlay"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AWARD SECTION -->
+  <section class="award-section">
+    <div class="container">
+      <div class="award-center">
+        <span class="award-eyebrow">Recognition</span>
+        <h2>Named Best Laundromat in Cincinnati</h2>
+        <div style="margin: 20px auto 8px; display: flex; justify-content: center;">
+          <div class="award-badge-large">
+            <span class="award-badge-icon">🏆</span>
+            <div class="award-badge-text">
+              <strong>BusinessRate Best of 2025</strong>
+              <span>Best Laundromat in Cincinnati — 45229 Area</span>
+            </div>
+          </div>
+        </div>
+        <p>Based on verified Google Review data across 45,229 Cincinnati businesses. Earned — not applied for.</p>
+        <p class="award-note">BusinessRate evaluates real customer feedback to surface the best-reviewed local businesses. No application, no fee. You earn it or you don't.</p>
+      </div>
+
+      <div class="award-scores">
+        <div class="score-card">
+          <div class="score-location">Springdale</div>
+          <div class="score-stars">★★★★☆</div>
+          <div class="score-number">4.2</div>
+          <div class="score-count">217 Google Reviews</div>
+          <div class="google-mark"><span class="google-g">G</span> Google Reviews</div>
+        </div>
+        <div class="score-card">
+          <div class="score-location">Avondale</div>
+          <div class="score-stars">★★★★☆</div>
+          <div class="score-number">4.1</div>
+          <div class="score-count">184 Google Reviews</div>
+          <div class="google-mark"><span class="google-g">G</span> Google Reviews</div>
+        </div>
+        <div class="score-card">
+          <div class="score-location">Westwood</div>
+          <div class="score-stars">★★★★☆</div>
+          <div class="score-number">4.0</div>
+          <div class="score-count">143 Google Reviews</div>
+          <div class="google-mark"><span class="google-g">G</span> Google Reviews</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES OVERVIEW -->
+  <section class="services-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">What We Offer</p>
+        <h2 class="section-title">Three ways to get it done</h2>
+        <p class="section-sub">Do it yourself, drop it off, or let us pick it up. Choose what works for you.</p>
+      </div>
+      <div class="services-row">
+        <div class="svc-card">
+          <div class="svc-icon">🫧</div>
+          <h3>Self-Service</h3>
+          <p>100+ commercial washers and dryers at every location. Machines from 2-load to 8-load capacity. Pay any way — cash, card, tap, app.</p>
+          <p class="svc-avail">✓ All 6 locations</p>
+          <a href="/services/self-service" class="svc-link">Learn more →</a>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon">👕</div>
+          <h3>Wash-Dry-Fold</h3>
+          <p>Drop off your laundry and come back to it washed, dried, and folded. Available at all staffed locations — we handle the whole thing.</p>
+          <p class="svc-avail">✓ All staffed locations</p>
+          <a href="/services/wash-and-fold" class="svc-link">Learn more →</a>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon">🚐</div>
+          <h3>Pickup &amp; Delivery</h3>
+          <p>Schedule a pickup, we wash and fold everything, and deliver it back to your door. Currently available from Springdale, expanding soon.</p>
+          <p class="svc-avail">✓ Springdale — expanding</p>
+          <a href="/services/pickup-delivery" class="svc-link">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <div class="final-cta-inner">
+        <h2>Your neighborhood laundromat is open right now.</h2>
+        <p>Come in, or call ahead.</p>
+        <div class="cta-buttons">
+          <a href="/locations" class="btn-white">Find Your Location</a>
+          <a href="tel:5138735939" class="btn-white-outline">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.63a16 16 0 006.29 6.29l1.95-1.95a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Call Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include "SuperLaundry/partials/footer.html" %}
+
+  <script>
+    // Mobile nav toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMobile = document.getElementById('nav-mobile');
+    hamburger.addEventListener('click', () => {
+      navMobile.classList.toggle('open');
+      const isOpen = navMobile.classList.contains('open');
+      hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    });
+  </script>
+
+  {{ standard_footer_includes }}
+
+</body>
+</html>

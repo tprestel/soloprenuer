@@ -1,0 +1,2108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harlow & Co. — Bespoke Residential Renovation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Cormorant+SC:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===== CSS CUSTOM PROPERTIES ===== */
+    :root {
+      --bg:           #FAFAF8;
+      --surface:      #F3F1EC;
+      --dark:         #1E1E1C;
+      --body-text:    #3A3A38;
+      --muted:        #8A8A84;
+      --brass:        #B8956A;
+      --brass-light:  #D4B080;
+      --brass-pale:   #EAD9BF;
+      --slate:        #5A6470;
+      --divider:      #E2DED8;
+      --cream:        #F0EBE0;
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'Plus Jakarta Sans', sans-serif;
+      --font-label:   'Cormorant SC', serif;
+
+      --max-width: 1240px;
+      --nav-height: 72px;
+
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--body-text);
+      background: var(--bg);
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+    }
+
+    /* ===== SHARED UTILITIES ===== */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .section-label {
+      font-family: var(--font-label);
+      font-variant: small-caps;
+      letter-spacing: 0.15em;
+      font-size: 13px;
+      color: var(--brass);
+      font-weight: 500;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: var(--nav-height);
+      background: rgba(250, 250, 248, 0.97);
+      border-bottom: 1px solid var(--brass);
+      transition: background 0.4s ease, backdrop-filter 0.4s ease;
+    }
+
+    .nav.scrolled {
+      background: rgba(250, 250, 248, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 48px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .nav-monogram {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+    }
+
+    .nav-wordmark {
+      font-family: var(--font-label);
+      font-variant: small-caps;
+      letter-spacing: 0.22em;
+      font-size: 15px;
+      color: var(--dark);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--body-text);
+      letter-spacing: 0.04em;
+      transition: color 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      color: var(--brass);
+    }
+
+    .nav-cta {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      color: var(--brass);
+      border: 1px solid var(--brass);
+      padding: 10px 22px;
+      white-space: nowrap;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      transition: background 0.25s ease, color 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .nav-cta:hover {
+      background: var(--brass);
+      color: #fff;
+    }
+
+    /* Hamburger */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      background: none;
+      border: none;
+      min-height: 44px;
+      justify-content: center;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--dark);
+      transition: all 0.3s ease;
+    }
+
+    .nav-mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      right: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--divider);
+      padding: 28px 24px;
+      z-index: 99;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .nav-mobile-menu.open {
+      display: flex;
+    }
+
+    .nav-mobile-menu a {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--body-text);
+      letter-spacing: 0.04em;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--divider);
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-mobile-menu a:last-child {
+      border-bottom: none;
+      color: var(--brass);
+      margin-top: 8px;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      padding-top: var(--nav-height);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--bg);
+      position: relative;
+    }
+
+    /* Subtle warm grain overlay */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-inner {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 60px 48px;
+      display: grid;
+      grid-template-columns: 55% 1fr;
+      gap: 56px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-left {
+      padding-right: 40px;
+    }
+
+    .hero-label {
+      font-family: var(--font-label);
+      font-variant: small-caps;
+      letter-spacing: 0.15em;
+      font-size: 13px;
+      color: var(--brass);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease-out-expo) 0.1s forwards;
+    }
+
+    .hero-label::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--brass);
+      flex-shrink: 0;
+    }
+
+    .hero-heading {
+      font-family: var(--font-display);
+      font-size: clamp(38px, 4.5vw, 62px);
+      font-weight: 500;
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease-out-expo) 0.25s forwards;
+    }
+
+    .hero-subtext {
+      font-family: var(--font-body);
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 44px;
+      max-width: 440px;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease-out-expo) 0.4s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease-out-expo) 0.55s forwards;
+    }
+
+    .btn-primary {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      background: var(--brass);
+      color: #fff;
+      padding: 14px 30px;
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      transition: background 0.25s ease, transform 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      background: var(--dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-text-link {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--body-text);
+      letter-spacing: 0.03em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 48px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-text-link:hover {
+      color: var(--brass);
+      border-color: var(--brass);
+    }
+
+    /* Hero Before/After */
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      opacity: 0;
+      animation: fadeLeft 1s var(--ease-out-expo) 0.35s forwards;
+    }
+
+    .ba-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .ba-panel {
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ba-before {
+      height: 230px;
+      background: linear-gradient(150deg, #7A7265 0%, #5E5850 50%, #4A4440 100%);
+      border: 1px solid rgba(90, 100, 112, 0.25);
+    }
+
+    .ba-after {
+      height: 310px;
+      background: linear-gradient(150deg, #F4EEE4 0%, #E4D8C4 40%, #D0C0A8 100%);
+      border: 1px solid rgba(184, 149, 106, 0.5);
+    }
+
+    .ba-divider {
+      height: 3px;
+      background: var(--brass);
+      position: relative;
+    }
+
+    .ba-divider::before,
+    .ba-divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--brass);
+    }
+
+    .ba-divider::before { left: 0; }
+    .ba-divider::after  { right: 0; }
+
+    .ba-label {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      font-family: var(--font-label);
+      font-variant: small-caps;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      font-weight: 500;
+      padding: 4px 10px;
+    }
+
+    .ba-before .ba-label {
+      background: rgba(30, 30, 28, 0.55);
+      color: rgba(255,255,255,0.75);
+    }
+
+    .ba-after .ba-label {
+      background: rgba(184, 149, 106, 0.85);
+      color: #fff;
+    }
+
+    .ba-after-texture {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 15%, rgba(255,255,255,0.55) 0%, transparent 45%),
+        radial-gradient(ellipse at 75% 85%, rgba(184, 149, 106, 0.25) 0%, transparent 40%),
+        linear-gradient(90deg, transparent 30%, rgba(255,255,255,0.12) 50%, transparent 70%);
+    }
+
+    /* Simulated "after" interior details */
+    .ba-after::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(0deg, rgba(184,149,106,0.12) 0%, transparent 100%);
+    }
+
+    .ba-before-texture {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 25%, rgba(255,255,255,0.08) 0%, transparent 40%),
+        linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.28) 100%),
+        repeating-linear-gradient(0deg, transparent, transparent 18px, rgba(0,0,0,0.04) 18px, rgba(0,0,0,0.04) 19px);
+    }
+
+    .ba-caption {
+      font-family: var(--font-label);
+      font-variant: small-caps;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      text-align: right;
+      margin-top: 14px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeLeft {
+      from { opacity: 0; transform: translateX(24px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ===== PORTFOLIO ===== */
+    .portfolio {
+      background: var(--surface);
+      padding: 100px 0;
+    }
+
+    .portfolio-header {
+      margin-bottom: 52px;
+    }
+
+    .portfolio-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 3vw, 46px);
+      font-weight: 500;
+      color: var(--dark);
+      line-height: 1.2;
+    }
+
+    .portfolio-header-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .portfolio-header-right {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .portfolio-header-right a {
+      color: var(--brass);
+      font-weight: 500;
+      border-bottom: 1px solid var(--brass-pale);
+      padding-bottom: 1px;
+      transition: border-color 0.2s;
+    }
+
+    .portfolio-header-right a:hover {
+      border-color: var(--brass);
+    }
+
+    /* Row 1: masonry asymmetric */
+    .portfolio-row-1 {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    /* Row 2: equal 3 */
+    .portfolio-row-2 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .portfolio-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    .portfolio-card-image {
+      width: 100%;
+      border-radius: 2px;
+      display: block;
+    }
+
+    /* Row 1 — all cards same height for visual rhythm */
+    .portfolio-row-1 .portfolio-card-image {
+      height: 420px;
+    }
+
+    /* Row 2 cards */
+    .portfolio-row-2 .portfolio-card-image {
+      height: 280px;
+    }
+
+    .portfolio-card-image {
+      background-size: 100%;
+      transition: transform 0.7s var(--ease-out-expo);
+    }
+
+    .portfolio-card:hover .portfolio-card-image {
+      transform: scale(1.04);
+    }
+
+    /* Gradient images — warm interior-suggesting tones */
+    .img-kitchen-1 {
+      background: linear-gradient(150deg, #F2EAE0 0%, #DDD0BC 25%, #C4B09A 55%, #A89078 80%, #9A8068 100%);
+      box-shadow: inset 0 -60px 80px rgba(0,0,0,0.12), inset 40px 0 60px rgba(255,250,240,0.3);
+    }
+    .img-bath-1 {
+      background: linear-gradient(135deg, #E4ECEC 0%, #C8D4D0 30%, #A8BCBA 60%, #8CA4A4 85%, #789090 100%);
+      box-shadow: inset 0 -60px 80px rgba(0,0,0,0.1), inset -30px 0 50px rgba(200,220,218,0.4);
+    }
+    .img-whole-1 {
+      background: linear-gradient(160deg, #EEE4D4 0%, #D8C8B0 30%, #C4B098 55%, #B09880 80%, #9A8268 100%);
+      box-shadow: inset 0 -80px 100px rgba(0,0,0,0.15), inset 50px 0 70px rgba(255,248,236,0.25);
+    }
+    .img-kitchen-2 {
+      background: linear-gradient(140deg, #EDE6DC 0%, #D8CAB4 35%, #C2B09C 65%, #AC9882 100%);
+      box-shadow: inset 0 -50px 70px rgba(0,0,0,0.1), inset 30px 0 50px rgba(255,252,244,0.3);
+    }
+    .img-bath-2 {
+      background: linear-gradient(155deg, #DEE8E8 0%, #BCCACA 30%, #98AAAA 60%, #7C9292 85%, #688080 100%);
+      box-shadow: inset 0 -50px 70px rgba(0,0,0,0.12), inset -20px 0 40px rgba(180,210,210,0.35);
+    }
+    .img-outdoor {
+      background: linear-gradient(145deg, #E0EAD8 0%, #C4D4BC 30%, #A8BC9E 60%, #8EA484 85%, #7A9070 100%);
+      box-shadow: inset 0 -50px 70px rgba(0,0,0,0.1), inset 30px 0 50px rgba(240,248,234,0.3);
+    }
+
+    /* Hover overlay */
+    .portfolio-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(184, 149, 106, 0.0);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px;
+      transition: background 0.4s ease;
+    }
+
+    .portfolio-card:hover .portfolio-overlay {
+      background: rgba(184, 149, 106, 0.88);
+    }
+
+    .portfolio-overlay-content {
+      transform: translateY(12px);
+      opacity: 0;
+      transition: transform 0.4s var(--ease-out-expo), opacity 0.4s ease;
+    }
+
+    .portfolio-card:hover .portfolio-overlay-content {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .portfolio-overlay-name {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .portfolio-overlay-meta {
+      font-family: var(--font-label);
+      font-variant: small-caps;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .portfolio-overlay-budget {
+      font-family: var(--font-label);
+      font-variant: small-caps;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.7);
+      margin-top: 4px;
+    }
+
+    /* Static label bottom-left (visible before hover) */
+    .portfolio-static-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 24px 20px;
+      background: linear-gradient(0deg, rgba(30,30,28,0.55) 0%, transparent 100%);
+      transition: opacity 0.4s ease;
+    }
+
+    .portfolio-card:hover .portfolio-static-label {
+      opacity: 0;
+    }
+
+    .portfolio-static-name {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    /* ===== PROCESS ===== */
+    .process {
+      background: #fff;
+      padding: 100px 0;
+    }
+
+    .process-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .process-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 2.8vw, 42px);
+      font-weight: 500;
+      color: var(--dark);
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    .process-step {
+      padding: 0 32px;
+      position: relative;
+    }
+
+    /* Connecting line between steps */
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: calc(25% - 0px);
+      right: calc(25% - 0px);
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--brass-pale) 15%, var(--brass-pale) 85%, transparent);
+      z-index: 0;
+    }
+
+    .process-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: -9px;
+      right: -8px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1.5px solid var(--brass-pale);
+      z-index: 1;
+    }
+
+    .process-step-top {
+      border-top: 2px solid var(--brass-pale);
+      padding-top: 28px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .process-step-top::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--brass);
+    }
+
+    .process-number {
+      font-family: var(--font-display);
+      font-size: 72px;
+      font-weight: 400;
+      color: var(--brass-pale);
+      line-height: 1;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .process-step-name {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .process-step-desc {
+      font-family: var(--font-body);
+      font-size: 14.5px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* ===== AWARDS STRIP ===== */
+    .awards {
+      border-top: 1px solid var(--brass-pale);
+      border-bottom: 1px solid var(--brass-pale);
+      padding: 32px 0;
+      background: var(--bg);
+    }
+
+    .awards-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+
+    .award-item {
+      font-family: var(--font-label);
+      font-variant: small-caps;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      color: var(--dark);
+      font-weight: 500;
+      padding: 6px 28px;
+      white-space: nowrap;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+
+    .award-sep {
+      font-family: var(--font-label);
+      font-size: 18px;
+      color: var(--brass);
+      line-height: 1;
+      user-select: none;
+    }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials {
+      background: var(--dark);
+      padding: 100px 0;
+    }
+
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .testimonials-label {
+      font-family: var(--font-label);
+      font-variant: small-caps;
+      letter-spacing: 0.15em;
+      font-size: 13px;
+      color: var(--brass);
+      font-weight: 500;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .testimonial-card {
+      position: relative;
+      padding: 40px 44px;
+      border: 1px solid rgba(184, 149, 106, 0.2);
+    }
+
+    .testimonial-quote-mark {
+      font-family: var(--font-display);
+      font-size: 96px;
+      line-height: 0.6;
+      color: var(--brass);
+      opacity: 0.5;
+      margin-bottom: 24px;
+      display: block;
+      font-style: italic;
+    }
+
+    .testimonial-text {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(16px, 1.5vw, 20px);
+      font-weight: 400;
+      line-height: 1.7;
+      color: #EDE8E0;
+      margin-bottom: 32px;
+    }
+
+    .testimonial-rule {
+      width: 36px;
+      height: 1px;
+      background: var(--brass);
+      margin-bottom: 18px;
+    }
+
+    .testimonial-client {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+
+    .testimonial-project {
+      font-family: var(--font-label);
+      font-variant: small-caps;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: var(--brass);
+      margin-top: 4px;
+    }
+
+    /* ===== ABOUT ===== */
+    .about {
+      background: var(--bg);
+      padding: 100px 0;
+    }
+
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .about-portrait {
+      height: 560px;
+      border-radius: 2px;
+      background: linear-gradient(160deg, #D4C4A8 0%, #B8A888 50%, #9A8C70 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-portrait-texture {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 40% 25%, rgba(255,255,255,0.25) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 80%, rgba(90, 70, 50, 0.3) 0%, transparent 45%);
+    }
+
+    .about-portrait-caption {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      right: 24px;
+      font-family: var(--font-label);
+      font-variant: small-caps;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .about-content h2 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 2.8vw, 42px);
+      font-weight: 500;
+      color: var(--dark);
+      line-height: 1.2;
+      margin-bottom: 28px;
+    }
+
+    .about-content p {
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--body-text);
+      margin-bottom: 20px;
+    }
+
+    .about-link {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--brass);
+      letter-spacing: 0.04em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      min-height: 44px;
+      border-bottom: 1px solid var(--brass-pale);
+      padding-bottom: 2px;
+      transition: gap 0.2s ease, border-color 0.2s ease;
+    }
+
+    .about-link:hover {
+      gap: 14px;
+      border-color: var(--brass);
+    }
+
+    /* ===== SERVICES ===== */
+    .services {
+      background: var(--surface);
+      padding: 100px 0;
+    }
+
+    .services-header {
+      margin-bottom: 56px;
+    }
+
+    .services-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 2.8vw, 42px);
+      font-weight: 500;
+      color: var(--dark);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: #fff;
+      padding: 44px 40px;
+      border-top: 2px solid var(--brass);
+      border-radius: 2px;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .service-card:hover {
+      box-shadow: 0 12px 40px rgba(0,0,0,0.07);
+      transform: translateY(-3px);
+    }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 28px;
+      color: var(--brass);
+    }
+
+    .service-name {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .service-desc {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .service-investment {
+      font-family: var(--font-label);
+      font-variant: small-caps;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      color: var(--brass);
+      font-weight: 500;
+    }
+
+    .service-investment span {
+      color: var(--body-text);
+      font-weight: 400;
+    }
+
+    /* ===== CONTACT FORM ===== */
+    .contact {
+      background: var(--bg);
+      padding: 100px 0;
+    }
+
+    .contact-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-inner h2 {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 3vw, 48px);
+      font-weight: 500;
+      color: var(--dark);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .contact-subtext {
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 52px;
+    }
+
+    .contact-form {
+      text-align: left;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .form-group {
+      margin-bottom: 36px;
+      position: relative;
+    }
+
+    .form-label {
+      font-family: var(--font-label);
+      font-variant: small-caps;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      font-weight: 500;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .form-control {
+      border: none;
+      border-bottom: 1px solid var(--brass);
+      background: transparent;
+      padding: 12px 0;
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--dark);
+      outline: none;
+      transition: border-color 0.2s ease;
+      -webkit-appearance: none;
+      border-radius: 0;
+    }
+
+    .form-control:focus {
+      border-color: var(--dark);
+    }
+
+    .form-control::placeholder {
+      color: var(--divider);
+    }
+
+    select.form-control {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23B8956A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 4px center;
+      padding-right: 24px;
+    }
+
+    textarea.form-control {
+      resize: none;
+      min-height: 100px;
+    }
+
+    .btn-submit {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      background: var(--brass);
+      color: #fff;
+      border: none;
+      padding: 16px 40px;
+      cursor: pointer;
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      transition: background 0.25s ease, transform 0.2s ease;
+      margin-top: 8px;
+    }
+
+    .btn-submit:hover {
+      background: var(--dark);
+      transform: translateY(-1px);
+    }
+
+    .contact-note {
+      font-family: var(--font-label);
+      font-variant: small-caps;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--dark);
+      padding: 64px 0 40px;
+      border-top: 1px solid var(--brass);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 36px;
+    }
+
+    .footer-brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .footer-wordmark {
+      font-family: var(--font-label);
+      font-variant: small-caps;
+      letter-spacing: 0.2em;
+      font-size: 15px;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .footer-tagline {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 15px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      max-width: 240px;
+    }
+
+    .footer-address {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.8;
+    }
+
+    .footer-col-title {
+      font-family: var(--font-label);
+      font-variant: small-caps;
+      letter-spacing: 0.14em;
+      font-size: 12px;
+      color: var(--brass);
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.2s ease;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-links a:hover {
+      color: var(--brass-light);
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-legal {
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .footer-license {
+      font-family: var(--font-label);
+      font-variant: small-caps;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ===== RESPONSIVE: 768px ===== */
+    @media (max-width: 768px) {
+      :root {
+        --nav-height: 64px;
+      }
+
+      .container {
+        padding: 0 24px;
+      }
+
+      /* Nav */
+      .nav-inner {
+        padding: 0 24px;
+      }
+
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+
+      .nav-hamburger {
+        display: flex;
+      }
+
+      /* Hero */
+      .hero-inner {
+        grid-template-columns: 1fr;
+        padding: 60px 24px;
+        gap: 48px;
+      }
+
+      .hero-left {
+        padding-right: 0;
+      }
+
+      .hero-right {
+        order: -1;
+      }
+
+      .ba-before { height: 160px; }
+      .ba-after  { height: 220px; }
+
+      /* Portfolio */
+      .portfolio-row-1,
+      .portfolio-row-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .portfolio-row-1 .portfolio-card-image,
+      .portfolio-row-2 .portfolio-card-image {
+        height: 280px;
+      }
+
+      /* Process */
+      .process-steps {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+
+      .process-step::after {
+        display: none;
+      }
+
+      /* Testimonials */
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* About */
+      .about-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .about-portrait {
+        height: 320px;
+      }
+
+      /* Services */
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* Contact */
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      /* Footer */
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+      }
+
+      .footer-top > :first-child {
+        grid-column: 1 / -1;
+      }
+
+      .portfolio { padding: 72px 0; }
+      .process   { padding: 72px 0; }
+      .about     { padding: 72px 0; }
+      .services  { padding: 72px 0; }
+      .contact   { padding: 72px 0; }
+      .testimonials { padding: 72px 0; }
+    }
+
+    /* ===== RESPONSIVE: 480px ===== */
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 18px;
+      }
+
+      .hero-inner {
+        padding: 48px 18px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+      }
+
+      .btn-primary {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .process-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .awards-inner {
+        flex-direction: column;
+        gap: 4px;
+        text-align: center;
+      }
+
+      .award-sep {
+        display: none;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+
+      .testimonial-card {
+        padding: 28px 24px;
+      }
+
+      .service-card {
+        padding: 32px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav" id="main-nav">
+    <div class="nav-inner">
+
+      <!-- Logo + Wordmark -->
+      <a href="#" class="nav-logo" aria-label="Harlow &amp; Co. Home">
+        <svg class="nav-monogram" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- H -->
+          <line x1="5" y1="7" x2="5" y2="29" stroke="#B8956A" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="5" y1="18" x2="17" y2="18" stroke="#B8956A" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="17" y1="7" x2="17" y2="29" stroke="#B8956A" stroke-width="1.4" stroke-linecap="round"/>
+          <!-- C interlocked -->
+          <path d="M29 10 C21 10 19 14 19 18 C19 22 21 26 29 26" stroke="#B8956A" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+          <!-- Connecting flourish -->
+          <line x1="17" y1="18" x2="19" y2="18" stroke="#B8956A" stroke-width="1" stroke-linecap="round" stroke-dasharray="1 2"/>
+          <!-- Corner marks -->
+          <rect x="1" y="1" width="6" height="1.2" fill="#D4B080" opacity="0.5" rx="0.5"/>
+          <rect x="1" y="1" width="1.2" height="6" fill="#D4B080" opacity="0.5" rx="0.5"/>
+          <rect x="29" y="33.8" width="6" height="1.2" fill="#D4B080" opacity="0.5" rx="0.5"/>
+          <rect x="33.8" y="29" width="1.2" height="6" fill="#D4B080" opacity="0.5" rx="0.5"/>
+        </svg>
+        <span class="nav-wordmark">Harlow &amp; Co.</span>
+      </a>
+
+      <!-- Center links -->
+      <ul class="nav-links" role="list">
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <!-- CTA + Hamburger -->
+      <a href="#contact" class="nav-cta">Start Your Project</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="nav-mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+    <a href="#portfolio" onclick="closeMobile()">Portfolio</a>
+    <a href="#process" onclick="closeMobile()">Process</a>
+    <a href="#about" onclick="closeMobile()">About</a>
+    <a href="#contact" onclick="closeMobile()">Start Your Project →</a>
+  </div>
+
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+
+      <!-- Left: Text -->
+      <div class="hero-left">
+        <span class="hero-label">Bespoke Residential Renovation</span>
+
+        <h1 class="hero-heading">
+          We transform<br/>houses into homes<br/>that last a lifetime.
+        </h1>
+
+        <p class="hero-subtext">
+          Custom kitchen and bath remodeling, whole-home renovations. Cincinnati's most awarded design-build firm.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#portfolio" class="btn-primary">View Our Portfolio</a>
+          <a href="#contact" class="btn-text-link">Schedule a Consultation &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Right: Before / After -->
+      <div class="hero-right">
+        <div class="ba-container">
+
+          <!-- Before -->
+          <div class="ba-panel ba-before">
+            <div class="ba-before-texture"></div>
+            <span class="ba-label">Before</span>
+          </div>
+
+          <!-- Brass Divider -->
+          <div class="ba-divider"></div>
+
+          <!-- After -->
+          <div class="ba-panel ba-after">
+            <div class="ba-after-texture"></div>
+            <span class="ba-label">After</span>
+          </div>
+
+        </div>
+        <p class="ba-caption">Hyde Park Kitchen Renovation &mdash; 2024</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===== PORTFOLIO ===== -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+
+      <div class="portfolio-header reveal">
+        <span class="section-label">Our Work</span>
+        <div class="portfolio-header-row">
+          <h2>Selected Projects</h2>
+          <p class="portfolio-header-right">
+            <a href="#contact">View full portfolio &rarr;</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Row 1: Asymmetric -->
+      <div class="portfolio-row-1 reveal">
+        <!-- Large card -->
+        <div class="portfolio-card">
+          <div class="portfolio-card-image img-kitchen-1">
+            <div class="portfolio-static-label">
+              <div class="portfolio-static-name">Anderson Kitchen</div>
+            </div>
+            <div class="portfolio-overlay">
+              <div class="portfolio-overlay-content">
+                <div class="portfolio-overlay-name">Anderson Kitchen</div>
+                <div class="portfolio-overlay-meta">Hyde Park · Kitchen Remodel</div>
+                <div class="portfolio-overlay-budget">Investment: $85,000 – $110,000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Small card 1 -->
+        <div class="portfolio-card">
+          <div class="portfolio-card-image img-bath-1">
+            <div class="portfolio-static-label">
+              <div class="portfolio-static-name">Clifton Master Bath</div>
+            </div>
+            <div class="portfolio-overlay">
+              <div class="portfolio-overlay-content">
+                <div class="portfolio-overlay-name">Clifton Master Bath</div>
+                <div class="portfolio-overlay-meta">Clifton · Bath Renovation</div>
+                <div class="portfolio-overlay-budget">Investment: $45,000 – $65,000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Small card 2 -->
+        <div class="portfolio-card">
+          <div class="portfolio-card-image img-whole-1">
+            <div class="portfolio-static-label">
+              <div class="portfolio-static-name">Mariemont Whole-Home</div>
+            </div>
+            <div class="portfolio-overlay">
+              <div class="portfolio-overlay-content">
+                <div class="portfolio-overlay-name">Mariemont Whole-Home</div>
+                <div class="portfolio-overlay-meta">Mariemont · Full Renovation</div>
+                <div class="portfolio-overlay-budget">Investment: $140,000 – $180,000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2: Equal 3 -->
+      <div class="portfolio-row-2 reveal">
+        <div class="portfolio-card">
+          <div class="portfolio-card-image img-kitchen-2">
+            <div class="portfolio-static-label">
+              <div class="portfolio-static-name">Oakley Chef's Kitchen</div>
+            </div>
+            <div class="portfolio-overlay">
+              <div class="portfolio-overlay-content">
+                <div class="portfolio-overlay-name">Oakley Chef's Kitchen</div>
+                <div class="portfolio-overlay-meta">Oakley · Kitchen Remodel</div>
+                <div class="portfolio-overlay-budget">Investment: $72,000 – $95,000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-card-image img-bath-2">
+            <div class="portfolio-static-label">
+              <div class="portfolio-static-name">Indian Hill Spa Bath</div>
+            </div>
+            <div class="portfolio-overlay">
+              <div class="portfolio-overlay-content">
+                <div class="portfolio-overlay-name">Indian Hill Spa Bath</div>
+                <div class="portfolio-overlay-meta">Indian Hill · Bath Renovation</div>
+                <div class="portfolio-overlay-budget">Investment: $58,000 – $80,000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-card-image img-outdoor">
+            <div class="portfolio-static-label">
+              <div class="portfolio-static-name">Kenwood Living Room</div>
+            </div>
+            <div class="portfolio-overlay">
+              <div class="portfolio-overlay-content">
+                <div class="portfolio-overlay-name">Kenwood Living Room</div>
+                <div class="portfolio-overlay-meta">Kenwood · Interior Renovation</div>
+                <div class="portfolio-overlay-budget">Investment: $40,000 – $60,000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===== PROCESS ===== -->
+  <section class="process" id="process">
+    <div class="container">
+
+      <div class="process-header reveal">
+        <span class="section-label">How We Work Together</span>
+        <h2>A deliberate process,<br/>from first conversation to final detail.</h2>
+      </div>
+
+      <div class="process-steps">
+
+        <div class="process-step reveal" style="--reveal-delay: 0s">
+          <div class="process-step-top"></div>
+          <div class="process-number">1</div>
+          <div class="process-step-name">Discovery &amp; Design</div>
+          <p class="process-step-desc">We begin with a thorough in-home consultation. We listen first, then translate your vision into a detailed design scope.</p>
+        </div>
+
+        <div class="process-step reveal" style="--reveal-delay: 0.1s">
+          <div class="process-step-top"></div>
+          <div class="process-number">2</div>
+          <div class="process-step-name">Material Selection</div>
+          <p class="process-step-desc">Our design team guides you through curated selections for cabinetry, tile, fixtures, and finishes &mdash; no decision is made alone.</p>
+        </div>
+
+        <div class="process-step reveal" style="--reveal-delay: 0.2s">
+          <div class="process-step-top"></div>
+          <div class="process-number">3</div>
+          <div class="process-step-name">Build Phase</div>
+          <p class="process-step-desc">Our in-house craftsmen execute with precision. You receive weekly progress updates, and our project manager is always reachable.</p>
+        </div>
+
+        <div class="process-step reveal" style="--reveal-delay: 0.3s">
+          <div class="process-step-top"></div>
+          <div class="process-number">4</div>
+          <div class="process-step-name">Final Walk-Through</div>
+          <p class="process-step-desc">A meticulous punch-list review. We don't close until every detail meets our standard and yours. Your home, perfected.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===== AWARDS STRIP ===== -->
+  <div class="awards reveal">
+    <div class="awards-inner">
+      <span class="award-item">Best of Houzz 2024</span>
+      <span class="award-sep">&middot;</span>
+      <span class="award-item">Cincinnati Home Builder of the Year</span>
+      <span class="award-sep">&middot;</span>
+      <span class="award-item">BBB A+ Accredited</span>
+      <span class="award-sep">&middot;</span>
+      <span class="award-item">NKBA Member</span>
+      <span class="award-sep">&middot;</span>
+      <span class="award-item">Houzz Pro Verified</span>
+    </div>
+  </div>
+
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+
+      <div class="testimonials-header reveal">
+        <span class="testimonials-label">Client Stories</span>
+      </div>
+
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card reveal">
+          <span class="testimonial-quote-mark">&ldquo;</span>
+          <p class="testimonial-text">Working with Harlow &amp; Co. was unlike any contractor experience we'd had before. Sarah sat with us for two hours on the first visit, just listening. The kitchen they delivered exceeded every expectation we had — it's the heart of our home now.</p>
+          <div class="testimonial-rule"></div>
+          <div class="testimonial-client">Michelle &amp; David Ostrowski</div>
+          <div class="testimonial-project">Hyde Park · Kitchen Remodel</div>
+        </div>
+
+        <div class="testimonial-card reveal">
+          <span class="testimonial-quote-mark">&ldquo;</span>
+          <p class="testimonial-text">The craftsmanship is extraordinary. We've had contractors work on this house for twenty years and no one has treated it — or us — with the level of care James and his team bring. The master bath renovation is something we're genuinely proud of.</p>
+          <div class="testimonial-rule"></div>
+          <div class="testimonial-client">Robert Fairchild</div>
+          <div class="testimonial-project">Indian Hill · Master Bath Renovation</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== ABOUT ===== -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-inner">
+
+        <!-- Portrait -->
+        <div class="about-portrait reveal">
+          <div class="about-portrait-texture"></div>
+          <p class="about-portrait-caption">Sarah &amp; James Harlow &mdash; Founders</p>
+        </div>
+
+        <!-- Content -->
+        <div class="about-content reveal">
+          <span class="section-label">The Studio</span>
+          <h2>Led by craft.<br/>Driven by detail.</h2>
+          <p>Sarah and James Harlow founded this firm on a single conviction: that a truly great renovation demands both the imagination of a designer and the precision of a builder. After nearly two decades in high-end residential work, they brought both under one roof.</p>
+          <p>Every project is personally led by one of the founders. That means a single point of vision, from concept to final reveal — no handoffs, no disconnects. The homes they build are ones their clients plan to grow old in. That weight is something they carry into every decision they make.</p>
+          <a href="#contact" class="about-link">Meet the Team &rarr;</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== SERVICES ===== -->
+  <section class="services" id="services">
+    <div class="container">
+
+      <div class="services-header reveal">
+        <span class="section-label">What We Build</span>
+        <h2>Our specialties</h2>
+      </div>
+
+      <div class="services-grid">
+
+        <!-- Kitchen -->
+        <div class="service-card reveal">
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <!-- Countertop -->
+            <rect x="6" y="20" width="36" height="4" rx="1"/>
+            <!-- Cabinet below -->
+            <rect x="8" y="24" width="14" height="14" rx="1"/>
+            <rect x="26" y="24" width="14" height="14" rx="1"/>
+            <circle cx="18" cy="31" r="0.8" fill="currentColor"/>
+            <circle cx="30" cy="31" r="0.8" fill="currentColor"/>
+            <!-- Upper cabinet -->
+            <rect x="10" y="8" width="28" height="10" rx="1"/>
+            <line x1="24" y1="8" x2="24" y2="18"/>
+            <!-- Sink cutout -->
+            <rect x="18" y="15" width="12" height="6" rx="1"/>
+            <!-- Faucet -->
+            <line x1="24" y1="8" x2="24" y2="15"/>
+            <path d="M21 11 Q24 9 27 11"/>
+          </svg>
+          <h3 class="service-name">Kitchen Remodeling</h3>
+          <p class="service-desc">Custom cabinetry, professional-grade appliances, bespoke islands. We engineer kitchens that perform as beautifully as they look.</p>
+          <div class="service-investment">Typical Investment: <span>$55,000 – $120,000</span></div>
+        </div>
+
+        <!-- Bath -->
+        <div class="service-card reveal">
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <!-- Tub -->
+            <path d="M8 30 Q8 38 16 38 L32 38 Q40 38 40 30 L40 26 L8 26 Z"/>
+            <!-- Faucet arm -->
+            <line x1="14" y1="26" x2="14" y2="18"/>
+            <line x1="14" y1="18" x2="20" y2="18"/>
+            <circle cx="20" cy="18" r="1.5"/>
+            <!-- Shower head -->
+            <line x1="34" y1="8" x2="34" y2="18"/>
+            <path d="M28 18 L40 18"/>
+            <line x1="29" y1="20" x2="29" y2="23"/>
+            <line x1="33" y1="20" x2="33" y2="23"/>
+            <line x1="37" y1="20" x2="37" y2="23"/>
+            <!-- Drain -->
+            <circle cx="24" cy="36" r="2"/>
+          </svg>
+          <h3 class="service-name">Bath Renovation</h3>
+          <p class="service-desc">Spa-caliber master baths, powder rooms with presence. Heated floors, custom tilework, freestanding fixtures. Thoughtfully composed.</p>
+          <div class="service-investment">Typical Investment: <span>$35,000 – $80,000</span></div>
+        </div>
+
+        <!-- Whole-Home -->
+        <div class="service-card reveal">
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <!-- House outline -->
+            <path d="M6 22 L24 6 L42 22"/>
+            <path d="M10 20 L10 40 L38 40 L38 20"/>
+            <!-- Door -->
+            <rect x="20" y="28" width="8" height="12" rx="0.5"/>
+            <circle cx="27" cy="34" r="0.8" fill="currentColor"/>
+            <!-- Windows -->
+            <rect x="12" y="24" width="7" height="6" rx="0.5"/>
+            <rect x="29" y="24" width="7" height="6" rx="0.5"/>
+            <!-- Floor lines suggesting levels -->
+            <line x1="10" y1="32" x2="19" y2="32" stroke-dasharray="1.5 2"/>
+            <line x1="29" y1="32" x2="38" y2="32" stroke-dasharray="1.5 2"/>
+          </svg>
+          <h3 class="service-name">Whole-Home Renovation</h3>
+          <p class="service-desc">Full-scope design-build for clients who want a cohesive transformation. One team. One vision. No coordination headaches.</p>
+          <div class="service-investment">Typical Investment: <span>$100,000 – $300,000+</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== CONTACT FORM ===== -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-inner">
+
+        <div class="reveal">
+          <span class="section-label">Begin the Conversation</span>
+          <h2>Ready to reimagine<br/>your home?</h2>
+          <p class="contact-subtext">Our consultation process starts with a single conversation. We'll learn what matters most to you, walk through your space, and return with a clear picture of what's possible. No pressure. No obligation.</p>
+        </div>
+
+        <form class="contact-form reveal" novalidate>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="name">Your Name</label>
+              <input class="form-control" type="text" id="name" name="name" placeholder="Sarah Thompson" autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email">Email Address</label>
+              <input class="form-control" type="email" id="email" name="email" placeholder="sarah@example.com" autocomplete="email" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="project-type">Project Type</label>
+            <select class="form-control" id="project-type" name="project_type">
+              <option value="" disabled selected>Select a project type</option>
+              <option value="kitchen">Kitchen Remodel</option>
+              <option value="bath">Bath Renovation</option>
+              <option value="whole-home">Whole-Home Renovation</option>
+              <option value="other">Other / Not Sure Yet</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="message">Tell Us About Your Project</label>
+            <textarea class="form-control" id="message" name="message" rows="4" placeholder="Describe your space, timeline, or anything that feels important…"></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit">Request Consultation</button>
+          <p class="contact-note">We typically respond within one business day</p>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+
+      <div class="footer-top">
+
+        <!-- Brand column -->
+        <div>
+          <div class="footer-brand-logo">
+            <svg width="28" height="28" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <line x1="5" y1="7" x2="5" y2="29" stroke="#B8956A" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="5" y1="18" x2="17" y2="18" stroke="#B8956A" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="17" y1="7" x2="17" y2="29" stroke="#B8956A" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M29 10 C21 10 19 14 19 18 C19 22 21 26 29 26" stroke="#B8956A" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+            </svg>
+            <span class="footer-wordmark">Harlow &amp; Co.</span>
+          </div>
+          <p class="footer-tagline">Crafted with intention.<br/>Built to last.</p>
+          <address class="footer-address" style="font-style:normal;">
+            4210 Madison Road, Suite 110<br/>
+            Cincinnati, OH 45209<br/><br/>
+            (513) 400-7820<br/>
+            hello@harlowandco.com
+          </address>
+        </div>
+
+        <!-- Services column -->
+        <div>
+          <p class="footer-col-title">Services</p>
+          <ul class="footer-links">
+            <li><a href="#services">Kitchen Remodeling</a></li>
+            <li><a href="#services">Bath Renovation</a></li>
+            <li><a href="#services">Whole-Home Renovation</a></li>
+            <li><a href="#services">Design Consultation</a></li>
+          </ul>
+        </div>
+
+        <!-- Company column -->
+        <div>
+          <p class="footer-col-title">Company</p>
+          <ul class="footer-links">
+            <li><a href="#about">Our Story</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#process">Our Process</a></li>
+            <li><a href="#contact">Careers</a></li>
+          </ul>
+        </div>
+
+        <!-- Connect column -->
+        <div>
+          <p class="footer-col-title">Connect</p>
+          <ul class="footer-links">
+            <li><a href="#">Houzz Profile</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Pinterest</a></li>
+            <li><a href="#contact">Schedule a Call</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-legal">&copy; 2026 Harlow &amp; Co. Design-Build. All rights reserved.</p>
+        <p class="footer-license">Ohio Contractor License #OH-2024-18847 &nbsp;&middot;&nbsp; Insured &amp; Bonded</p>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // ── Nav scroll effect ──────────────────────────────────────────────
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ── Mobile menu toggle ─────────────────────────────────────────────
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+      // Animate bars
+      const bars = hamburger.querySelectorAll('span');
+      if (isOpen) {
+        bars[0].style.transform = 'translateY(6.5px) rotate(45deg)';
+        bars[1].style.opacity   = '0';
+        bars[2].style.transform = 'translateY(-6.5px) rotate(-45deg)';
+      } else {
+        bars[0].style.transform = '';
+        bars[1].style.opacity   = '';
+        bars[2].style.transform = '';
+      }
+    });
+
+    function closeMobile() {
+      mobileMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', false);
+      const bars = hamburger.querySelectorAll('span');
+      bars[0].style.transform = '';
+      bars[1].style.opacity   = '';
+      bars[2].style.transform = '';
+    }
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!nav.contains(e.target) && !mobileMenu.contains(e.target)) {
+        closeMobile();
+      }
+    });
+
+    // ── IntersectionObserver for .reveal elements ──────────────────────
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // Stagger siblings slightly
+          const siblings = entry.target.parentElement.querySelectorAll('.reveal');
+          let delay = 0;
+          siblings.forEach((el, idx) => {
+            if (el === entry.target) delay = idx * 80;
+          });
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    // ── Smooth form prevent default (template demo) ────────────────────
+    document.querySelector('.contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = e.target.querySelector('.btn-submit');
+      const original = btn.textContent;
+      btn.textContent = 'Thank you — we\'ll be in touch.';
+      btn.style.background = '#3A3A38';
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.style.background = '';
+        e.target.reset();
+      }, 4000);
+    });
+
+    // ── Portfolio card: ensure overlay works on touch ──────────────────
+    document.querySelectorAll('.portfolio-card').forEach(card => {
+      card.addEventListener('touchstart', () => {
+        // Toggle active class for touch devices
+        card.classList.toggle('touch-active');
+      }, { passive: true });
+    });
+
+    // ── Subtle parallax on hero before/after ──────────────────────────
+    const baAfter = document.querySelector('.ba-after');
+    if (baAfter && window.matchMedia('(min-width: 769px)').matches) {
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const scrolled = window.scrollY;
+            if (scrolled < window.innerHeight) {
+              baAfter.style.transform = `translateY(${scrolled * 0.04}px)`;
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    }
+  </script>
+
+</body>
+</html>

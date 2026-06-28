@@ -1,0 +1,512 @@
+<!--
+  FEATURE CAROUSEL — Reusable Component
+  ──────────────────────────────────────
+  Self-contained HTML/CSS/JS carousel.
+  Left panel: auto-scrolling label buttons on an accent background.
+  Right panel: stacked image cards with tilt transitions.
+
+  TO CUSTOMIZE:
+  - Change --fc-accent to your brand color
+  - Edit .fc-label-btn items and .fc-card items to match your services
+  - Swap image src paths to your own photos
+  - Adjust INTERVAL in the <script> to change auto-play speed
+-->
+
+<style>
+  /* ─── FEATURE CAROUSEL ────────────────────────────────── */
+
+  .fc {
+    max-width: 1280px;
+    margin: 0 auto;
+    overflow: hidden;
+    --fc-accent: #F25B19;
+    --fc-bg-dark: #111111;
+    --fc-bg-darker: #0d0d0d;
+    --fc-divider: rgba(255, 255, 255, 0.08);
+  }
+
+  .fc-wrap {
+    display: flex;
+    min-height: 520px;
+    border-top: 1px solid var(--fc-divider);
+    border-bottom: 1px solid var(--fc-divider);
+  }
+
+  /* Left panel — label list */
+  .fc-labels {
+    width: 40%;
+    background: var(--fc-accent);
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 48px 0;
+  }
+
+  .fc-labels::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 8px,
+        rgba(0,0,0,0.04) 8px,
+        rgba(0,0,0,0.04) 9px
+      );
+    pointer-events: none;
+  }
+
+  /* top/bottom fade masks */
+  .fc-labels::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, var(--fc-accent) 0%, transparent 15%, transparent 85%, var(--fc-accent) 100%);
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .fc-label-list {
+    position: relative;
+    width: 100%;
+    height: 325px;
+    z-index: 2;
+  }
+
+  .fc-label-btn {
+    position: absolute;
+    left: 32px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 28px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: transparent;
+    color: rgba(255,255,255,0.55);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                background 0.35s ease,
+                color 0.35s ease,
+                border-color 0.35s ease;
+  }
+
+  .fc-label-btn.active {
+    background: #fff;
+    color: var(--fc-accent);
+    border-color: #fff;
+    z-index: 5;
+  }
+
+  .fc-label-btn:not(.active):hover {
+    border-color: rgba(255,255,255,0.5);
+    color: #fff;
+  }
+
+  .fc-label-btn svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .fc-label-btn.active svg {
+    color: var(--fc-accent);
+  }
+
+  /* Right panel — image cards */
+  .fc-cards {
+    flex: 1;
+    background: var(--fc-bg-darker);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    overflow: hidden;
+    border-left: 1px solid var(--fc-divider);
+  }
+
+  .fc-card-stage {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    aspect-ratio: 4 / 5;
+  }
+
+  .fc-card {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 6px solid var(--fc-bg-dark);
+    background: var(--fc-bg-dark);
+    transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+  }
+
+  .fc-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: filter 0.5s ease;
+  }
+
+  .fc-card.active img {
+    filter: none;
+  }
+
+  .fc-card:not(.active) img {
+    filter: grayscale(1) blur(2px) brightness(0.7);
+  }
+
+  .fc-card.active {
+    transform: translateX(0) scale(1) rotate(0deg);
+    opacity: 1;
+    z-index: 20;
+  }
+
+  .fc-card.prev {
+    transform: translateX(-80px) scale(0.88) rotate(-3deg);
+    opacity: 0.4;
+    z-index: 10;
+  }
+
+  .fc-card.next {
+    transform: translateX(80px) scale(0.88) rotate(3deg);
+    opacity: 0.4;
+    z-index: 10;
+  }
+
+  .fc-card.hidden {
+    transform: translateX(0) scale(0.7);
+    opacity: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Card overlay caption */
+  .fc-card-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 32px;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 40%, transparent 60%);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
+    pointer-events: none;
+  }
+
+  .fc-card.active .fc-card-overlay {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fc-card-tag {
+    display: inline-block;
+    background: #fff;
+    color: var(--fc-bg-dark);
+    font-family: monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+    width: fit-content;
+  }
+
+  .fc-card-desc {
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 500;
+    color: #fff;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  /* Live indicator dot */
+  .fc-card-live {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .fc-card.active .fc-card-live {
+    opacity: 1;
+  }
+
+  .fc-card-live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 8px rgba(255,255,255,0.6);
+    animation: fc-livePulse 2s ease-in-out infinite;
+  }
+
+  @keyframes fc-livePulse {
+    0%, 100% { box-shadow: 0 0 6px rgba(255,255,255,0.4); }
+    50% { box-shadow: 0 0 14px rgba(255,255,255,0.8); }
+  }
+
+  .fc-card-live span {
+    font-family: monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* ─── RESPONSIVE ───────────────────────────────────────── */
+
+  @media (max-width: 768px) {
+    .fc-wrap {
+      flex-direction: column;
+      min-height: auto;
+    }
+
+    .fc-labels {
+      width: 100%;
+      min-height: 320px;
+      padding: 40px 0;
+      justify-content: center;
+    }
+
+    .fc-label-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 325px;
+    }
+
+    .fc-label-btn {
+      left: auto;
+      font-size: 13px;
+      padding: 12px 22px;
+      gap: 10px;
+    }
+
+    .fc-cards {
+      min-height: 480px;
+      padding: 32px 20px;
+      border-left: none;
+      border-top: 1px solid var(--fc-divider);
+    }
+
+    .fc-card-stage {
+      max-width: 320px;
+    }
+
+    .fc-card.prev {
+      transform: translateX(-60px) scale(0.85) rotate(-3deg);
+    }
+
+    .fc-card.next {
+      transform: translateX(60px) scale(0.85) rotate(3deg);
+    }
+
+    .fc-card-desc {
+      font-size: 17px;
+    }
+
+    .fc-card-overlay {
+      padding: 24px;
+    }
+  }
+</style>
+
+<!-- ─── MARKUP ──────────────────────────────────────────── -->
+<!--
+  Copy this <section> into your page where you want the carousel.
+  Update labels, images, tags, and descriptions to match your content.
+-->
+
+<section class="fc" aria-label="Services carousel">
+  <div class="fc-wrap">
+
+    <!-- Left: label buttons -->
+    <div class="fc-labels" id="fc-labels">
+      <div class="fc-label-list" id="fc-label-list">
+
+        <button class="fc-label-btn active" data-index="0">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+          <span>Arrive &amp; Drive</span>
+        </button>
+
+        <button class="fc-label-btn" data-index="1">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          <span>Race Prep</span>
+        </button>
+
+        <button class="fc-label-btn" data-index="2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Full Team Support</span>
+        </button>
+
+        <button class="fc-label-btn" data-index="3">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 3h-8l-2 4h12l-2-4z"/></svg>
+          <span>LO206</span>
+        </button>
+
+        <button class="fc-label-btn" data-index="4">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Where We Race</span>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Right: image cards -->
+    <div class="fc-cards">
+      <div class="fc-card-stage" id="fc-card-stage">
+
+        <div class="fc-card active" data-index="0">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?q=80&w=800" alt="Service 1" loading="lazy">
+          <div class="fc-card-live"><span class="fc-card-live-dot"></span><span>Live</span></div>
+          <div class="fc-card-overlay">
+            <span class="fc-card-tag">01 · Arrive &amp; Drive</span>
+            <p class="fc-card-desc">Book a slot. We have the kart ready at the track. You show up, you race.</p>
+          </div>
+        </div>
+
+        <div class="fc-card next" data-index="1">
+          <img src="https://images.unsplash.com/photo-1504222490345-c075b6008014?q=80&w=800" alt="Service 2" loading="lazy">
+          <div class="fc-card-live"><span class="fc-card-live-dot"></span><span>Live</span></div>
+          <div class="fc-card-overlay">
+            <span class="fc-card-tag">02 · Race Prep</span>
+            <p class="fc-card-desc">In-house builds. The same hands that built your kart are crewing it on race day.</p>
+          </div>
+        </div>
+
+        <div class="fc-card hidden" data-index="2">
+          <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=800" alt="Service 3" loading="lazy">
+          <div class="fc-card-live"><span class="fc-card-live-dot"></span><span>Live</span></div>
+          <div class="fc-card-overlay">
+            <span class="fc-card-tag">03 · Full Team Support</span>
+            <p class="fc-card-desc">Data, coaching, and crew in your corner — every race, all season long.</p>
+          </div>
+        </div>
+
+        <div class="fc-card hidden" data-index="3">
+          <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800" alt="Service 4" loading="lazy">
+          <div class="fc-card-live"><span class="fc-card-live-dot"></span><span>Live</span></div>
+          <div class="fc-card-overlay">
+            <span class="fc-card-tag">04 · LO206</span>
+            <p class="fc-card-desc">Authorized dealer. The best entry-level class in the sport, done right.</p>
+          </div>
+        </div>
+
+        <div class="fc-card prev" data-index="4">
+          <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=800" alt="Service 5" loading="lazy">
+          <div class="fc-card-live"><span class="fc-card-live-dot"></span><span>Live</span></div>
+          <div class="fc-card-overlay">
+            <span class="fc-card-tag">05 · Where We Race</span>
+            <p class="fc-card-desc">New Castle Motorsports Park, Indiana. We're there every single weekend.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── SCRIPT ──────────────────────────────────────────── -->
+<script>
+(function() {
+  var TOTAL = document.querySelectorAll('.fc-card').length;
+  var INTERVAL = 3500;
+  var ITEM_H = 65;
+  var current = 0;
+  var paused = false;
+  var timer;
+
+  var labels = document.querySelectorAll('.fc-label-btn');
+  var cards  = document.querySelectorAll('.fc-card');
+
+  function positionLabels() {
+    labels.forEach(function(btn, i) {
+      var dist = i - current;
+      if (dist > TOTAL / 2)  dist -= TOTAL;
+      if (dist < -TOTAL / 2) dist += TOTAL;
+
+      btn.style.transform = 'translateY(' + (dist * ITEM_H) + 'px)';
+      btn.style.opacity = Math.max(1 - Math.abs(dist) * 0.25, 0);
+      btn.style.top = 'calc(50% - 22px)';
+
+      if (i === current) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  }
+
+  function positionCards() {
+    cards.forEach(function(card, i) {
+      var diff = i - current;
+      if (diff > TOTAL / 2)  diff -= TOTAL;
+      if (diff < -TOTAL / 2) diff += TOTAL;
+
+      card.classList.remove('active', 'prev', 'next', 'hidden');
+
+      if (diff === 0)       card.classList.add('active');
+      else if (diff === -1) card.classList.add('prev');
+      else if (diff === 1)  card.classList.add('next');
+      else                  card.classList.add('hidden');
+    });
+  }
+
+  function goTo(index) {
+    current = ((index % TOTAL) + TOTAL) % TOTAL;
+    positionLabels();
+    positionCards();
+  }
+
+  function advance() {
+    goTo(current + 1);
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(function() {
+      if (!paused) advance();
+    }, INTERVAL);
+  }
+
+  labels.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      goTo(parseInt(btn.dataset.index, 10));
+      startTimer();
+    });
+    btn.addEventListener('mouseenter', function() { paused = true; });
+    btn.addEventListener('mouseleave', function() { paused = false; });
+  });
+
+  positionLabels();
+  positionCards();
+  startTimer();
+})();
+</script>

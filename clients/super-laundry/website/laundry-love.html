@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laundry Love Cincinnati — Free Laundry at Super Laundry Westwood</title>
+  <meta name="description" content="Every 2nd Wednesday, Super Laundry Westwood hosts Laundry Love Cincinnati — free laundry for families facing financial hardship. 6–8 PM, 2455 Harrison Ave. No registration needed.">
+
+  <!-- Event Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Laundry Love Cincinnati — Free Laundry Event",
+    "description": "Monthly free laundry event at Super Laundry Westwood. Provided by Laundry Love Cincinnati nonprofit. Free for individuals (up to 2 loads) and families (up to 4 loads).",
+    "eventSchedule": {
+      "@type": "Schedule",
+      "repeatFrequency": "P1M",
+      "byDay": "https://schema.org/Wednesday",
+      "startTime": "18:00",
+      "endTime": "20:00"
+    },
+    "location": {
+      "@type": "Place",
+      "name": "Super Laundry — Westwood",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "2455 Harrison Ave",
+        "addressLocality": "Cincinnati",
+        "addressRegion": "OH",
+        "postalCode": "45211"
+      }
+    },
+    "organizer": {
+      "@type": "Organization",
+      "name": "Laundry Love Cincinnati",
+      "url": "https://www.laundrylove.org"
+    },
+    "isAccessibleForFree": true
+  }
+  </script>
+
+  <!-- Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Super Laundry Cincinnati",
+    "url": "https://superlaundry24.com",
+    "telephone": "(513) 873-5939",
+    "email": "info@superlaundry24.com"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== DESIGN SYSTEM ===== */
+    :root {
+      --green-dark: #1C4A25;
+      --green: #2D7F3C;
+      --green-light: #4A9B58;
+      --green-pale: #EAF4EC;
+      --cream: #F5F1E8;
+      --warm-white: #FAFAF6;
+      --text-dark: #1A2B1C;
+      --text-body: #3C4A3E;
+      --text-muted: #4E6150;
+      --border: #DDD8CE;
+      --shadow-sm: 0 2px 8px rgba(28,74,37,0.08);
+      --shadow-md: 0 4px 20px rgba(28,74,37,0.12);
+      --shadow-lg: 0 8px 40px rgba(28,74,37,0.18);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-body);
+      background: var(--warm-white);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== REVIEW BANNER ===== */
+    .review-banner {
+      background: var(--green-dark);
+      border-bottom: 3px solid var(--green);
+      padding: 10px 24px;
+      text-align: center;
+    }
+    .review-banner p {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+    .review-banner span { color: #A8E6B0; }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      background: var(--green-dark);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 68px;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .nav-logo img {
+      height: 44px;
+      width: auto;
+      mix-blend-mode: screen;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a.active {
+      color: #fff;
+      font-weight: 700;
+    }
+    .nav-cta {
+      background: var(--green) !important;
+      color: #fff !important;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+      min-height: 44px;
+      display: inline-flex !important;
+      align-items: center !important;
+    }
+    .nav-cta:hover { background: var(--green-light) !important; }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 2px;
+    }
+    .nav-mobile {
+      display: none;
+      background: var(--green-dark);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 12px 24px 20px;
+    }
+    .nav-mobile.open { display: block; }
+    .nav-mobile a {
+      display: block;
+      padding: 12px 0;
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      min-height: 44px;
+    }
+    .nav-mobile a:last-child { border-bottom: none; }
+    .nav-mobile a.active { color: #fff; font-weight: 700; }
+
+    /* ===== PAGE HERO — dark, full-width ===== */
+    .page-hero {
+      background: var(--green-dark);
+      position: relative;
+      overflow: hidden;
+      padding: 80px 0;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #0d2914 0%, #1C4A25 55%, rgba(28,74,37,0.85) 100%);
+      z-index: 1;
+    }
+    .hero-photo-bg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 45%;
+      height: 100%;
+      z-index: 0;
+    }
+    .hero-photo-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .hero-photo-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, #1C4A25 0%, rgba(28,74,37,0.6) 40%, rgba(28,74,37,0.15) 100%);
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 45%;
+      gap: 0;
+      align-items: center;
+    }
+    .hero-content {
+      padding-right: 48px;
+    }
+    .hero-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #A8E6B0;
+      margin-bottom: 24px;
+    }
+    .page-hero h1 {
+      font-size: clamp(32px, 4.5vw, 56px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .hero-sub {
+      font-size: clamp(16px, 1.8vw, 18px);
+      color: rgba(255,255,255,0.82);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+    .hero-meta {
+      margin-top: 36px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .hero-meta-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.9);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 100px;
+    }
+    .hero-meta-tag svg {
+      flex-shrink: 0;
+      opacity: 0.8;
+    }
+
+    /* ===== WHAT IS LAUNDRY LOVE ===== */
+    .what-section {
+      background: var(--warm-white);
+      padding: 80px 0;
+    }
+    .what-inner {
+      display: grid;
+      grid-template-columns: 1fr 440px;
+      gap: 72px;
+      align-items: center;
+    }
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 14px;
+    }
+    .what-content h2 {
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 700;
+      margin-bottom: 22px;
+      line-height: 1.15;
+    }
+    .what-content p {
+      font-size: 16px;
+      color: var(--text-body);
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+    .what-content p:last-child { margin-bottom: 0; }
+    .what-photo {
+      position: relative;
+    }
+    .what-photo img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+    }
+    .what-photo-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(28,74,37,0.85) 0%, transparent 100%);
+      border-radius: 0 0 var(--radius) var(--radius);
+      padding: 32px 20px 18px;
+    }
+    .what-photo-caption p {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.88);
+      text-align: center;
+    }
+
+    /* ===== EVENT DETAILS ===== */
+    .event-section {
+      background: var(--cream);
+      padding: 72px 0;
+    }
+    .event-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .event-header h2 {
+      font-size: clamp(26px, 3.2vw, 40px);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .event-header p {
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+    .detail-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .detail-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+    }
+    .detail-card-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--green-pale);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+    }
+    .detail-card-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+    .detail-card-main {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+    .detail-card-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+    .event-note {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 28px 36px;
+      border: 1px solid var(--border);
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 32px;
+    }
+    .event-note p {
+      font-size: 16px;
+      color: var(--text-body);
+      line-height: 1.7;
+    }
+    .event-cta-wrap {
+      text-align: center;
+    }
+    .btn-green {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green);
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 32px;
+      border-radius: 8px;
+      transition: background 0.2s, transform 0.15s;
+      min-height: 48px;
+    }
+    .btn-green:hover { background: var(--green-dark); transform: translateY(-1px); }
+    .btn-green-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--green-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 13px 32px;
+      border-radius: 8px;
+      border: 2px solid var(--green);
+      transition: background 0.2s, color 0.2s;
+      min-height: 48px;
+    }
+    .btn-green-outline:hover { background: var(--green); color: #fff; }
+
+    /* ===== PHOTO GALLERY ===== */
+    .gallery-section {
+      background: var(--warm-white);
+      padding: 72px 0;
+    }
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .gallery-header h2 {
+      font-size: clamp(24px, 2.8vw, 36px);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .gallery-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .gallery-photo {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+    .gallery-photo img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .gallery-photo:hover img { transform: scale(1.03); }
+    .gallery-caption {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ===== WHY WE DO THIS ===== */
+    .why-section {
+      background: var(--green-dark);
+      padding: 72px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .why-section::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(74,155,88,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .why-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .why-section h2 {
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 28px;
+      line-height: 1.15;
+    }
+    .why-section p {
+      font-size: 17px;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .why-section p:last-child { margin-bottom: 0; }
+    .why-divider {
+      width: 48px;
+      height: 3px;
+      background: #A8E6B0;
+      border-radius: 2px;
+      margin: 0 auto 36px;
+    }
+
+    /* ===== LEARN MORE ===== */
+    .learn-section {
+      background: var(--cream);
+      padding: 72px 0;
+    }
+    .learn-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .learn-inner h2 {
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .learn-inner p {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+    .learn-inner p:last-of-type { margin-bottom: 36px; }
+    .learn-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 24px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-sm);
+    }
+    .learn-logo span {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+    .learn-logo strong {
+      font-weight: 700;
+      color: var(--green-dark);
+    }
+    .btn-external {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green-dark);
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 32px;
+      border-radius: 8px;
+      transition: background 0.2s, transform 0.15s;
+      min-height: 48px;
+    }
+    .btn-external:hover { background: var(--green); transform: translateY(-1px); }
+
+    /* ===== SPREAD THE WORD ===== */
+    .spread-section {
+      background: var(--warm-white);
+      padding: 64px 0;
+    }
+    .spread-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .spread-inner h2 {
+      font-size: clamp(22px, 2.8vw, 32px);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .spread-inner > p {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .event-details-box {
+      background: var(--green-pale);
+      border: 1px solid rgba(45,127,60,0.2);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 28px;
+    }
+    .event-details-box ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .event-details-box li {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--green-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .event-details-box li::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      flex-shrink: 0;
+    }
+    .spread-note {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      font-style: italic;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--green-dark);
+      padding: 64px 0 0;
+    }
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    .footer-brand img {
+      height: 40px;
+      width: auto;
+      mix-blend-mode: screen;
+      margin-bottom: 16px;
+    }
+    .footer-brand p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.58);
+      line-height: 1.65;
+      max-width: 260px;
+      margin-bottom: 20px;
+    }
+    .footer-social {
+      display: flex;
+      gap: 10px;
+    }
+    .social-link {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.7);
+      font-size: 13px;
+      font-weight: 700;
+      transition: background 0.2s;
+      min-height: 36px;
+    }
+    .social-link:hover { background: var(--green); color: #fff; }
+    .footer-col h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.58);
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: rgba(255,255,255,0.9); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media screen and (max-width: 960px) {
+      .what-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .what-photo {
+        max-width: 560px;
+      }
+      .detail-cards {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .detail-cards .detail-card:last-child {
+        grid-column: span 2;
+        max-width: 400px;
+        margin: 0 auto;
+        width: 100%;
+      }
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+      .hero-photo-bg {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .page-hero { padding: 60px 0; }
+      .hero-content { padding-right: 0; }
+      .what-section { padding: 60px 0; }
+      .event-section { padding: 56px 0; }
+      .gallery-section { padding: 56px 0; }
+      .why-section { padding: 56px 0; }
+      .learn-section { padding: 56px 0; }
+      .spread-section { padding: 52px 0; }
+      .gallery-photos {
+        grid-template-columns: 1fr;
+      }
+      .gallery-photo img {
+        height: 280px;
+      }
+      .event-note {
+        padding: 24px 20px;
+      }
+    }
+
+    @media screen and (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .detail-cards {
+        grid-template-columns: 1fr;
+      }
+      .detail-cards .detail-card:last-child {
+        grid-column: auto;
+        max-width: 100%;
+      }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .hero-meta { gap: 8px; }
+      .hero-meta-tag { font-size: 12px; padding: 7px 12px; }
+      .event-details-box { padding: 22px 20px; }
+      .spread-inner > p { margin-bottom: 24px; }
+    }
+
+    @media screen and (max-width: 480px) {
+      .page-hero { padding: 48px 0; }
+      .page-hero h1 { font-size: 30px; }
+    }
+
+    @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      .review-banner { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- REVIEW BANNER -->
+  <div class="review-banner">
+    <p><span>Best Laundromat in Cincinnati</span> &nbsp;—&nbsp; BusinessRate Best of 2025</p>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="../assets/logos/SuperLaundry_Logo.webp" alt="Super Laundry Cincinnati">
+      </a>
+      <ul class="nav-links">
+        <li><a href="/services">Services</a></li>
+        <li><a href="/locations">Locations</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="tel:5138735939" class="nav-cta">Call Us</a></li>
+      </ul>
+      <button class="nav-hamburger" aria-label="Open menu" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-mobile" id="nav-mobile">
+      <a href="/services">Services</a>
+      <a href="/locations">Locations</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="tel:5138735939">Call Us — (513) 873-5939</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="hero-photo-bg">
+      <img src="../assets/images/westwood-ext.jpeg" alt="Super Laundry Westwood — 2455 Harrison Ave, Cincinnati">
+    </div>
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <span class="hero-label">Community</span>
+          <h1>Free laundry for Cincinnati families who need it most.</h1>
+          <p class="hero-sub">Every second Wednesday, our Westwood and Avondale locations open their doors for Laundry Love Cincinnati — a nonprofit event that provides free laundry services to families facing financial hardship.</p>
+          <div class="hero-meta">
+            <span class="hero-meta-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              2nd Wednesday · Monthly
+            </span>
+            <span class="hero-meta-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              6 PM – 8 PM
+            </span>
+            <span class="hero-meta-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Westwood &amp; Avondale
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT IS LAUNDRY LOVE -->
+  <section class="what-section">
+    <div class="container">
+      <div class="what-inner">
+        <div class="what-content">
+          <p class="section-eyebrow">About the Event</p>
+          <h2>What is Laundry Love Cincinnati?</h2>
+          <p>Laundry Love is a national nonprofit network with a straightforward mission — provide free, dignified laundry access to people who can't afford it. No application, no paperwork, no gatekeeping. Just open doors and clean machines.</p>
+          <p>The Cincinnati chapter partners with local laundromats to host regular free laundry events. Super Laundry's Westwood and Avondale locations are both partners. On the second Wednesday of every month, we open our machines, supply the detergent, and make sure everyone who walks in is taken care of.</p>
+          <p>This isn't a one-time thing. It happens every month, same time, same place — at two locations across Cincinnati. Neighbors who need it can count on it.</p>
+        </div>
+        <div class="what-photo">
+          <img src="../assets/images/westwood-int.jpeg" alt="Inside Super Laundry Westwood during Laundry Love Cincinnati">
+          <div class="what-photo-caption">
+            <p>Super Laundry Westwood — Laundry Love host location</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENT DETAILS -->
+  <section class="event-section">
+    <div class="container">
+      <div class="event-header">
+        <p class="section-eyebrow">Event Details</p>
+        <h2>Join us at the Westwood location</h2>
+        <p>Every second Wednesday. No sign-up needed.</p>
+      </div>
+
+      <div class="detail-cards">
+        <div class="detail-card">
+          <div class="detail-card-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2D7F3C" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <p class="detail-card-label">When</p>
+          <p class="detail-card-main">2nd Wednesday<br>of every month</p>
+          <p class="detail-card-sub">6:00 PM – 8:00 PM</p>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-card-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2D7F3C" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <p class="detail-card-label">Where</p>
+          <p class="detail-card-main">Super Laundry<br>Westwood</p>
+          <p class="detail-card-sub">2455 Harrison Ave<br>Cincinnati, OH 45211</p>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-card-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2D7F3C" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </div>
+          <p class="detail-card-label">Free Loads</p>
+          <p class="detail-card-main">Up to 2 loads<br>per individual</p>
+          <p class="detail-card-sub">Families: up to 4 loads free</p>
+        </div>
+      </div>
+
+      <div class="event-note">
+        <p>No registration needed. Just come in during the event hours. Detergent and machines are provided at no cost. Attendants are on-site to help.</p>
+      </div>
+
+      <div class="event-cta-wrap">
+        <a href="https://maps.google.com/?q=2455+Harrison+Ave,+Cincinnati,+OH+45211" target="_blank" rel="noopener" class="btn-green">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Get Directions to Westwood
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO GALLERY -->
+  <section class="gallery-section">
+    <div class="container">
+      <div class="gallery-header">
+        <p class="section-eyebrow">The Location</p>
+        <h2>Super Laundry Westwood</h2>
+      </div>
+      <div class="gallery-photos">
+        <div class="gallery-photo">
+          <img src="../assets/images/westwood-ext2.jpeg" alt="Super Laundry Westwood exterior — 2455 Harrison Ave Cincinnati">
+        </div>
+        <div class="gallery-photo">
+          <img src="../assets/images/westwood-int2.jpeg" alt="Inside Super Laundry Westwood — washers and dryers">
+        </div>
+      </div>
+      <p class="gallery-caption">Super Laundry Westwood — 2455 Harrison Ave, Cincinnati, OH 45211</p>
+    </div>
+  </section>
+
+  <!-- WHY WE DO THIS -->
+  <section class="why-section">
+    <div class="container">
+      <div class="why-inner">
+        <p class="section-eyebrow" style="color: #A8E6B0; margin-bottom: 28px;">Why We Do This</p>
+        <h2>Clean clothes shouldn't be a barrier.</h2>
+        <div class="why-divider"></div>
+        <p>We opened our Westwood location to this community years ago. Hosting Laundry Love is an extension of that.</p>
+        <p>Clean laundry is fundamental. It affects whether kids can go to school, whether adults can show up to work, whether families feel dignity in their daily lives. A load of laundry is a small thing. What it makes possible isn't.</p>
+        <p>We're proud to open our doors for it. Every month. No conditions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEARN MORE -->
+  <section class="learn-section">
+    <div class="container">
+      <div class="learn-inner">
+        <p class="section-eyebrow">About the Organization</p>
+        <h2>Laundry Love Cincinnati is part of a national movement.</h2>
+        <p>Laundry Love partners with local laundromats across the United States to host regular free laundry events for people in need. There are chapters in dozens of cities — each one run through local partnerships with businesses willing to open their doors.</p>
+        <p>Cincinnati is one of those chapters. Super Laundry Westwood is one of those partners.</p>
+        <a href="https://www.laundrylove.org" target="_blank" rel="noopener" class="btn-external">
+          Visit laundrylove.org
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPREAD THE WORD -->
+  <section class="spread-section">
+    <div class="container">
+      <div class="spread-inner">
+        <p class="section-eyebrow">Pass It Along</p>
+        <h2>Spread the word to neighbors who could use it.</h2>
+        <p>If you know someone who could benefit from this, tell them. That's how it works.</p>
+
+        <div class="event-details-box">
+          <ul>
+            <li>2nd Wednesday of every month</li>
+            <li>6:00 PM – 8:00 PM</li>
+            <li>Super Laundry Westwood — 2455 Harrison Ave</li>
+            <li>No registration. Walk in during event hours.</li>
+          </ul>
+        </div>
+
+        <p class="spread-note">If you know a neighbor, a coworker, or a family who could use a hand — let them know this happens every month. That's the whole idea.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="../assets/logos/SuperLaundry_Logo.webp" alt="Super Laundry Cincinnati">
+          <p>Cincinnati's Biggest &amp; Best Laundromats. Locally owned. 6 neighborhoods. Open when you need us.</p>
+          <div class="footer-social">
+            <a href="#" class="social-link" aria-label="Facebook">f</a>
+            <a href="#" class="social-link" aria-label="Instagram">in</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="/services/self-service">Self-Service</a></li>
+            <li><a href="/services/wash-and-fold">Wash &amp; Fold</a></li>
+            <li><a href="/services/pickup-delivery">Pickup &amp; Delivery</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Locations</h4>
+          <ul>
+            <li><a href="/locations/springdale">Springdale</a></li>
+            <li><a href="/locations/avondale">Avondale</a></li>
+            <li><a href="/locations/bond-hill">Bond Hill</a></li>
+            <li><a href="/locations/westwood">Westwood</a></li>
+            <li><a href="/locations/north-college-hill">North College Hill</a></li>
+            <li><a href="/locations/allison-road">Allison Road</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:5138735939">(513) 873-5939</a></li>
+            <li><a href="mailto:info@superlaundry24.com">info@superlaundry24.com</a></li>
+            <li><a href="/contact">Contact Us</a></li>
+            <li><a href="/about">About Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Super Laundry Cincinnati. All rights reserved.</p>
+        <p>Locally owned &amp; operated in Cincinnati, OH</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMobile = document.getElementById('nav-mobile');
+    hamburger.addEventListener('click', () => {
+      navMobile.classList.toggle('open');
+      const isOpen = navMobile.classList.contains('open');
+      hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    });
+  </script>
+
+</body>
+</html>

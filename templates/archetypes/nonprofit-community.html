@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Harbor Project — Building Foundations, Changing Lives</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS
+    ============================================================ */
+    :root {
+      --bg:          #FAFAF8;
+      --surface:     #F2F0EB;
+      --text:        #1A1F1A;
+      --body:        #3D4A3D;
+      --muted:       #7A8A7A;
+      --teal:        #1B5E6B;
+      --teal-light:  #2E7A8A;
+      --sunflower:   #F5A623;
+      --sunflower-h: #E09510;
+      --teal-bg:     #E8F4F7;
+      --divider:     #E0DDD7;
+      --cream:       #F5F0E8;
+      --white:       #FFFFFF;
+
+      --font-display: 'Lora', Georgia, serif;
+      --font-body:    'Plus Jakarta Sans', sans-serif;
+      --font-stat:    'DM Serif Display', Georgia, serif;
+
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --shadow-card: 0 2px 12px rgba(27,94,107,0.08), 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-card-hover: 0 8px 32px rgba(27,94,107,0.16), 0 2px 8px rgba(0,0,0,0.06);
+      --transition: 0.25s ease;
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ============================================================
+       FADE-UP ANIMATION
+    ============================================================ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-up-delay-1 { transition-delay: 0.1s; }
+    .fade-up-delay-2 { transition-delay: 0.2s; }
+    .fade-up-delay-3 { transition-delay: 0.3s; }
+    .fade-up-delay-4 { transition-delay: 0.4s; }
+
+    /* ============================================================
+       NAV
+    ============================================================ */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .nav.scrolled {
+      border-color: var(--divider);
+      box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    /* Logo */
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+    }
+    .nav-logo-text {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--teal);
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    /* Nav links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--body);
+      letter-spacing: 0.01em;
+      transition: color var(--transition);
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    /* Nav CTAs */
+    .nav-ctas {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .btn-volunteer {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      padding: 0 20px;
+      border: 2px solid var(--teal);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--teal);
+      background: transparent;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+      white-space: nowrap;
+      min-height: 44px;
+    }
+    .btn-volunteer:hover { background: var(--teal); color: var(--white); }
+
+    .btn-donate {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      padding: 0 20px;
+      border: 2px solid var(--sunflower);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--sunflower);
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition);
+      white-space: nowrap;
+      min-height: 44px;
+    }
+    .btn-donate:hover { background: var(--sunflower-h); border-color: var(--sunflower-h); }
+
+    /* Mobile hamburger */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      background: none;
+      border: none;
+      min-width: 44px;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--teal);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      display: block;
+    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 50% 30%, #2A7A8A 0%, #1B5E6B 45%, #124A57 100%);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle decorative circles */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 80px;
+      left: -120px;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: rgba(245,166,35,0.05);
+      pointer-events: none;
+    }
+
+    .hero-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 32px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sunflower);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.18;
+      color: var(--cream);
+      max-width: 780px;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.4s forwards;
+    }
+
+    .hero-sub {
+      font-family: var(--font-body);
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: rgba(245,240,232,0.75);
+      max-width: 520px;
+      line-height: 1.65;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.6s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.8s forwards;
+    }
+
+    .btn-hero-donate {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 56px;
+      padding: 0 36px;
+      background: var(--sunflower);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--sunflower);
+      cursor: pointer;
+      transition: background var(--transition), transform 0.2s ease;
+      min-height: 56px;
+    }
+    .btn-hero-donate:hover { background: var(--sunflower-h); border-color: var(--sunflower-h); transform: translateY(-1px); }
+
+    .btn-hero-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--cream);
+      transition: gap var(--transition), opacity var(--transition);
+      opacity: 0.9;
+      min-height: 56px;
+      padding: 0 8px;
+    }
+    .btn-hero-link:hover { gap: 14px; opacity: 1; }
+
+    /* Hero stats band */
+    .hero-stats-band {
+      background: rgba(15,46,55,0.7);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 1.0s forwards;
+    }
+    .hero-stats-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .hero-stat-item {
+      padding: 28px 20px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .hero-stat-item:last-child { border-right: none; }
+    .hero-stat-number {
+      font-family: var(--font-stat);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .hero-stat-label {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: rgba(245,240,232,0.65);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       SECTION UTILITY
+    ============================================================ */
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sunflower);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .section-label--teal { color: var(--teal); }
+    .section-label--muted { color: var(--muted); }
+
+    /* ============================================================
+       MISSION SECTION
+    ============================================================ */
+    .mission {
+      padding: 96px 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .mission-heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+    .mission-body {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--body);
+      margin-bottom: 16px;
+    }
+    .mission-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--teal);
+      margin-top: 8px;
+      transition: gap var(--transition);
+      min-height: 44px;
+    }
+    .mission-link:hover { gap: 14px; }
+
+    .mission-photo {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, #2A7A4A 0%, #1B5E6B 50%, #144A55 100%);
+      position: relative;
+      box-shadow: 0 20px 60px rgba(27,94,107,0.2);
+    }
+    .mission-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(20,74,85,0.6) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .mission-photo-caption {
+      position: absolute;
+      bottom: 28px;
+      left: 28px;
+      right: 28px;
+      z-index: 3;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: rgba(245,240,232,0.9);
+      line-height: 1.5;
+    }
+    .mission-photo-shapes {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .mission-photo-shapes .shape-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .mission-photo-shapes .c1 { width: 200px; height: 200px; top: -60px; right: -60px; }
+    .mission-photo-shapes .c2 { width: 140px; height: 140px; bottom: 80px; left: -40px; }
+    .mission-photo-shapes .c3 { width: 80px; height: 80px; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(245,166,35,0.12); }
+
+    /* ============================================================
+       PROGRAMS SECTION
+    ============================================================ */
+    .programs {
+      background: var(--teal-bg);
+      padding: 96px 32px;
+    }
+    .programs-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .programs-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .programs-heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .program-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border-top: 4px solid var(--teal);
+      padding: 36px 32px;
+      box-shadow: var(--shadow-card);
+      transition: box-shadow var(--transition), transform var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .program-card:hover {
+      box-shadow: var(--shadow-card-hover);
+      transform: translateY(-4px);
+    }
+    .program-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 24px;
+      color: var(--teal);
+      flex-shrink: 0;
+    }
+    .program-name {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 14px;
+      line-height: 1.3;
+    }
+    .program-desc {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--body);
+      flex: 1;
+      margin-bottom: 20px;
+    }
+    .program-count {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--sunflower);
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+    }
+    .program-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--teal);
+      transition: gap var(--transition);
+      margin-top: auto;
+      min-height: 44px;
+      align-self: flex-start;
+      padding: 4px 0;
+    }
+    .program-link:hover { gap: 12px; }
+
+    /* ============================================================
+       IMPACT NUMBERS
+    ============================================================ */
+    .impact {
+      background: var(--teal);
+      padding: 88px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .impact::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      pointer-events: none;
+    }
+    .impact::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: -60px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: rgba(245,166,35,0.06);
+      pointer-events: none;
+    }
+    .impact-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .impact-label-wrap {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .impact-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 700;
+      color: var(--cream);
+      margin-top: 8px;
+    }
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .impact-item {
+      text-align: center;
+      padding: 40px 24px;
+      border-right: 1px solid rgba(255,255,255,0.12);
+    }
+    .impact-item:last-child { border-right: none; }
+    .impact-number {
+      font-family: var(--font-stat);
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      color: var(--white);
+      line-height: 1;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .impact-desc {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: rgba(245,240,232,0.65);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       STORY / TESTIMONIAL
+    ============================================================ */
+    .story {
+      padding: 96px 32px;
+      background: var(--bg);
+    }
+    .story-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .story-portrait-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .story-portrait {
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, #D4956A 0%, #B57845 50%, #8A5830 100%);
+      box-shadow: 0 16px 48px rgba(180,100,50,0.25);
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .story-portrait::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle at 65% 25%, rgba(255,220,180,0.3) 0%, transparent 60%);
+    }
+    .story-name {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--body);
+      text-align: center;
+    }
+    .story-role {
+      font-family: var(--font-body);
+      font-size: 0.83rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 2px;
+    }
+    .story-quote-col {
+      position: relative;
+      padding-top: 20px;
+    }
+    .story-quote-mark {
+      font-family: var(--font-stat);
+      font-size: 8rem;
+      line-height: 0.8;
+      color: var(--sunflower);
+      opacity: 0.35;
+      position: absolute;
+      top: -16px;
+      left: -16px;
+      pointer-events: none;
+      user-select: none;
+      aria-hidden: true;
+    }
+    .story-quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+      font-style: italic;
+      font-weight: 500;
+      line-height: 1.55;
+      color: var(--text);
+      position: relative;
+      z-index: 1;
+      padding-left: 12px;
+    }
+    .story-source-label {
+      display: inline-block;
+      margin-top: 28px;
+      padding: 8px 16px;
+      background: var(--surface);
+      border-radius: 99px;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    .story-source-label span {
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    /* ============================================================
+       GET INVOLVED — 50/50 SPLIT
+    ============================================================ */
+    .get-involved {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .gi-panel {
+      padding: 88px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 520px;
+      position: relative;
+      overflow: hidden;
+    }
+    .gi-panel--volunteer {
+      background: var(--teal);
+    }
+    .gi-panel--volunteer::before {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      right: -60px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      pointer-events: none;
+    }
+    .gi-panel--donate {
+      background: var(--sunflower);
+    }
+    .gi-panel--donate::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      left: -60px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      pointer-events: none;
+    }
+    .gi-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .gi-panel--volunteer .gi-eyebrow { color: rgba(245,240,232,0.6); }
+    .gi-panel--donate .gi-eyebrow { color: rgba(26,31,26,0.55); }
+
+    .gi-heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 2.5vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .gi-panel--volunteer .gi-heading { color: var(--cream); }
+    .gi-panel--donate .gi-heading { color: var(--text); }
+
+    .gi-desc {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 36px;
+      position: relative;
+      z-index: 1;
+    }
+    .gi-panel--volunteer .gi-desc { color: rgba(245,240,232,0.75); }
+    .gi-panel--donate .gi-desc { color: rgba(26,31,26,0.75); }
+
+    .btn-gi-volunteer {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 52px;
+      padding: 0 32px;
+      background: var(--white);
+      color: var(--teal);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--white);
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+      position: relative;
+      z-index: 1;
+      min-height: 52px;
+    }
+    .btn-gi-volunteer:hover { background: transparent; color: var(--white); }
+
+    .btn-gi-donate {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 52px;
+      padding: 0 32px;
+      background: var(--text);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--text);
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+      position: relative;
+      z-index: 1;
+      min-height: 52px;
+    }
+    .btn-gi-donate:hover { background: transparent; color: var(--text); }
+
+    /* ============================================================
+       LATEST NEWS
+    ============================================================ */
+    .news {
+      padding: 96px 32px;
+      background: var(--surface);
+    }
+    .news-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .news-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 48px;
+      gap: 20px;
+    }
+    .news-heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    .news-view-all {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--teal);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap var(--transition);
+      white-space: nowrap;
+      min-height: 44px;
+      padding: 4px 0;
+    }
+    .news-view-all:hover { gap: 12px; }
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .news-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--divider);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+    .news-card:hover {
+      box-shadow: var(--shadow-card-hover);
+      transform: translateY(-4px);
+    }
+    .news-card-photo {
+      height: 200px;
+      position: relative;
+    }
+    .news-card-photo-1 {
+      background: linear-gradient(135deg, #1B7A4A 0%, #1B5E6B 60%, #144A55 100%);
+    }
+    .news-card-photo-2 {
+      background: linear-gradient(135deg, #2D6B4A 0%, #3A7A6A 50%, #1B5E6B 100%);
+    }
+    .news-card-photo-3 {
+      background: linear-gradient(135deg, #4A7A3D 0%, #2E7A5A 50%, #1B5E6B 100%);
+    }
+    .news-card-body {
+      padding: 28px;
+    }
+    .news-date {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .news-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .news-excerpt {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--body);
+      margin-bottom: 20px;
+    }
+    .news-read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--teal);
+      transition: gap var(--transition);
+      min-height: 44px;
+      padding: 4px 0;
+    }
+    .news-read-more:hover { gap: 12px; }
+
+    /* ============================================================
+       PARTNERS
+    ============================================================ */
+    .partners {
+      padding: 72px 32px;
+      background: var(--bg);
+      border-top: 1px solid var(--divider);
+      border-bottom: 1px solid var(--divider);
+    }
+    .partners-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .partners-label {
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+    .partners-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .partner-chip {
+      border: 1.5px solid var(--divider);
+      border-radius: var(--radius-sm);
+      background: var(--white);
+      padding: 12px 24px;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .partner-chip:hover {
+      border-color: var(--teal);
+      box-shadow: 0 2px 12px rgba(27,94,107,0.1);
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer {
+      background: var(--teal);
+      padding: 80px 32px 40px;
+      color: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -80px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+      pointer-events: none;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 60px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 40px;
+      align-items: start;
+    }
+    .footer-brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .footer-brand-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--white);
+    }
+    .footer-tagline {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: rgba(245,240,232,0.65);
+      margin-bottom: 28px;
+    }
+    .footer-donate-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 48px;
+      padding: 0 28px;
+      background: var(--sunflower);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--sunflower);
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition);
+      min-height: 48px;
+    }
+    .footer-donate-btn:hover { background: var(--sunflower-h); border-color: var(--sunflower-h); }
+
+    .footer-links-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+    .footer-col-heading {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.5);
+      margin-bottom: 20px;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .footer-col ul li a {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: rgba(245,240,232,0.75);
+      transition: color var(--transition);
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+      padding: 2px 0;
+    }
+    .footer-col ul li a:hover { color: var(--white); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-legal {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: rgba(245,240,232,0.45);
+      line-height: 1.6;
+    }
+    .footer-legal strong { color: rgba(245,240,232,0.6); }
+    .footer-copy {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: rgba(245,240,232,0.4);
+    }
+
+    /* ============================================================
+       RESPONSIVE — 768px
+    ============================================================ */
+    @media (max-width: 768px) {
+      /* Nav */
+      .nav-inner {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 16px 20px;
+      }
+      .nav-inner > .nav-links,
+      .nav-inner > .nav-ctas {
+        display: none;
+      }
+      .nav-toggle { display: flex; }
+
+      .nav-mobile-menu {
+        display: none;
+        width: 100%;
+        background: var(--white);
+        border-top: 1px solid var(--divider);
+        padding: 16px 20px 24px;
+        flex-direction: column;
+        gap: 0;
+      }
+      .nav-mobile-menu.open { display: flex; }
+
+      .nav-mobile-menu .nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        list-style: none;
+      }
+      .nav-mobile-menu .nav-links a {
+        padding: 12px 0;
+        border-bottom: 1px solid var(--divider);
+        font-size: 1rem;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        color: var(--body);
+      }
+      .nav-mobile-menu .nav-ctas {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        margin-top: 20px;
+      }
+      .nav-mobile-menu .btn-volunteer,
+      .nav-mobile-menu .btn-donate {
+        flex: 1;
+        height: 48px;
+        min-height: 48px;
+      }
+
+      /* Hero */
+      .hero-main { padding: 80px 20px 60px; }
+      .hero-stats-inner {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 20px;
+      }
+      .hero-stat-item {
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+      .hero-stat-item:nth-child(2n) { border-right: none; }
+      .hero-stat-item:nth-child(3),
+      .hero-stat-item:nth-child(4) { border-bottom: none; }
+
+      /* Mission */
+      .mission { padding: 64px 20px; }
+      .mission-grid { grid-template-columns: 1fr; gap: 48px; }
+      .mission-photo { aspect-ratio: 3/2; }
+
+      /* Programs */
+      .programs { padding: 64px 20px; }
+      .programs-grid { grid-template-columns: 1fr; gap: 20px; }
+
+      /* Impact */
+      .impact { padding: 64px 20px; }
+      .impact-grid { grid-template-columns: repeat(2, 1fr); }
+      .impact-item {
+        border-bottom: 1px solid rgba(255,255,255,0.12);
+        padding: 28px 16px;
+      }
+      .impact-item:nth-child(2n) { border-right: none; }
+      .impact-item:nth-child(3),
+      .impact-item:nth-child(4) { border-bottom: none; }
+
+      /* Story */
+      .story { padding: 64px 20px; }
+      .story-inner { grid-template-columns: 1fr; gap: 48px; }
+      .story-quote { padding-left: 0; }
+      .story-quote-mark { left: 0; }
+
+      /* Get Involved */
+      .get-involved { grid-template-columns: 1fr; }
+      .gi-panel { padding: 64px 32px; min-height: auto; }
+
+      /* News */
+      .news { padding: 64px 20px; }
+      .news-header { flex-direction: column; align-items: flex-start; }
+      .news-grid { grid-template-columns: 1fr; gap: 20px; }
+
+      /* Partners */
+      .partners { padding: 56px 20px; }
+      .partners-row {
+        gap: 10px;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        padding-bottom: 8px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      /* Footer */
+      .footer { padding: 56px 20px 32px; }
+      .footer-top { grid-template-columns: 1fr; gap: 40px; }
+      .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+
+    /* ============================================================
+       RESPONSIVE — 480px
+    ============================================================ */
+    @media (max-width: 480px) {
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+      }
+      .btn-hero-donate {
+        width: 100%;
+        max-width: 320px;
+      }
+      .gi-panel { padding: 56px 24px; }
+      .footer-links-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       NAV
+  ============================================================ -->
+  <header class="nav" id="main-nav">
+    <div class="nav-inner">
+      <!-- Logo -->
+      <a href="#" class="nav-logo" aria-label="The Harbor Project — Home">
+        <svg class="nav-logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="18" cy="10" r="4" stroke="#1B5E6B" stroke-width="2" fill="none"/>
+          <line x1="18" y1="14" x2="18" y2="30" stroke="#1B5E6B" stroke-width="2" stroke-linecap="round"/>
+          <line x1="9" y1="18" x2="27" y2="18" stroke="#1B5E6B" stroke-width="2" stroke-linecap="round"/>
+          <path d="M10 28 Q10 33 18 33 Q26 33 26 28" stroke="#1B5E6B" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <line x1="10" y1="28" x2="10" y2="30" stroke="#1B5E6B" stroke-width="2" stroke-linecap="round"/>
+          <line x1="26" y1="28" x2="26" y2="30" stroke="#1B5E6B" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="nav-logo-text">The Harbor Project</span>
+      </a>
+
+      <!-- Desktop nav links -->
+      <ul class="nav-links" aria-label="Main navigation">
+        <li><a href="#programs">Our Work</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#story">Stories</a></li>
+        <li><a href="#news">About</a></li>
+      </ul>
+
+      <!-- Desktop CTAs -->
+      <div class="nav-ctas">
+        <a href="#get-involved" class="btn-volunteer">Volunteer</a>
+        <a href="#get-involved" class="btn-donate">Donate</a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile dropdown -->
+    <div class="nav-mobile-menu" id="nav-mobile-menu" aria-label="Mobile navigation">
+      <ul class="nav-links">
+        <li><a href="#programs">Our Work</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#story">Stories</a></li>
+        <li><a href="#news">About</a></li>
+      </ul>
+      <div class="nav-ctas">
+        <a href="#get-involved" class="btn-volunteer">Volunteer</a>
+        <a href="#get-involved" class="btn-donate">Donate</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section class="hero" aria-label="Hero — The Harbor Project">
+    <div class="hero-main">
+      <span class="hero-eyebrow">Serving Cincinnati Since 2012</span>
+
+      <h1 class="hero-heading">Every neighbor deserves<br>a foundation to build on.</h1>
+
+      <p class="hero-sub">We provide food, training, and opportunity to 4,200+ families each year — because dignity isn't earned. It's a starting point.</p>
+
+      <div class="hero-actions">
+        <a href="#get-involved" class="btn-hero-donate">Donate Today</a>
+        <a href="#programs" class="btn-hero-link">Learn How You Can Help &nbsp;→</a>
+      </div>
+    </div>
+
+    <!-- Impact stats band -->
+    <div class="hero-stats-band" aria-label="Impact overview">
+      <div class="hero-stats-inner">
+        <div class="hero-stat-item">
+          <span class="hero-stat-number">4,200</span>
+          <span class="hero-stat-label">Families Served</span>
+        </div>
+        <div class="hero-stat-item">
+          <span class="hero-stat-number">12</span>
+          <span class="hero-stat-label">Years in Cincinnati</span>
+        </div>
+        <div class="hero-stat-item">
+          <span class="hero-stat-number">850+</span>
+          <span class="hero-stat-label">Active Volunteers</span>
+        </div>
+        <div class="hero-stat-item">
+          <span class="hero-stat-number">3</span>
+          <span class="hero-stat-label">Core Programs</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MISSION
+  ============================================================ -->
+  <section aria-labelledby="mission-heading">
+    <div class="mission">
+      <div class="mission-grid">
+        <!-- Text column -->
+        <div class="fade-up">
+          <span class="section-label section-label--teal">Our Mission</span>
+          <h2 class="mission-heading" id="mission-heading">
+            We believe no one should go hungry. No one should go untrained. No one should be left out.
+          </h2>
+          <p class="mission-body">The Harbor Project started as a single food pantry in the West End. Today, we run three integrated programs that meet people where they are — with meals, job skills, and support for their children — and walk alongside them toward something better.</p>
+          <p class="mission-body">We don't just address symptoms. We build relationships, open doors, and stay for the whole journey.</p>
+          <a href="#story" class="mission-link">Read Our Story →</a>
+        </div>
+
+        <!-- Photo column -->
+        <div class="mission-photo fade-up fade-up-delay-2" role="img" aria-label="Community members at The Harbor Project">
+          <div class="mission-photo-shapes">
+            <div class="shape-circle c1"></div>
+            <div class="shape-circle c2"></div>
+            <div class="shape-circle c3"></div>
+          </div>
+          <!-- Gentle community silhouette suggestion -->
+          <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg"
+            style="position:absolute;bottom:56px;left:50%;transform:translateX(-50%);width:68%;opacity:0.16;z-index:1;pointer-events:none;" aria-hidden="true">
+            <ellipse cx="100" cy="270" rx="32" ry="50" fill="white"/>
+            <circle cx="100" cy="200" r="26" fill="white"/>
+            <ellipse cx="200" cy="275" rx="38" ry="55" fill="white"/>
+            <circle cx="200" cy="198" r="30" fill="white"/>
+            <ellipse cx="300" cy="270" rx="30" ry="48" fill="white"/>
+            <circle cx="300" cy="200" r="24" fill="white"/>
+          </svg>
+          <p class="mission-photo-caption">"We stay for the whole journey."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROGRAMS
+  ============================================================ -->
+  <section class="programs" id="programs" aria-labelledby="programs-heading">
+    <div class="programs-inner">
+      <div class="programs-header fade-up">
+        <span class="section-label section-label--teal">What We Do</span>
+        <h2 class="programs-heading" id="programs-heading">Three programs. One commitment.</h2>
+      </div>
+
+      <div class="programs-grid">
+        <!-- Food Security -->
+        <article class="program-card fade-up fade-up-delay-1">
+          <svg class="program-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M8 22C8 16.5 15 9 24 9C33 9 40 16.5 40 22" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <rect x="8" y="22" width="32" height="17" rx="4" stroke="currentColor" stroke-width="2.5"/>
+            <line x1="24" y1="9" x2="24" y2="6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M16 30C18 32 22 32 24 30C26 28 30 30 32 30" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <h3 class="program-name">Food Security</h3>
+          <p class="program-desc">A weekly food pantry, hot meal service, and fresh produce distribution that keeps 4,200 families fed — no judgment, no paperwork, no waiting list.</p>
+          <p class="program-count">↑ 4,200 families served monthly</p>
+          <a href="#" class="program-link">Learn More →</a>
+        </article>
+
+        <!-- Workforce Training -->
+        <article class="program-card fade-up fade-up-delay-2">
+          <svg class="program-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="8" y="18" width="32" height="22" rx="3" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M16 18V14C16 11.8 17.8 10 20 10H28C30.2 10 32 11.8 32 14V18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="8" y1="28" x2="40" y2="28" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <circle cx="24" cy="28" r="3.5" fill="currentColor"/>
+          </svg>
+          <h3 class="program-name">Workforce Training</h3>
+          <p class="program-desc">Eight-week cohort programs in hospitality, healthcare support, and skilled trades — with direct job placement and employer partnerships that stick.</p>
+          <p class="program-count">↑ 320 jobs placed this year</p>
+          <a href="#" class="program-link">Learn More →</a>
+        </article>
+
+        <!-- Youth Enrichment -->
+        <article class="program-card fade-up fade-up-delay-3">
+          <svg class="program-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M24 7L27.8 18H39.5L29.8 24.6L33.6 35.5L24 28.8L14.4 35.5L18.2 24.6L8.5 18H20.2L24 7Z"
+              stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <h3 class="program-name">Youth Enrichment</h3>
+          <p class="program-desc">After-school tutoring, summer camps, and mentorship for kids ages 6–17 — because every child deserves a safe place to grow, learn, and imagine more.</p>
+          <p class="program-count">↑ 680 youth enrolled annually</p>
+          <a href="#" class="program-link">Learn More →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       IMPACT NUMBERS
+  ============================================================ -->
+  <section class="impact" aria-labelledby="impact-heading">
+    <div class="impact-inner">
+      <div class="impact-label-wrap fade-up">
+        <span class="section-label" style="color: rgba(245,166,35,0.85);">The Numbers</span>
+        <h2 class="impact-title" id="impact-heading">Twelve years. Immeasurable lives.</h2>
+      </div>
+      <div class="impact-grid">
+        <div class="impact-item fade-up fade-up-delay-1">
+          <span class="impact-number" data-target="4200" data-suffix="+">0+</span>
+          <span class="impact-desc">Families Fed<br>Monthly</span>
+        </div>
+        <div class="impact-item fade-up fade-up-delay-2">
+          <span class="impact-number" data-target="850" data-suffix="+">0+</span>
+          <span class="impact-desc">Active<br>Volunteers</span>
+        </div>
+        <div class="impact-item fade-up fade-up-delay-3">
+          <span class="impact-number" data-target="320" data-suffix="">0</span>
+          <span class="impact-desc">Jobs Placed<br>This Year</span>
+        </div>
+        <div class="impact-item fade-up fade-up-delay-4">
+          <span class="impact-number" data-target="12" data-suffix="">0</span>
+          <span class="impact-desc">Years in the<br>Community</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       STORY / TESTIMONIAL
+  ============================================================ -->
+  <section class="story" id="story" aria-label="Community story">
+    <div class="story-inner">
+      <!-- Portrait column -->
+      <div class="story-portrait-col fade-up">
+        <div class="story-portrait" role="img" aria-label="Portrait of Maria Santos">
+          <!-- Warm human shape suggestion -->
+          <svg viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg"
+            style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:72%;opacity:0.28;pointer-events:none;" aria-hidden="true">
+            <ellipse cx="100" cy="68" rx="34" ry="38" fill="white"/>
+            <path d="M38 260C38 195 62 168 100 158C138 168 162 195 162 260" fill="white"/>
+          </svg>
+        </div>
+        <p class="story-name">Maria Santos</p>
+        <p class="story-role">Workforce Training Graduate, 2023</p>
+      </div>
+
+      <!-- Quote column -->
+      <div class="story-quote-col fade-up fade-up-delay-2">
+        <div class="story-quote-mark" aria-hidden="true">"</div>
+        <blockquote class="story-quote">
+          "I came to the Harbor Project with nothing. They helped me find work, feed my family, and believe again. That's not a small thing. That's everything."
+        </blockquote>
+        <span class="story-source-label">Program Graduate &nbsp;·&nbsp; <span>Workforce Training, Class of 2023</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       GET INVOLVED — 50/50 SPLIT
+  ============================================================ -->
+  <section class="get-involved" id="get-involved" aria-label="Get involved with The Harbor Project">
+    <!-- Volunteer panel -->
+    <div class="gi-panel gi-panel--volunteer">
+      <span class="gi-eyebrow">Give Your Time</span>
+      <h2 class="gi-heading">Volunteer Your Time</h2>
+      <p class="gi-desc">Show up on a Saturday. Serve meals, tutor a student, staff an intake desk. No experience required — just presence. Our volunteers say it's the best part of their week.</p>
+      <a href="#" class="btn-gi-volunteer">Become a Volunteer →</a>
+    </div>
+
+    <!-- Donate panel -->
+    <div class="gi-panel gi-panel--donate">
+      <span class="gi-eyebrow">Give Resources</span>
+      <h2 class="gi-heading">Make a Donation</h2>
+      <p class="gi-desc">Every $50 feeds a family for a week. Every $250 covers one training module. One hundred percent of your donation goes directly to programs — zero overhead.</p>
+      <a href="#" class="btn-gi-donate">Donate Now →</a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       LATEST NEWS
+  ============================================================ -->
+  <section class="news" id="news" aria-labelledby="news-heading">
+    <div class="news-inner">
+      <div class="news-header fade-up">
+        <div>
+          <span class="section-label section-label--muted">From Our Community</span>
+          <h2 class="news-heading" id="news-heading">Latest News &amp; Stories</h2>
+        </div>
+        <a href="#" class="news-view-all">View All Stories →</a>
+      </div>
+
+      <div class="news-grid">
+        <article class="news-card fade-up fade-up-delay-1">
+          <div class="news-card-photo news-card-photo-1" role="img" aria-label="Workforce training spring cohort"></div>
+          <div class="news-card-body">
+            <time class="news-date" datetime="2026-03-10">March 10, 2026</time>
+            <h3 class="news-title">Spring Cohort Opens 40 New Spots in Workforce Training</h3>
+            <p class="news-excerpt">Applications are open for our most in-demand program. This spring, we're partnering with three new employers to place graduates directly into paid positions.</p>
+            <a href="#" class="news-read-more">Read More →</a>
+          </div>
+        </article>
+
+        <article class="news-card fade-up fade-up-delay-2">
+          <div class="news-card-photo news-card-photo-2" role="img" aria-label="Annual volunteer day"></div>
+          <div class="news-card-body">
+            <time class="news-date" datetime="2026-02-21">February 21, 2026</time>
+            <h3 class="news-title">Record Turnout at Our Annual Volunteer Day — Thank You</h3>
+            <p class="news-excerpt">Over 340 volunteers showed up across all three sites. We packed 8,200 meal boxes, repainted the youth center, and felt the weight of community in the best possible way.</p>
+            <a href="#" class="news-read-more">Read More →</a>
+          </div>
+        </article>
+
+        <article class="news-card fade-up fade-up-delay-3">
+          <div class="news-card-photo news-card-photo-3" role="img" aria-label="Youth services federal grant"></div>
+          <div class="news-card-body">
+            <time class="news-date" datetime="2026-01-15">January 15, 2026</time>
+            <h3 class="news-title">The Harbor Project Receives $400K Federal Grant for Youth Services</h3>
+            <p class="news-excerpt">A new federal grant will allow us to expand youth programming to two additional neighborhoods and hire three full-time youth counselors starting this spring.</p>
+            <a href="#" class="news-read-more">Read More →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PARTNERS
+  ============================================================ -->
+  <section class="partners" aria-labelledby="partners-heading">
+    <div class="partners-inner">
+      <p class="partners-label" id="partners-heading">Trusted by Our Community Partners</p>
+      <div class="partners-row" role="list">
+        <div class="partner-chip" role="listitem">Fifth Third Bank</div>
+        <div class="partner-chip" role="listitem">Cincinnati Children's</div>
+        <div class="partner-chip" role="listitem">Kroger Foundation</div>
+        <div class="partner-chip" role="listitem">P&amp;G Fund</div>
+        <div class="partner-chip" role="listitem">United Way SW Ohio</div>
+        <div class="partner-chip" role="listitem">FC Cincinnati Foundation</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <!-- Brand + CTA column -->
+        <div>
+          <div class="footer-brand-logo">
+            <svg width="30" height="30" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="18" cy="10" r="4" stroke="rgba(245,240,232,0.85)" stroke-width="2" fill="none"/>
+              <line x1="18" y1="14" x2="18" y2="30" stroke="rgba(245,240,232,0.85)" stroke-width="2" stroke-linecap="round"/>
+              <line x1="9" y1="18" x2="27" y2="18" stroke="rgba(245,240,232,0.85)" stroke-width="2" stroke-linecap="round"/>
+              <path d="M10 28 Q10 33 18 33 Q26 33 26 28" stroke="rgba(245,240,232,0.85)" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+            <span class="footer-brand-name">The Harbor Project</span>
+          </div>
+          <p class="footer-tagline">Building food security, economic opportunity, and brighter futures for families across Cincinnati since 2012.</p>
+          <a href="#get-involved" class="footer-donate-btn">Donate Now</a>
+        </div>
+
+        <!-- 4-column link grid -->
+        <div class="footer-links-grid">
+          <div class="footer-col">
+            <p class="footer-col-heading">Our Work</p>
+            <ul>
+              <li><a href="#">Food Security</a></li>
+              <li><a href="#">Workforce Training</a></li>
+              <li><a href="#">Youth Enrichment</a></li>
+              <li><a href="#">Our Impact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <p class="footer-col-heading">Get Involved</p>
+            <ul>
+              <li><a href="#">Volunteer</a></li>
+              <li><a href="#">Donate</a></li>
+              <li><a href="#">Corporate Partnerships</a></li>
+              <li><a href="#">Planned Giving</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <p class="footer-col-heading">Stories</p>
+            <ul>
+              <li><a href="#">Program Stories</a></li>
+              <li><a href="#">Annual Report</a></li>
+              <li><a href="#">News</a></li>
+              <li><a href="#">Press</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <p class="footer-col-heading">Organization</p>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Leadership</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Financials</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="footer-bottom">
+        <p class="footer-legal">
+          <strong>The Harbor Project</strong> is a registered 501(c)(3) nonprofit organization.<br>
+          Tax ID: 45-XXXXXXX &nbsp;·&nbsp; Donations are tax-deductible to the fullest extent of the law.
+        </p>
+        <p class="footer-copy">© 2026 The Harbor Project. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    'use strict';
+
+    /* ---- Nav: scroll border ---- */
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', function() {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    /* ---- Nav: mobile toggle ---- */
+    const navToggle = document.getElementById('nav-toggle');
+    const navMobileMenu = document.getElementById('nav-mobile-menu');
+
+    navToggle.addEventListener('click', function() {
+      const isOpen = navMobileMenu.classList.toggle('open');
+      navToggle.classList.toggle('open', isOpen);
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    navMobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        navMobileMenu.classList.remove('open');
+        navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    /* ---- Fade-up on scroll ---- */
+    var fadeObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(function(el) {
+      fadeObserver.observe(el);
+    });
+
+    /* ---- Count-up animation ---- */
+    function animateCounter(el) {
+      var target = parseInt(el.getAttribute('data-target'), 10);
+      var suffix = el.getAttribute('data-suffix') || '';
+      var duration = 2000;
+      var startTime = null;
+
+      function easeOut(t) {
+        return 1 - Math.pow(1 - t, 3);
+      }
+
+      function tick(timestamp) {
+        if (!startTime) startTime = timestamp;
+        var elapsed = timestamp - startTime;
+        var progress = Math.min(elapsed / duration, 1);
+        var value = Math.round(easeOut(progress) * target);
+        el.textContent = value.toLocaleString() + suffix;
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          el.textContent = target.toLocaleString() + suffix;
+        }
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    var counterObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    document.querySelectorAll('.impact-number[data-target]').forEach(function(el) {
+      counterObserver.observe(el);
+    });
+
+    /* ---- Smooth scroll for anchor links ---- */
+    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        var href = link.getAttribute('href');
+        if (href === '#') return;
+        var target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          var navHeight = nav.offsetHeight;
+          var targetTop = target.getBoundingClientRect().top + window.scrollY - navHeight - 16;
+          window.scrollTo({ top: targetTop, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

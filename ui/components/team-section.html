@@ -1,0 +1,411 @@
+<!--
+  TEAM SECTION — Reusable Component
+  ───────────────────────────────────
+  Team member cards in a 2-column grid with hover tilt effect,
+  skills badges, social links, and a CTA card at the bottom.
+
+  TO CUSTOMIZE:
+  - Edit team member cards in the HTML
+  - Change --ts-accent for brand color
+  - Swap avatar images
+  - Edit skills, roles, bios
+-->
+
+<style>
+  .ts {
+    --ts-accent: hsl(220,90%,56%);
+    position: relative;
+    width: 100%;
+    padding: 80px 24px;
+    overflow: hidden;
+  }
+
+  .ts-inner {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  /* Background blurs */
+  .ts-blur {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .ts-blur-1 {
+    width: 384px; height: 384px;
+    top: -96px; right: -96px;
+    background: var(--ts-accent);
+    opacity: 0.12;
+    filter: blur(180px);
+    animation: ts-pulse 18s ease infinite;
+  }
+  .ts-blur-2 {
+    width: 384px; height: 384px;
+    bottom: -96px; left: -96px;
+    background: #34d399;
+    opacity: 0.1;
+    filter: blur(180px);
+    animation: ts-pulse 16s ease infinite reverse;
+  }
+  @keyframes ts-pulse {
+    0%,100% { opacity: 0.1; transform: scale(1); }
+    50% { opacity: 0.25; transform: scale(1.15); }
+  }
+
+  /* Header */
+  .ts-header {
+    text-align: center;
+    margin-bottom: 56px;
+    position: relative;
+    z-index: 1;
+    animation: ts-fadeUp 0.7s ease both;
+  }
+
+  @keyframes ts-fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .ts-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 50px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(8px);
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 20px;
+  }
+
+  .ts-title {
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    background: linear-gradient(to right, #fff, rgba(255,255,255,0.6));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .ts-title span {
+    background: linear-gradient(to right, var(--ts-accent), color-mix(in srgb, var(--ts-accent) 60%, transparent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .ts-subtitle {
+    font-size: 17px;
+    color: rgba(255,255,255,0.5);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Grid */
+  .ts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Card */
+  .ts-card {
+    position: relative;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(12px);
+    padding: 32px 24px;
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    overflow: hidden;
+    animation: ts-fadeUp 0.6s ease both;
+  }
+
+  .ts-card:nth-child(1) { animation-delay: 0.3s; }
+  .ts-card:nth-child(2) { animation-delay: 0.45s; }
+  .ts-card:nth-child(3) { animation-delay: 0.6s; }
+  .ts-card:nth-child(4) { animation-delay: 0.75s; }
+
+  .ts-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.4);
+  }
+
+  .ts-card-glow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.06), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+  }
+
+  .ts-card:hover .ts-card-glow { opacity: 1; }
+
+  /* Avatar */
+  .ts-avatar-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .ts-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.05);
+    padding: 4px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .ts-card:hover .ts-avatar { transform: scale(1.05); }
+
+  .ts-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ts-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+
+  .ts-role {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 50px;
+    background: rgba(255,255,255,0.08);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 8px;
+  }
+
+  .ts-location {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .ts-location svg { width: 12px; height: 12px; }
+
+  .ts-bio {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+
+  .ts-skills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .ts-skill {
+    padding: 4px 10px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .ts-socials {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .ts-social {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .ts-social:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .ts-social svg { width: 14px; height: 14px; }
+
+  /* CTA Card */
+  .ts-cta {
+    position: relative;
+    z-index: 1;
+    margin-top: 48px;
+    text-align: center;
+    animation: ts-fadeUp 0.7s ease both 1s;
+  }
+
+  .ts-cta-card {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 40px 48px;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(12px);
+  }
+
+  .ts-cta-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .ts-cta-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    max-width: 400px;
+  }
+
+  .ts-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 36px;
+    border-radius: 50px;
+    border: none;
+    background: var(--ts-accent);
+    color: #fff;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .ts-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--ts-accent) 30%, transparent);
+  }
+
+  @media (max-width: 768px) {
+    .ts-grid { grid-template-columns: 1fr; }
+    .ts-cta-card { padding: 28px 24px; }
+  }
+</style>
+
+<!-- ─── MARKUP ──────────────────────────────────────────── -->
+
+<section class="ts">
+  <div class="ts-blur ts-blur-1"></div>
+  <div class="ts-blur ts-blur-2"></div>
+
+  <div class="ts-inner">
+    <div class="ts-header">
+      <div class="ts-badge">&#10024; Our Dream Team</div>
+      <h2 class="ts-title">Meet the people behind<br><span>our success</span></h2>
+      <p class="ts-subtitle">A diverse team of talented individuals working together to build amazing products.</p>
+    </div>
+
+    <div class="ts-grid">
+      <div class="ts-card">
+        <div class="ts-card-glow"></div>
+        <div class="ts-avatar-wrap"><div class="ts-avatar"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" alt="Sarah Johnson"></div></div>
+        <div class="ts-name">Sarah Johnson</div>
+        <div class="ts-role">CEO &amp; Founder</div>
+        <div class="ts-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> San Francisco</div>
+        <p class="ts-bio">Visionary leader with 15+ years in tech</p>
+        <div class="ts-skills"><span class="ts-skill">Strategy</span><span class="ts-skill">Leadership</span><span class="ts-skill">Innovation</span></div>
+        <div class="ts-socials">
+          <a href="#" class="ts-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 12 7.5v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5 0-.28-.03-.56-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a href="#" class="ts-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" class="ts-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        </div>
+      </div>
+
+      <div class="ts-card">
+        <div class="ts-card-glow"></div>
+        <div class="ts-avatar-wrap"><div class="ts-avatar"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Michael" alt="Michael Chen"></div></div>
+        <div class="ts-name">Michael Chen</div>
+        <div class="ts-role">CTO</div>
+        <div class="ts-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> New York</div>
+        <p class="ts-bio">Full-stack architect and AI enthusiast</p>
+        <div class="ts-skills"><span class="ts-skill">AI/ML</span><span class="ts-skill">Architecture</span><span class="ts-skill">Cloud</span></div>
+        <div class="ts-socials">
+          <a href="#" class="ts-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 12 7.5v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5 0-.28-.03-.56-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a href="#" class="ts-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" class="ts-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        </div>
+      </div>
+
+      <div class="ts-card">
+        <div class="ts-card-glow"></div>
+        <div class="ts-avatar-wrap"><div class="ts-avatar"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Emily" alt="Emily Rodriguez"></div></div>
+        <div class="ts-name">Emily Rodriguez</div>
+        <div class="ts-role">Head of Design</div>
+        <div class="ts-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> London</div>
+        <p class="ts-bio">Creative mind behind beautiful interfaces</p>
+        <div class="ts-skills"><span class="ts-skill">UI/UX</span><span class="ts-skill">Branding</span><span class="ts-skill">Motion</span></div>
+        <div class="ts-socials">
+          <a href="#" class="ts-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 12 7.5v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5 0-.28-.03-.56-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a href="#" class="ts-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" class="ts-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        </div>
+      </div>
+
+      <div class="ts-card">
+        <div class="ts-card-glow"></div>
+        <div class="ts-avatar-wrap"><div class="ts-avatar"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=David" alt="David Park"></div></div>
+        <div class="ts-name">David Park</div>
+        <div class="ts-role">Lead Developer</div>
+        <div class="ts-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Tokyo</div>
+        <p class="ts-bio">Code wizard and performance optimizer</p>
+        <div class="ts-skills"><span class="ts-skill">React</span><span class="ts-skill">TypeScript</span><span class="ts-skill">Performance</span></div>
+        <div class="ts-socials">
+          <a href="#" class="ts-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 12 7.5v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5 0-.28-.03-.56-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a href="#" class="ts-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" class="ts-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ts-cta">
+      <div class="ts-cta-card">
+        <h3 class="ts-cta-title">Join Our Amazing Team</h3>
+        <p class="ts-cta-desc">We're always looking for talented people to join our mission.</p>
+        <button class="ts-cta-btn">View Open Positions &rarr;</button>
+      </div>
+    </div>
+  </div>
+</section>

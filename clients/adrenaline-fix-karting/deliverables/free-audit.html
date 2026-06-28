@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Presence Audit — Adrenaline Fix Karting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Epilogue:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:      #F25B19;
+      --orange-dim:  rgba(242,91,25,0.12);
+      --dark:        #0e0e0e;
+      --dark-mid:    #1a1a1a;
+      --white:       #ffffff;
+      --off-white:   #f7f7f6;
+      --rule:        #e4e4e2;
+      --text:        #1a1a1a;
+      --text-mid:    #444444;
+      --text-muted:  #888888;
+      --red:         #C93535;
+      --amber:       #B87A0C;
+      --green:       #1E8C4A;
+      --red-bg:      #fdf2f2;
+      --amber-bg:    #fdf8f0;
+      --green-bg:    #f0faf4;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Epilogue', sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .mono {
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    /* ─── LAYOUT ──────────────────────────────────────────── */
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ─── SECTION LABEL SYSTEM ───────────────────────────── */
+    .sec-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sec-label::after {
+      content: '';
+      flex: 1;
+      max-width: 40px;
+      height: 1px;
+      background: var(--orange);
+      opacity: 0.4;
+      display: block;
+    }
+
+    .sec-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+
+    .sec-title--light {
+      color: var(--white);
+    }
+
+    /* ─── HEADER ──────────────────────────────────────────── */
+    .header {
+      background: var(--dark);
+      position: relative;
+      padding: 52px 0 72px;
+      clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+      margin-bottom: -24px;
+    }
+
+    .header-stripe {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--orange);
+    }
+
+    .header-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .header-kicker {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 14px;
+    }
+
+    .header-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(40px, 7vw, 64px);
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--white);
+      line-height: 0.95;
+      letter-spacing: 0.01em;
+      margin-bottom: 6px;
+    }
+
+    .header-title span {
+      color: var(--orange);
+    }
+
+    .header-subtitle {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    .header-desc {
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+      max-width: 520px;
+      line-height: 1.6;
+    }
+
+    .header-meta {
+      text-align: right;
+      padding-top: 4px;
+    }
+
+    .header-meta-row {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 5px;
+      line-height: 1.5;
+    }
+
+    .header-meta-row strong {
+      color: rgba(255,255,255,0.65);
+      font-weight: 500;
+    }
+
+    /* ─── OPPORTUNITY BAND ────────────────────────────────── */
+    .opportunity {
+      background: var(--orange);
+      padding: 36px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .opportunity-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .opportunity-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(18px, 2.5vw, 24px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.35;
+      letter-spacing: 0.01em;
+    }
+
+    .opportunity-text mark {
+      background: rgba(0,0,0,0.15);
+      color: #fff;
+      padding: 0 5px;
+      border-radius: 2px;
+    }
+
+    .opp-stat {
+      flex-shrink: 0;
+      text-align: center;
+      background: rgba(0,0,0,0.14);
+      padding: 18px 28px;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    .opp-stat-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 44px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1;
+      display: block;
+    }
+
+    .opp-stat-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: rgba(255,255,255,0.75);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-top: 5px;
+      display: block;
+    }
+
+    /* ─── CONTENT SECTIONS ────────────────────────────────── */
+    .section {
+      padding: 56px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .section:last-of-type { border-bottom: none; }
+
+    .section--alt {
+      background: var(--off-white);
+    }
+
+    /* ─── SCORE CARDS ─────────────────────────────────────── */
+    .scores {
+      display: flex;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .score-card {
+      flex: 1;
+      min-width: 0;
+      border-radius: 2px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--rule);
+    }
+
+    .score-card__bar {
+      height: 5px;
+      flex-shrink: 0;
+    }
+
+    .score-card__body {
+      padding: 16px 14px 18px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .score-card__category {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .score-card__num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 42px;
+      font-weight: 600;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    .score-card__denom {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 16px;
+      font-weight: 400;
+      opacity: 0.3;
+    }
+
+    .score-card__note {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.55;
+      margin-top: auto;
+      padding-top: 10px;
+    }
+
+    /* Red */
+    .score--red .score-card__bar { background: var(--red); }
+    .score--red .score-card__num { color: var(--red); }
+    .score--red { border-color: rgba(201,53,53,0.2); background: var(--red-bg); }
+
+    /* Amber */
+    .score--amber .score-card__bar { background: var(--amber); }
+    .score--amber .score-card__num { color: var(--amber); }
+    .score--amber { border-color: rgba(184,122,12,0.2); background: var(--amber-bg); }
+
+    /* Green */
+    .score--green .score-card__bar { background: var(--green); }
+    .score--green .score-card__num { color: var(--green); }
+    .score--green { border-color: rgba(30,140,74,0.2); background: var(--green-bg); }
+
+    /* ─── PROSE ───────────────────────────────────────────── */
+    .prose p {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-mid);
+      margin-bottom: 15px;
+    }
+
+    .prose p:last-child { margin-bottom: 0; }
+
+    .prose strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ─── CATEGORY OPTIONS ────────────────────────────────── */
+    .cat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .cat-option {
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--rule);
+      border-radius: 2px;
+      padding: 20px;
+      background: var(--white);
+    }
+
+    .cat-option:first-child {
+      border-top-color: var(--orange);
+    }
+
+    .cat-option:last-child {
+      border-top-color: var(--green);
+    }
+
+    .cat-badge {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+      margin-bottom: 10px;
+    }
+
+    .cat-badge--discover { background: #fff0e8; color: var(--orange); }
+    .cat-badge--accurate { background: #edf7f1; color: var(--green); }
+
+    .cat-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .cat-note {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    .cat-footnote {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--rule);
+    }
+
+    /* ─── FINDINGS ────────────────────────────────────────── */
+    .finding {
+      padding-bottom: 36px;
+      margin-bottom: 36px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .finding:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .finding-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 6px;
+    }
+
+    .finding-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.1;
+    }
+
+    .finding-body {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-mid);
+      margin-bottom: 14px;
+    }
+
+    .callout {
+      border-left: 3px solid var(--orange);
+      background: var(--orange-dim);
+      padding: 13px 16px;
+      border-radius: 0 2px 2px 0;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-mid);
+    }
+
+    .callout strong {
+      color: var(--text);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .callout code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      background: rgba(242,91,25,0.08);
+      padding: 1px 5px;
+      border-radius: 2px;
+      color: var(--text);
+    }
+
+    /* ─── KEYWORD TABLE ───────────────────────────────────── */
+    .kw-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .kw-table thead tr {
+      border-bottom: 2px solid var(--text);
+    }
+
+    .kw-table thead th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 0 12px 10px;
+      text-align: left;
+    }
+
+    .kw-table thead th:first-child { padding-left: 0; }
+
+    .kw-table tbody tr {
+      border-bottom: 1px solid var(--rule);
+      transition: background 0.1s;
+    }
+
+    .kw-table tbody tr:hover { background: var(--off-white); }
+
+    .kw-table td {
+      padding: 11px 12px;
+      font-size: 14px;
+      vertical-align: middle;
+    }
+
+    .kw-table td:first-child {
+      padding-left: 0;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .kw-group {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: var(--off-white);
+      padding: 10px 0 10px 0;
+    }
+
+    .kw-vol {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--orange);
+    }
+
+    .kw-rank {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: var(--red);
+    }
+
+    .comp-dots {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .comp-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--rule);
+    }
+
+    .comp-dot.on-low  { background: var(--green); }
+    .comp-dot.on-med  { background: var(--amber); }
+    .comp-dot.on-high { background: var(--red); }
+
+    .comp-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-left: 4px;
+    }
+
+    .kw-total-bar {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 24px;
+      align-items: center;
+      background: var(--dark);
+      padding: 20px 24px;
+      border-radius: 2px;
+    }
+
+    .kw-total-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--orange);
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .kw-total-sub {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+    }
+
+    /* ─── QUICK WIN ───────────────────────────────────────── */
+    .quick-win {
+      background: var(--dark);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .quick-win__head {
+      background: var(--orange);
+      padding: 16px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .quick-win__head-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #fff;
+    }
+
+    .quick-win__time {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: rgba(255,255,255,0.8);
+      background: rgba(0,0,0,0.15);
+      padding: 4px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .quick-win__body {
+      padding: 28px 28px 32px;
+    }
+
+    .quick-win-steps {
+      list-style: none;
+      counter-reset: qw;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .quick-win-steps li {
+      counter-increment: qw;
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .qw-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--orange);
+      color: #fff;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .qw-text {
+      font-size: 15px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.65;
+      padding-top: 3px;
+    }
+
+    .qw-text strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .qw-text code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      background: rgba(255,255,255,0.1);
+      padding: 1px 6px;
+      border-radius: 2px;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* ─── VISION ──────────────────────────────────────────── */
+    .vision-box {
+      border-left: 3px solid var(--orange);
+      padding: 24px 28px;
+      background: var(--off-white);
+      border-radius: 0 2px 2px 0;
+    }
+
+    .vision-box p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-mid);
+      margin-bottom: 14px;
+    }
+
+    .vision-box p:last-child { margin-bottom: 0; }
+
+    .vision-box strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ─── CTA ─────────────────────────────────────────────── */
+    .cta-section {
+      background: var(--dark);
+      padding: 64px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--orange);
+    }
+
+    /* Large faint number background */
+    .cta-section::after {
+      content: '?';
+      position: absolute;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 320px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.02);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .cta-inner {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-kicker {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 14px;
+    }
+
+    .cta-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--white);
+      letter-spacing: 0.01em;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+
+    .cta-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.5);
+      max-width: 480px;
+      margin: 0 auto 32px;
+      line-height: 1.65;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 15px 44px;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .cta-btn:hover {
+      background: #d34f16;
+      transform: translateY(-2px);
+    }
+
+    .cta-contact {
+      margin-top: 22px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      line-height: 1.8;
+    }
+
+    .cta-contact strong {
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    .footer {
+      background: #080808;
+      padding: 20px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-text {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: rgba(255,255,255,0.18);
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── MOBILE ──────────────────────────────────────────── */
+    @media (max-width: 720px) {
+      .wrap { padding: 0 20px; }
+
+      .header { clip-path: polygon(0 0, 100% 0, 100% 94%, 0 100%); padding-bottom: 56px; }
+      .header-inner { grid-template-columns: 1fr; }
+      .header-meta { text-align: left; }
+
+      .opportunity-inner { grid-template-columns: 1fr; }
+      .opp-stat { display: flex; align-items: center; gap: 16px; text-align: left; }
+
+      .scores { flex-direction: column; }
+
+      .cat-grid { grid-template-columns: 1fr; }
+
+      .kw-total-bar { grid-template-columns: 1fr; gap: 8px; }
+
+      .quick-win__head { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media print {
+      .header { clip-path: none; }
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ HEADER ═══════════════════════════════════════════ -->
+  <header class="header">
+    <div class="header-stripe"></div>
+    <div class="wrap">
+      <div class="header-inner">
+        <div>
+          <div class="header-kicker">01 · Digital Presence Audit</div>
+          <h1 class="header-title">Adrenaline Fix<br><span>Karting</span></h1>
+          <div class="header-subtitle">Conlin SpeedSports, LLC · Columbus, OH</div>
+          <p class="header-desc">19 years. Hundreds of drivers. The largest active kart racing team in central Ohio — and Google doesn't know you exist.</p>
+        </div>
+        <div class="header-meta">
+          <div class="header-meta-row">Prepared for <strong>Jim Conlin</strong></div>
+          <div class="header-meta-row">Prepared by <strong>[Your Agency]</strong></div>
+          <div class="header-meta-row">Date <strong>March 2026</strong></div>
+          <div class="header-meta-row" style="margin-top:10px;">Confidential</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ OPPORTUNITY BAND ══════════════════════════════════ -->
+  <div class="opportunity">
+    <div class="wrap">
+      <div class="opportunity-inner">
+        <div class="opportunity-text">
+          <mark>720 people</mark> search "go kart racing Columbus Ohio" every month. Another <mark>590</mark> search for it in Indianapolis — 45 minutes from New Castle. AFK doesn't appear for either. The demand is already there. The visibility isn't. That's fixable.
+        </div>
+        <div class="opp-stat">
+          <span class="opp-stat-num">2,790+</span>
+          <span class="opp-stat-label">monthly searches<br>AFK is invisible for</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SCORECARD ════════════════════════════════════════ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">02 · Scorecard</div>
+      <h2 class="sec-title">Your Digital Presence at a Glance</h2>
+
+      <div class="scores">
+
+        <div class="score-card score--red">
+          <div class="score-card__bar"></div>
+          <div class="score-card__body">
+            <div class="score-card__category">Website</div>
+            <div class="score-card__num">3<span class="score-card__denom">/10</span></div>
+            <div class="score-card__note">Zero H1 tags sitewide. No meta descriptions on service pages. Copyright stuck at 2021. Broken Wix template links still visible.</div>
+          </div>
+        </div>
+
+        <div class="score-card score--red">
+          <div class="score-card__bar"></div>
+          <div class="score-card__body">
+            <div class="score-card__category">Google Business</div>
+            <div class="score-card__num">3<span class="score-card__denom">/10</span></div>
+            <div class="score-card__note">Wrong category. 3 reviews in 19 years. Website URL points to the contact page. No posts, no description.</div>
+          </div>
+        </div>
+
+        <div class="score-card score--red">
+          <div class="score-card__bar"></div>
+          <div class="score-card__body">
+            <div class="score-card__category">Traditional SEO</div>
+            <div class="score-card__num">2<span class="score-card__denom">/10</span></div>
+            <div class="score-card__note">Not ranking for any target keyword. Only schema record is the internal Wix name "afk-main" — tells Google nothing.</div>
+          </div>
+        </div>
+
+        <div class="score-card score--red">
+          <div class="score-card__bar"></div>
+          <div class="score-card__body">
+            <div class="score-card__category">AI Search</div>
+            <div class="score-card__num">1<span class="score-card__denom">/10</span></div>
+            <div class="score-card__note">No FAQ content, no entity clarity, no structured answer blocks. ChatGPT and Perplexity have nothing to cite.</div>
+          </div>
+        </div>
+
+        <div class="score-card score--amber">
+          <div class="score-card__bar"></div>
+          <div class="score-card__body">
+            <div class="score-card__category">Social Media</div>
+            <div class="score-card__num">4<span class="score-card__denom">/10</span></div>
+            <div class="score-card__note">Facebook, Instagram, YouTube present. Branding inconsistent. Twitter footer link points to a Wix template URL.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ COMPETITIVE LANDSCAPE ════════════════════════════ -->
+  <section class="section section--alt">
+    <div class="wrap">
+      <div class="sec-label">03 · Competitive Landscape</div>
+      <h2 class="sec-title">Where You Stand in the Market</h2>
+      <div class="prose">
+        <p>The central Ohio–Indiana karting market has a territory nobody is actively claiming online — and AFK is best positioned to own it.</p>
+        <p>Your closest direct competitors are <strong>NEWGEN Motorsport</strong> and <strong>A-Maxx Racing</strong>, both based in Whiteland, Indiana. They serve Indianapolis-area drivers and compete at Whiteland Raceway Park. NEWGEN also operates at New Castle Motorsports Park — your home track. Both have cleaner digital positioning and more GBP visibility than AFK currently does, which means Indiana drivers searching for team support are finding them first.</p>
+        <p>In Ohio, <strong>Trinity Karting Group</strong> (Cincinnati area) operates at Motorsports Country Club of Cincinnati and runs a strong digital presence — but they're Cincinnati-focused and not positioned for New Castle or Columbus.</p>
+        <p><strong>The unclaimed territory:</strong> Nobody is targeting the Ohio driver who competes at NCMP. Trinity is Cincinnati. NEWGEN and A-Maxx are Indianapolis. The Columbus-to–New Castle corridor belongs to AFK — it just needs to be staked online.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ GBP CATEGORY ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">04 · Google Business Profile</div>
+      <h2 class="sec-title">Fix Your Category First</h2>
+      <div class="prose">
+        <p>Your GBP is currently categorized as <strong>"Racing car parts store"</strong> — a category for parts retailers. Google uses this to decide what searches to show you for. Right now it's routing you to parts-store queries, not racing team queries. That's the single biggest immediate source of search invisibility.</p>
+        <p>Google's category list doesn't include "Kart racing team." The two closest confirmed options are below:</p>
+      </div>
+
+      <div class="cat-grid">
+        <div class="cat-option">
+          <div class="cat-badge cat-badge--discover">Most Discoverable</div>
+          <div class="cat-name">Go-Karting Venue</div>
+          <div class="cat-note">Most searchable category — Google associates it with karting-related queries. Tradeoff: technically describes a venue, not a team. Likely to increase visibility significantly. May attract some wrong-fit inquiries.</div>
+        </div>
+        <div class="cat-option">
+          <div class="cat-badge cat-badge--accurate">More Accurate</div>
+          <div class="cat-name">Motoring Club</div>
+          <div class="cat-note">Better reflects AFK's team/club structure. Less likely to attract entertainment-seekers. Tradeoff: lower search demand associated with this category — fewer people search "motoring club."</div>
+        </div>
+      </div>
+
+      <p class="cat-footnote">Neither is a perfect fit. We recommend starting with <em>Go-Karting Venue</em> for maximum discoverability. Secondary categories can further refine the listing. These are the exact names you'll see in your GBP dashboard.</p>
+    </div>
+  </section>
+
+  <!-- ═══ FINDINGS ══════════════════════════════════════════ -->
+  <section class="section section--alt">
+    <div class="wrap">
+      <div class="sec-label">05 · Key Findings</div>
+      <h2 class="sec-title">What We Found</h2>
+
+      <div class="finding">
+        <div class="finding-num">Finding 01</div>
+        <h3 class="finding-title">Google Has No Idea What Your Business Does</h3>
+        <p class="finding-body">Every page on conlinss.com — homepage, Arrive &amp; Drive, Race Prep, Trackside, LO-206 — has zero H1 tags and no meta descriptions on service pages. The H1 tag is the primary signal you send Google about what a page covers. Without it, Google is guessing, and it's guessing wrong.</p>
+        <p class="finding-body">The only structured data Google can read on your entire site is a single WebSite record. It doesn't describe a business, a location, or a service — it's named after your internal Wix project.</p>
+        <div class="callout">
+          <strong>Verbatim from your site's source code</strong>
+          The only schema record Google can parse is a WebSite type with the name <code>"afk-main"</code> — the Wix project label. There is no LocalBusiness schema, no Service schema, no address, no phone number in structured data. Google is reading nothing about what AFK actually is.
+        </div>
+      </div>
+
+      <div class="finding">
+        <div class="finding-num">Finding 02</div>
+        <h3 class="finding-title">The Wrong Category Is Sending the Wrong Signals</h3>
+        <p class="finding-body">A GBP category isn't just a label — it's how Google decides which searches trigger your listing. "Racing car parts store" places AFK in a parts-retail bucket, not a team/club/motorsport bucket. When someone searches for a karting team or arrive-and-drive option near Columbus or Indianapolis, your listing isn't in the candidate pool.</p>
+        <p class="finding-body">The category mismatch is visible enough that it's shaping how real customers perceive AFK, as evidenced by your own reviews.</p>
+        <div class="callout">
+          <strong>From a 5-star review on your Google listing</strong>
+          "IT IS SO LIT IN HERE" — the reviewer describes AFK like an indoor entertainment venue. The category confusion is attracting customers with entirely the wrong expectations about what AFK is.
+        </div>
+      </div>
+
+      <div class="finding">
+        <div class="finding-num">Finding 03</div>
+        <h3 class="finding-title">Three Reviews in 19 Years Erodes Trust on First Contact</h3>
+        <p class="finding-body">When a new prospect finds AFK through search, your GBP is often the first thing they see. Three reviews on a 19-year-old business signals either neglect or low customer satisfaction — neither is the impression you want. With so few reviews, a single negative one has outsized impact.</p>
+        <p class="finding-body">Your current average is 3.7 stars across 3 reviews. One is a 1-star complaint. With a proper review cadence, that average and volume would look completely different within a month.</p>
+        <div class="callout">
+          <strong>Your only 1-star review reads:</strong>
+          "Answer your phone." — With only 3 total reviews, this one complaint has the same weight as 33% of your entire review history. Thirty real reviews from real clients would bury it and tell a completely different story.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ KEYWORD TABLE ═════════════════════════════════════ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">06 · Search Opportunity</div>
+      <h2 class="sec-title">Keywords You Should Be Ranking For</h2>
+
+      <table class="kw-table">
+        <thead>
+          <tr>
+            <th>Keyword</th>
+            <th>Mo. Searches</th>
+            <th>Your Rank</th>
+            <th>Competition</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="4" class="kw-group">Indiana / Operational Geography (where you race)</td></tr>
+          <tr>
+            <td>go kart racing Indianapolis</td>
+            <td><span class="kw-vol">590</span></td>
+            <td><span class="kw-rank">Not ranking</span></td>
+            <td><div class="comp-dots"><span class="comp-dot on-med"></span><span class="comp-dot on-med"></span><span class="comp-dot"></span><span class="comp-label">Medium</span></div></td>
+          </tr>
+          <tr>
+            <td>go kart racing Indiana</td>
+            <td><span class="kw-vol">170</span></td>
+            <td><span class="kw-rank">Not ranking</span></td>
+            <td><div class="comp-dots"><span class="comp-dot on-low"></span><span class="comp-dot"></span><span class="comp-dot"></span><span class="comp-label">Low</span></div></td>
+          </tr>
+          <tr>
+            <td>kart racing Indianapolis</td>
+            <td><span class="kw-vol">140</span></td>
+            <td><span class="kw-rank">Not ranking</span></td>
+            <td><div class="comp-dots"><span class="comp-dot on-low"></span><span class="comp-dot on-low"></span><span class="comp-dot"></span><span class="comp-label">Low–Med</span></div></td>
+          </tr>
+          <tr>
+            <td>arrive and drive racing</td>
+            <td><span class="kw-vol">90</span></td>
+            <td><span class="kw-rank">Not ranking</span></td>
+            <td><div class="comp-dots"><span class="comp-dot on-low"></span><span class="comp-dot"></span><span class="comp-dot"></span><span class="comp-label">Low</span></div></td>
+          </tr>
+          <tr>
+            <td>arrive and drive karting</td>
+            <td><span class="kw-vol">70</span></td>
+            <td><span class="kw-rank">Not ranking</span></td>
+            <td><div class="comp-dots"><span class="comp-dot on-low"></span><span class="comp-dot"></span><span class="comp-dot"></span><span class="comp-label">Low</span></div></td>
+          </tr>
+          <tr><td colspan="4" class="kw-group">Ohio / Shop Geography (where you're based)</td></tr>
+          <tr>
+            <td>go kart racing Columbus Ohio</td>
+            <td><span class="kw-vol">720</span></td>
+            <td><span class="kw-rank">Not ranking</span></td>
+            <td><div class="comp-dots"><span class="comp-dot on-low"></span><span class="comp-dot on-low"></span><span class="comp-dot"></span><span class="comp-label">Low</span></div></td>
+          </tr>
+          <tr>
+            <td>go kart racing Cincinnati</td>
+            <td><span class="kw-vol">480</span></td>
+            <td><span class="kw-rank">Not ranking</span></td>
+            <td><div class="comp-dots"><span class="comp-dot on-low"></span><span class="comp-dot on-low"></span><span class="comp-dot"></span><span class="comp-label">Low</span></div></td>
+          </tr>
+          <tr>
+            <td>go kart racing Ohio</td>
+            <td><span class="kw-vol">320</span></td>
+            <td><span class="kw-rank">Not ranking</span></td>
+            <td><div class="comp-dots"><span class="comp-dot on-low"></span><span class="comp-dot on-low"></span><span class="comp-dot"></span><span class="comp-label">Low</span></div></td>
+          </tr>
+          <tr>
+            <td>go kart racing Dayton Ohio</td>
+            <td><span class="kw-vol">140</span></td>
+            <td><span class="kw-rank">Not ranking</span></td>
+            <td><div class="comp-dots"><span class="comp-dot on-low"></span><span class="comp-dot"></span><span class="comp-dot"></span><span class="comp-label">Low</span></div></td>
+          </tr>
+          <tr>
+            <td>karting Columbus Ohio</td>
+            <td><span class="kw-vol">70</span></td>
+            <td><span class="kw-rank">Not ranking</span></td>
+            <td><div class="comp-dots"><span class="comp-dot on-low"></span><span class="comp-dot"></span><span class="comp-dot"></span><span class="comp-label">Low</span></div></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="kw-total-bar">
+        <div class="kw-total-num">2,790+</div>
+        <div class="kw-total-sub">Combined monthly searches across these terms. AFK is not appearing for a single one. Most have low competition — these aren't long shots. They're available now with the right technical foundation in place.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ QUICK WIN ═════════════════════════════════════════ -->
+  <section class="section section--alt">
+    <div class="wrap">
+      <div class="sec-label">07 · Immediate Action</div>
+      <h2 class="sec-title">One Fix You Can Do Today</h2>
+      <p style="font-size:14px;color:var(--text-muted);margin-bottom:20px;line-height:1.65;">Before anything else: fix your GBP. It costs nothing, takes five minutes, and immediately corrects how Google classifies and presents your business.</p>
+
+      <div class="quick-win">
+        <div class="quick-win__head">
+          <span class="quick-win__head-title">Fix Your Google Business Profile</span>
+          <span class="quick-win__time">⏱ ~5 minutes</span>
+        </div>
+        <div class="quick-win__body">
+          <ol class="quick-win-steps">
+            <li>
+              <span class="qw-num">1</span>
+              <span class="qw-text">Go to <strong>business.google.com</strong> and sign in with the Google account linked to your GBP listing.</span>
+            </li>
+            <li>
+              <span class="qw-num">2</span>
+              <span class="qw-text">Click <strong>Edit Profile → Business category</strong>. It currently says "Racing car parts store." Change it. Best available options: <strong>"Go-karting venue"</strong> (most searchable) or <strong>"Motoring club"</strong> (more accurate). Either is dramatically better than what's there now.</span>
+            </li>
+            <li>
+              <span class="qw-num">3</span>
+              <span class="qw-text">Still in Edit Profile — find the <strong>Website</strong> field. It currently points to <code>conlinss.com/contact</code>. Change it to <code>conlinss.com</code>. Anyone clicking from Google should land on your homepage, not a blank contact form.</span>
+            </li>
+            <li>
+              <span class="qw-num">4</span>
+              <span class="qw-text"><strong>Save.</strong> Google processes updates within 1–3 days. You'll immediately be eligible to appear in karting-related searches instead of parts-store searches.</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ VISION ════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">08 · The Goal</div>
+      <h2 class="sec-title">What Good Looks Like for AFK</h2>
+      <div class="vision-box">
+        <p>Within six months of fixing the technical foundation, AFK should be appearing on page one for "go kart racing Columbus Ohio," "arrive and drive karting," and — critically — "go kart racing Indianapolis." <strong>A driver in Indy who's been racing solo at New Castle searches that term, finds AFK at the top, reads about full-service team support for $X/weekend, and calls.</strong> That's the first inbound client who's never met anyone in your referral network.</p>
+        <p>Longer term, AFK should own the Columbus-to-NCMP corridor in search. Trinity is Cincinnati-focused. NEWGEN and A-Maxx are Indianapolis-focused. <strong>No competitor is actively targeting the Ohio racer who drives to New Castle to compete.</strong> That's your market. It just needs content and structure to stake the claim.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ════════════════════════════════════════════════ -->
+  <div class="cta-section">
+    <div class="wrap">
+      <div class="cta-inner">
+        <div class="cta-kicker">09 · Next Step</div>
+        <h2 class="cta-heading">Let's Talk Through It</h2>
+        <p class="cta-sub">Twenty minutes. I'll walk you through what we found, what it would take to fix, and what realistic results look like. No pitch — just a plain conversation.</p>
+        <a href="[SCHEDULING_LINK]" class="cta-btn">Book a 20-Minute Call</a>
+        <div class="cta-contact">
+          <strong>[Your Name]</strong><br>
+          [your@email.com] &nbsp;·&nbsp; [Phone]
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-inner">
+        <span class="footer-text">Adrenaline Fix Karting · Conlin SpeedSports, LLC · Columbus, OH · March 2026</span>
+        <span class="footer-text">Confidential — Prepared by [Your Agency]</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

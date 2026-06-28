@@ -1,0 +1,1120 @@
+<!--
+  templateType: "page"
+  isAvailableForNewContent: true
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/webp" href="https://244988351.fs1.hubspotusercontent-na2.net/hubfs/244988351/logos/superlaundry_favicon.webp">
+  <title>Contact Us — Super Laundry Cincinnati</title>
+  <meta name="description" content="Contact Super Laundry Cincinnati — 6 locations across the city. Questions about hours or services? Call, email, or send us a message.">
+
+  <!-- JSON-LD: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Super Laundry Cincinnati",
+    "url": "https://www.superlaundry24.com",
+    "telephone": "(513) 873-5939",
+    "email": "info@superlaundry24.com",
+    "sameAs": ["https://www.facebook.com/superlaundrycincinnati"]
+  }
+  </script>
+
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.superlaundry24.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Contact",
+        "item": "https://www.superlaundry24.com/contact"
+      }
+    ]
+  }
+  </script>
+
+  <link rel="canonical" href="https://www.superlaundry24.com/contact">
+  {{ standard_header_includes }}
+
+</head>
+<body>
+
+  {% include "SuperLaundry/partials/header.html" %}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== DESIGN SYSTEM ===== */
+    :root {
+      --green-dark: #1C4A25;
+      --green: #2D7F3C;
+      --green-light: #4A9B58;
+      --green-pale: #EAF4EC;
+      --cream: #F5F1E8;
+      --warm-white: #FAFAF6;
+      --text-dark: #1A2B1C;
+      --text-body: #3C4A3E;
+      --text-muted: #4E6150;
+      --border: #DDD8CE;
+      --shadow-sm: 0 2px 8px rgba(28,74,37,0.08);
+      --shadow-md: 0 4px 20px rgba(28,74,37,0.12);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-body);
+      background: var(--warm-white);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== REVIEW BANNER ===== */
+    .review-banner {
+      background: var(--green-dark);
+      border-bottom: 3px solid var(--green);
+      padding: 10px 24px;
+      text-align: center;
+    }
+    .review-banner p {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+    .review-banner span { color: var(--green-light); }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      background: var(--green-dark);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 68px;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .nav-logo img {
+      height: 44px;
+      width: auto;
+      mix-blend-mode: screen;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a.active { color: #fff; font-weight: 700; }
+    .nav-cta {
+      background: var(--green) !important;
+      color: #fff !important;
+      padding: 10px 20px !important;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--green-light) !important; }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px 4px;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+    .nav-mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--green-dark);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 16px 24px 24px;
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu a {
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: block;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .nav-mobile-menu a:last-child { border-bottom: none; }
+    .nav-mobile-menu a:hover { color: #fff; }
+    .nav-mobile-cta {
+      margin-top: 8px;
+      background: var(--green);
+      color: #fff !important;
+      border-radius: 6px;
+      padding: 13px 20px !important;
+      justify-content: center;
+      font-weight: 700 !important;
+      border-bottom: none !important;
+    }
+
+    /* ===== BREADCRUMB ===== */
+    .breadcrumb-bar {
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+    }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .breadcrumb a {
+      color: var(--text-muted);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .breadcrumb a:hover { color: var(--green); }
+    .breadcrumb-sep { color: var(--border); font-size: 16px; }
+    .breadcrumb-bar nav { background: transparent; position: static; box-shadow: none; z-index: auto; }
+    .breadcrumb-current {
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      padding: 48px 0;
+    }
+    .page-hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 48px;
+      align-items: center;
+    }
+    .page-hero-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 12px;
+    }
+    .page-hero h1 {
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 14px;
+      line-height: 1.15;
+    }
+    .page-hero-sub {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 500px;
+    }
+    .contact-quick-card {
+      background: #fff;
+      border: 2px solid var(--green);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .quick-card-phone {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--green-dark);
+      text-decoration: none;
+      margin-bottom: 6px;
+      transition: color 0.2s;
+      line-height: 1.1;
+    }
+    .quick-card-phone:hover { color: var(--green); }
+    .quick-card-phone-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .quick-card-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+    .quick-card-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 14px;
+      font-size: 14px;
+    }
+    .quick-card-row:last-child { margin-bottom: 0; }
+    .quick-card-icon {
+      font-size: 16px;
+      line-height: 1.4;
+      flex-shrink: 0;
+    }
+    .quick-card-row-content {}
+    .quick-card-row-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+    .quick-card-row a {
+      color: var(--green-dark);
+      font-weight: 600;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .quick-card-row a:hover { color: var(--green); }
+    .quick-card-row p {
+      color: var(--text-body);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ===== MAIN CONTACT SECTION ===== */
+    .contact-section {
+      background: var(--warm-white);
+      padding: 72px 0;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 56px;
+      align-items: start;
+    }
+
+    /* Form */
+    .contact-form-panel {}
+    .contact-form-title {
+      font-size: clamp(22px, 2.5vw, 28px);
+      margin-bottom: 6px;
+    }
+    .contact-form-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 7px;
+      letter-spacing: 0.01em;
+    }
+    .form-label-optional {
+      font-weight: 500;
+      color: var(--text-muted);
+      font-size: 12px;
+      margin-left: 4px;
+    }
+    .form-input,
+    .form-select,
+    .form-textarea {
+      display: block;
+      width: 100%;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px var(--green-pale);
+    }
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: #A8B5AA;
+    }
+    .form-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%234E6150' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.6;
+    }
+    .btn-submit {
+      display: block;
+      width: 100%;
+      height: 52px;
+      background: var(--green);
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      letter-spacing: 0.01em;
+    }
+    .btn-submit:hover {
+      background: var(--green-light);
+      transform: translateY(-1px);
+    }
+    .form-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    /* Right contact info panel */
+    .contact-info-panel {
+      position: sticky;
+      top: 88px;
+    }
+    .info-block {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 20px;
+    }
+    .info-block-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+    .info-phone-big {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 4px;
+      transition: color 0.2s;
+    }
+    .info-phone-big:hover { color: var(--green); }
+    .info-phone-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .info-row-icon {
+      font-size: 18px;
+      line-height: 1.3;
+      flex-shrink: 0;
+    }
+    .info-row-text {}
+    .info-row-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+    .info-row-value {
+      font-size: 14px;
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+    .info-row-value a {
+      color: var(--green-dark);
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .info-row-value a:hover { color: var(--green); }
+    .info-row-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 3px;
+      line-height: 1.5;
+    }
+    .info-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+    .btn-locations-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--green-pale);
+      color: var(--green-dark);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      transition: background 0.2s;
+      margin-top: 4px;
+    }
+    .btn-locations-link:hover { background: #D4EEDA; }
+    .btn-locations-arrow { font-size: 18px; }
+
+    /* ===== LOCATIONS GRID SECTION ===== */
+    .locations-section {
+      background: var(--cream);
+      padding: 72px 0;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(26px, 3.2vw, 38px);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .section-subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 540px;
+      line-height: 1.65;
+    }
+    .section-header {
+      margin-bottom: 48px;
+    }
+    .locations-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .loc-card {
+      background: #fff;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .loc-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .loc-card-header {
+      margin-bottom: 14px;
+    }
+    .loc-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+    .loc-hours-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+    .loc-hours-tag.open-24 {
+      background: var(--green-pale);
+      color: var(--green-dark);
+    }
+    .loc-hours-tag.specific-hours {
+      background: #FFF8E7;
+      color: #7A5A00;
+    }
+    .loc-address {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .loc-chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      align-items: flex-start;
+    }
+    .loc-chip {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: var(--green-pale);
+      color: var(--green-dark);
+      letter-spacing: 0.02em;
+      border: 1.5px solid rgba(45,127,60,0.25);
+    }
+    .loc-chip-featured {
+      background: var(--green-dark);
+      color: #fff;
+    }
+    .loc-chip-special {
+      background: #FFF0D6;
+      color: #7A4A00;
+    }
+    .loc-chip-love {
+      background: #FFF0F0;
+      color: #B84040;
+    }
+    .loc-card-footer {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-directions {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--green);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 11px 14px;
+      border-radius: 6px;
+      transition: background 0.2s;
+      min-height: 44px;
+      text-align: center;
+    }
+    .btn-directions:hover { background: var(--green-light); }
+    .loc-phone-link {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green-dark);
+      padding: 11px 14px;
+      border-radius: 6px;
+      border: 1.5px solid var(--green-dark);
+      transition: background 0.2s;
+      min-height: 44px;
+      white-space: nowrap;
+    }
+    .loc-phone-link:hover { background: var(--green-pale); }
+    .loc-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--green-dark);
+      padding: 64px 0 0;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    .footer-brand img {
+      height: 40px;
+      width: auto;
+      mix-blend-mode: screen;
+      margin-bottom: 16px;
+    }
+    .footer-brand p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.65;
+      max-width: 260px;
+      margin-bottom: 20px;
+    }
+    .footer-social {
+      display: flex;
+      gap: 10px;
+    }
+    .social-link {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.7);
+      font-size: 14px;
+      font-weight: 700;
+      transition: background 0.2s;
+    }
+    .social-link:hover { background: var(--green); color: #fff; }
+    .footer-col h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 16px;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 9px; }
+    .footer-links a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.9); }
+    .footer-contact-item {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      margin-bottom: 11px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.58);
+      line-height: 1.5;
+    }
+    .footer-contact-item a {
+      color: rgba(255,255,255,0.58);
+      transition: color 0.2s;
+    }
+    .footer-contact-item a:hover { color: rgba(255,255,255,0.9); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.38);
+    }
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+    .footer-bottom-links a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.38);
+      transition: color 0.2s;
+    }
+    .footer-bottom-links a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ===== RESPONSIVE ===== */
+    @media screen and (max-width: 900px) {
+      .locations-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .page-hero-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .page-hero-sub { max-width: 100%; }
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .contact-info-panel {
+        position: static;
+        order: -1;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+    }
+
+    @media screen and (max-width: 640px) {
+      .page-hero { padding: 36px 0; }
+      .contact-section { padding: 56px 0; }
+      .locations-section { padding: 56px 0; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media screen and (max-width: 600px) {
+      .locations-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      html, body { height: auto !important; overflow: visible !important; }
+      .review-banner { display: none; }
+    }
+  </style>
+
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb-bar">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb-sep" aria-hidden="true">›</span>
+        <span class="breadcrumb-current" aria-current="page">Contact</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-inner">
+        <div class="page-hero-left">
+          <p class="page-hero-label">Get in Touch</p>
+          <h1>We're here. Come in, call, or send us a message.</h1>
+          <p class="page-hero-sub">Questions about services, hours, or your neighborhood location? Reach out — or just show up.</p>
+        </div>
+        <div class="page-hero-right">
+          <div class="contact-quick-card">
+            <p class="quick-card-phone-label">Main Line</p>
+            <a href="tel:5138735939" class="quick-card-phone">(513) 873-5939</a>
+            <div class="quick-card-divider"></div>
+            <div class="quick-card-row">
+              <span class="quick-card-icon">✉</span>
+              <div class="quick-card-row-content">
+                <p class="quick-card-row-label">Email</p>
+                <a href="mailto:info@superlaundry24.com">info@superlaundry24.com</a>
+              </div>
+            </div>
+            <div class="quick-card-row">
+              <span class="quick-card-icon">🕐</span>
+              <div class="quick-card-row-content">
+                <p class="quick-card-row-label">Hours</p>
+                <p>Most locations open 24/7. Call ahead for Springdale &amp; Allison St hours.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTACT SECTION -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- LEFT: Contact Form -->
+        <div class="contact-form-panel">
+          <h2 class="contact-form-title">Send Us a Message</h2>
+          <p class="contact-form-desc">Fill out the form and we'll get back to you within 1 business day.</p>
+          <script charset="utf-8" type="text/javascript" src="//js-na2.hsforms.net/forms/embed/v2.js"></script>
+          <script>
+            hbspt.forms.create({
+              portalId: "244988351",
+              formId: "25c4d051-bdba-4062-b374-cfd0ef130e2c",
+              region: "na2"
+            });
+          </script>
+        </div>
+
+        <!-- RIGHT: Contact Info Panel -->
+        <aside class="contact-info-panel">
+          <div class="info-block">
+            <p class="info-block-title">Phone</p>
+            <a href="tel:5138735939" class="info-phone-big">(513) 873-5939</a>
+            <p class="info-phone-sub">Available during staffed hours</p>
+            <div class="info-row">
+              <span class="info-row-icon">✉</span>
+              <div class="info-row-text">
+                <p class="info-row-label">Email</p>
+                <div class="info-row-value"><a href="mailto:info@superlaundry24.com">info@superlaundry24.com</a></div>
+              </div>
+            </div>
+            <div class="info-divider"></div>
+            <div class="info-row">
+              <span class="info-row-icon">🕐</span>
+              <div class="info-row-text">
+                <p class="info-row-label">Hours</p>
+                <div class="info-row-value">Most locations open 24/7</div>
+                <p class="info-row-note">Springdale: 7 AM–10 PM daily<br>Allison Street: 6 AM–11 PM daily</p>
+              </div>
+            </div>
+          </div>
+          <div class="info-block">
+            <p class="info-block-title">Find Your Nearest Location</p>
+            <p style="font-size:14px; color:var(--text-muted); line-height:1.6; margin-bottom:16px;">We have 6 locations across Cincinnati's neighborhoods. Find the one closest to you.</p>
+            <a href="/locations" class="btn-locations-link">
+              <span>View All Locations</span>
+              <span class="btn-locations-arrow">→</span>
+            </a>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ALL LOCATIONS GRID -->
+  <section class="locations-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">6 Locations</p>
+        <h2 class="section-title">Find your neighborhood location</h2>
+        <p class="section-subtitle">Every location has 100+ machines and free parking. Most are open around the clock.</p>
+      </div>
+      <div class="locations-grid">
+
+        <!-- Springdale -->
+        <div class="loc-card">
+          <div class="loc-card-header">
+            <h3 class="loc-name">Springdale</h3>
+            <span class="loc-hours-tag specific-hours">7 AM–10 PM Daily</span>
+            <p class="loc-address">11627 Springfield Pike<br>Springdale, OH 45246</p>
+          </div>
+          <div class="loc-chips">
+            <span class="loc-chip">Self-Service</span>
+            <span class="loc-chip">Wash-Dry-Fold</span>
+            <span class="loc-chip loc-chip-featured">Pickup &amp; Delivery</span>
+          </div>
+          <div class="loc-card-footer">
+            <a href="https://maps.google.com/?q=11627+Springfield+Pike+Springdale+OH+45246" target="_blank" rel="noopener noreferrer" class="btn-directions">Get Directions</a>
+            <a href="tel:5133767129" class="loc-phone-link">(513) 376-7129</a>
+          </div>
+        </div>
+
+        <!-- Avondale -->
+        <div class="loc-card">
+          <div class="loc-card-header">
+            <h3 class="loc-name">Avondale</h3>
+            <span class="loc-hours-tag open-24">Open 24/7</span>
+            <p class="loc-address">3545 Reading Rd<br>Cincinnati, OH 45229</p>
+          </div>
+          <div class="loc-chips">
+            <span class="loc-chip">Self-Service</span>
+            <span class="loc-chip">Wash-Dry-Fold</span>
+            <span class="loc-chip loc-chip-love">Laundry Love Host</span>
+          </div>
+          <div class="loc-card-footer">
+            <a href="https://maps.google.com/?q=3545+Reading+Rd+Cincinnati+OH+45229" target="_blank" rel="noopener noreferrer" class="btn-directions">Get Directions</a>
+            <a href="tel:5138735939" class="loc-phone-link">(513) 873-5939</a>
+          </div>
+        </div>
+
+        <!-- Bond Hill -->
+        <div class="loc-card">
+          <div class="loc-card-header">
+            <h3 class="loc-name">Bond Hill</h3>
+            <span class="loc-hours-tag open-24">Open 24/7</span>
+            <p class="loc-address">4368 Reading Rd<br>Cincinnati, OH 45229</p>
+          </div>
+          <div class="loc-chips">
+            <span class="loc-chip">Self-Service</span>
+            <span class="loc-chip">Wash-Dry-Fold</span>
+          </div>
+          <div class="loc-card-footer">
+            <a href="https://maps.google.com/?q=4368+Reading+Rd+Cincinnati+OH+45229" target="_blank" rel="noopener noreferrer" class="btn-directions">Get Directions</a>
+            <a href="tel:5138735939" class="loc-phone-link">(513) 873-5939</a>
+          </div>
+        </div>
+
+        <!-- Westwood -->
+        <div class="loc-card">
+          <div class="loc-card-header">
+            <h3 class="loc-name">Westwood</h3>
+            <span class="loc-hours-tag open-24">Open 24/7</span>
+            <p class="loc-address">2455 Harrison Ave<br>Cincinnati, OH 45211</p>
+          </div>
+          <div class="loc-chips">
+            <span class="loc-chip">Self-Service</span>
+            <span class="loc-chip">Wash-Dry-Fold</span>
+            <span class="loc-chip loc-chip-love">Laundry Love Host</span>
+          </div>
+          <div class="loc-card-footer">
+            <a href="https://maps.google.com/?q=2455+Harrison+Ave+Cincinnati+OH+45211" target="_blank" rel="noopener noreferrer" class="btn-directions">Get Directions</a>
+            <a href="tel:5138735939" class="loc-phone-link">(513) 873-5939</a>
+          </div>
+        </div>
+
+        <!-- North College Hill -->
+        <div class="loc-card">
+          <div class="loc-card-header">
+            <h3 class="loc-name">North College Hill</h3>
+            <span class="loc-hours-tag open-24">Open 24/7</span>
+            <p class="loc-address">1585 Goodman Ave<br>Cincinnati, OH 45224</p>
+          </div>
+          <div class="loc-chips">
+            <span class="loc-chip">Self-Service</span>
+            <span class="loc-chip">Wash-Dry-Fold</span>
+          </div>
+          <div class="loc-card-footer">
+            <a href="https://maps.google.com/?q=1585+Goodman+Ave+Cincinnati+OH+45224" target="_blank" rel="noopener noreferrer" class="btn-directions">Get Directions</a>
+            <a href="tel:5138735939" class="loc-phone-link">(513) 873-5939</a>
+          </div>
+        </div>
+
+        <!-- Allison Street -->
+        <div class="loc-card">
+          <div class="loc-card-header">
+            <h3 class="loc-name">Allison Street</h3>
+            <span class="loc-hours-tag specific-hours">6 AM–11 PM Daily</span>
+            <p class="loc-address">4522 Allison St<br>Cincinnati, OH 45212</p>
+          </div>
+          <div class="loc-chips">
+            <span class="loc-chip">Self-Service</span>
+            <span class="loc-chip loc-chip-special">Coin-Operated</span>
+          </div>
+          <div class="loc-card-footer">
+            <a href="https://maps.google.com/?q=4522+Allison+St+Cincinnati+OH+45212" target="_blank" rel="noopener noreferrer" class="btn-directions">Get Directions</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  {% include "SuperLaundry/partials/footer.html" %}
+
+  <script>
+    // Contact form — intercept submit, show thank you in place
+    var contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var name = contactForm.querySelector('[name="name"]');
+        var email = contactForm.querySelector('[name="email"]');
+        var message = contactForm.querySelector('[name="message"]');
+        if (!name || !name.value.trim()) { name && name.focus(); return; }
+        if (!email || !email.value.trim()) { email && email.focus(); return; }
+        if (!message || !message.value.trim()) { message && message.focus(); return; }
+        contactForm.style.display = 'none';
+        document.getElementById('contact-thank-you').style.display = 'block';
+      });
+    }
+
+    // Mobile hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', function () {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+      hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    });
+
+    // Close mobile menu on outside click
+    document.addEventListener('click', function (e) {
+      if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'Open menu');
+
+      }
+    });
+  </script>
+
+  {{ standard_footer_includes }}
+
+</body>
+</html>

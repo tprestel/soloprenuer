@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[TITLE_TAG] | [BUSINESS_NAME]</title>
+<meta name="description" content="[META_DESCRIPTION]">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #C4622D;       /* Replace with client primary color — warm terracotta default */
+    --accent-light: #FDF0E8;
+    --accent-dark: #a04e22;
+    --bg: #FAF7F2;
+    --bg-mid: #F0EBE3;
+    --bg-dark: #2C2416;
+    --text: #2C2416;
+    --text-muted: #7A6A55;
+    --border: #E5DDD3;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Lato', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.7; }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--bg);
+    padding: 0 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 76px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 400; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--accent) !important;
+    color: #fff !important;
+    padding: 10px 22px;
+    border-radius: 100px;
+    font-weight: 700 !important;
+  }
+
+  /* ── HERO ── */
+  .hero { padding: 96px 60px; background: var(--bg); }
+  .hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .hero-text { }
+  .hero-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 54px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .hero h1 em { color: var(--accent); font-style: normal; }
+  .hero-sub { font-size: 17px; color: var(--text-muted); line-height: 1.75; margin-bottom: 36px; font-weight: 300; }
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 15px 32px;
+    border-radius: 100px;
+    text-decoration: none;
+    margin-right: 12px;
+  }
+  .btn-primary:hover { background: var(--accent-dark); }
+  .btn-text {
+    display: inline-block;
+    color: var(--text-muted);
+    font-size: 14px;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+  }
+  .hero-image {
+    background: var(--bg-mid);
+    border-radius: 24px;
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-badge-float {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px 18px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-badge-float .num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--text); }
+  .hero-badge-float .lbl { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+
+  /* ── SERVICES ── */
+  .services { padding: 96px 60px; background: var(--bg-mid); }
+  .section-label { font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 700; color: var(--text); line-height: 1.2; margin-bottom: 48px; }
+  .services-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px; max-width: 1100px; }
+  .service-card {
+    background: var(--bg);
+    border-radius: 16px;
+    padding: 32px 28px;
+    border: 1px solid var(--border);
+    transition: box-shadow 0.2s;
+  }
+  .service-card:hover { box-shadow: 0 8px 40px rgba(0,0,0,0.08); }
+  .service-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--accent-light);
+    line-height: 1;
+    margin-bottom: 16px;
+    -webkit-text-stroke: 1.5px var(--accent);
+    color: transparent;
+  }
+  .service-card h3 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+  .service-card p { font-size: 14px; color: var(--text-muted); line-height: 1.65; margin-bottom: 16px; }
+  .service-link { font-size: 13px; color: var(--accent); text-decoration: none; font-weight: 700; }
+
+  /* ── STORY / ABOUT ── */
+  .about { padding: 96px 60px; background: var(--bg); }
+  .about-inner { display: grid; grid-template-columns: 5fr 4fr; gap: 80px; align-items: center; max-width: 1100px; margin: 0 auto; }
+  .about-text .section-title { margin-bottom: 20px; }
+  .about-body { color: var(--text-muted); font-size: 16px; line-height: 1.8; margin-bottom: 16px; font-weight: 300; }
+  .about-body strong { color: var(--text); font-weight: 700; }
+  .about-signature {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .signature-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--bg-mid);
+    flex-shrink: 0;
+  }
+  .signature-name { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: var(--text); }
+  .signature-title { font-size: 12px; color: var(--text-muted); }
+  .about-callout {
+    background: var(--accent-light);
+    border-radius: 20px;
+    padding: 40px 36px;
+    border: 1px solid #E8D5C4;
+  }
+  .callout-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .callout-label { font-size: 14px; color: var(--text-muted); margin-bottom: 32px; }
+  .callout-items { display: flex; flex-direction: column; gap: 16px; }
+  .callout-item { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text); }
+  .callout-bullet { color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { padding: 96px 60px; background: var(--bg-dark); }
+  .testimonials .section-label { color: var(--accent); }
+  .testimonials .section-title { color: #fff; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; max-width: 1100px; margin-top: 48px; }
+  .testimonial-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px; }
+  .testimonial-stars { color: #F59E0B; margin-bottom: 12px; letter-spacing: 2px; }
+  .testimonial-text { font-size: 15px; color: #C4B49A; line-height: 1.75; margin-bottom: 20px; font-style: italic; font-weight: 300; }
+  .testimonial-author { font-size: 13px; color: #7A6A55; font-weight: 700; }
+
+  /* ── CTA ── */
+  .cta-section { padding: 96px 60px; background: var(--accent); text-align: center; }
+  .cta-section h2 { font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 16px; }
+  .cta-section p { color: rgba(255,255,255,0.8); font-size: 17px; max-width: 480px; margin: 0 auto 36px; font-weight: 300; }
+  .btn-white { display: inline-block; background: #fff; color: var(--accent); font-size: 15px; font-weight: 700; padding: 16px 36px; border-radius: 100px; text-decoration: none; }
+  .cta-contact { display: block; margin-top: 20px; color: rgba(255,255,255,0.7); font-size: 14px; }
+
+  /* ── FOOTER ── */
+  footer { background: #1C1409; padding: 64px 60px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 20px; color: #fff; margin-bottom: 12px; display: block; }
+  .footer-desc { font-size: 13px; color: #6B5A45; line-height: 1.75; }
+  .footer-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #5A4A35; margin-bottom: 16px; }
+  .footer-col a { display: block; font-size: 13px; color: #5A4A35; text-decoration: none; margin-bottom: 8px; }
+  .footer-col a:hover { color: var(--accent); }
+  .footer-bottom { background: #1C1409; padding: 20px 60px; border-top: 1px solid #2C2010; display: flex; justify-content: space-between; }
+  .footer-bottom p { font-size: 12px; color: #3A2A18; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav, .hero, .services, .about, .testimonials, .cta-section, footer { padding-left: 24px; padding-right: 24px; }
+    .hero-inner, .about-inner { grid-template-columns: 1fr; gap: 40px; }
+    .hero h1 { font-size: 36px; }
+    .section-title { font-size: 32px; }
+    footer { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">[BUSINESS_<span>NAME</span>]</div>
+  <div class="nav-links">
+    <a href="/services">[SERVICE_1]</a>
+    <a href="/services">[SERVICE_2]</a>
+    <a href="/about">About</a>
+    <a href="/blog">Blog</a>
+    <a href="/contact" class="nav-cta">Get in Touch</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="hero-tag">Serving [CITY] since [YEAR]</span>
+      <h1>[H1 with Primary <em>Keyword</em> Here]</h1>
+      <p class="hero-sub">[HERO_SUBHEADLINE — warm, personal. Lead with how they help, not what they sell.]</p>
+      <a href="/contact" class="btn-primary">Let's Talk</a>
+      <a href="/about" class="btn-text">Our Story →</a>
+    </div>
+    <div class="hero-image">
+      [Client photography here]
+      <div class="hero-badge-float">
+        <div class="num">[YEARS]+</div>
+        <div class="lbl">Years Serving<br>Our Community</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services">
+  <div style="max-width:1100px; margin: 0 auto;">
+    <div class="section-label">What We Do</div>
+    <div class="section-title">[SERVICES_HEADLINE]</div>
+    <div class="services-list">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <h3>[SERVICE_1]</h3>
+        <p>[SERVICE_1_DESC]</p>
+        <a href="/[slug]" class="service-link">Learn more →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <h3>[SERVICE_2]</h3>
+        <p>[SERVICE_2_DESC]</p>
+        <a href="/[slug]" class="service-link">Learn more →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <h3>[SERVICE_3]</h3>
+        <p>[SERVICE_3_DESC]</p>
+        <a href="/[slug]" class="service-link">Learn more →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <h3>[SERVICE_4]</h3>
+        <p>[SERVICE_4_DESC]</p>
+        <a href="/[slug]" class="service-link">Learn more →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="about-inner">
+    <div class="about-text">
+      <div class="section-label">Our Story</div>
+      <div class="section-title">[ABOUT_HEADLINE]</div>
+      <p class="about-body">[ABOUT_PARAGRAPH_1 — personal, in their voice. Why they started. Reference intake form Q1.]</p>
+      <p class="about-body">[ABOUT_PARAGRAPH_2 — what makes them different. Reference intake form Q7. Warm, human, specific.]</p>
+      <div class="about-signature">
+        <div class="signature-avatar"></div>
+        <div>
+          <div class="signature-name">[OWNER_NAME]</div>
+          <div class="signature-title">Founder, [BUSINESS_NAME]</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-callout">
+      <div class="callout-num">[YEARS]</div>
+      <div class="callout-label">Years in the community</div>
+      <div class="callout-items">
+        <div class="callout-item"><span class="callout-bullet">→</span>[DIFFERENTIATOR_1]</div>
+        <div class="callout-item"><span class="callout-bullet">→</span>[DIFFERENTIATOR_2]</div>
+        <div class="callout-item"><span class="callout-bullet">→</span>[DIFFERENTIATOR_3]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div style="max-width:1100px; margin: 0 auto;">
+    <div class="section-label">What People Say</div>
+    <div class="section-title">Stories from Our Clients</div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"[TESTIMONIAL_1]"</p>
+        <div class="testimonial-author">— [REVIEWER_1], [CONTEXT_1]</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"[TESTIMONIAL_2]"</p>
+        <div class="testimonial-author">— [REVIEWER_2], [CONTEXT_2]</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"[TESTIMONIAL_3]"</p>
+        <div class="testimonial-author">— [REVIEWER_3], [CONTEXT_3]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>[CTA_HEADLINE]</h2>
+  <p>[CTA_SUBTEXT — warm, specific, low-pressure.]</p>
+  <a href="/contact" class="btn-white">Get in Touch</a>
+  <span class="cta-contact">Or call us at [PHONE]</span>
+</section>
+
+<footer>
+  <div>
+    <span class="footer-logo">[BUSINESS_NAME]</span>
+    <p class="footer-desc">[FOOTER_DESC]</p>
+    <p style="font-size:13px; color:#5A4A35; margin-top:12px; line-height:1.8;">[PHONE]<br>[EMAIL]<br>[ADDRESS]</p>
+  </div>
+  <div class="footer-col">
+    <h4>Services</h4>
+    <a href="#">[SERVICE_1]</a>
+    <a href="#">[SERVICE_2]</a>
+    <a href="#">[SERVICE_3]</a>
+    <a href="#">[SERVICE_4]</a>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="/about">About Us</a>
+    <a href="/blog">Blog</a>
+    <a href="/contact">Contact</a>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© [YEAR] [BUSINESS_NAME].</p>
+  <p>Proudly serving [CITY] & surrounding areas.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Section — AFK Example</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Saira:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Saira', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+    }
+    h1,h2,h3 { font-family: 'Chakra Petch', sans-serif; }
+
+    .ts {
+      --ts-accent: #F25B19;
+      position: relative;
+      width: 100%;
+      padding: 80px 24px;
+      overflow: hidden;
+    }
+
+    .ts-inner { max-width: 960px; margin: 0 auto; }
+
+    .ts-blur {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ts-blur-1 {
+      width: 384px; height: 384px;
+      top: -96px; right: -96px;
+      background: var(--ts-accent);
+      opacity: 0.1;
+      filter: blur(180px);
+      animation: ts-pulse 18s ease infinite;
+    }
+    .ts-blur-2 {
+      width: 384px; height: 384px;
+      bottom: -96px; left: -96px;
+      background: #F25B19;
+      opacity: 0.08;
+      filter: blur(180px);
+      animation: ts-pulse 16s ease infinite reverse;
+    }
+    @keyframes ts-pulse {
+      0%,100% { opacity: 0.08; transform: scale(1); }
+      50% { opacity: 0.2; transform: scale(1.15); }
+    }
+
+    .ts-header {
+      text-align: center;
+      margin-bottom: 56px;
+      position: relative;
+      z-index: 1;
+      animation: ts-fadeUp 0.7s ease both;
+    }
+
+    @keyframes ts-fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ts-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(8px);
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ts-accent);
+      margin-bottom: 20px;
+    }
+
+    .ts-title {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      background: linear-gradient(to right, #fff, rgba(255,255,255,0.6));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .ts-title span {
+      background: linear-gradient(to right, var(--ts-accent), rgba(255,140,66,0.7));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .ts-subtitle {
+      font-size: 16px;
+      color: rgba(255,255,255,0.45);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .ts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ts-card {
+      position: relative;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(8px);
+      padding: 28px 20px;
+      text-align: center;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      overflow: hidden;
+      animation: ts-fadeUp 0.6s ease both;
+    }
+
+    .ts-card:nth-child(1) { animation-delay: 0.3s; }
+    .ts-card:nth-child(2) { animation-delay: 0.45s; }
+    .ts-card:nth-child(3) { animation-delay: 0.6s; }
+    .ts-card:nth-child(4) { animation-delay: 0.75s; }
+
+    .ts-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px -20px rgba(242,91,25,0.1);
+    }
+
+    .ts-card-glow {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(242,91,25,0.06), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+    .ts-card:hover .ts-card-glow { opacity: 1; }
+
+    .ts-avatar-wrap { display: flex; justify-content: center; margin-bottom: 14px; }
+
+    .ts-avatar {
+      width: 88px; height: 88px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.03);
+      padding: 3px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    .ts-card:hover .ts-avatar { transform: scale(1.05); }
+
+    .ts-avatar img {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ts-name {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .ts-role {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 50px;
+      background: rgba(242,91,25,0.1);
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ts-accent);
+      margin-bottom: 8px;
+    }
+
+    .ts-location {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .ts-location svg { width: 12px; height: 12px; }
+
+    .ts-bio {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .ts-skills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .ts-skill {
+      padding: 4px 10px;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+      font-size: 10px;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .ts-socials {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .ts-social {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.35);
+      text-decoration: none;
+      transition: color 0.2s, background 0.2s;
+    }
+    .ts-social:hover {
+      color: var(--ts-accent);
+      background: rgba(242,91,25,0.08);
+    }
+    .ts-social svg { width: 13px; height: 13px; }
+
+    .ts-cta {
+      position: relative;
+      z-index: 1;
+      margin-top: 48px;
+      text-align: center;
+      animation: ts-fadeUp 0.7s ease both 1s;
+    }
+
+    .ts-cta-card {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      padding: 36px 44px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(8px);
+    }
+
+    .ts-cta-title {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .ts-cta-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      max-width: 400px;
+    }
+
+    .ts-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 50px;
+      border: none;
+      background: var(--ts-accent);
+      color: #111;
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-decoration: none;
+    }
+    .ts-cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(242,91,25,0.3);
+    }
+
+    @media (max-width: 768px) {
+      .ts-grid { grid-template-columns: 1fr; }
+      .ts-cta-card { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="ts">
+    <div class="ts-blur ts-blur-1"></div>
+    <div class="ts-blur ts-blur-2"></div>
+
+    <div class="ts-inner">
+      <div class="ts-header">
+        <div class="ts-badge">&#9733; The AFK Crew</div>
+        <h2 class="ts-title">The people behind<br><span>your race weekend</span></h2>
+        <p class="ts-subtitle">One team, one standard. The same crew that built your kart is standing in your pit at New Castle.</p>
+      </div>
+
+      <div class="ts-grid">
+        <div class="ts-card">
+          <div class="ts-card-glow"></div>
+          <div class="ts-avatar-wrap"><div class="ts-avatar"><img src="https://api.dicebear.com/7.x/initials/svg?seed=JC&backgroundColor=F25B19&textColor=111111" alt="Jim Conlin"></div></div>
+          <div class="ts-name">Jim Conlin</div>
+          <div class="ts-role">Owner · Crew Chief</div>
+          <div class="ts-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Columbus, OH</div>
+          <p class="ts-bio">19 years building karts, coaching drivers, and running race operations out of Columbus.</p>
+          <div class="ts-skills"><span class="ts-skill">Crew Chief</span><span class="ts-skill">Kart Builds</span><span class="ts-skill">Coaching</span></div>
+          <div class="ts-socials">
+            <a href="tel:6143705152" class="ts-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+            <a href="#" class="ts-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+          </div>
+        </div>
+
+        <div class="ts-card">
+          <div class="ts-card-glow"></div>
+          <div class="ts-avatar-wrap"><div class="ts-avatar"><img src="https://api.dicebear.com/7.x/initials/svg?seed=MK&backgroundColor=1a1a1a&textColor=F25B19" alt="MAGiK Kart"></div></div>
+          <div class="ts-name">MAGiK Kart</div>
+          <div class="ts-role">Chassis Partner</div>
+          <div class="ts-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Official Partner</div>
+          <p class="ts-bio">Premium kart chassis engineered for competitive LO206 racing at every level.</p>
+          <div class="ts-skills"><span class="ts-skill">Chassis</span><span class="ts-skill">LO206</span><span class="ts-skill">Performance</span></div>
+          <div class="ts-socials">
+            <a href="#" class="ts-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a>
+          </div>
+        </div>
+
+        <div class="ts-card">
+          <div class="ts-card-glow"></div>
+          <div class="ts-avatar-wrap"><div class="ts-avatar"><img src="https://api.dicebear.com/7.x/initials/svg?seed=GH&backgroundColor=1a1a1a&textColor=F25B19" alt="GreyHound Racing"></div></div>
+          <div class="ts-name">GreyHound Racing</div>
+          <div class="ts-role">Seat Partner</div>
+          <div class="ts-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Official Partner</div>
+          <p class="ts-bio">Racing seats built for competitive karting. Comfort and performance on every lap.</p>
+          <div class="ts-skills"><span class="ts-skill">Racing Seats</span><span class="ts-skill">Ergonomics</span><span class="ts-skill">Safety</span></div>
+          <div class="ts-socials">
+            <a href="#" class="ts-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a>
+          </div>
+        </div>
+
+        <div class="ts-card">
+          <div class="ts-card-glow"></div>
+          <div class="ts-avatar-wrap"><div class="ts-avatar"><img src="https://api.dicebear.com/7.x/initials/svg?seed=NC&backgroundColor=1a1a1a&textColor=F25B19" alt="NCMP"></div></div>
+          <div class="ts-name">New Castle Motorsports</div>
+          <div class="ts-role">Home Track</div>
+          <div class="ts-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> New Castle, Indiana</div>
+          <p class="ts-bio">Premier karting facility. 45 minutes from Indianapolis. Where AFK races every weekend.</p>
+          <div class="ts-skills"><span class="ts-skill">Race Venue</span><span class="ts-skill">LO206</span><span class="ts-skill">Every Weekend</span></div>
+          <div class="ts-socials">
+            <a href="#" class="ts-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ts-cta">
+        <div class="ts-cta-card">
+          <h3 class="ts-cta-title">Ready to Join the Team?</h3>
+          <p class="ts-cta-desc">Whether you're booking your first arrive-and-drive or looking for a full-season crew — start here.</p>
+          <a href="tel:6143705152" class="ts-cta-btn">Call Jim: 614-370-5152 &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

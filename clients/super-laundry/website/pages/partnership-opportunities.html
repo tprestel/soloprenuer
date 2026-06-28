@@ -1,0 +1,1317 @@
+<!--
+  templateType: "page"
+  isAvailableForNewContent: true
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/webp" href="https://244988351.fs1.hubspotusercontent-na2.net/hubfs/244988351/logos/superlaundry_favicon.webp">
+  <title>Partnership Opportunities — Super Laundry Cincinnati</title>
+  <meta name="description" content="Partner with Super Laundry Cincinnati. Advertise to thousands of neighborhood residents or collaborate on community initiatives. 6 locations across Cincinnati.">
+
+  <!-- Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Super Laundry Cincinnati",
+    "url": "https://www.superlaundry24.com",
+    "telephone": "(513) 873-5939",
+    "email": "info@superlaundry24.com",
+    "description": "Locally owned laundromat network with 6 locations across Cincinnati's neighborhoods.",
+    "areaServed": {
+      "@type": "City",
+      "name": "Cincinnati",
+      "addressRegion": "OH"
+    }
+  }
+  </script>
+
+
+
+  <link rel="canonical" href="https://www.superlaundry24.com/partner">
+  {{ standard_header_includes }}
+
+</head>
+<body>
+
+  {% include "SuperLaundry/partials/header.html" %}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== DESIGN SYSTEM ===== */
+    :root {
+      --green-dark: #1C4A25;
+      --green: #2D7F3C;
+      --green-light: #4A9B58;
+      --green-pale: #EAF4EC;
+      --cream: #F5F1E8;
+      --warm-white: #FAFAF6;
+      --text-dark: #1A2B1C;
+      --text-body: #3C4A3E;
+      --text-muted: #4E6150;
+      --border: #DDD8CE;
+      --shadow-sm: 0 2px 8px rgba(28,74,37,0.08);
+      --shadow-md: 0 4px 20px rgba(28,74,37,0.12);
+      --shadow-lg: 0 8px 40px rgba(28,74,37,0.16);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-body);
+      background: var(--warm-white);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== REVIEW BANNER ===== */
+    .review-banner {
+      background: var(--green-dark);
+      border-bottom: 3px solid var(--green);
+      padding: 10px 24px;
+      text-align: center;
+    }
+    .review-banner p {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+    .review-banner span { color: #A8E6B0; }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      background: var(--green-dark);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 68px;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .nav-logo img {
+      height: 44px;
+      width: auto;
+      mix-blend-mode: screen;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a.active {
+      color: #fff;
+      font-weight: 700;
+    }
+        .nav-cta {
+      background: var(--green) !important;
+      color: #fff !important;
+      padding: 10px 20px !important;
+      border-radius: 6px !important;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--green-light) !important; }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 2px;
+    }
+    .nav-mobile {
+      display: none;
+      background: var(--green-dark);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 12px 24px 20px;
+    }
+    .nav-mobile.open { display: block; }
+    .nav-mobile a {
+      display: block;
+      padding: 12px 0;
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      min-height: 44px;
+    }
+    .nav-mobile a:last-child { border-bottom: none; }
+    .nav-mobile a.active { color: #fff; font-weight: 700; }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      background: var(--cream);
+      padding: 64px 0 56px;
+    }
+    .page-hero-text {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 48px;
+    }
+    .page-hero-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--green);
+      background: var(--green-pale);
+      padding: 5px 14px;
+      border-radius: 4px;
+      margin-bottom: 18px;
+    }
+    .page-hero h1 {
+      font-size: clamp(30px, 4vw, 52px);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 18px;
+      color: var(--text-dark);
+    }
+    .page-hero-sub {
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* Hero stat strip */
+    .hero-stats-strip {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      background: #fff;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .hero-stat {
+      flex: 1;
+      text-align: center;
+      padding: 20px 16px;
+      border-right: 1.5px solid var(--border);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 2.4vw, 26px);
+      font-weight: 800;
+      color: var(--green-dark);
+      line-height: 1.1;
+      margin-bottom: 5px;
+    }
+    .hero-stat-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ===== TWO WAYS TO PARTNER ===== */
+    .partner-section {
+      background: var(--warm-white);
+      padding: 72px 0;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .section-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 14px;
+    }
+    .section-header h2 {
+      font-size: clamp(26px, 3.2vw, 40px);
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    .partner-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+    .partner-card {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s, border-color 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .partner-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--green-light);
+    }
+    .partner-card:first-child::before {
+      background: #C49A0A;
+    }
+    .partner-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--green-light);
+    }
+    .partner-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 22px;
+      align-self: flex-start;
+    }
+    .partner-badge.paid {
+      background: #FFF3CD;
+      color: #7A5700;
+    }
+    .partner-badge.community {
+      background: var(--green-pale);
+      color: var(--green-dark);
+    }
+    .partner-card h3 {
+      font-size: clamp(22px, 2.4vw, 28px);
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 14px;
+    }
+    .partner-card-lead {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+    .partner-checklist {
+      list-style: none;
+      margin-bottom: 32px;
+      flex: 1;
+    }
+    .partner-checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      color: var(--text-body);
+      line-height: 1.55;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--cream);
+    }
+    .partner-checklist li:last-child { border-bottom: none; }
+    .check-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      background: var(--green-pale);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .check-icon svg {
+      width: 11px;
+      height: 11px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      min-height: 44px;
+      text-decoration: none;
+    }
+    .btn-green {
+      background: var(--green);
+      color: #fff;
+      border: 2px solid var(--green);
+    }
+    .btn-green:hover { background: var(--green-dark); border-color: var(--green-dark); }
+    .btn-outline {
+      background: transparent;
+      color: var(--green);
+      border: 2px solid var(--green);
+    }
+    .btn-outline:hover { background: var(--green-pale); }
+    .btn-full { width: 100%; }
+
+    /* ===== WHY PARTNER ===== */
+    .why-section {
+      background: var(--cream);
+      padding: 64px 0;
+    }
+    .why-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .why-section .section-header {
+      text-align: left;
+      margin-bottom: 32px;
+    }
+    .why-section .section-header h2 {
+      text-align: left;
+    }
+    .stat-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .stat-card {
+      background: var(--green-dark);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      text-align: center;
+    }
+    .stat-card-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3.5vw, 40px);
+      font-weight: 800;
+      color: #A8E6B0;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-card-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.72);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      line-height: 1.4;
+    }
+    .benefits-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .benefit-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .benefit-row:first-child { padding-top: 0; }
+    .benefit-row:last-child { border-bottom: none; }
+    .benefit-icon {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      background: var(--green-pale);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .benefit-icon svg {
+      width: 22px;
+      height: 22px;
+      color: var(--green);
+    }
+    .benefit-text h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 3px;
+    }
+    .benefit-text p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ===== LAUNDRY LOVE ===== */
+    .laundry-love-section {
+      background: var(--green-dark);
+      padding: 64px 0;
+    }
+    .ll-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .ll-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 14px;
+    }
+    .ll-inner h2 {
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .ll-body {
+      font-size: 17px;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.72;
+      margin-bottom: 36px;
+    }
+    .ll-details {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .ll-pill {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 24px;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.4;
+    }
+    .ll-note {
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 28px;
+    }
+    .ll-link {
+      color: #A8E6B0;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s;
+    }
+    .ll-link:hover { color: #fff; }
+
+    /* ===== NEIGHBORHOODS ===== */
+    .neighborhoods-section {
+      background: var(--warm-white);
+      padding: 56px 0;
+    }
+    .neighborhoods-section .section-header {
+      margin-bottom: 16px;
+    }
+    .neighborhoods-sub {
+      text-align: center;
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 640px;
+      margin: 0 auto 40px;
+    }
+    .neighborhood-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .neighborhood-card {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .neighborhood-card:hover {
+      border-color: var(--green-light);
+      box-shadow: var(--shadow-sm);
+    }
+    .neighborhood-pin {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: var(--green-pale);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .neighborhood-pin svg {
+      width: 16px;
+      height: 16px;
+      color: var(--green);
+    }
+    .neighborhood-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 2px;
+    }
+    .neighborhood-addr {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ===== CONTACT FORM ===== */
+    .contact-section {
+      background: var(--cream);
+      padding: 72px 0;
+    }
+    .contact-section .section-header {
+      margin-bottom: 48px;
+    }
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 52px;
+      align-items: start;
+    }
+
+    /* Form styles */
+    .inquiry-form {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      box-shadow: var(--shadow-sm);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 7px;
+      letter-spacing: 0.01em;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      color: var(--text-dark);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #a0a8a2;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(45,127,60,0.12);
+    }
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234E6150' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+      cursor: pointer;
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-submit {
+      background: var(--green);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      width: 100%;
+      height: 52px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-bottom: 12px;
+    }
+    .form-submit:hover { background: var(--green-dark); }
+    .form-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* Info panel */
+    .contact-info-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .info-panel-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 20px;
+    }
+    .info-panel-card {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .info-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--cream);
+    }
+    .info-contact-item:last-of-type { border-bottom: none; }
+    .info-contact-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      background: var(--green-pale);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .info-contact-icon svg {
+      width: 18px;
+      height: 18px;
+      color: var(--green);
+    }
+    .info-contact-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 3px;
+    }
+    .info-contact-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--green-dark);
+    }
+    .info-contact-value a {
+      color: var(--green-dark);
+      transition: color 0.2s;
+    }
+    .info-contact-value a:hover { color: var(--green); }
+    .info-panel-note {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--cream);
+      font-style: italic;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--green-dark);
+      padding: 56px 0 0;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1.5fr 1fr;
+      gap: 40px;
+      padding-bottom: 48px;
+    }
+    .footer-brand-logo {
+      height: 40px;
+      width: auto;
+      mix-blend-mode: screen;
+      margin-bottom: 14px;
+    }
+    .footer-tagline {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.65;
+      max-width: 220px;
+    }
+    .footer-col h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.72);
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 20px 0;
+    }
+    .footer-bottom-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .footer-copyright {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+      .why-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .why-section .section-header {
+        text-align: center;
+      }
+      .why-section .section-header h2 {
+        text-align: center;
+      }
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+
+      .page-hero { padding: 48px 0 40px; }
+      .hero-stats-strip {
+        flex-wrap: wrap;
+      }
+      .hero-stat {
+        flex: 1 1 calc(50% - 1px);
+        min-width: 140px;
+      }
+      .hero-stat:nth-child(2) { border-right: none; }
+      .hero-stat:nth-child(3) {
+        border-top: 1.5px solid var(--border);
+        border-right: 1.5px solid var(--border);
+      }
+      .hero-stat:nth-child(4) { border-top: 1.5px solid var(--border); }
+
+      .partner-section { padding: 52px 0; }
+      .partner-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .why-section { padding: 48px 0; }
+      .stat-cards-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .laundry-love-section { padding: 48px 0; }
+      .ll-details { flex-direction: column; align-items: center; }
+      .ll-pill { text-align: center; }
+
+      .neighborhoods-section { padding: 48px 0; }
+      .neighborhood-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .contact-section { padding: 52px 0; }
+      .contact-layout { gap: 32px; }
+      .form-row { grid-template-columns: 1fr; }
+      .inquiry-form { padding: 24px 20px; }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+      .footer-tagline { max-width: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      .neighborhood-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-stat {
+        flex: 1 1 100%;
+      }
+      .hero-stat:nth-child(2) { border-bottom: 1.5px solid var(--border); }
+      .hero-stat:nth-child(3) { border-right: none; }
+    }
+  </style>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-text">
+        <span class="page-hero-label">Partnerships</span>
+        <h1>Partner With Super Laundry</h1>
+        <p class="page-hero-sub">We're more than a laundromat — we're a neighborhood hub.</p>
+      </div>
+      <div class="hero-stats-strip">
+        <div class="hero-stat">
+          <div class="hero-stat-num">6</div>
+          <div class="hero-stat-label">Cincinnati Locations</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">Open 24/7</div>
+          <div class="hero-stat-label">At 4 of 6 Locations</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">45–90 Min</div>
+          <div class="hero-stat-label">Average Customer Dwell Time</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">6</div>
+          <div class="hero-stat-label">Neighborhoods Reached</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TWO WAYS TO PARTNER -->
+  <section class="partner-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Two Ways to Partner</div>
+        <h2>Reach your neighborhood, every visit.</h2>
+      </div>
+      <div class="partner-cards">
+        <!-- Card 1: Advertise -->
+        <div class="partner-card">
+          <span class="partner-badge paid">Paid Opportunity</span>
+          <h3>Advertise With Us</h3>
+          <p class="partner-card-lead">Put your brand in front of thousands of Cincinnati residents every month.</p>
+          <ul class="partner-checklist">
+            <li>
+              <span class="check-icon">
+                <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 6.5L5 9.5L10 3.5" stroke="#2D7F3C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              Digital display screens at each location
+            </li>
+            <li>
+              <span class="check-icon">
+                <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 6.5L5 9.5L10 3.5" stroke="#2D7F3C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              High dwell time — customers stay 45–90 minutes per visit
+            </li>
+            <li>
+              <span class="check-icon">
+                <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 6.5L5 9.5L10 3.5" stroke="#2D7F3C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              Reach across 6 neighborhoods including Avondale, Westwood, and Springdale
+            </li>
+            <li>
+              <span class="check-icon">
+                <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 6.5L5 9.5L10 3.5" stroke="#2D7F3C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              Great for local services, food &amp; beverage, healthcare, and nonprofits
+            </li>
+          </ul>
+          <a href="#contact" class="btn btn-green">Get In Touch</a>
+        </div>
+
+        <!-- Card 2: Community -->
+        <div class="partner-card">
+          <span class="partner-badge community">Community Focused</span>
+          <h3>Community Partnership</h3>
+          <p class="partner-card-lead">We're committed to the neighborhoods we serve.</p>
+          <ul class="partner-checklist">
+            <li>
+              <span class="check-icon">
+                <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 6.5L5 9.5L10 3.5" stroke="#2D7F3C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              Host outreach events and community programs
+            </li>
+            <li>
+              <span class="check-icon">
+                <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 6.5L5 9.5L10 3.5" stroke="#2D7F3C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              Co-sponsor free wash days or hygiene drives
+            </li>
+            <li>
+              <span class="check-icon">
+                <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 6.5L5 9.5L10 3.5" stroke="#2D7F3C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              Partner on initiatives like Laundry Love Cincinnati
+            </li>
+            <li>
+              <span class="check-icon">
+                <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 6.5L5 9.5L10 3.5" stroke="#2D7F3C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              Space available for resource tabling and community events
+            </li>
+          </ul>
+          <a href="#contact" class="btn btn-outline">Get In Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY PARTNER -->
+  <section class="why-section">
+    <div class="container">
+      <div class="why-inner">
+        <!-- Left: stat cards -->
+        <div>
+          <div class="section-header">
+            <div class="section-label">Why Super Laundry?</div>
+            <h2>Built-in audience. Real neighborhoods.</h2>
+          </div>
+          <div class="stat-cards-grid">
+            <div class="stat-card">
+              <div class="stat-card-num">6</div>
+              <div class="stat-card-label">Cincinnati Locations</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-num">24/7</div>
+              <div class="stat-card-label">Open at 4 of 6</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-num">45–90<br><span style="font-size:0.65em;">min</span></div>
+              <div class="stat-card-label">Avg. Customer Visit</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-num">6</div>
+              <div class="stat-card-label">Distinct Neighborhoods</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: benefit rows -->
+        <div class="benefits-list">
+          <div class="benefit-row">
+            <div class="benefit-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <div class="benefit-text">
+              <h4>Digital Displays</h4>
+              <p>In-store screens at every location, front of mind while customers wait.</p>
+            </div>
+          </div>
+          <div class="benefit-row">
+            <div class="benefit-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div class="benefit-text">
+              <h4>Repeat Visitors</h4>
+              <p>Weekly and bi-weekly customers — consistent, recurring exposure.</p>
+            </div>
+          </div>
+          <div class="benefit-row">
+            <div class="benefit-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div class="benefit-text">
+              <h4>Hyper-Local</h4>
+              <p>Target specific Cincinnati neighborhoods — not a generic metro buy.</p>
+            </div>
+          </div>
+          <div class="benefit-row">
+            <div class="benefit-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div class="benefit-text">
+              <h4>Long Dwell Time</h4>
+              <p>45–90 min avg. per visit — far more time than a gas station or quick-service.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAUNDRY LOVE -->
+  <section class="laundry-love-section">
+    <div class="container">
+      <div class="ll-inner">
+        <div class="ll-label">Community Partnership Example</div>
+        <h2>Laundry Love Cincinnati</h2>
+        <p class="ll-body">Every second Wednesday of the month, we host Laundry Love Cincinnati at our Westwood and Avondale locations — providing free wash cycles to individuals and families in need.</p>
+        <div class="ll-details">
+          <span class="ll-pill">📅 2nd Wednesday Monthly</span>
+          <span class="ll-pill">🕕 6:00 PM – 8:00 PM</span>
+          <span class="ll-pill">👕 Up to 4 loads free per family</span>
+          <span class="ll-pill">📍 Westwood — 2455 Harrison Ave</span>
+          <span class="ll-pill">📍 Avondale — 3545 Reading Rd</span>
+        </div>
+        <p class="ll-note">First come, first served — all costs covered.</p>
+        <a href="https://www.laundrylove.org" target="_blank" rel="noopener noreferrer" class="ll-link">Learn more about Laundry Love →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEIGHBORHOODS -->
+  <section class="neighborhoods-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Our Locations</div>
+        <h2>Supporting Cincinnati's Neighborhoods</h2>
+      </div>
+      <p class="neighborhoods-sub">Our 6 locations are embedded in residential neighborhoods — not commercial strips. Your partnership reaches people where they live.</p>
+      <div class="neighborhood-grid">
+        <div class="neighborhood-card">
+          <div class="neighborhood-pin">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <div class="neighborhood-name">Avondale</div>
+            <div class="neighborhood-addr">3545 Reading Rd</div>
+          </div>
+        </div>
+        <div class="neighborhood-card">
+          <div class="neighborhood-pin">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <div class="neighborhood-name">Bond Hill</div>
+            <div class="neighborhood-addr">4368 Reading Rd</div>
+          </div>
+        </div>
+        <div class="neighborhood-card">
+          <div class="neighborhood-pin">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <div class="neighborhood-name">Westwood</div>
+            <div class="neighborhood-addr">2455 Harrison Ave</div>
+          </div>
+        </div>
+        <div class="neighborhood-card">
+          <div class="neighborhood-pin">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <div class="neighborhood-name">Springdale</div>
+            <div class="neighborhood-addr">11627 Springfield Pike</div>
+          </div>
+        </div>
+        <div class="neighborhood-card">
+          <div class="neighborhood-pin">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <div class="neighborhood-name">North College Hill</div>
+            <div class="neighborhood-addr">1585 Goodman Ave</div>
+          </div>
+        </div>
+        <div class="neighborhood-card">
+          <div class="neighborhood-pin">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <div class="neighborhood-name">Allison St</div>
+            <div class="neighborhood-addr">4522 Allison St</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Let's Talk</div>
+        <h2>Let's Talk Partnership</h2>
+        <p style="font-size:17px;color:var(--text-muted);margin-top:14px;line-height:1.65;">Tell us a little about yourself and what you have in mind.<br>We'll get back to you within 2 business days.</p>
+      </div>
+      <div class="contact-layout">
+        <!-- Form -->
+        <div class="inquiry-form">
+          <script charset="utf-8" type="text/javascript" src="//js-na2.hsforms.net/forms/embed/v2.js"></script>
+          <script>
+            hbspt.forms.create({
+              portalId: "244988351",
+              formId: "8ec1ed93-a359-48ae-867b-43bb900773b9",
+              region: "na2"
+            });
+          </script>
+        </div>
+
+        <!-- Info Panel -->
+        <div class="contact-info-panel">
+          <div class="info-panel-title">Or reach us directly</div>
+          <div class="info-panel-card">
+            <div class="info-contact-item">
+              <div class="info-contact-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 16z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="info-contact-label">Phone</div>
+                <div class="info-contact-value"><a href="tel:5138735939">(513) 873-5939</a></div>
+              </div>
+            </div>
+            <div class="info-contact-item">
+              <div class="info-contact-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div>
+                <div class="info-contact-label">Email</div>
+                <div class="info-contact-value"><a href="mailto:info@superlaundry24.com">info@superlaundry24.com</a></div>
+              </div>
+            </div>
+            <p class="info-panel-note">We're a local team — you'll hear back from a real person.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include "SuperLaundry/partials/footer.html" %}
+
+  <script>
+    // Mobile hamburger menu
+    var hamburger = document.getElementById('hamburger');
+    var mobileMenu = document.getElementById('mobileMenu') || document.getElementById('nav-mobile');
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', function() {
+        var isOpen = mobileMenu.classList.toggle('open');
+        hamburger.setAttribute('aria-expanded', isOpen);
+      });
+    }
+
+    // Partnership form — intercept submit, show thank you in place
+    var partnerForm = document.getElementById('partnership-form');
+    if (partnerForm) {
+      partnerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var email = partnerForm.querySelector('[name="email"]');
+        if (!email || !email.value.trim()) { email && email.focus(); return; }
+        partnerForm.style.display = 'none';
+        document.getElementById('partnership-thank-you').style.display = 'block';
+      });
+    }
+  </script>
+
+  {{ standard_footer_includes }}
+
+</body>
+</html>

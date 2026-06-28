@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GBP Optimization — Super Laundry Cincinnati</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #2D7F3C;
+      --green-dark: #1C4A25;
+      --green-pale: #EAF3EC;
+      --green-mid: #4A9B5A;
+      --amber: #92400E;
+      --amber-pale: #FEF3C7;
+      --red-pale: #FFF0F0;
+      --red: #B84040;
+      --cream: #F8F7F4;
+      --border: #E2E0DC;
+      --text-dark: #1A1917;
+      --text-body: #3D3B38;
+      --text-muted: #7A7772;
+      --white: #FFFFFF;
+      --sidebar: 260px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text-body);
+      font-size: 15px;
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      width: var(--sidebar);
+      background: var(--green-dark);
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      overflow-y: auto;
+      z-index: 100;
+      padding: 28px 0 40px;
+    }
+
+    .sidebar-logo {
+      padding: 0 24px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 20px;
+    }
+    .sidebar-logo-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 4px;
+    }
+    .sidebar-logo-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .sidebar-section {
+      padding: 0 16px;
+      margin-bottom: 4px;
+    }
+    .sidebar-section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      padding: 0 8px;
+      margin-bottom: 6px;
+      margin-top: 20px;
+    }
+    .sidebar-link {
+      display: block;
+      padding: 8px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      margin-bottom: 2px;
+    }
+    .sidebar-link:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .sidebar-link.active { background: rgba(255,255,255,0.15); color: #fff; }
+    .sidebar-dot {
+      display: inline-block;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--green-mid);
+      margin-right: 8px;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+    }
+    .sidebar-dot.amber { background: #F59E0B; }
+
+    /* ===== MAIN ===== */
+    .main {
+      margin-left: var(--sidebar);
+      flex: 1;
+      padding: 0;
+    }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      background: var(--green-dark);
+      padding: 48px 56px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+    .page-header-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 10px;
+    }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .page-header-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      max-width: 520px;
+    }
+    .header-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 28px;
+    }
+    .header-stat {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+    .header-stat strong {
+      display: block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 22px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    /* ===== CONTENT AREA ===== */
+    .content {
+      padding: 48px 56px;
+      max-width: 900px;
+    }
+
+    /* ===== SECTION ===== */
+    .section { margin-bottom: 64px; }
+    .section-anchor { scroll-margin-top: 24px; }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--green);
+    }
+    .section-number {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--green);
+      background: var(--green-pale);
+      padding: 4px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+      margin-top: 4px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+    .section-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* ===== LOCATION HEADER ===== */
+    .location-header {
+      background: var(--green);
+      border-radius: 10px 10px 0 0;
+      padding: 22px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .location-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: #fff;
+    }
+    .location-address {
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      margin-top: 2px;
+    }
+    .location-phone {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      color: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.12);
+      padding: 5px 12px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .location-body {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 10px 10px;
+      padding: 28px;
+      margin-bottom: 40px;
+    }
+
+    /* ===== FIELD BLOCKS ===== */
+    .field {
+      margin-bottom: 24px;
+    }
+    .field-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .field-label-note {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--green);
+      background: var(--green-pale);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .char-count {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+    .char-count.warn { color: var(--amber); }
+
+    .copy-box {
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-dark);
+      position: relative;
+      white-space: pre-wrap;
+    }
+    .copy-box.mono {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px; right: 10px;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      letter-spacing: 0.04em;
+    }
+    .copy-btn:hover { border-color: var(--green); color: var(--green); }
+    .copy-btn.copied { border-color: var(--green); color: var(--green); background: var(--green-pale); }
+
+    /* ===== HOURS TABLE ===== */
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .hours-table td {
+      padding: 8px 12px;
+      font-size: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hours-table tr:last-child td { border-bottom: none; }
+    .hours-table td:first-child { color: var(--text-muted); width: 160px; }
+    .hours-table td:last-child { font-weight: 600; color: var(--text-dark); }
+    .hours-badge {
+      display: inline-block;
+      background: var(--green-pale);
+      color: var(--green-dark);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 4px;
+    }
+    .hours-badge.amber { background: var(--amber-pale); color: var(--amber); }
+
+    /* ===== Q&A ===== */
+    .qa-list { display: flex; flex-direction: column; gap: 12px; }
+    .qa-item {
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .qa-q {
+      background: var(--green-pale);
+      padding: 11px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green-dark);
+    }
+    .qa-a {
+      padding: 12px 16px;
+      font-size: 14px;
+      color: var(--text-dark);
+      line-height: 1.65;
+      background: var(--white);
+      position: relative;
+    }
+
+    /* ===== SERVICES ===== */
+    .services-list { display: flex; flex-direction: column; gap: 12px; }
+    .service-item {
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .service-category {
+      background: var(--green-dark);
+      padding: 9px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+    }
+    .service-desc {
+      padding: 12px 16px;
+      font-size: 14px;
+      color: var(--text-dark);
+      line-height: 1.65;
+      background: var(--white);
+      position: relative;
+    }
+
+    /* ===== CATEGORIES GRID ===== */
+    .cat-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .cat-tag {
+      background: var(--green-pale);
+      color: var(--green-dark);
+      border: 1.5px solid #C8E3CB;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 6px;
+    }
+    .cat-tag.primary {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+    }
+    .cat-tag.location-specific {
+      background: var(--amber-pale);
+      color: var(--amber);
+      border-color: #F3D08A;
+    }
+
+    /* ===== ATTRS ===== */
+    .attr-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .attr-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-dark);
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+    .attr-check { color: var(--green); font-size: 15px; font-weight: 700; }
+    .attr-cross { color: var(--text-muted); font-size: 15px; }
+
+    /* ===== PHOTOS CHECKLIST ===== */
+    .photo-list { display: flex; flex-direction: column; gap: 6px; }
+    .photo-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-dark);
+      padding: 6px 0;
+    }
+    .photo-icon {
+      width: 28px; height: 28px;
+      background: var(--green-pale);
+      border-radius: 5px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .photo-filename {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+    .photo-item.cover .photo-icon { background: var(--green); }
+
+    /* ===== PRIORITY CHECKLIST ===== */
+    .priority-list { display: flex; flex-direction: column; gap: 10px; }
+    .priority-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 18px;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+    }
+    .priority-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--green);
+      line-height: 1;
+      min-width: 28px;
+      padding-top: 2px;
+    }
+    .priority-text strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 2px;
+    }
+    .priority-text span {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ===== NAME TABLE ===== */
+    .name-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .name-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-bottom: 2px solid var(--border);
+    }
+    .name-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .name-table tr:last-child td { border-bottom: none; }
+    .name-old {
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--red);
+      font-size: 13px;
+      text-decoration: line-through;
+      opacity: 0.7;
+    }
+    .name-arrow { color: var(--text-muted); text-align: center; }
+    .name-new {
+      font-weight: 700;
+      color: var(--green-dark);
+    }
+
+    /* ===== URL TABLE ===== */
+    .url-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .url-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-bottom: 2px solid var(--border);
+    }
+    .url-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .url-table tr:last-child td { border-bottom: none; }
+    .url-table td:first-child { font-weight: 600; color: var(--text-dark); }
+    .url-mono {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: var(--green-dark);
+    }
+
+    /* ===== MONTHLY SECTION ===== */
+    .post-template {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-left: 4px solid var(--green);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-dark);
+      position: relative;
+    }
+    .post-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    /* ===== DIVIDER ===== */
+    .field-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 20px 0;
+    }
+
+    /* ===== ALERT ===== */
+    .alert {
+      background: var(--amber-pale);
+      border: 1.5px solid #F3D08A;
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 13px;
+      color: var(--amber);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .alert strong { font-weight: 700; }
+
+    .note {
+      background: var(--green-pale);
+      border: 1.5px solid #C8E3CB;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: var(--green-dark);
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 900px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .content { padding: 28px 20px; }
+      .page-header { padding: 32px 20px; }
+      .attr-grid { grid-template-columns: 1fr; }
+      .location-header { flex-direction: column; align-items: flex-start; }
+      .header-stats { gap: 20px; }
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .copy-btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-label">Deliverable</div>
+      <div class="sidebar-logo-name">GBP Optimization<br>Super Laundry</div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">Start Here</div>
+      <a href="#global" class="sidebar-link">Global Changes</a>
+      <a href="#priority" class="sidebar-link">Implementation Order</a>
+      <a href="#monthly" class="sidebar-link">Monthly Upkeep</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">Locations</div>
+      <a href="#springdale" class="sidebar-link"><span class="sidebar-dot amber"></span>Springdale</a>
+      <a href="#avondale" class="sidebar-link"><span class="sidebar-dot"></span>Avondale</a>
+      <a href="#bond-hill" class="sidebar-link"><span class="sidebar-dot"></span>Bond Hill</a>
+      <a href="#westwood" class="sidebar-link"><span class="sidebar-dot"></span>Westwood</a>
+      <a href="#nch" class="sidebar-link"><span class="sidebar-dot"></span>North College Hill</a>
+      <a href="#allison" class="sidebar-link"><span class="sidebar-dot amber"></span>Allison Street</a>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <div class="page-header">
+      <div class="page-header-eyebrow">Google Business Profile · All 6 Locations</div>
+      <h1>GBP Optimization</h1>
+      <p class="page-header-sub">Ready-to-implement content for every listing. Copy each field directly into Google Business Profile.</p>
+      <div class="header-stats">
+        <div class="header-stat"><strong>6</strong>Locations</div>
+        <div class="header-stat"><strong>1,200+</strong>Existing Reviews</div>
+        <div class="header-stat"><strong>4.2★</strong>Avg Rating</div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- GLOBAL CHANGES -->
+      <div class="section section-anchor" id="global">
+        <div class="section-header">
+          <div class="section-number">01</div>
+          <div>
+            <div class="section-title">Global Changes — Apply to All Listings</div>
+            <div class="section-subtitle">Do these first. They affect every listing simultaneously.</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="field-label">Business Name — Fix Inconsistencies</div>
+          <div class="alert"><strong>Highest priority.</strong> Four different naming formats across 6 listings prevent Google from recognizing these as a chain. Consistent naming builds entity authority across all listings at once.</div>
+          <table class="name-table">
+            <thead>
+              <tr>
+                <th>Current (Wrong)</th>
+                <th class="name-arrow">→</th>
+                <th>Correct</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="name-old">Super Laundry</span></td>
+                <td class="name-arrow">→</td>
+                <td class="name-new">Super Laundry Springdale</td>
+              </tr>
+              <tr>
+                <td><span class="name-old">Super Laundry-Avondale</span></td>
+                <td class="name-arrow">→</td>
+                <td class="name-new">Super Laundry Avondale</td>
+              </tr>
+              <tr>
+                <td><span class="name-old">Super Laundry</span></td>
+                <td class="name-arrow">→</td>
+                <td class="name-new">Super Laundry Bond Hill</td>
+              </tr>
+              <tr>
+                <td><span class="name-old">Westwood Super Laundry</span></td>
+                <td class="name-arrow">→</td>
+                <td class="name-new">Super Laundry Westwood</td>
+              </tr>
+              <tr>
+                <td><span class="name-old">Super Laundry North College Hill</span></td>
+                <td class="name-arrow">→</td>
+                <td class="name-new">Super Laundry North College Hill</td>
+              </tr>
+              <tr>
+                <td><span class="name-old">Super Laundry</span></td>
+                <td class="name-arrow">→</td>
+                <td class="name-new">Super Laundry Allison Street</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <hr class="field-divider">
+
+        <div class="field">
+          <div class="field-label">Primary Category <span class="field-label-note">All Locations — Confirm it's set</span></div>
+          <div class="cat-grid">
+            <div class="cat-tag primary">Laundromat</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="field-label">Secondary Categories <span class="field-label-note">Add to all locations</span></div>
+          <div class="cat-grid">
+            <div class="cat-tag">Laundry service</div>
+            <div class="cat-tag">Self-service laundry</div>
+            <div class="cat-tag location-specific">Laundry delivery service — Springdale only</div>
+            <div class="cat-tag location-specific">Coin operated laundry — Allison Street only</div>
+          </div>
+        </div>
+
+        <hr class="field-divider">
+
+        <div class="field">
+          <div class="field-label">Attributes — Apply to All Locations</div>
+          <div class="attr-grid">
+            <div class="attr-item"><span class="attr-check">✓</span> Wheelchair accessible entrance</div>
+            <div class="attr-item"><span class="attr-check">✓</span> Wheelchair accessible parking</div>
+            <div class="attr-item"><span class="attr-check">✓</span> Credit cards accepted</div>
+            <div class="attr-item"><span class="attr-check">✓</span> Debit cards accepted</div>
+            <div class="attr-item"><span class="attr-check">✓</span> NFC / tap / Apple Pay / Google Pay</div>
+            <div class="attr-item"><span class="attr-check">✓</span> Cash accepted</div>
+            <div class="attr-item"><span class="attr-cross">✗</span> Appointment required: No</div>
+            <div class="attr-item"><span class="attr-cross">✗</span> Appointment recommended: No</div>
+            <div class="attr-item"><span class="attr-check">✓</span> In-store self-service</div>
+            <div class="attr-item"><span class="attr-check">✓</span> Onsite services</div>
+          </div>
+          <div class="note">Allison Street only: also check <strong>Coins accepted</strong></div>
+        </div>
+
+        <hr class="field-divider">
+
+        <div class="field">
+          <div class="field-label">Website URL — Point to Location Page, Not Homepage</div>
+          <table class="url-table">
+            <thead>
+              <tr><th>Location</th><th>URL to Set</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Springdale</td><td><span class="url-mono">https://www.superlaundry24.com/locations/springdale</span></td></tr>
+              <tr><td>Avondale</td><td><span class="url-mono">https://www.superlaundry24.com/locations/avondale</span></td></tr>
+              <tr><td>Bond Hill</td><td><span class="url-mono">https://www.superlaundry24.com/locations/bond-hill</span></td></tr>
+              <tr><td>Westwood</td><td><span class="url-mono">https://www.superlaundry24.com/locations/westwood</span></td></tr>
+              <tr><td>North College Hill</td><td><span class="url-mono">https://www.superlaundry24.com/locations/north-college-hill</span></td></tr>
+              <tr><td>Allison Street</td><td><span class="url-mono">https://www.superlaundry24.com/locations/allison-street</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SPRINGDALE -->
+      <div class="section section-anchor" id="springdale">
+        <div class="section-header">
+          <div class="section-number">02</div>
+          <div>
+            <div class="section-title">Springdale</div>
+            <div class="section-subtitle">11627 Springfield Pike, Springdale, OH 45246 · (513) 376-7129</div>
+          </div>
+        </div>
+
+        <div class="location-header">
+          <div>
+            <div class="location-name">Super Laundry Springdale</div>
+            <div class="location-address">11627 Springfield Pike, Springdale, OH 45246</div>
+          </div>
+          <div class="location-phone">(513) 376-7129</div>
+        </div>
+        <div class="location-body">
+
+          <div class="field">
+            <div class="field-label">
+              Hours
+            </div>
+            <table class="hours-table">
+              <tr><td>Monday</td><td>7:00 AM – 10:00 PM</td></tr>
+              <tr><td>Tuesday</td><td>7:00 AM – 10:00 PM</td></tr>
+              <tr><td>Wednesday</td><td>7:00 AM – 10:00 PM</td></tr>
+              <tr><td>Thursday</td><td>7:00 AM – 10:00 PM</td></tr>
+              <tr><td>Friday</td><td><span class="hours-badge">Open from 7:00 AM → through weekend</span></td></tr>
+              <tr><td>Saturday</td><td><span class="hours-badge">Open 24 hours</span></td></tr>
+              <tr><td>Sunday</td><td><span class="hours-badge">Closes at 10:00 PM</span></td></tr>
+            </table>
+            <div class="note">Fri–Sun: store stays open continuously — no overnight closing. Set Friday as 7:00 AM – 12:00 AM (midnight), Saturday as Open 24 hours, Sunday as 12:00 AM – 10:00 PM in GBP.</div>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">
+              Business Description
+              <span class="char-count">726 / 750 chars</span>
+            </div>
+            <div class="copy-box" id="desc-springdale">Super Laundry Springdale — Cincinnati's largest laundromat network. 100+ commercial washers and dryers, 2-load to 8-load capacity for comforters, rugs, and big family loads. Open Monday–Thursday 7 AM–10 PM. Open continuously from Friday 7 AM through Sunday 10 PM — no overnight closing. Self-service, drop-off wash-dry-fold, and laundry pickup and delivery available. Pay your way: tap, Apple Pay, card, or cash. Spend $30, earn $3 back through our rewards program. Attendants on site. Free parking at the door.</div>
+            <button class="copy-btn" onclick="copyField('desc-springdale', this)">Copy</button>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Services</div>
+            <div class="services-list">
+              <div class="service-item">
+                <div class="service-category">Self-Service Laundry</div>
+                <div class="service-desc">
+                  100+ commercial washers and dryers — 2-load to 8-load capacity. Perfect for comforters, rugs, and full family loads. Pay by tap, Apple Pay, credit card, or cash. No quarters needed.
+                  <button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button>
+                </div>
+              </div>
+              <div class="service-item">
+                <div class="service-category">Drop-Off Wash-Dry-Fold</div>
+                <div class="service-desc">
+                  Drop off your laundry, we handle everything. Washed, dried, and folded — most orders ready same-day or next-day. No appointment needed. Just bring your items during staffed hours.
+                  <button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button>
+                </div>
+              </div>
+              <div class="service-item">
+                <div class="service-category">Laundry Pickup &amp; Delivery</div>
+                <div class="service-desc">
+                  We pick up your laundry, wash and fold everything, and deliver it back to your door. Available from our Springdale location. Schedule in advance — same-day subject to availability.
+                  <button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Q&amp;A — Pre-Populate These in GBP</div>
+            <div class="qa-list">
+              <div class="qa-item">
+                <div class="qa-q">Do you offer laundry pickup and delivery?</div>
+                <div class="qa-a">Yes — Springdale is our pickup and delivery location. We pick up your laundry, wash and fold everything, and bring it back to you. Schedule in advance; same-day pickup is subject to availability.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div>
+              </div>
+              <div class="qa-item">
+                <div class="qa-q">What are your weekend hours?</div>
+                <div class="qa-a">We stay open continuously from Friday at 7 AM straight through to Sunday at 10 PM — no overnight closing on the weekend.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div>
+              </div>
+              <div class="qa-item">
+                <div class="qa-q">Do you need quarters to use the machines?</div>
+                <div class="qa-a">No quarters needed. Our machines accept tap to pay, Apple Pay, Google Pay, credit card, debit card, and cash — right on the washer.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div>
+              </div>
+              <div class="qa-item">
+                <div class="qa-q">Do you offer a rewards program?</div>
+                <div class="qa-a">Yes. At Springdale, spend $30 and get $3 back — automatically added to your account every time. Use the Super Laundry app to track your balance.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div>
+              </div>
+              <div class="qa-item">
+                <div class="qa-q">Is there parking?</div>
+                <div class="qa-a">Yes — free parking right at the door.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div>
+              </div>
+              <div class="qa-item">
+                <div class="qa-q">Are attendants on site?</div>
+                <div class="qa-a">Yes — attendants are on site during all open hours.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div>
+              </div>
+              <div class="qa-item">
+                <div class="qa-q">How big are the machines?</div>
+                <div class="qa-a">We have 100+ machines ranging from 2-load to 8-load capacity. Large-capacity machines handle king comforters, rugs, sleeping bags, and bulky items.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Photos to Upload</div>
+            <div class="photo-list">
+              <div class="photo-item cover"><div class="photo-icon">★</div><span>Exterior storefront — <strong>set as cover photo</strong></span><span class="photo-filename">springdale-web.webp</span></div>
+              <div class="photo-item"><div class="photo-icon">📷</div><span>Interior — machines in rows</span></div>
+              <div class="photo-item"><div class="photo-icon">📷</div><span>Payment terminal / machine control panel</span></div>
+              <div class="photo-item"><div class="photo-icon">📷</div><span>Folding tables area</span></div>
+              <div class="photo-item"><div class="photo-icon">📷</div><span>Pickup &amp; delivery photo (bag, handoff, or van)</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- AVONDALE -->
+      <div class="section section-anchor" id="avondale">
+        <div class="section-header">
+          <div class="section-number">03</div>
+          <div>
+            <div class="section-title">Avondale</div>
+            <div class="section-subtitle">3545 Reading Rd, Cincinnati, OH 45229 · (513) 873-5939</div>
+          </div>
+        </div>
+
+        <div class="location-header">
+          <div>
+            <div class="location-name">Super Laundry Avondale</div>
+            <div class="location-address">3545 Reading Rd, Cincinnati, OH 45229</div>
+          </div>
+          <div class="location-phone">(513) 873-5939</div>
+        </div>
+        <div class="location-body">
+
+          <div class="field">
+            <div class="field-label">Hours</div>
+            <div class="hours-badge">Open 24 hours, 7 days a week — including holidays</div>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">
+              Business Description
+              <span class="char-count">744 / 750 chars</span>
+            </div>
+            <div class="copy-box" id="desc-avondale">Super Laundry Avondale — open 24 hours a day, 7 days a week. 100+ commercial washers and dryers, 2-load to 8-load capacity for comforters, rugs, and full family loads. Self-service laundry and drop-off wash-dry-fold available. Pay your way: tap, Apple Pay, card, or cash — no quarters needed. Load $20 onto your account and get a free dollar through our rewards program. Attendants on site. Free parking at the door. Home of the monthly Laundry Love Cincinnati free wash event — 2nd Wednesday of every month, 6–8 PM.</div>
+            <button class="copy-btn" onclick="copyField('desc-avondale', this)">Copy</button>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Services</div>
+            <div class="services-list">
+              <div class="service-item">
+                <div class="service-category">Self-Service Laundry</div>
+                <div class="service-desc">Open 24/7. 100+ commercial washers and dryers — 2-load to 8-load capacity. Pay by tap, Apple Pay, credit card, or cash. No quarters needed.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div>
+              </div>
+              <div class="service-item">
+                <div class="service-category">Drop-Off Wash-Dry-Fold</div>
+                <div class="service-desc">Drop off your laundry, we handle everything. Washed, dried, and folded — most orders ready same-day or next-day. No appointment needed.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div>
+              </div>
+              <div class="service-item">
+                <div class="service-category">Laundry Love Free Wash</div>
+                <div class="service-desc">Super Laundry Avondale hosts a monthly free laundry event for families in need through Laundry Love Cincinnati. Every 2nd Wednesday of the month, 6–8 PM. Individuals: up to 2 loads free. Families: up to 4 loads free.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Q&amp;A</div>
+            <div class="qa-list">
+              <div class="qa-item"><div class="qa-q">Are you really open 24 hours?</div><div class="qa-a">Yes — Super Laundry Avondale is open 24 hours a day, 7 days a week, including weekends and holidays. No exceptions.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">Do you need quarters to use the machines?</div><div class="qa-a">No quarters needed. Our machines accept tap to pay, Apple Pay, Google Pay, credit card, debit card, and cash.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">Do you offer drop-off laundry service?</div><div class="qa-a">Yes — drop your laundry off with an attendant and come back to it washed, dried, and folded. Most orders are ready same-day or next-day. No appointment needed.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">What is Laundry Love?</div><div class="qa-a">Laundry Love Cincinnati is a nonprofit program providing free laundry to families facing financial hardship. We host a free wash event every 2nd Wednesday of the month from 6–8 PM. Individuals: up to 2 loads free. Families: up to 4 loads — completely free.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">Do you have a rewards program?</div><div class="qa-a">Yes. Load $20 onto your account and get a free dollar added automatically. Use the Super Laundry app to manage your balance.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">Is there parking?</div><div class="qa-a">Yes — free parking right at the door.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">How big are the machines?</div><div class="qa-a">We have 100+ machines ranging from 2-load to 8-load capacity. Large-capacity machines handle king comforters, rugs, sleeping bags, and bulky items.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+            </div>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Photos to Upload</div>
+            <div class="photo-list">
+              <div class="photo-item cover"><div class="photo-icon">★</div><span>Exterior storefront — <strong>set as cover photo</strong></span><span class="photo-filename">avondale-ext.webp</span></div>
+              <div class="photo-item"><div class="photo-icon">📷</div><span>Interior — machines in rows</span></div>
+              <div class="photo-item"><div class="photo-icon">📷</div><span>Payment terminal / machine control panel</span></div>
+              <div class="photo-item"><div class="photo-icon">📷</div><span>Laundry Love event photo (if available)</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- BOND HILL -->
+      <div class="section section-anchor" id="bond-hill">
+        <div class="section-header">
+          <div class="section-number">04</div>
+          <div>
+            <div class="section-title">Bond Hill</div>
+            <div class="section-subtitle">4368 Reading Rd, Cincinnati, OH 45229 · (513) 531-4131</div>
+          </div>
+        </div>
+
+        <div class="location-header">
+          <div>
+            <div class="location-name">Super Laundry Bond Hill</div>
+            <div class="location-address">4368 Reading Rd, Cincinnati, OH 45229</div>
+          </div>
+          <div class="location-phone">(513) 531-4131</div>
+        </div>
+        <div class="location-body">
+
+          <div class="field">
+            <div class="field-label">Hours</div>
+            <div class="hours-badge">Open 24 hours, 7 days a week — including holidays</div>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Business Description <span class="char-count">694 / 750 chars</span></div>
+            <div class="copy-box" id="desc-bond-hill">Super Laundry Bond Hill — open 24 hours a day, 7 days a week. 100+ commercial washers and dryers, 2-load to 8-load capacity for comforters, rugs, and full family loads. Self-service laundry and drop-off wash-dry-fold available. Pay your way: tap, Apple Pay, card, or cash — no quarters needed. Load $20 onto your account and get a free dollar through our rewards program. Attendants on site. Free parking at the door. One of 6 Super Laundry locations serving Cincinnati's neighborhoods.</div>
+            <button class="copy-btn" onclick="copyField('desc-bond-hill', this)">Copy</button>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Services</div>
+            <div class="services-list">
+              <div class="service-item"><div class="service-category">Self-Service Laundry</div><div class="service-desc">Open 24/7. 100+ commercial washers and dryers — 2-load to 8-load capacity. Pay by tap, Apple Pay, credit card, or cash. No quarters needed.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="service-item"><div class="service-category">Drop-Off Wash-Dry-Fold</div><div class="service-desc">Drop off your laundry, we handle everything. Washed, dried, and folded — most orders ready same-day or next-day. No appointment needed.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+            </div>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Q&amp;A</div>
+            <div class="qa-list">
+              <div class="qa-item"><div class="qa-q">Are you really open 24 hours?</div><div class="qa-a">Yes — Super Laundry Bond Hill is open 24 hours a day, 7 days a week, including weekends and holidays.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">Do you need quarters to use the machines?</div><div class="qa-a">No quarters needed. Our machines accept tap to pay, Apple Pay, Google Pay, credit card, debit card, and cash.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">Do you offer drop-off laundry service?</div><div class="qa-a">Yes — drop your laundry off with an attendant and come back to it washed, dried, and folded. Most orders ready same-day or next-day. No appointment needed.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">Do you have a rewards program?</div><div class="qa-a">Yes. Load $20 onto your account and get a free dollar added automatically. Use the Super Laundry app to manage your balance.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">Is there parking?</div><div class="qa-a">Yes — free parking right at the door.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">How big are the machines?</div><div class="qa-a">We have 100+ machines ranging from 2-load to 8-load capacity — perfect for comforters, rugs, sleeping bags, and big family loads.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+            </div>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Photos to Upload</div>
+            <div class="photo-list">
+              <div class="photo-item cover"><div class="photo-icon">★</div><span>Exterior storefront — <strong>set as cover photo</strong></span><span class="photo-filename">bondhill3-web.webp</span></div>
+              <div class="photo-item"><div class="photo-icon">📷</div><span>Interior — machines in rows</span></div>
+              <div class="photo-item"><div class="photo-icon">📷</div><span>Payment terminal / machine control panel</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- WESTWOOD -->
+      <div class="section section-anchor" id="westwood">
+        <div class="section-header">
+          <div class="section-number">05</div>
+          <div>
+            <div class="section-title">Westwood</div>
+            <div class="section-subtitle">2455 Harrison Ave, Cincinnati, OH 45211 · (513) 481-9595</div>
+          </div>
+        </div>
+
+        <div class="location-header">
+          <div>
+            <div class="location-name">Super Laundry Westwood</div>
+            <div class="location-address">2455 Harrison Ave, Cincinnati, OH 45211</div>
+          </div>
+          <div class="location-phone">(513) 481-9595</div>
+        </div>
+        <div class="location-body">
+
+          <div class="field">
+            <div class="field-label">Hours</div>
+            <div class="hours-badge">Open 24 hours, 7 days a week — including holidays</div>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Business Description <span class="char-count">745 / 750 chars</span></div>
+            <div class="copy-box" id="desc-westwood">Super Laundry Westwood — open 24 hours a day, 7 days a week. 100+ commercial washers and dryers, 2-load to 8-load capacity for comforters, rugs, and full family loads. Self-service laundry and drop-off wash-dry-fold available. Pay your way: tap, Apple Pay, card, or cash — no quarters needed. Load $20 onto your account and get a free dollar through our rewards program. Attendants on site. Free parking at the door. Home of the monthly Laundry Love Cincinnati free wash event — 2nd Wednesday of every month, 6–8 PM.</div>
+            <button class="copy-btn" onclick="copyField('desc-westwood', this)">Copy</button>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Services</div>
+            <div class="services-list">
+              <div class="service-item"><div class="service-category">Self-Service Laundry</div><div class="service-desc">Open 24/7. 100+ commercial washers and dryers — 2-load to 8-load capacity. Pay by tap, Apple Pay, credit card, or cash. No quarters needed.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="service-item"><div class="service-category">Drop-Off Wash-Dry-Fold</div><div class="service-desc">Drop off your laundry, we handle everything. Washed, dried, and folded — most orders ready same-day or next-day. No appointment needed.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="service-item"><div class="service-category">Laundry Love Free Wash</div><div class="service-desc">Super Laundry Westwood hosts a monthly free laundry event for families in need through Laundry Love Cincinnati. Every 2nd Wednesday of the month, 6–8 PM. Individuals: up to 2 loads free. Families: up to 4 loads free.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+            </div>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Q&amp;A</div>
+            <div class="qa-list">
+              <div class="qa-item"><div class="qa-q">Are you really open 24 hours?</div><div class="qa-a">Yes — Super Laundry Westwood is open 24 hours a day, 7 days a week, including weekends and holidays.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">Do you need quarters to use the machines?</div><div class="qa-a">No quarters needed. Our machines accept tap to pay, Apple Pay, Google Pay, credit card, debit card, and cash.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">Do you offer drop-off laundry service?</div><div class="qa-a">Yes — drop your laundry off with an attendant and come back to it washed, dried, and folded. Most orders ready same-day or next-day. No appointment needed.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">What is Laundry Love?</div><div class="qa-a">Laundry Love Cincinnati is a nonprofit program providing free laundry to families facing financial hardship. We host a free wash event every 2nd Wednesday of the month from 6–8 PM. Individuals: up to 2 loads free. Families: up to 4 loads — completely free.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">Do you have a rewards program?</div><div class="qa-a">Yes. Load $20 onto your account and get a free dollar added automatically. Use the Super Laundry app to manage your balance.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">Is there parking?</div><div class="qa-a">Yes — free parking right at the door.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">How big are the machines?</div><div class="qa-a">We have 100+ machines ranging from 2-load to 8-load capacity — perfect for comforters, rugs, sleeping bags, and big family loads.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+            </div>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Photos to Upload</div>
+            <div class="photo-list">
+              <div class="photo-item cover"><div class="photo-icon">★</div><span>Exterior storefront — <strong>set as cover photo</strong></span><span class="photo-filename">westwood-ext.webp</span></div>
+              <div class="photo-item"><div class="photo-icon">📷</div><span>Interior</span><span class="photo-filename">westwood-int.webp</span></div>
+              <div class="photo-item"><div class="photo-icon">📷</div><span>Second interior angle</span><span class="photo-filename">westwood-int2.webp</span></div>
+              <div class="photo-item"><div class="photo-icon">📷</div><span>Laundry Love event photo (if available)</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- NORTH COLLEGE HILL -->
+      <div class="section section-anchor" id="nch">
+        <div class="section-header">
+          <div class="section-number">06</div>
+          <div>
+            <div class="section-title">North College Hill</div>
+            <div class="section-subtitle">1585 Goodman Ave, Cincinnati, OH 45224 · (513) 729-8888</div>
+          </div>
+        </div>
+
+        <div class="location-header">
+          <div>
+            <div class="location-name">Super Laundry North College Hill</div>
+            <div class="location-address">1585 Goodman Ave, Cincinnati, OH 45224</div>
+          </div>
+          <div class="location-phone">(513) 729-8888</div>
+        </div>
+        <div class="location-body">
+
+          <div class="field">
+            <div class="field-label">Hours</div>
+            <div class="hours-badge">Open 24 hours, 7 days a week — including holidays</div>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Business Description <span class="char-count">699 / 750 chars</span></div>
+            <div class="copy-box" id="desc-nch">Super Laundry North College Hill — open 24 hours a day, 7 days a week. 100+ commercial washers and dryers, 2-load to 8-load capacity for comforters, rugs, and full family loads. Self-service laundry and drop-off wash-dry-fold available. Pay your way: tap, Apple Pay, card, or cash — no quarters needed. Load $20 onto your account and get a free dollar through our rewards program. Attendants on site. Free parking at the door. One of 6 Super Laundry locations serving Cincinnati's neighborhoods.</div>
+            <button class="copy-btn" onclick="copyField('desc-nch', this)">Copy</button>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Services</div>
+            <div class="services-list">
+              <div class="service-item"><div class="service-category">Self-Service Laundry</div><div class="service-desc">Open 24/7. 100+ commercial washers and dryers — 2-load to 8-load capacity. Pay by tap, Apple Pay, credit card, or cash. No quarters needed.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="service-item"><div class="service-category">Drop-Off Wash-Dry-Fold</div><div class="service-desc">Drop off your laundry, we handle everything. Washed, dried, and folded — most orders ready same-day or next-day. No appointment needed.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+            </div>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Q&amp;A</div>
+            <div class="qa-list">
+              <div class="qa-item"><div class="qa-q">Are you really open 24 hours?</div><div class="qa-a">Yes — Super Laundry North College Hill is open 24 hours a day, 7 days a week, including weekends and holidays.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">Do you need quarters to use the machines?</div><div class="qa-a">No quarters needed. Our machines accept tap to pay, Apple Pay, Google Pay, credit card, debit card, and cash.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">Do you offer drop-off laundry service?</div><div class="qa-a">Yes — drop your laundry off with an attendant and come back to it washed, dried, and folded. Most orders ready same-day or next-day. No appointment needed.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">Do you have a rewards program?</div><div class="qa-a">Yes. Load $20 onto your account and get a free dollar added automatically. Use the Super Laundry app to manage your balance.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">Is there parking?</div><div class="qa-a">Yes — free parking right at the door.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">How big are the machines?</div><div class="qa-a">We have 100+ machines ranging from 2-load to 8-load capacity — perfect for comforters, rugs, sleeping bags, and big family loads.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+            </div>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Photos to Upload</div>
+            <div class="photo-list">
+              <div class="photo-item cover"><div class="photo-icon">★</div><span>Exterior storefront — <strong>set as cover photo</strong></span><span class="photo-filename">north-college-ext.webp</span></div>
+              <div class="photo-item"><div class="photo-icon">📷</div><span>Exterior — second angle</span><span class="photo-filename">north-college-ext2.webp</span></div>
+              <div class="photo-item"><div class="photo-icon">📷</div><span>Interior</span><span class="photo-filename">north-college-int.webp</span></div>
+              <div class="photo-item"><div class="photo-icon">📷</div><span>Interior — second angle</span><span class="photo-filename">north-college-int2.webp</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ALLISON STREET -->
+      <div class="section section-anchor" id="allison">
+        <div class="section-header">
+          <div class="section-number">07</div>
+          <div>
+            <div class="section-title">Allison Street</div>
+            <div class="section-subtitle">4522 Allison St, Cincinnati, OH 45212 · No phone on file</div>
+          </div>
+        </div>
+
+        <div class="alert">This location is different from the other five. No rewards program. No drop-off wash-dry-fold. Coin machines on site. Last load at 10 PM. Make sure none of the other location's content bleeds into this one.</div>
+
+        <div class="location-header">
+          <div>
+            <div class="location-name">Super Laundry Allison Street</div>
+            <div class="location-address">4522 Allison St, Cincinnati, OH 45212</div>
+          </div>
+          <div class="location-phone">No phone — add if available</div>
+        </div>
+        <div class="location-body">
+
+          <div class="field">
+            <div class="field-label">Hours</div>
+            <table class="hours-table">
+              <tr><td>Monday – Sunday</td><td><span class="hours-badge amber">6:00 AM – 11:00 PM</span></td></tr>
+            </table>
+            <div class="note">Last load must be started by 10 PM. Store closes at 11 PM.</div>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Business Description <span class="char-count">644 / 750 chars</span></div>
+            <div class="copy-box" id="desc-allison">Super Laundry Allison Street — open 6 AM to 11 PM daily. 100+ washers and dryers, 2-load to 8-load capacity for comforters, rugs, and full family loads. Self-service laundry. Pay your way: tap, Apple Pay, credit card, debit card, or cash — coin machines also available on site. Free parking at the door. One of 6 Super Laundry locations serving Cincinnati's neighborhoods. Note: Last load must be started by 10 PM.</div>
+            <button class="copy-btn" onclick="copyField('desc-allison', this)">Copy</button>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Services</div>
+            <div class="services-list">
+              <div class="service-item"><div class="service-category">Self-Service Laundry</div><div class="service-desc">100+ washers and dryers, 2-load to 8-load capacity. Pay by tap, Apple Pay, credit card, cash, or coin. Last load by 10 PM. Open 6 AM–11 PM daily.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+            </div>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Q&amp;A</div>
+            <div class="qa-list">
+              <div class="qa-item"><div class="qa-q">What time is the last load?</div><div class="qa-a">The last load must be started by 10 PM. The store closes at 11 PM.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">Do you accept quarters / coins?</div><div class="qa-a">Yes — Allison Street is our coin-operated location. Coin machines are on site. We also accept tap to pay, Apple Pay, Google Pay, credit card, and cash directly on the machines.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">Do you offer drop-off wash-dry-fold?</div><div class="qa-a">Drop-off wash-dry-fold is not available at Allison Street. It's available at our Springdale, Avondale, Bond Hill, Westwood, and North College Hill locations.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">Is there parking?</div><div class="qa-a">Yes — free parking right at the door.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">How big are the machines?</div><div class="qa-a">We have 100+ machines ranging from 2-load to 8-load capacity — perfect for comforters, rugs, sleeping bags, and big family loads.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+              <div class="qa-item"><div class="qa-q">Do you have a rewards program?</div><div class="qa-a">The rewards program is not available at Allison Street. It's available at our other 5 Cincinnati locations.<button class="copy-btn" onclick="copyField(this.previousSibling, this)">Copy</button></div></div>
+            </div>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field">
+            <div class="field-label">Photos to Upload</div>
+            <div class="photo-list">
+              <div class="photo-item cover"><div class="photo-icon">★</div><span>Exterior storefront — <strong>set as cover photo</strong></span><span class="photo-filename">allison-web.webp</span></div>
+              <div class="photo-item"><div class="photo-icon">📷</div><span>Interior</span><span class="photo-filename">Alison int.webp</span></div>
+              <div class="photo-item"><div class="photo-icon">📷</div><span>Coin machine / payment terminal</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- MONTHLY -->
+      <div class="section section-anchor" id="monthly">
+        <div class="section-header">
+          <div class="section-number">08</div>
+          <div>
+            <div class="section-title">Monthly Upkeep</div>
+            <div class="section-subtitle">Post at least 2x per month per listing. Respond to every review within 48 hours.</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="field-label">Post Templates — What's New</div>
+          <div class="post-template" id="post-1">
+            Springdale is now open all weekend — continuously from Friday 7 AM through Sunday 10 PM. No overnight closing. Come in any time.
+            <button class="copy-btn" onclick="copyField('post-1', this)">Copy</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="field-label">Post Templates — Rewards</div>
+          <div class="post-template" id="post-2">
+            Spend $30 at Springdale, earn $3 back — automatically, every time. Download the Super Laundry app to track your balance and pay on any machine.
+            <button class="copy-btn" onclick="copyField('post-2', this)">Copy</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="field-label">Post Templates — Laundry Love (Avondale + Westwood only)</div>
+          <div class="post-template" id="post-3">
+            Laundry Love Cincinnati is back at Super Laundry Westwood — 2nd Wednesday of the month, 6–8 PM. Free laundry for families in need. Individuals: up to 2 loads. Families: up to 4 loads. No sign-up required.
+            <button class="copy-btn" onclick="copyField('post-3', this)">Copy</button>
+          </div>
+        </div>
+
+        <hr class="field-divider">
+
+        <div class="field">
+          <div class="field-label">Review Response — Positive</div>
+          <div class="copy-box" id="review-pos">Thank you for the kind words, [Name]! We're glad you had a great experience at Super Laundry [Location]. See you next time!</div>
+          <button class="copy-btn" onclick="copyField('review-pos', this)">Copy</button>
+        </div>
+
+        <div class="field">
+          <div class="field-label">Review Response — Negative</div>
+          <div class="copy-box" id="review-neg">We're sorry to hear about your experience, [Name]. This isn't what we expect at Super Laundry [Location]. Please reach out to us at info@superlaundry24.com so we can make it right.</div>
+          <button class="copy-btn" onclick="copyField('review-neg', this)">Copy</button>
+        </div>
+
+      </div>
+
+      <!-- PRIORITY -->
+      <div class="section section-anchor" id="priority">
+        <div class="section-header">
+          <div class="section-number">09</div>
+          <div>
+            <div class="section-title">Implementation Order</div>
+            <div class="section-subtitle">Do these in sequence for maximum impact.</div>
+          </div>
+        </div>
+
+        <div class="priority-list">
+          <div class="priority-item"><div class="priority-num">1</div><div class="priority-text"><strong>Fix business names</strong><span>Naming inconsistency is the single biggest entity-recognition issue. Do this before anything else.</span></div></div>
+          <div class="priority-item"><div class="priority-num">2</div><div class="priority-text"><strong>Update hours</strong><span>Especially Springdale's new continuous Fri–Sun hours.</span></div></div>
+          <div class="priority-item"><div class="priority-num">3</div><div class="priority-text"><strong>Add business descriptions</strong><span>Copy/paste from the boxes above into each listing.</span></div></div>
+          <div class="priority-item"><div class="priority-num">4</div><div class="priority-text"><strong>Add secondary categories</strong><span>Two minutes per listing — big impact on what searches you appear for.</span></div></div>
+          <div class="priority-item"><div class="priority-num">5</div><div class="priority-text"><strong>Update website URLs</strong><span>Point each listing to its own location page, not the homepage.</span></div></div>
+          <div class="priority-item"><div class="priority-num">6</div><div class="priority-text"><strong>Pre-populate Q&amp;A</strong><span>Log in as the owner and add the questions yourself so the right answers are there before customers ask.</span></div></div>
+          <div class="priority-item"><div class="priority-num">7</div><div class="priority-text"><strong>Upload photos</strong><span>At minimum: exterior + interior for each location. Filenames are listed above next to each photo item.</span></div></div>
+          <div class="priority-item"><div class="priority-num">8</div><div class="priority-text"><strong>Add services</strong><span>Fill in the Services section for each listing using the copy above.</span></div></div>
+          <div class="priority-item"><div class="priority-num">9</div><div class="priority-text"><strong>Start posting</strong><span>2x per month minimum going forward. Use the templates in the Monthly Upkeep section.</span></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function copyField(sourceOrId, btn) {
+      let text = '';
+      if (typeof sourceOrId === 'string') {
+        const el = document.getElementById(sourceOrId);
+        text = el ? el.innerText.replace(/Copy$/, '').trim() : '';
+      } else {
+        // passed a DOM element (text node sibling)
+        const el = sourceOrId;
+        text = el.innerText ? el.innerText.trim() : el.textContent.trim();
+      }
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    // Sidebar active state on scroll
+    const sections = document.querySelectorAll('.section-anchor');
+    const links = document.querySelectorAll('.sidebar-link');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links.forEach(l => l.classList.remove('active'));
+          const id = entry.target.id;
+          const active = document.querySelector(`.sidebar-link[href="#${id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { threshold: 0.3 });
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>

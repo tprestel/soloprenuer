@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEO + AI SEO Audit — Super Laundry Cincinnati</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green-dark: #1C4A25;
+      --green-mid: #2D7F3C;
+      --green-light: #4CAF5C;
+      --green-pale: #E8F5EA;
+      --cream: #F8F7F4;
+      --sand: #EDE9E1;
+      --charcoal: #1A1A1A;
+      --ink: #2C2C2C;
+      --muted: #6B7280;
+      --border: #D9D4CA;
+      --white: #FFFFFF;
+
+      --red: #C0392B;
+      --red-pale: #FDECEA;
+      --amber: #D97706;
+      --amber-pale: #FEF3C7;
+      --blue: #1E5FAD;
+      --blue-pale: #EBF2FF;
+
+      --pass: #2D7F3C;
+      --pass-bg: #E8F5EA;
+      --warn: #D97706;
+      --warn-bg: #FEF3C7;
+      --fail: #C0392B;
+      --fail-bg: #FDECEA;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* HEADER */
+    .report-header {
+      background: var(--green-dark);
+      color: white;
+      padding: 56px 48px 48px;
+    }
+
+    .header-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .report-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 16px;
+    }
+
+    .report-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.1;
+      color: white;
+      margin-bottom: 8px;
+    }
+
+    .report-subtitle {
+      font-size: 17px;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 40px;
+    }
+
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .meta-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .meta-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .meta-value {
+      font-size: 14px;
+      color: rgba(255,255,255,0.85);
+      font-weight: 500;
+    }
+
+    .meta-value a {
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* SCORE BANNER */
+    .score-banner {
+      background: var(--green-mid);
+      padding: 40px 48px;
+    }
+
+    .score-banner-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .overall-score {
+      text-align: center;
+    }
+
+    .score-ring {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 6px solid rgba(255,255,255,0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.1);
+      position: relative;
+    }
+
+    .score-ring::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 6px solid transparent;
+      border-top-color: white;
+      border-right-color: white;
+      border-bottom-color: rgba(255,255,255,0.3);
+    }
+
+    .score-number {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 36px;
+      font-weight: 600;
+      color: white;
+      line-height: 1;
+    }
+
+    .score-denom {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .score-label {
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .category-scores {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .cat-score {
+      background: rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+
+    .cat-score-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 8px;
+    }
+
+    .cat-score-bar-wrap {
+      height: 6px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 3px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .cat-score-bar {
+      height: 100%;
+      background: white;
+      border-radius: 3px;
+      transition: width 0.8s ease;
+    }
+
+    .cat-score-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 22px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .cat-score-prev {
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 2px;
+    }
+
+    .cat-score-delta {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      padding: 1px 5px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.75);
+      margin-left: 4px;
+    }
+
+    /* MAIN CONTENT */
+    .content {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+    }
+
+    section {
+      padding-top: 56px;
+    }
+
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      color: var(--green-dark);
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 32px;
+    }
+
+    /* EXECUTIVE SUMMARY */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .summary-card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px 28px;
+      border: 1px solid var(--border);
+    }
+
+    .summary-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--green-dark);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .summary-card h3 .icon {
+      font-size: 20px;
+    }
+
+    .summary-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .summary-card ul li {
+      font-size: 14px;
+      color: var(--ink);
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .summary-card ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--green-mid);
+      font-size: 12px;
+    }
+
+    /* FIXES COMPLETED */
+    .fixes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .fix-item {
+      background: var(--pass-bg);
+      border: 1px solid #B7D9BC;
+      border-radius: 10px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .fix-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--pass);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .fix-text {
+      font-size: 13.5px;
+      color: var(--green-dark);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .fix-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+      font-weight: 400;
+    }
+
+    /* FINDING CARDS */
+    .finding {
+      background: white;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+
+    .finding-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      padding: 18px 24px;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    .finding-title-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .severity {
+      display: inline-flex;
+      align-items: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .severity-high { background: var(--fail-bg); color: var(--fail); }
+    .severity-medium { background: var(--amber-pale); color: var(--amber); }
+    .severity-low { background: var(--blue-pale); color: var(--blue); }
+    .severity-pass { background: var(--pass-bg); color: var(--pass); }
+
+    .finding-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    .finding-body {
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .finding-row {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 12px;
+      font-size: 14px;
+    }
+
+    .finding-row-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 2px;
+    }
+
+    .finding-row-value {
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .finding-row-value strong {
+      color: var(--charcoal);
+    }
+
+    code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      background: var(--sand);
+      padding: 2px 6px;
+      border-radius: 3px;
+      color: var(--green-dark);
+    }
+
+    /* TECHNICAL CHECKS TABLE */
+    .check-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .check-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: left;
+      padding: 10px 16px;
+      background: var(--sand);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .check-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .check-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .check-table tr:hover td {
+      background: var(--cream);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .status-pass { background: var(--pass-bg); color: var(--pass); }
+    .status-warn { background: var(--amber-pale); color: var(--amber); }
+    .status-fail { background: var(--fail-bg); color: var(--fail); }
+
+    /* META REVIEW TABLE */
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .meta-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: left;
+      padding: 10px 12px;
+      background: var(--sand);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .meta-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .meta-table tr:last-child td { border-bottom: none; }
+    .meta-table tr:hover td { background: #fafaf8; }
+
+    .char-count {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .char-ok { color: var(--pass); }
+    .char-warn { color: var(--amber); }
+    .char-bad { color: var(--fail); }
+
+    .page-slug {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* KEYWORD TABLE */
+    .kw-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+
+    .kw-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: left;
+      padding: 10px 14px;
+      background: var(--sand);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .kw-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .kw-table tr:last-child td { border-bottom: none; }
+    .kw-table tr:hover td { background: #fafaf8; }
+
+    .kw-vol {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    .kw-rank {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+    }
+
+    .kw-rank-none { color: var(--fail); }
+    .kw-rank-poor { color: var(--amber); }
+    .kw-rank-ok { color: var(--pass); }
+
+    .coverage-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    .dot-good { background: var(--pass); }
+    .dot-warn { background: var(--amber); }
+    .dot-none { background: var(--fail); }
+
+    /* ACTION PLAN */
+    .action-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 26px;
+      margin-bottom: 14px;
+      display: grid;
+      grid-template-columns: 40px 1fr auto;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .action-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--green-mid);
+      line-height: 1;
+      padding-top: 2px;
+    }
+
+    .action-content h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 6px;
+    }
+
+    .action-content p {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .action-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+
+    .effort-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .effort-easy { background: var(--pass-bg); color: var(--pass); }
+    .effort-medium { background: var(--amber-pale); color: var(--amber); }
+    .effort-hard { background: var(--fail-bg); color: var(--fail); }
+
+    .impact-tag {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* SCHEMA GRID */
+    .schema-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .schema-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+    }
+
+    .schema-page {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .schema-types {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .schema-type {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 3px;
+      background: var(--green-pale);
+      color: var(--green-dark);
+      font-weight: 600;
+    }
+
+    .schema-type.warn {
+      background: var(--amber-pale);
+      color: var(--amber);
+    }
+
+    /* INSIGHT CALLOUT */
+    .insight {
+      background: var(--green-pale);
+      border-left: 4px solid var(--green-mid);
+      border-radius: 0 10px 10px 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-size: 14px;
+      color: var(--green-dark);
+      line-height: 1.55;
+    }
+
+    .insight strong {
+      font-weight: 700;
+    }
+
+    .warn-callout {
+      background: var(--amber-pale);
+      border-left: 4px solid var(--amber);
+      border-radius: 0 10px 10px 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-size: 14px;
+      color: #92400E;
+      line-height: 1.55;
+    }
+
+    /* LOCATION ACCURACY */
+    .location-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px;
+    }
+
+    .location-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 22px;
+    }
+
+    .location-card-name {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--green-dark);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .loc-check {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--pass);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    .location-detail {
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 5px;
+    }
+
+    .location-detail-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      min-width: 54px;
+      flex-shrink: 0;
+    }
+
+    /* AI SEO SECTION */
+    .ai-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .ai-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+    }
+
+    .ai-card-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .ai-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 10px;
+    }
+
+    .ai-card-body {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .ai-card.pass-card {
+      border-color: #B7D9BC;
+      background: var(--pass-bg);
+    }
+
+    .ai-card.pass-card .ai-card-title { color: var(--green-dark); }
+    .ai-card.pass-card .ai-card-body { color: #3A6B42; }
+    .ai-card.pass-card .ai-card-label { color: var(--green-mid); }
+
+    .ai-card.warn-card {
+      border-color: #FCD34D;
+      background: var(--amber-pale);
+    }
+
+    .ai-card.warn-card .ai-card-title { color: #92400E; }
+    .ai-card.warn-card .ai-card-body { color: #78350F; }
+    .ai-card.warn-card .ai-card-label { color: var(--amber); }
+
+    /* FOOTER */
+    .report-footer {
+      background: var(--green-dark);
+      color: rgba(255,255,255,0.5);
+      padding: 32px 48px;
+      margin-top: 56px;
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 16px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .report-header, .score-banner, .content, .report-footer {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .score-banner-inner {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .category-scores {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .summary-grid, .ai-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .finding-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
+      .finding-row-label {
+        padding-top: 0;
+      }
+
+      .action-item {
+        grid-template-columns: 32px 1fr;
+      }
+
+      .action-meta {
+        display: none;
+      }
+
+      .meta-table, .kw-table, .check-table {
+        font-size: 12px;
+      }
+
+      .meta-table th, .kw-table th, .check-table th {
+        font-size: 9px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="report-header">
+    <div class="header-inner">
+      <div class="report-label">Full Site SEO + AI SEO Audit</div>
+      <h1 class="report-title">Super Laundry Cincinnati</h1>
+      <p class="report-subtitle">Pre-launch audit — HubSpot rebuild vs. superlaundry24.com</p>
+      <div class="header-meta">
+        <div class="meta-items">
+          <div class="meta-item">
+            <span class="meta-label">Site Audited</span>
+            <span class="meta-value"><a href="https://244988351.hs-sites-na2.com" target="_blank">244988351.hs-sites-na2.com</a></span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Production Domain</span>
+            <span class="meta-value">superlaundry24.com</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Pages Audited</span>
+            <span class="meta-value">19 pages</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Audit Date</span>
+            <span class="meta-value">March 27, 2026</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Status</span>
+            <span class="meta-value">Pre-launch — domain cutover pending</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCORE BANNER -->
+  <div class="score-banner">
+    <div class="score-banner-inner">
+      <div class="overall-score">
+        <div class="score-ring">
+          <div class="score-number">74</div>
+          <div class="score-denom">/100</div>
+        </div>
+        <div class="score-label">Overall Score</div>
+      </div>
+      <div class="category-scores">
+        <div class="cat-score">
+          <div class="cat-score-label">SEO Health</div>
+          <div class="cat-score-bar-wrap"><div class="cat-score-bar" style="width:68%"></div></div>
+          <div class="cat-score-num">68</div>
+          <div class="cat-score-prev">Was 55 <span class="cat-score-delta">+13</span></div>
+        </div>
+        <div class="cat-score">
+          <div class="cat-score-label">Location Data</div>
+          <div class="cat-score-bar-wrap"><div class="cat-score-bar" style="width:96%"></div></div>
+          <div class="cat-score-num">96</div>
+          <div class="cat-score-prev">Was 93 <span class="cat-score-delta">+3</span></div>
+        </div>
+        <div class="cat-score">
+          <div class="cat-score-label">AI SEO</div>
+          <div class="cat-score-bar-wrap"><div class="cat-score-bar" style="width:66%"></div></div>
+          <div class="cat-score-num">66</div>
+          <div class="cat-score-prev">Was 44 <span class="cat-score-delta">+22</span></div>
+        </div>
+        <div class="cat-score">
+          <div class="cat-score-label">Technical</div>
+          <div class="cat-score-bar-wrap"><div class="cat-score-bar" style="width:80%"></div></div>
+          <div class="cat-score-num">80</div>
+          <div class="cat-score-prev">Was 72 <span class="cat-score-delta">+8</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- EXECUTIVE SUMMARY -->
+    <section>
+      <div class="section-label">01 — Executive Summary</div>
+      <h2 class="section-title">Where things stand going into launch</h2>
+      <div class="section-divider"></div>
+
+      <div class="summary-grid">
+        <div class="summary-card">
+          <h3><span class="icon">✅</span> What's working</h3>
+          <ul>
+            <li>All 19 pages have H1 tags, canonical URLs pointing to production domain, and preconnect hints in place</li>
+            <li>All 6 location pages have Laundry schema, FAQPage schema, and BreadcrumbList structured data</li>
+            <li>All 4 service pages have Service schema and FAQPage schema</li>
+            <li>robots.txt allows all AI crawlers — a critical improvement over the old Squarespace site</li>
+            <li>85 images tagged with lazy/eager loading — hero images load eagerly for LCP, all below-fold images are lazy</li>
+            <li>Location data is accurate, complete, and consistent across all 6 locations</li>
+            <li>Keyword targeting is on-point: "wash and fold," "24 hour laundry," and neighborhood terms in titles and H1s</li>
+          </ul>
+        </div>
+        <div class="summary-card">
+          <h3><span class="icon">⚠️</span> Still needs attention</h3>
+          <ul>
+            <li>6 page titles exceed 60 characters — will truncate in Google SERPs</li>
+            <li>7 meta descriptions exceed 160 characters — will be cut off with "…" in search results</li>
+            <li>About and Contact pages use <code>Organization</code> schema — should be <code>LocalBusiness</code></li>
+            <li>Location pages use <code>Laundry</code> schema type — homepage uses <code>LaundryOrDryCleaning</code>, creating an inconsistency</li>
+            <li><code>/news</code> and <code>/blog</code> are in the sitemap but have no content — should be excluded pre-launch</li>
+            <li>No <code>AggregateRating</code> schema despite 1,200+ Google reviews across 6 locations</li>
+            <li>Near-zero non-brand organic rankings — baseline condition the rebuild addresses, but results take 3–6 months</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="insight">
+        <strong>Bottom line:</strong> The rebuild is in strong shape for launch. The critical blockers from the original audit — AI crawler blocks, missing H1s, no canonical URLs, bad location data — are resolved. The remaining issues are optimization-level work that won't block launch but will matter for ranking performance over the first 90 days.
+      </div>
+    </section>
+
+    <!-- FIXES SINCE LAST AUDIT -->
+    <section>
+      <div class="section-label">02 — Resolved Since Last Audit</div>
+      <h2 class="section-title">What was fixed</h2>
+      <div class="section-divider"></div>
+
+      <div class="fixes-grid">
+        <div class="fix-item">
+          <div class="fix-check">✓</div>
+          <div>
+            <div class="fix-text">Image lazy loading — 85 images</div>
+            <div class="fix-sub">75 lazy-loaded below-fold; 10 hero images set to eager for LCP</div>
+          </div>
+        </div>
+        <div class="fix-item">
+          <div class="fix-check">✓</div>
+          <div>
+            <div class="fix-text">Canonical URLs — all 19 pages</div>
+            <div class="fix-sub">All point to superlaundry24.com production domain</div>
+          </div>
+        </div>
+        <div class="fix-item">
+          <div class="fix-check">✓</div>
+          <div>
+            <div class="fix-text">AI crawlers unblocked</div>
+            <div class="fix-sub">GPTBot, ClaudeBot, Google-Extended all allowed in robots.txt</div>
+          </div>
+        </div>
+        <div class="fix-item">
+          <div class="fix-check">✓</div>
+          <div>
+            <div class="fix-text">/partner canonical corrected</div>
+            <div class="fix-sub">Was pointing to /partnership-opportunities — now correctly /partner</div>
+          </div>
+        </div>
+        <div class="fix-item">
+          <div class="fix-check">✓</div>
+          <div>
+            <div class="fix-text">Homepage meta trimmed</div>
+            <div class="fix-sub">Reduced from 197 chars to 149 chars — within SERP display range</div>
+          </div>
+        </div>
+        <div class="fix-item">
+          <div class="fix-check">✓</div>
+          <div>
+            <div class="fix-text">Allison St address corrected</div>
+            <div class="fix-sub">4522 Allison St confirmed across all pages and context docs</div>
+          </div>
+        </div>
+        <div class="fix-item">
+          <div class="fix-check">✓</div>
+          <div>
+            <div class="fix-text">FAQ schema parse error fixed</div>
+            <div class="fix-sub">Invalid JSON (double braces) on 2 FAQ questions — now valid</div>
+          </div>
+        </div>
+        <div class="fix-item">
+          <div class="fix-check">✓</div>
+          <div>
+            <div class="fix-text">Services meta copy corrected</div>
+            <div class="fix-sub">"Three ways" → "four ways" — now accurately reflects 4 services</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECHNICAL SEO -->
+    <section>
+      <div class="section-label">03 — Technical SEO</div>
+      <h2 class="section-title">Crawlability, indexation &amp; infrastructure</h2>
+      <div class="section-divider"></div>
+
+      <table class="check-table">
+        <thead>
+          <tr>
+            <th>Check</th>
+            <th>Status</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>robots.txt</strong></td>
+            <td><span class="status-badge status-pass">Pass</span></td>
+            <td>Allows all crawlers. Blocks only HubSpot preview/admin paths. Sitemap reference points to production domain. AI bots (GPTBot, ClaudeBot, Google-Extended) not blocked.</td>
+          </tr>
+          <tr>
+            <td><strong>XML Sitemap</strong></td>
+            <td><span class="status-badge status-warn">Review</span></td>
+            <td>21 URLs present. Includes <code>/news</code> and <code>/blog</code> (empty HubSpot defaults) — should be excluded or removed before launch. Currently references staging domain; will auto-update at domain cutover.</td>
+          </tr>
+          <tr>
+            <td><strong>Canonical Tags</strong></td>
+            <td><span class="status-badge status-pass">Pass</span></td>
+            <td>All 19 pages have explicit <code>&lt;link rel="canonical"&gt;</code> tags pointing to the correct superlaundry24.com path. No self-referencing errors or mismatches found.</td>
+          </tr>
+          <tr>
+            <td><strong>HTTPS</strong></td>
+            <td><span class="status-badge status-pass">Pass</span></td>
+            <td>HubSpot CMS enforces HTTPS. Valid SSL certificate. No mixed content issues observed.</td>
+          </tr>
+          <tr>
+            <td><strong>Mobile Responsive</strong></td>
+            <td><span class="status-badge status-pass">Pass</span></td>
+            <td>All pages use responsive CSS with <code>@media (max-width: 768px)</code> breakpoints. Viewport meta tag present on all pages. Touch targets and text sizes within mobile-friendly guidelines.</td>
+          </tr>
+          <tr>
+            <td><strong>Image Lazy Loading</strong></td>
+            <td><span class="status-badge status-pass">Pass</span></td>
+            <td>85 images across 19 pages have explicit loading attributes. 75 below-fold images set to <code>lazy</code>; 10 hero/LCP images set to <code>eager</code> to avoid LCP regression.</td>
+          </tr>
+          <tr>
+            <td><strong>Image Formats</strong></td>
+            <td><span class="status-badge status-pass">Pass</span></td>
+            <td>Majority of images use WebP format. A small number use legacy formats (BondHill.webp, Alison int.webp with inconsistent naming). No large uncompressed images identified.</td>
+          </tr>
+          <tr>
+            <td><strong>Alt Text</strong></td>
+            <td><span class="status-badge status-pass">Pass</span></td>
+            <td>All sampled images have descriptive alt text. Location and service images include neighborhood names and specific context.</td>
+          </tr>
+          <tr>
+            <td><strong>Preconnect Hints</strong></td>
+            <td><span class="status-badge status-pass">Pass</span></td>
+            <td>Google Fonts preconnect links present on all pages. Reduces font render-blocking delay.</td>
+          </tr>
+          <tr>
+            <td><strong>H1 Tags</strong></td>
+            <td><span class="status-badge status-pass">Pass</span></td>
+            <td>Every page has exactly one H1. All H1s are unique and contain the primary keyword or location name.</td>
+          </tr>
+          <tr>
+            <td><strong>JSON-LD Schema</strong></td>
+            <td><span class="status-badge status-warn">Review</span></td>
+            <td>All pages have schema. FAQ schema on <code>/faq</code> had a JSON parse error (invalid — now fixed). Schema type inconsistency between homepage (<code>LaundryOrDryCleaning</code>) and location pages (<code>Laundry</code>).</td>
+          </tr>
+          <tr>
+            <td><strong>Internal Linking</strong></td>
+            <td><span class="status-badge status-pass">Pass</span></td>
+            <td>Homepage links to all 6 location pages and all 4 service pages. Service pages cross-link to locations. No orphan pages identified.</td>
+          </tr>
+          <tr>
+            <td><strong>URL Structure</strong></td>
+            <td><span class="status-badge status-pass">Pass</span></td>
+            <td>Clean, descriptive slugs. Location pages at <code>/locations/[name]</code>, service pages at <code>/services/[name]</code>. Lowercase and hyphen-separated throughout.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ON-PAGE SEO -->
+    <section>
+      <div class="section-label">04 — On-Page SEO</div>
+      <h2 class="section-title">Title tags, meta descriptions &amp; headings</h2>
+      <div class="section-divider"></div>
+
+      <!-- FINDINGS -->
+      <div class="finding">
+        <div class="finding-header">
+          <div class="finding-title-row">
+            <span class="severity severity-high">High</span>
+            <span class="finding-name">6 title tags exceed 60 characters — will truncate in SERPs</span>
+          </div>
+        </div>
+        <div class="finding-body">
+          <div class="finding-row">
+            <div class="finding-row-label">Impact</div>
+            <div class="finding-row-value">Google displays approximately 600px (~60 chars) of title text. Longer titles are cut off with "…" reducing click-through rates and keyword visibility.</div>
+          </div>
+          <div class="finding-row">
+            <div class="finding-row-label">Pages</div>
+            <div class="finding-row-value">
+              <code>/services/self-service</code> (78c) &nbsp;·&nbsp;
+              <code>/services/pickup-delivery</code> (72c) &nbsp;·&nbsp;
+              <code>/locations/north-college-hill</code> (68c) &nbsp;·&nbsp;
+              <code>/locations/springdale</code> (68c) &nbsp;·&nbsp;
+              <code>/locations/locations</code> (66c) &nbsp;·&nbsp;
+              <code>/locations/allison-street</code> (65c)
+            </div>
+          </div>
+          <div class="finding-row">
+            <div class="finding-row-label">Fix</div>
+            <div class="finding-row-value">Trim titles to 55–60 chars while keeping primary keyword and brand name. Example: <em>"Self-Service Laundry Cincinnati | 100+ Machines"</em> (49c) vs. current 78c title.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="finding">
+        <div class="finding-header">
+          <div class="finding-title-row">
+            <span class="severity severity-high">High</span>
+            <span class="finding-name">7 meta descriptions exceed 160 characters — truncated in SERPs</span>
+          </div>
+        </div>
+        <div class="finding-body">
+          <div class="finding-row">
+            <div class="finding-row-label">Impact</div>
+            <div class="finding-row-value">Meta descriptions over 160 characters are cut off in search results, often mid-sentence. This wastes the opportunity to deliver a complete call to action and reduces CTR.</div>
+          </div>
+          <div class="finding-row">
+            <div class="finding-row-label">Pages</div>
+            <div class="finding-row-value">
+              <code>/about</code> (193c) &nbsp;·&nbsp;
+              <code>/locations/locations</code> (187c) &nbsp;·&nbsp;
+              <code>/locations/allison-street</code> (172c) &nbsp;·&nbsp;
+              <code>/services/self-service</code> (173c) &nbsp;·&nbsp;
+              <code>/careers</code> (173c) &nbsp;·&nbsp;
+              <code>/services/pickup-delivery</code> (167c) &nbsp;·&nbsp;
+              <code>/contact</code> (163c)
+            </div>
+          </div>
+          <div class="finding-row">
+            <div class="finding-row-label">Fix</div>
+            <div class="finding-row-value">Trim each to 150–158 chars. Prioritize: lead with the location/service name, include the primary keyword, and end with a clear action ("Open 24/7 — find your nearest location").</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="finding">
+        <div class="finding-header">
+          <div class="finding-title-row">
+            <span class="severity severity-medium">Medium</span>
+            <span class="finding-name">Schema type inconsistency — LaundryOrDryCleaning vs Laundry</span>
+          </div>
+        </div>
+        <div class="finding-body">
+          <div class="finding-row">
+            <div class="finding-row-label">Impact</div>
+            <div class="finding-row-value">The homepage uses <code>LaundryOrDryCleaning</code> (the most specific Schema.org type for laundromats), while all 6 location pages use the less specific <code>Laundry</code> type. Google and AI assistants benefit from the most specific type available.</div>
+          </div>
+          <div class="finding-row">
+            <div class="finding-row-label">Fix</div>
+            <div class="finding-row-value">Update all 6 location pages to use <code>"@type": "LaundryOrDryCleaning"</code> instead of <code>"@type": "Laundry"</code>. This is a single string change per page.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="finding">
+        <div class="finding-header">
+          <div class="finding-title-row">
+            <span class="severity severity-medium">Medium</span>
+            <span class="finding-name">About &amp; Contact pages use Organization schema — should be LocalBusiness</span>
+          </div>
+        </div>
+        <div class="finding-body">
+          <div class="finding-row">
+            <div class="finding-row-label">Impact</div>
+            <div class="finding-row-value"><code>Organization</code> schema is generic. For a local brick-and-mortar business, <code>LocalBusiness</code> (or the more specific <code>LaundryOrDryCleaning</code>) signals geographic relevance to both Google and AI assistants answering local queries.</div>
+          </div>
+          <div class="finding-row">
+            <div class="finding-row-label">Fix</div>
+            <div class="finding-row-value">Update <code>/about</code> and <code>/contact</code> to use <code>LocalBusiness</code> schema with full NAP data (name, address, phone, hours). The <code>/contact</code> page already shows all 6 location cards — the schema should reflect this.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="finding">
+        <div class="finding-header">
+          <div class="finding-title-row">
+            <span class="severity severity-medium">Medium</span>
+            <span class="finding-name">No AggregateRating schema — 1,200+ Google reviews going unclaimed</span>
+          </div>
+        </div>
+        <div class="finding-body">
+          <div class="finding-row">
+            <div class="finding-row-label">Impact</div>
+            <div class="finding-row-value">Super Laundry has 1,200+ verified Google reviews across 6 locations (4.0–4.2★ average). Adding <code>AggregateRating</code> schema to location pages makes these reviews appear as star ratings in SERPs — a significant CTR booster — and gives AI assistants a citation source when answering "best laundromat Cincinnati."</div>
+          </div>
+          <div class="finding-row">
+            <div class="finding-row-label">Fix</div>
+            <div class="finding-row-value">Add <code>aggregateRating</code> property to each location's JSON-LD schema. Use each location's confirmed GBP rating and review count. Example: Bond Hill 4.0★ / 482 reviews, Avondale 4.2★ / 218 reviews.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="finding">
+        <div class="finding-header">
+          <div class="finding-title-row">
+            <span class="severity severity-low">Low</span>
+            <span class="finding-name">/news and /blog in sitemap — empty HubSpot default pages</span>
+          </div>
+        </div>
+        <div class="finding-body">
+          <div class="finding-row">
+            <div class="finding-row-label">Impact</div>
+            <div class="finding-row-value">Google crawls and evaluates all sitemap URLs. Empty pages create thin-content signals and waste crawl budget. Minor issue pre-launch but grows over time.</div>
+          </div>
+          <div class="finding-row">
+            <div class="finding-row-label">Fix</div>
+            <div class="finding-row-value">Either remove <code>/news</code> and <code>/blog</code> from the HubSpot sitemap, redirect them to the homepage, or add a content plan. A blog strategy would benefit long-term SEO — but launch without content is worse than no blog at all.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FULL META TABLE -->
+      <h3 style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--green-dark);margin:36px 0 16px;">All Pages — Title &amp; Meta Snapshot</h3>
+      <div style="background:white;border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+        <table class="meta-table">
+          <thead>
+            <tr>
+              <th>Page</th>
+              <th>Title</th>
+              <th>T Chars</th>
+              <th>Desc Chars</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="page-slug">/</td>
+              <td>Laundromat in Cincinnati — Super Laundry | Open 24/7, 6 Locations</td>
+              <td class="char-count char-warn">65</td>
+              <td class="char-count char-ok">149</td>
+              <td><span class="status-badge status-warn">Title Long</span></td>
+            </tr>
+            <tr>
+              <td class="page-slug">/services</td>
+              <td>Laundry Services in Cincinnati | Super Laundry</td>
+              <td class="char-count char-ok">46</td>
+              <td class="char-count char-ok">148</td>
+              <td><span class="status-badge status-pass">Pass</span></td>
+            </tr>
+            <tr>
+              <td class="page-slug">/services/wash-and-fold</td>
+              <td>Wash and Fold Near You in Cincinnati | Super Laundry</td>
+              <td class="char-count char-ok">52</td>
+              <td class="char-count char-ok">155</td>
+              <td><span class="status-badge status-pass">Pass</span></td>
+            </tr>
+            <tr>
+              <td class="page-slug">/services/self-service</td>
+              <td>Self-Service Laundry in Cincinnati — Super Laundry | 100+ Washers &amp; Dryers</td>
+              <td class="char-count char-bad">78</td>
+              <td class="char-count char-bad">173</td>
+              <td><span class="status-badge status-fail">Both Long</span></td>
+            </tr>
+            <tr>
+              <td class="page-slug">/services/pickup-delivery</td>
+              <td>Laundry Pickup &amp; Delivery in Cincinnati — Super Laundry | Springdale</td>
+              <td class="char-count char-bad">72</td>
+              <td class="char-count char-bad">167</td>
+              <td><span class="status-badge status-fail">Both Long</span></td>
+            </tr>
+            <tr>
+              <td class="page-slug">/services/24-hour-laundry</td>
+              <td>24 Hour Laundry Near Me in Cincinnati | Super Laundry</td>
+              <td class="char-count char-ok">53</td>
+              <td class="char-count char-ok">157</td>
+              <td><span class="status-badge status-pass">Pass</span></td>
+            </tr>
+            <tr>
+              <td class="page-slug">/locations</td>
+              <td>All Locations — Super Laundry Cincinnati | 6 Laundromats Open 24/7</td>
+              <td class="char-count char-warn">66</td>
+              <td class="char-count char-bad">187</td>
+              <td><span class="status-badge status-fail">Both Long</span></td>
+            </tr>
+            <tr>
+              <td class="page-slug">/locations/springdale</td>
+              <td>Laundromat in Springdale, OH — Super Laundry | Open 7 AM–10 PM Daily</td>
+              <td class="char-count char-bad">68</td>
+              <td class="char-count char-ok">156</td>
+              <td><span class="status-badge status-warn">Title Long</span></td>
+            </tr>
+            <tr>
+              <td class="page-slug">/locations/avondale</td>
+              <td>24-Hour Laundromat in Avondale — Super Laundry | Open 24/7</td>
+              <td class="char-count char-ok">58</td>
+              <td class="char-count char-ok">154</td>
+              <td><span class="status-badge status-pass">Pass</span></td>
+            </tr>
+            <tr>
+              <td class="page-slug">/locations/bond-hill</td>
+              <td>24-Hour Laundromat in Bond Hill — Super Laundry | Open 24/7</td>
+              <td class="char-count char-ok">59</td>
+              <td class="char-count char-warn">136</td>
+              <td><span class="status-badge status-warn">Desc Short</span></td>
+            </tr>
+            <tr>
+              <td class="page-slug">/locations/westwood</td>
+              <td>24-Hour Laundromat in Westwood — Super Laundry | Open 24/7</td>
+              <td class="char-count char-ok">58</td>
+              <td class="char-count char-ok">156</td>
+              <td><span class="status-badge status-pass">Pass</span></td>
+            </tr>
+            <tr>
+              <td class="page-slug">/locations/north-college-hill</td>
+              <td>24-Hour Laundromat in North College Hill — Super Laundry | Open 24/7</td>
+              <td class="char-count char-bad">68</td>
+              <td class="char-count char-ok">146</td>
+              <td><span class="status-badge status-warn">Title Long</span></td>
+            </tr>
+            <tr>
+              <td class="page-slug">/locations/allison-street</td>
+              <td>Coin Laundromat Near Me | Super Laundry Allison Street Cincinnati</td>
+              <td class="char-count char-warn">65</td>
+              <td class="char-count char-bad">172</td>
+              <td><span class="status-badge status-fail">Desc Long</span></td>
+            </tr>
+            <tr>
+              <td class="page-slug">/about</td>
+              <td>About Super Laundry Cincinnati — Locally Owned, 6 Locations</td>
+              <td class="char-count char-ok">59</td>
+              <td class="char-count char-bad">193</td>
+              <td><span class="status-badge status-fail">Desc Long</span></td>
+            </tr>
+            <tr>
+              <td class="page-slug">/faq</td>
+              <td>FAQ — Super Laundry Cincinnati</td>
+              <td class="char-count char-ok">30</td>
+              <td class="char-count char-ok">144</td>
+              <td><span class="status-badge status-warn">Title Short</span></td>
+            </tr>
+            <tr>
+              <td class="page-slug">/contact</td>
+              <td>Contact — Super Laundry Cincinnati</td>
+              <td class="char-count char-ok">37</td>
+              <td class="char-count char-warn">163</td>
+              <td><span class="status-badge status-warn">Desc Long</span></td>
+            </tr>
+            <tr>
+              <td class="page-slug">/careers</td>
+              <td>Careers — Super Laundry Cincinnati</td>
+              <td class="char-count char-ok">48</td>
+              <td class="char-count char-bad">173</td>
+              <td><span class="status-badge status-fail">Desc Long</span></td>
+            </tr>
+            <tr>
+              <td class="page-slug">/partner</td>
+              <td>Partnership Opportunities — Super Laundry Cincinnati</td>
+              <td class="char-count char-ok">52</td>
+              <td class="char-count char-ok">159</td>
+              <td><span class="status-badge status-pass">Pass</span></td>
+            </tr>
+            <tr>
+              <td class="page-slug">/store-policies</td>
+              <td>Store Policies — Super Laundry Cincinnati</td>
+              <td class="char-count char-ok">41</td>
+              <td class="char-count char-ok">139</td>
+              <td><span class="status-badge status-pass">Pass</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin-top:8px;">Target: Title 50–60 chars · Meta description 150–158 chars</p>
+    </section>
+
+    <!-- SCHEMA OVERVIEW -->
+    <section>
+      <div class="section-label">05 — Structured Data</div>
+      <h2 class="section-title">Schema markup across all 19 pages</h2>
+      <div class="section-divider"></div>
+
+      <div class="schema-grid">
+        <div class="schema-item">
+          <div class="schema-page">/</div>
+          <div class="schema-types">
+            <span class="schema-type">LaundryOrDryCleaning</span>
+            <span class="schema-type">FAQPage</span>
+          </div>
+        </div>
+        <div class="schema-item">
+          <div class="schema-page">/services</div>
+          <div class="schema-types"><span class="schema-type">ItemList</span></div>
+        </div>
+        <div class="schema-item">
+          <div class="schema-page">/services/wash-and-fold</div>
+          <div class="schema-types"><span class="schema-type">Service</span><span class="schema-type">FAQPage</span><span class="schema-type">BreadcrumbList</span></div>
+        </div>
+        <div class="schema-item">
+          <div class="schema-page">/services/self-service</div>
+          <div class="schema-types"><span class="schema-type">Service</span><span class="schema-type">FAQPage</span><span class="schema-type">BreadcrumbList</span></div>
+        </div>
+        <div class="schema-item">
+          <div class="schema-page">/services/pickup-delivery</div>
+          <div class="schema-types"><span class="schema-type">Service</span><span class="schema-type">FAQPage</span><span class="schema-type">BreadcrumbList</span></div>
+        </div>
+        <div class="schema-item">
+          <div class="schema-page">/services/24-hour-laundry</div>
+          <div class="schema-types"><span class="schema-type">Service</span><span class="schema-type">FAQPage</span><span class="schema-type">BreadcrumbList</span></div>
+        </div>
+        <div class="schema-item">
+          <div class="schema-page">/locations</div>
+          <div class="schema-types"><span class="schema-type">ItemList</span></div>
+        </div>
+        <div class="schema-item">
+          <div class="schema-page">/locations/springdale</div>
+          <div class="schema-types"><span class="schema-type warn">Laundry ⚠</span><span class="schema-type">FAQPage</span><span class="schema-type">BreadcrumbList</span></div>
+        </div>
+        <div class="schema-item">
+          <div class="schema-page">/locations/avondale</div>
+          <div class="schema-types"><span class="schema-type warn">Laundry ⚠</span><span class="schema-type">FAQPage</span><span class="schema-type">BreadcrumbList</span></div>
+        </div>
+        <div class="schema-item">
+          <div class="schema-page">/locations/bond-hill</div>
+          <div class="schema-types"><span class="schema-type warn">Laundry ⚠</span><span class="schema-type">FAQPage</span><span class="schema-type">BreadcrumbList</span></div>
+        </div>
+        <div class="schema-item">
+          <div class="schema-page">/locations/westwood</div>
+          <div class="schema-types"><span class="schema-type warn">Laundry ⚠</span><span class="schema-type">FAQPage</span><span class="schema-type">BreadcrumbList</span></div>
+        </div>
+        <div class="schema-item">
+          <div class="schema-page">/locations/north-college-hill</div>
+          <div class="schema-types"><span class="schema-type warn">Laundry ⚠</span><span class="schema-type">FAQPage</span><span class="schema-type">BreadcrumbList</span></div>
+        </div>
+        <div class="schema-item">
+          <div class="schema-page">/locations/allison-street</div>
+          <div class="schema-types"><span class="schema-type warn">Laundry ⚠</span><span class="schema-type">FAQPage</span><span class="schema-type">BreadcrumbList</span></div>
+        </div>
+        <div class="schema-item">
+          <div class="schema-page">/about</div>
+          <div class="schema-types"><span class="schema-type warn">Organization ⚠</span><span class="schema-type">BreadcrumbList</span></div>
+        </div>
+        <div class="schema-item">
+          <div class="schema-page">/contact</div>
+          <div class="schema-types"><span class="schema-type warn">Organization ⚠</span><span class="schema-type">BreadcrumbList</span></div>
+        </div>
+        <div class="schema-item">
+          <div class="schema-page">/faq</div>
+          <div class="schema-types"><span class="schema-type">FAQPage ✓</span><span class="schema-type">BreadcrumbList</span></div>
+        </div>
+        <div class="schema-item">
+          <div class="schema-page">/careers</div>
+          <div class="schema-types"><span class="schema-type">JobPosting</span></div>
+        </div>
+        <div class="schema-item">
+          <div class="schema-page">/partner</div>
+          <div class="schema-types"><span class="schema-type">Organization</span></div>
+        </div>
+        <div class="schema-item">
+          <div class="schema-page">/store-policies</div>
+          <div class="schema-types"><span class="schema-type">BreadcrumbList</span></div>
+        </div>
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin-top:10px;">⚠ = schema type could be improved. Location pages should use <code>LaundryOrDryCleaning</code> (not <code>Laundry</code>). About/Contact should use <code>LocalBusiness</code> (not <code>Organization</code>).</p>
+    </section>
+
+    <!-- AI SEO -->
+    <section>
+      <div class="section-label">06 — AI SEO</div>
+      <h2 class="section-title">Visibility in ChatGPT, Perplexity &amp; Google AI Overviews</h2>
+      <div class="section-divider"></div>
+
+      <div class="insight">
+        <strong>The biggest single improvement in this rebuild:</strong> The old Squarespace site blocked every AI crawler by default — GPTBot, ClaudeBot, anthropic-ai, and Google-Extended were all in robots.txt Disallow. Any AI assistant asked "best laundromat in Cincinnati" literally could not access or reference the site. The new HubSpot build has no AI crawler blocks, which opens the door for the first time.
+      </div>
+
+      <div class="ai-grid">
+        <div class="ai-card pass-card">
+          <div class="ai-card-label">✅ Fixed</div>
+          <div class="ai-card-title">AI crawlers unblocked</div>
+          <div class="ai-card-body">robots.txt now allows GPTBot, ClaudeBot, anthropic-ai, and Google-Extended. ChatGPT, Perplexity, Claude, and Google AI Overviews can now crawl and index content for the first time.</div>
+        </div>
+        <div class="ai-card pass-card">
+          <div class="ai-card-label">✅ Good</div>
+          <div class="ai-card-title">FAQPage schema on 9 pages</div>
+          <div class="ai-card-body">FAQ schema on the homepage, all 6 location pages, and all 4 service pages gives AI assistants structured Q&A data to pull answers from directly. Covers hours, payment, services, and machine capacity.</div>
+        </div>
+        <div class="ai-card pass-card">
+          <div class="ai-card-label">✅ Good</div>
+          <div class="ai-card-title">Conversational location content</div>
+          <div class="ai-card-body">Location pages contain natural-language answers to high-frequency local queries: "What are the hours?", "Do I need quarters?", "Is there parking?". This content is directly citable by AI assistants.</div>
+        </div>
+        <div class="ai-card pass-card">
+          <div class="ai-card-label">✅ Good</div>
+          <div class="ai-card-title">NAP consistent across all pages</div>
+          <div class="ai-card-body">Name, address, phone, and hours are consistently structured and schema-marked on every location page. AI assistants can confidently return these details without hallucinating.</div>
+        </div>
+        <div class="ai-card warn-card">
+          <div class="ai-card-label">⚠️ Missing</div>
+          <div class="ai-card-title">No AggregateRating in schema</div>
+          <div class="ai-card-body">1,200+ Google reviews across 6 locations are not referenced in any structured data. AI assistants answering "best laundromat Cincinnati" look for rating signals — this is a missed citation opportunity.</div>
+        </div>
+        <div class="ai-card warn-card">
+          <div class="ai-card-label">⚠️ Opportunity</div>
+          <div class="ai-card-title">No AI Overview–optimized content</div>
+          <div class="ai-card-body">Queries like "What's the best 24-hour laundromat in Cincinnati?" or "Where can I drop off laundry near me in Cincinnati?" aren't answered anywhere in a format AI assistants can cite directly. A short FAQ or "Why Super Laundry" section on the homepage could capture these.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOCATION DATA ACCURACY -->
+    <section>
+      <div class="section-label">07 — Location Data Accuracy</div>
+      <h2 class="section-title">All 6 locations verified</h2>
+      <div class="section-divider"></div>
+
+      <div class="location-grid">
+        <div class="location-card">
+          <div class="location-card-name">
+            <div class="loc-check">✓</div>
+            Springdale
+          </div>
+          <div class="location-detail"><span class="location-detail-label">Address</span>11627 Springfield Pike, OH 45246</div>
+          <div class="location-detail"><span class="location-detail-label">Hours</span>7 AM – 10 PM daily</div>
+          <div class="location-detail"><span class="location-detail-label">Phone</span>(513) 376-7129</div>
+          <div class="location-detail"><span class="location-detail-label">Services</span>Self-service, wash & fold, pickup & delivery</div>
+        </div>
+        <div class="location-card">
+          <div class="location-card-name">
+            <div class="loc-check">✓</div>
+            Avondale
+          </div>
+          <div class="location-detail"><span class="location-detail-label">Address</span>3545 Reading Rd, Cincinnati OH 45229</div>
+          <div class="location-detail"><span class="location-detail-label">Hours</span>Open 24/7</div>
+          <div class="location-detail"><span class="location-detail-label">Phone</span>(513) 873-5939</div>
+          <div class="location-detail"><span class="location-detail-label">Services</span>Self-service, wash & fold + Laundry Love host</div>
+        </div>
+        <div class="location-card">
+          <div class="location-card-name">
+            <div class="loc-check">✓</div>
+            Bond Hill
+          </div>
+          <div class="location-detail"><span class="location-detail-label">Address</span>4368 Reading Rd, Cincinnati OH 45229</div>
+          <div class="location-detail"><span class="location-detail-label">Hours</span>Open 24/7</div>
+          <div class="location-detail"><span class="location-detail-label">Phone</span>(513) 531-4131</div>
+          <div class="location-detail"><span class="location-detail-label">Services</span>Self-service, wash & fold</div>
+        </div>
+        <div class="location-card">
+          <div class="location-card-name">
+            <div class="loc-check">✓</div>
+            Westwood
+          </div>
+          <div class="location-detail"><span class="location-detail-label">Address</span>2455 Harrison Ave, Cincinnati OH 45211</div>
+          <div class="location-detail"><span class="location-detail-label">Hours</span>Open 24/7</div>
+          <div class="location-detail"><span class="location-detail-label">Phone</span>(513) 481-9595</div>
+          <div class="location-detail"><span class="location-detail-label">Services</span>Self-service, wash & fold + Laundry Love host</div>
+        </div>
+        <div class="location-card">
+          <div class="location-card-name">
+            <div class="loc-check">✓</div>
+            North College Hill
+          </div>
+          <div class="location-detail"><span class="location-detail-label">Address</span>1585 Goodman Ave, Cincinnati OH 45224</div>
+          <div class="location-detail"><span class="location-detail-label">Hours</span>Open 24/7</div>
+          <div class="location-detail"><span class="location-detail-label">Phone</span>(513) 729-8888</div>
+          <div class="location-detail"><span class="location-detail-label">Services</span>Self-service, wash & fold</div>
+        </div>
+        <div class="location-card">
+          <div class="location-card-name">
+            <div class="loc-check">✓</div>
+            Allison St
+          </div>
+          <div class="location-detail"><span class="location-detail-label">Address</span>4522 Allison St, Cincinnati OH 45212</div>
+          <div class="location-detail"><span class="location-detail-label">Hours</span>6 AM – 11 PM daily</div>
+          <div class="location-detail"><span class="location-detail-label">Phone</span>None listed</div>
+          <div class="location-detail"><span class="location-detail-label">Payment</span>Cash · Card · Tap + coin-operated (only location with coin machines)</div>
+        </div>
+      </div>
+
+      <div class="warn-callout" style="margin-top:24px;">
+        <strong>GBP name inconsistency (external — not on-site):</strong> Google Business Profile listings use four different naming formats — "Super Laundry," "Super Laundry-Avondale," "Super Laundry North College Hill," and "Westwood Super Laundry." Google treats differently-named listings as separate entities rather than a unified chain. Recommend standardizing all 6 GBP names to <strong>Super Laundry [Neighborhood]</strong> format (e.g., "Super Laundry Westwood," "Super Laundry Avondale") as soon as possible after launch.
+      </div>
+    </section>
+
+    <!-- KEYWORD TARGETING -->
+    <section>
+      <div class="section-label">08 — Keyword Targeting</div>
+      <h2 class="section-title">Primary targets and site coverage</h2>
+      <div class="section-divider"></div>
+
+      <div style="background:white;border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+        <table class="kw-table">
+          <thead>
+            <tr>
+              <th>Keyword</th>
+              <th>Monthly Vol.</th>
+              <th>Pre-Rebuild Rank</th>
+              <th>Targeting Page</th>
+              <th>Coverage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>wash and fold near me</strong></td>
+              <td class="kw-vol">14,800</td>
+              <td class="kw-rank kw-rank-none">Not ranking</td>
+              <td><code>/services/wash-and-fold</code></td>
+              <td><span class="coverage-dot dot-good"></span>Strong — in H1 &amp; title</td>
+            </tr>
+            <tr>
+              <td><strong>24 hour laundry near me</strong></td>
+              <td class="kw-vol">6,600</td>
+              <td class="kw-rank kw-rank-poor">#63 (pg 7)</td>
+              <td><code>/services/24-hour-laundry</code></td>
+              <td><span class="coverage-dot dot-good"></span>Strong — in title &amp; H1</td>
+            </tr>
+            <tr>
+              <td><strong>drop off laundry near me</strong></td>
+              <td class="kw-vol">4,400</td>
+              <td class="kw-rank kw-rank-none">Not ranking</td>
+              <td><code>/services/wash-and-fold</code></td>
+              <td><span class="coverage-dot dot-warn"></span>Covered in body — not in H1</td>
+            </tr>
+            <tr>
+              <td><strong>laundromat open near me</strong></td>
+              <td class="kw-vol">2,900</td>
+              <td class="kw-rank kw-rank-none">Not ranking</td>
+              <td>Location pages / 24hr page</td>
+              <td><span class="coverage-dot dot-warn"></span>Implied — not explicitly targeted</td>
+            </tr>
+            <tr>
+              <td><strong>wash dry fold near me</strong></td>
+              <td class="kw-vol">1,600</td>
+              <td class="kw-rank kw-rank-none">Not ranking</td>
+              <td><code>/services/wash-and-fold</code></td>
+              <td><span class="coverage-dot dot-good"></span>Phrase used throughout page</td>
+            </tr>
+            <tr>
+              <td><strong>laundry pickup and delivery near me</strong></td>
+              <td class="kw-vol">1,300</td>
+              <td class="kw-rank kw-rank-none">Not ranking</td>
+              <td><code>/services/pickup-delivery</code></td>
+              <td><span class="coverage-dot dot-good"></span>Strong — dedicated page</td>
+            </tr>
+            <tr>
+              <td><strong>laundromat cincinnati</strong></td>
+              <td class="kw-vol">260</td>
+              <td class="kw-rank kw-rank-none">Not ranking</td>
+              <td>Homepage</td>
+              <td><span class="coverage-dot dot-good"></span>In homepage title</td>
+            </tr>
+            <tr>
+              <td><strong>laundromat avondale</strong></td>
+              <td class="kw-vol">Local</td>
+              <td class="kw-rank kw-rank-none">Not ranking</td>
+              <td><code>/locations/avondale</code></td>
+              <td><span class="coverage-dot dot-good"></span>In H1 and throughout page</td>
+            </tr>
+            <tr>
+              <td><strong>coin laundromat near me</strong></td>
+              <td class="kw-vol">Local</td>
+              <td class="kw-rank kw-rank-none">Not ranking</td>
+              <td><code>/locations/allison-street</code></td>
+              <td><span class="coverage-dot dot-good"></span>In Allison St title &amp; H1</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="insight" style="margin-top:20px;">
+        <strong>Expectations for launch:</strong> Ranking improvements from a rebuild take 60–90 days to reflect in Search Console, and meaningful traffic growth typically emerges at 3–6 months. The keyword targeting architecture is correct — each high-value intent has a dedicated, optimized page. The foundation is in place; what follows is patience and GBP optimization.
+      </div>
+    </section>
+
+    <!-- ACTION PLAN -->
+    <section>
+      <div class="section-label">09 — Prioritized Action Plan</div>
+      <h2 class="section-title">What to tackle and in what order</h2>
+      <div class="section-divider"></div>
+
+      <div class="action-item">
+        <div class="action-num">01</div>
+        <div class="action-content">
+          <h4>Standardize GBP names across all 6 listings</h4>
+          <p>Log into each Google Business Profile and rename to "Super Laundry [Neighborhood]" — Westwood, Avondale, Bond Hill, North College Hill, Springdale, Allison Street. This unified naming tells Google you're a chain, not 6 unrelated businesses. Highest single lever for local pack rankings.</p>
+        </div>
+        <div class="action-meta">
+          <span class="effort-tag effort-easy">Easy</span>
+          <span class="impact-tag">🔥 High Impact</span>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-num">02</div>
+        <div class="action-content">
+          <h4>Trim 6 over-length title tags (&gt;60 chars)</h4>
+          <p>Self-service (78c), pickup-delivery (72c), north-college-hill (68c), springdale (68c), locations hub (66c), allison-street (65c). Trim each to 55–60 chars while preserving the primary keyword and brand name. Simple text edits in each HTML file.</p>
+        </div>
+        <div class="action-meta">
+          <span class="effort-tag effort-easy">Easy</span>
+          <span class="impact-tag">High Impact</span>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-num">03</div>
+        <div class="action-content">
+          <h4>Trim 7 over-length meta descriptions (&gt;160 chars)</h4>
+          <p>About (193c), locations hub (187c), allison-street (172c), self-service (173c), careers (173c), pickup-delivery (167c), contact (163c). Cut each to 150–158 chars. End with a clear action — hours, "Find your nearest location," or a service-specific hook.</p>
+        </div>
+        <div class="action-meta">
+          <span class="effort-tag effort-easy">Easy</span>
+          <span class="impact-tag">High Impact</span>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-num">04</div>
+        <div class="action-content">
+          <h4>Update location page schema: Laundry → LaundryOrDryCleaning</h4>
+          <p>All 6 location pages use <code>"@type": "Laundry"</code>. Change to <code>"@type": "LaundryOrDryCleaning"</code> to match the homepage and use the most specific available Schema.org type. Single string replacement per page.</p>
+        </div>
+        <div class="action-meta">
+          <span class="effort-tag effort-easy">Easy</span>
+          <span class="impact-tag">Medium Impact</span>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-num">05</div>
+        <div class="action-content">
+          <h4>Add AggregateRating schema to each location page</h4>
+          <p>Add <code>aggregateRating</code> to each location's JSON-LD using confirmed GBP data: Bond Hill 4.0★/482 reviews, Avondale 4.2★/218 reviews, Westwood 3.9★/303 reviews, Springdale 4.2★/217 reviews. Unlocks star ratings in SERPs and gives AI assistants a citation signal for "best laundromat" queries.</p>
+        </div>
+        <div class="action-meta">
+          <span class="effort-tag effort-medium">Medium</span>
+          <span class="impact-tag">High Impact</span>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-num">06</div>
+        <div class="action-content">
+          <h4>Remove /news and /blog from the sitemap</h4>
+          <p>Two empty HubSpot default pages are indexed and in the sitemap. Either disable them in HubSpot settings or set them to noindex before launch. An empty blog sends a thin-content signal. Add content only when there's a content plan behind it.</p>
+        </div>
+        <div class="action-meta">
+          <span class="effort-tag effort-easy">Easy</span>
+          <span class="impact-tag">Low-Medium</span>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-num">07</div>
+        <div class="action-content">
+          <h4>Update About &amp; Contact schema to LocalBusiness</h4>
+          <p>Both pages currently use <code>Organization</code> schema. Swap to <code>LocalBusiness</code> with full NAP data. The Contact page especially — it displays all 6 locations — should include structured data that matches the displayed content.</p>
+        </div>
+        <div class="action-meta">
+          <span class="effort-tag effort-easy">Easy</span>
+          <span class="impact-tag">Medium Impact</span>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-num">08</div>
+        <div class="action-content">
+          <h4>Submit sitemap to Google Search Console after domain cutover</h4>
+          <p>Once superlaundry24.com is live on HubSpot, add the property to Google Search Console, submit the sitemap, and request indexation of key pages. This accelerates discovery and gets the new canonical URLs into the index. Also connect to Bing Webmaster Tools for additional coverage.</p>
+        </div>
+        <div class="action-meta">
+          <span class="effort-tag effort-easy">Easy</span>
+          <span class="impact-tag">🔥 Critical</span>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-num">09</div>
+        <div class="action-content">
+          <h4>Add AI Overview–targeted content to the homepage</h4>
+          <p>Add a short FAQ or "Why Super Laundry" section that directly answers high-AI-traffic questions: "What's the best laundromat in Cincinnati?", "Which Cincinnati laundromats are open 24 hours?", "Where can I do wash and fold drop-off near me?" — written as a direct answer, 2–3 sentences each. This positions the site for featured snippets and AI Overview citations.</p>
+        </div>
+        <div class="action-meta">
+          <span class="effort-tag effort-medium">Medium</span>
+          <span class="impact-tag">AI Impact</span>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="report-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">Super Laundry Cincinnati — Pre-Launch SEO Audit</div>
+      <div>Prepared March 27, 2026 · superlaundry24.com</div>
+    </div>
+  </div>
+
+</body>
+</html>

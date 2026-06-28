@@ -1,0 +1,707 @@
+<!--
+  templateType: "page"
+  isAvailableForNewContent: true
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/webp" href="https://244988351.fs1.hubspotusercontent-na2.net/hubfs/244988351/logos/superlaundry_favicon.webp">
+  <title>Store Policies — Super Laundry Cincinnati</title>
+  <meta name="description" content="Super Laundry Cincinnati store policies — machine use, drop-off service, unattended laundry, refunds, lost & found, and conduct guidelines.">
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.superlaundry24.com"},
+      {"@type": "ListItem", "position": 2, "name": "Store Policies", "item": "https://www.superlaundry24.com/store-policies"}
+    ]
+  }
+  </script>
+
+
+  <link rel="canonical" href="https://www.superlaundry24.com/store-policies">
+  {{ standard_header_includes }}
+
+</head>
+<body>
+
+  {% include "SuperLaundry/partials/header.html" %}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-dark: #1C4A25;
+      --green: #2D7F3C;
+      --green-light: #4A9B58;
+      --green-pale: #EAF4EC;
+      --cream: #F5F1E8;
+      --warm-white: #FAFAF6;
+      --text-dark: #1A2B1C;
+      --text-body: #3C4A3E;
+      --text-muted: #4E6150;
+      --border: #DDD8CE;
+      --shadow-sm: 0 2px 8px rgba(28,74,37,0.08);
+      --shadow-md: 0 4px 20px rgba(28,74,37,0.12);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-body);
+      background: var(--warm-white);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== AWARD BAR ===== */
+    .award-bar {
+      background: #B5D300;
+      padding: 9px 24px;
+      text-align: center;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .award-bar p {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #1C4A25;
+    }
+    .award-bar span { color: #1C4A25; font-weight: 700; }
+    .award-bar .dot { margin: 0 10px; opacity: 0.75; color: #1C4A25; }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      background: var(--green-dark);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 68px;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .nav-logo img { height: 44px; width: auto; mix-blend-mode: screen; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta {
+      background: var(--green) !important;
+      color: #fff !important;
+      padding: 10px 20px !important;
+      border-radius: 6px !important;
+      font-weight: 600 !important;
+    }
+    .nav-cta:hover { background: var(--green-light) !important; }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: rgba(255,255,255,0.85); border-radius: 2px; }
+    .nav-mobile-menu {
+      display: none;
+      background: var(--green-dark);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 16px 24px 24px;
+    }
+    .nav-mobile-menu.open { display: block; }
+    .nav-mobile-menu a {
+      display: block;
+      padding: 12px 0;
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-mobile-menu a:last-child { border-bottom: none; }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      background: var(--green-dark);
+      padding: 64px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(74,155,88,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-hero-inner { position: relative; z-index: 1; }
+    .page-hero-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 12px;
+    }
+    .page-hero h1 {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 16px;
+      max-width: 640px;
+    }
+    .page-hero-sub {
+      font-size: 17px;
+      color: rgba(255,255,255,0.72);
+      max-width: 560px;
+      line-height: 1.6;
+    }
+    .page-hero-meta {
+      margin-top: 20px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ===== POLICIES BODY ===== */
+    .policies-body {
+      padding: 80px 0;
+    }
+    .policies-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* Sidebar */
+    .policies-sidebar {
+      position: sticky;
+      top: 96px;
+    }
+    .policies-sidebar-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .policies-nav { list-style: none; }
+    .policies-nav li { margin-bottom: 4px; }
+    .policies-nav a {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding: 7px 12px;
+      border-radius: 6px;
+      transition: background 0.2s, color 0.2s;
+      border-left: 2px solid transparent;
+    }
+    .policies-nav a:hover { color: var(--green); background: var(--green-pale); border-left-color: var(--green); }
+    .policies-nav a.active { color: var(--green-dark); background: var(--green-pale); border-left-color: var(--green-dark); font-weight: 600; }
+
+    /* Policy sections */
+    .policy-group {
+      margin-bottom: 48px;
+      scroll-margin-top: 100px;
+    }
+    .policy-group:last-of-type { margin-bottom: 0; }
+
+    .policy-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--border);
+    }
+    .policy-icon {
+      width: 40px; height: 40px;
+      background: var(--green-pale);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .policy-header h2 {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .policy-body {
+      font-size: 15px;
+      color: var(--text-body);
+      line-height: 1.75;
+    }
+    .policy-body p { margin-bottom: 14px; }
+    .policy-body p:last-child { margin-bottom: 0; }
+    .policy-body ul {
+      list-style: none;
+      margin: 14px 0;
+    }
+    .policy-body ul li {
+      padding: 8px 0 8px 22px;
+      position: relative;
+      color: var(--text-body);
+      border-bottom: 1px solid var(--border);
+      font-size: 15px;
+    }
+    .policy-body ul li:first-child { border-top: 1px solid var(--border); }
+    .policy-body ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 700;
+    }
+    .policy-callout {
+      background: var(--cream);
+      border-left: 3px solid var(--green);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 16px 20px;
+      margin: 16px 0;
+      font-size: 14px;
+      color: var(--text-body);
+    }
+    .policy-callout strong { color: var(--green-dark); }
+    .policy-highlight {
+      background: var(--green-pale);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-size: 14px;
+      color: var(--green-dark);
+      font-weight: 600;
+    }
+    .policy-warning {
+      background: #FFF8E6;
+      border-left: 3px solid #E8A020;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 14px;
+      color: #7A4F00;
+      font-weight: 600;
+    }
+
+    /* Divider between sections */
+    .policy-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 48px 0;
+    }
+
+    /* ===== CONTACT SECTION ===== */
+    .policies-contact {
+      background: var(--green-dark);
+      border-radius: var(--radius);
+      padding: 40px 48px;
+      margin-top: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+    .policies-contact::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(74,155,88,0.18) 0%, transparent 70%);
+    }
+    .policies-contact-text { position: relative; z-index: 1; }
+    .policies-contact-text h3 { font-size: 22px; margin-bottom: 8px; color: #fff; }
+    .policies-contact-text p { font-size: 15px; color: rgba(255,255,255,0.7); }
+    .policies-contact-actions { display: flex; gap: 12px; flex-wrap: wrap; position: relative; z-index: 1; }
+    .btn-white {
+      display: inline-block;
+      background: #fff;
+      color: var(--green-dark);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-white:hover { background: var(--green-pale); }
+    .btn-outline-white {
+      display: inline-block;
+      background: transparent;
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      transition: border-color 0.2s;
+      white-space: nowrap;
+    }
+    .btn-outline-white:hover { border-color: #fff; }
+
+    /* ===== FOOTER ===== */
+    footer { background: var(--green-dark); padding: 64px 0 0; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand img { height: 40px; width: auto; mix-blend-mode: screen; margin-bottom: 16px; }
+    .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.65; max-width: 280px; margin-bottom: 20px; }
+    .footer-contact a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 10px;
+      transition: color 0.2s;
+    }
+    .footer-contact a:hover { color: #fff; }
+    .footer-col-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 20px;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 12px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,0.65); transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 24px; }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.4); }
+    .footer-bottom-links { display: flex; gap: 20px; list-style: none; }
+    .footer-bottom-links a { font-size: 13px; color: rgba(255,255,255,0.4); transition: color 0.2s; }
+    .footer-bottom-links a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ===== MOBILE ===== */
+    @media screen and (max-width: 768px) {
+      .policies-layout { grid-template-columns: 1fr; gap: 40px; }
+      .policies-sidebar { position: static; }
+      .policies-nav { display: flex; flex-wrap: wrap; gap: 8px; }
+      .policies-nav li { margin-bottom: 0; }
+      .policies-nav a { padding: 6px 14px; border-left: none; border: 1.5px solid var(--border); border-radius: 24px; font-size: 12px; }
+      .policies-contact { flex-direction: column; padding: 32px 28px; }
+      .policies-contact-actions { flex-direction: column; width: 100%; }
+      .btn-white, .btn-outline-white { text-align: center; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+    @media screen and (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .policies-body { padding: 48px 0; }
+      .page-hero { padding: 48px 0; }
+      .policies-contact { padding: 28px 24px; }
+    }
+  </style>
+
+
+
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-inner">
+        <p class="page-hero-label">Support</p>
+        <h1>Store Policies</h1>
+        <p class="page-hero-sub">Guidelines for machine use, drop-off service, conduct, and what to expect at every Super Laundry location.</p>
+        <p class="page-hero-meta">Last updated: March 2026</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- POLICIES BODY -->
+  <div class="policies-body">
+    <div class="container">
+      <div class="policies-layout">
+
+        <!-- Sidebar -->
+        <aside class="policies-sidebar">
+          <p class="policies-sidebar-title">Jump to section</p>
+          <ul class="policies-nav">
+            <li><a href="#machine-use">Machine Use</a></li>
+            <li><a href="#unattended">Unattended Laundry</a></li>
+            <li><a href="#drop-off">Drop-Off Service</a></li>
+            <li><a href="#pickup-delivery">Pickup &amp; Delivery</a></li>
+            <li><a href="#refunds">Refunds</a></li>
+            <li><a href="#lost-found">Lost &amp; Found</a></li>
+            <li><a href="#conduct">Conduct &amp; Safety</a></li>
+            <li><a href="#liability">Liability</a></li>
+          </ul>
+        </aside>
+
+        <!-- Policy Content -->
+        <div class="policies-content">
+
+          <!-- 1. Machine Use -->
+          <div class="policy-group" id="machine-use">
+            <div class="policy-header">
+              <div class="policy-icon">🫧</div>
+              <h2>Machine Use</h2>
+            </div>
+            <div class="policy-body">
+              <ul>
+                <li>Avoid overloading washers or dryers — this prevents equipment damage and ensures proper cleaning</li>
+                <li>Use only laundry detergent and dryer sheets; bleach goes in the dispenser tray only</li>
+                <li>Clean lint traps before and after dryer use to prevent fire hazards</li>
+                <li>Report malfunctioning equipment to staff immediately; do not attempt repairs</li>
+                <li>Remove laundry promptly when cycles finish so other customers can access machines</li>
+                <li>Allison St location accepts Cash · Card · Tap and is also the only location with coin-operated machines (quarters accepted)</li>
+              </ul>
+              <div class="policy-warning">
+                Never wash or dry items contaminated with flammable substances — gasoline, oil, paint thinner, grease, or solvents. This is a fire hazard and strictly prohibited.
+              </div>
+            </div>
+          </div>
+
+          <hr class="policy-divider">
+
+          <!-- 2. Unattended Laundry -->
+          <div class="policy-group" id="unattended">
+            <div class="policy-header">
+              <div class="policy-icon">⏱</div>
+              <h2>Unattended Laundry</h2>
+            </div>
+            <div class="policy-body">
+              <p>We ask that you stay with your laundry or return promptly when your cycle ends. Out of respect for other customers, machines should be freed up as soon as they're done.</p>
+              <ul>
+                <li>Washers: laundry left for 15+ minutes after a cycle ends may be moved to folding tables by staff</li>
+                <li>Dryers: laundry left for 20+ minutes may be removed to a cart</li>
+                <li>At unstaffed hours, customers are responsible for moving laundry promptly when cycles complete</li>
+              </ul>
+              <div class="policy-callout">
+                <strong>Please note:</strong> Super Laundry is not responsible for items removed from machines due to inactivity.
+              </div>
+            </div>
+          </div>
+
+          <hr class="policy-divider">
+
+          <!-- 3. Drop-Off Wash-Dry-Fold -->
+          <div class="policy-group" id="drop-off">
+            <div class="policy-header">
+              <div class="policy-icon">👕</div>
+              <h2>Drop-Off Wash-Dry-Fold Service</h2>
+            </div>
+            <div class="policy-body">
+              <p>Drop-off service is priced by the pound. Most orders are ready for same-day or next-day pickup — turnaround is confirmed at the time of drop-off.</p>
+              <ul>
+                <li>Items not accepted: dry-clean only, delicate hand-wash, leather, suede, fur</li>
+                <li>Pre-existing damage is processed at customer risk</li>
+                <li>Orders are never mixed with other customers' laundry</li>
+                <li>Payment is due at pickup</li>
+              </ul>
+              <div class="policy-callout">
+                <strong>Damage or loss claims must be reported within 24 hours of pickup.</strong> Maximum compensation is 10&times; the processing charge for affected items.
+              </div>
+              <div class="policy-highlight">
+                Unclaimed orders after 7 days are logged as unclaimed. After 30 days, items are donated to local charity.
+              </div>
+            </div>
+          </div>
+
+          <hr class="policy-divider">
+
+          <!-- 4. Pickup & Delivery -->
+          <div class="policy-group" id="pickup-delivery">
+            <div class="policy-header">
+              <div class="policy-icon">🚗</div>
+              <h2>Pickup &amp; Delivery</h2>
+            </div>
+            <div class="policy-body">
+              <p>Pickup and delivery is currently available through our Springdale location. All drop-off wash-dry-fold terms apply to pickup and delivery orders.</p>
+              <ul>
+                <li>Pickups must be scheduled in advance</li>
+                <li>Laundry must be bagged and accessible at the scheduled time</li>
+                <li>Provide a correct and accessible delivery address</li>
+                <li>Cancellations must be made at least 2 hours before scheduled pickup</li>
+              </ul>
+              <div class="policy-callout">
+                Super Laundry is not liable for delays caused by weather or traffic conditions.
+              </div>
+            </div>
+          </div>
+
+          <hr class="policy-divider">
+
+          <!-- 5. Refunds & Machine Malfunctions -->
+          <div class="policy-group" id="refunds">
+            <div class="policy-header">
+              <div class="policy-icon">💳</div>
+              <h2>Refunds &amp; Machine Malfunctions</h2>
+            </div>
+            <div class="policy-body">
+              <p>If a machine fails mid-cycle, please report it right away. Refunds are issued for verified equipment failures — not for user error.</p>
+              <ul>
+                <li>Report a failed cycle to an attendant immediately while present</li>
+                <li>At unstaffed hours: call <a href="tel:5138735939" style="color: var(--green); font-weight: 600;">(513) 873-5939</a> or email within 24 hours — include the machine number and time of the issue</li>
+                <li>Drop-off and delivery refunds are handled case-by-case within 24 hours of order receipt</li>
+              </ul>
+              <div class="policy-callout">
+                <strong>Self-service refund cap:</strong> Refunds for machine malfunctions are limited to the cost of the failed cycle.
+              </div>
+            </div>
+          </div>
+
+          <hr class="policy-divider">
+
+          <!-- 6. Lost & Found -->
+          <div class="policy-group" id="lost-found">
+            <div class="policy-header">
+              <div class="policy-icon">🔍</div>
+              <h2>Lost &amp; Found</h2>
+            </div>
+            <div class="policy-body">
+              <p>If you've left something behind, contact the specific location as soon as possible. Found items are logged and held for 30 days — after that, unclaimed belongings are donated to local charity.</p>
+              <ul>
+                <li>Contact the specific location directly, or reach us at <a href="mailto:info@superlaundry24.com" style="color: var(--green); font-weight: 600;">info@superlaundry24.com</a></li>
+                <li>You can also call us at <a href="tel:5138735939" style="color: var(--green); font-weight: 600;">(513) 873-5939</a></li>
+              </ul>
+              <div class="policy-callout">
+                Super Laundry is not responsible for unattended personal belongings left in the laundromat.
+              </div>
+            </div>
+          </div>
+
+          <hr class="policy-divider">
+
+          <!-- 7. Conduct & Safety -->
+          <div class="policy-group" id="conduct">
+            <div class="policy-header">
+              <div class="policy-icon">🏪</div>
+              <h2>Conduct &amp; Safety</h2>
+            </div>
+            <div class="policy-body">
+              <p>Super Laundry locations are shared community spaces. We ask everyone to respect fellow customers and staff.</p>
+              <ul>
+                <li>Smoking, vaping, alcohol, and illegal substances are strictly prohibited on all premises</li>
+                <li>Children must be supervised at all times; no playing on or around equipment</li>
+                <li>Harassment or threatening behavior will result in immediate removal and a potential permanent ban</li>
+                <li>Loitering without active laundry use is not permitted</li>
+                <li>Please keep noise at a reasonable level; use headphones for personal audio</li>
+              </ul>
+              <div class="policy-highlight">
+                All locations are monitored by 24/7 security cameras. Super Laundry reserves the right to refuse service to any individual whose behavior is disruptive or unsafe.
+              </div>
+            </div>
+          </div>
+
+          <hr class="policy-divider">
+
+          <!-- 8. Liability -->
+          <div class="policy-group" id="liability">
+            <div class="policy-header">
+              <div class="policy-icon">📋</div>
+              <h2>Liability</h2>
+            </div>
+            <div class="policy-body">
+              <ul>
+                <li>Super Laundry is not responsible for loss, theft, or damage to unattended personal property</li>
+                <li>Self-service claim limit: refund of the cycle payment only</li>
+                <li>Drop-off and delivery claim limit: 10&times; the processing charge for affected items, not to exceed the total order amount</li>
+                <li>These policies are subject to change; current versions are posted in-store and on this page</li>
+              </ul>
+              <div class="policy-callout">
+                <strong>Questions about a specific situation?</strong> Reach our team directly — we review each case individually and aim to respond within 24 hours.
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom CTA -->
+          <div class="policies-contact">
+            <div class="policies-contact-text">
+              <h3>Have a question about our policies?</h3>
+              <p>Our team is happy to help — give us a call or send a message.</p>
+            </div>
+            <div class="policies-contact-actions">
+              <a href="tel:5138735939" class="btn-white">Call (513) 873-5939</a>
+              <a href="/contact" class="btn-outline-white">Send a Message</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include "SuperLaundry/partials/footer.html" %}
+
+  <script>
+    // Sidebar active state on scroll
+    const sections = document.querySelectorAll('.policy-group');
+    const navLinks = document.querySelectorAll('.policies-nav a');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => link.classList.remove('active'));
+          const active = document.querySelector(`.policies-nav a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -60% 0px' });
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+  {{ standard_footer_includes }}
+
+</body>
+</html>

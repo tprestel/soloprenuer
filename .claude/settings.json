@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -c \"\nimport sys, json, re\ndata = json.load(sys.stdin)\nfp = data.get('tool_input', {}).get('file_path', '')\nif re.search(r'design-direction-[abc]\\.html$', fp):\n    print(json.dumps({'hookSpecificOutput': {'hookEventName': 'PostToolUse', 'additionalContext': 'READABILITY CHECK: A client homepage prototype was just written. Before responding, re-read the file and scan all CSS for contrast issues: muted text (#555-#777) on near-black backgrounds (#0a0a0a, #111, #1a1a1a), dark text on dark backgrounds, or light text on light backgrounds. Fix any issues before presenting to the user.'}}))\n\"",
+            "timeout": 10,
+            "statusMessage": "Checking readability..."
+          }
+        ]
+      }
+    ]
+  }
+}

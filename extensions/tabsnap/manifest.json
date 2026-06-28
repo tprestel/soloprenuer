@@ -3,7 +3,7 @@
   "name": "TabSnap — Full Page Screenshots",
   "version": "0.1.0",
   "description": "Capture a full-page screenshot of any tab and download as PNG, JPG, or PDF.",
-  "permissions": ["activeTab", "scripting", "downloads", "storage"],
+  "permissions": ["activeTab", "scripting", "downloads", "storage", "debugger"],
   "host_permissions": ["<all_urls>"],
   "action": {
     "default_popup": "src/popup/popup.html",

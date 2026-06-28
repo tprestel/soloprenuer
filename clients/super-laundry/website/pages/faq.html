@@ -1,0 +1,813 @@
+<!--
+  templateType: "page"
+  isAvailableForNewContent: true
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/webp" href="https://244988351.fs1.hubspotusercontent-na2.net/hubfs/244988351/logos/superlaundry_favicon.webp">
+  <title>FAQ — Super Laundry Cincinnati</title>
+  <meta name="description" content="Everything you need to know about Super Laundry Cincinnati — hours, payments, drop-off service, pickup & delivery, machines, and store policies.">
+
+  <!-- FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How many Super Laundry locations are there?",
+        "acceptedAnswer": {"@type": "Answer", "text": "We have 6 locations across Cincinnati: Avondale, Bond Hill, Westwood, North College Hill, Springdale, and Allison St."}
+      },
+      {
+        "@type": "Question",
+        "name": "Which locations are open 24 hours?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Avondale, Bond Hill, Westwood, and North College Hill are open 24/7, every day including holidays. Springdale is open 7 AM – 10 PM daily, and Allison St is open 6 AM – 11 PM daily."}
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need quarters to use the machines?",
+        "acceptedAnswer": {"@type": "Answer", "text": "At most locations, no. We accept cash, credit card, debit card, and tap-to-pay (Apple Pay, Google Pay). All locations accept Cash · Card · Tap. The Allison St location also accepts coins and quarters."}
+      },
+      {
+        "@type": "Question",
+        "name": "How long does a wash cycle take?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Most wash cycles run 28–40 minutes. Dryers typically take 40–60 minutes. Most customers are in and out in under 90 minutes."}
+      },
+      {
+        "@type": "Question",
+        "name": "What is wash-dry-fold drop-off service?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Drop off your laundry and our attendants will wash, dry, and fold everything for you. It's priced by the pound and most orders are ready for same-day or next-day pickup."}
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer pickup and delivery?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Yes — pickup and delivery is available through our Springdale location. Schedule in advance; same-day subject to availability."}
+      },
+      {
+        "@type": "Question",
+        "name": "What is Laundry Love Cincinnati?",
+        "acceptedAnswer": {"@type": "Answer", "text": "A free community laundry program hosted at our Westwood and Avondale locations every 2nd Wednesday of the month from 6–8 PM. All costs covered — machines, detergent, and dryers. Individuals get up to 2 free loads; families get up to 4."}
+      },
+      {
+        "@type": "Question",
+        "name": "Is parking available at Super Laundry locations?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Yes, free parking is available at all Super Laundry locations — right at the door."}
+      }
+    ]
+  }
+  </script>
+
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.superlaundry24.com"},
+      {"@type": "ListItem", "position": 2, "name": "FAQ", "item": "https://www.superlaundry24.com/faq"}
+    ]
+  }
+  </script>
+
+
+  <link rel="canonical" href="https://www.superlaundry24.com/faq">
+  {{ standard_header_includes }}
+
+</head>
+<body>
+
+  {% include "SuperLaundry/partials/header.html" %}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-dark: #1C4A25;
+      --green: #2D7F3C;
+      --green-light: #4A9B58;
+      --green-pale: #EAF4EC;
+      --cream: #F5F1E8;
+      --warm-white: #FAFAF6;
+      --text-dark: #1A2B1C;
+      --text-body: #3C4A3E;
+      --text-muted: #4E6150;
+      --border: #DDD8CE;
+      --shadow-sm: 0 2px 8px rgba(28,74,37,0.08);
+      --shadow-md: 0 4px 20px rgba(28,74,37,0.12);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-body);
+      background: var(--warm-white);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== AWARD BAR ===== */
+    .award-bar {
+      background: #B5D300;
+      padding: 9px 24px;
+      text-align: center;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .award-bar p {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #1C4A25;
+    }
+    .award-bar span { color: #1C4A25; font-weight: 700; }
+    .award-bar .dot { margin: 0 10px; opacity: 0.75; color: #1C4A25; }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      background: var(--green-dark);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 68px;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .nav-logo img { height: 44px; width: auto; mix-blend-mode: screen; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta {
+      background: var(--green) !important;
+      color: #fff !important;
+      padding: 10px 20px !important;
+      border-radius: 6px !important;
+      font-weight: 600 !important;
+    }
+    .nav-cta:hover { background: var(--green-light) !important; }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: rgba(255,255,255,0.85); border-radius: 2px; }
+    .nav-mobile-menu {
+      display: none;
+      background: var(--green-dark);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 16px 24px 24px;
+    }
+    .nav-mobile-menu.open { display: block; }
+    .nav-mobile-menu a {
+      display: block;
+      padding: 12px 0;
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-mobile-menu a:last-child { border-bottom: none; }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      background: var(--green-dark);
+      padding: 64px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(74,155,88,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .page-hero-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 12px;
+    }
+    .page-hero h1 {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 16px;
+      max-width: 640px;
+    }
+    .page-hero-sub {
+      font-size: 17px;
+      color: rgba(255,255,255,0.72);
+      max-width: 560px;
+      line-height: 1.6;
+    }
+
+    /* ===== FAQ BODY ===== */
+    .faq-body {
+      padding: 80px 0;
+    }
+    .faq-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* Sidebar nav */
+    .faq-sidebar {
+      position: sticky;
+      top: 96px;
+    }
+    .faq-sidebar-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .faq-nav { list-style: none; }
+    .faq-nav li { margin-bottom: 4px; }
+    .faq-nav a {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background 0.2s, color 0.2s;
+      border-left: 2px solid transparent;
+    }
+    .faq-nav a:hover { color: var(--green); background: var(--green-pale); border-left-color: var(--green); }
+    .faq-nav a.active { color: var(--green-dark); background: var(--green-pale); border-left-color: var(--green-dark); font-weight: 600; }
+
+    /* FAQ sections */
+    .faq-section-group { margin-bottom: 56px; }
+    .faq-section-group:last-child { margin-bottom: 0; }
+    .faq-section-heading {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--border);
+    }
+    .faq-section-icon {
+      width: 40px; height: 40px;
+      background: var(--green-pale);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .faq-section-heading h2 {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    /* Accordion */
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-dark);
+      transition: color 0.2s;
+    }
+    .faq-question:hover { color: var(--green); }
+    .faq-icon {
+      width: 24px; height: 24px;
+      background: var(--green-pale);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green);
+      font-size: 16px;
+      flex-shrink: 0;
+      transition: background 0.2s, transform 0.25s;
+      line-height: 1;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      background: var(--green);
+      color: #fff;
+    }
+    .faq-answer {
+      display: none;
+      padding: 0 32px 20px 0;
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+    .faq-item.open .faq-answer { display: block; }
+
+    /* ===== CTA SECTION ===== */
+    .faq-cta {
+      background: var(--green-dark);
+      border-radius: var(--radius);
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-top: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .faq-cta::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(74,155,88,0.18) 0%, transparent 70%);
+    }
+    .faq-cta-text { position: relative; z-index: 1; }
+    .faq-cta-text h3 { color: #fff; font-size: 24px; margin-bottom: 8px; }
+    .faq-cta-text p { color: rgba(255,255,255,0.7); font-size: 15px; }
+    .faq-cta-actions {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .btn-white {
+      display: inline-block;
+      background: #fff;
+      color: var(--green-dark);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-white:hover { background: var(--green-pale); }
+    .btn-outline-white {
+      display: inline-block;
+      background: transparent;
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      transition: border-color 0.2s;
+      white-space: nowrap;
+    }
+    .btn-outline-white:hover { border-color: #fff; }
+
+    /* ===== FOOTER ===== */
+    footer { background: var(--green-dark); padding: 64px 0 0; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand img { height: 40px; width: auto; mix-blend-mode: screen; margin-bottom: 16px; }
+    .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.65; max-width: 280px; margin-bottom: 20px; }
+    .footer-contact a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 10px;
+      transition: color 0.2s;
+    }
+    .footer-contact a:hover { color: #fff; }
+    .footer-col-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 20px;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 12px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,0.65); transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 24px; }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.4); }
+    .footer-bottom-links { display: flex; gap: 20px; list-style: none; }
+    .footer-bottom-links a { font-size: 13px; color: rgba(255,255,255,0.4); transition: color 0.2s; }
+    .footer-bottom-links a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ===== MOBILE ===== */
+    @media screen and (max-width: 768px) {
+      .faq-layout { grid-template-columns: 1fr; gap: 40px; }
+      .faq-sidebar { position: static; }
+      .faq-nav { display: flex; flex-wrap: wrap; gap: 8px; }
+      .faq-nav li { margin-bottom: 0; }
+      .faq-nav a { padding: 6px 14px; border-left: none; border: 1.5px solid var(--border); border-radius: 24px; }
+      .faq-cta { flex-direction: column; padding: 32px 28px; }
+      .faq-cta-actions { flex-direction: column; width: 100%; }
+      .btn-white, .btn-outline-white { text-align: center; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+    @media screen and (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .faq-body { padding: 48px 0; }
+      .page-hero { padding: 48px 0; }
+    }
+  </style>
+
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-inner">
+        <p class="page-hero-label">Support</p>
+        <h1>Frequently Asked Questions</h1>
+        <p class="page-hero-sub">Everything you need to know about Super Laundry Cincinnati — from hours and payments to drop-off and pickup & delivery.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ BODY -->
+  <div class="faq-body">
+    <div class="container">
+      <div class="faq-layout">
+
+        <!-- Sidebar -->
+        <aside class="faq-sidebar">
+          <p class="faq-sidebar-title">Jump to section</p>
+          <ul class="faq-nav">
+            <li><a href="#general">General</a></li>
+            <li><a href="#machines">Machines</a></li>
+            <li><a href="#payment">Payment</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#policies">Policies</a></li>
+          </ul>
+        </aside>
+
+        <!-- FAQ Content -->
+        <div class="faq-content">
+
+          <!-- General -->
+          <div class="faq-section-group" id="general">
+            <div class="faq-section-heading">
+              <div class="faq-section-icon">🏪</div>
+              <h2>General</h2>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                How many Super Laundry locations are there?
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                We have 6 locations across the Cincinnati area: Avondale, Bond Hill, Westwood, North College Hill, Springdale, and Allison St. Each location has 100+ washers and dryers.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                Which locations are open 24 hours?
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                Avondale, Bond Hill, Westwood, and North College Hill are open 24/7 — every day, including holidays. Springdale is open 7 AM – 10 PM daily, and Allison St is open 6 AM – 11 PM daily.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                Are attendants on-site at all times?
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                Attendants are available during staffed hours at most locations. Not all locations have attendants overnight, but machines are fully operational 24/7 at our four around-the-clock locations.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                Is parking available?
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                Yes — free parking is available at all Super Laundry locations, right at the door. No walking across a lot with your laundry.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                What is Laundry Love Cincinnati?
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                Laundry Love is a free community laundry program we host at our Westwood and Avondale locations every 2nd Wednesday of the month, 6–8 PM. All costs are covered — machines, detergent, and dryers. Individuals get up to 2 free loads; families get up to 4. No registration required.
+              </div>
+            </div>
+          </div>
+
+          <!-- Machines -->
+          <div class="faq-section-group" id="machines">
+            <div class="faq-section-heading">
+              <div class="faq-section-icon">🫧</div>
+              <h2>Machines</h2>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                How many machines do your locations have?
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                Each location has 100+ washers and dryers, with a mix of sizes — from standard 2-load machines up to large 8-load capacity washers for bulky items.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                Can I wash big items like comforters and rugs?
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                Absolutely. We have large-capacity machines up to 8-load size — perfect for king-size comforters, sleeping bags, area rugs, and other bulky bedding. Most home washers can't handle these items properly.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                Do I need to bring my own detergent?
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                You're welcome to bring your own. We also have detergent, fabric softener, and other laundry supplies available via vending machines on-site at all locations.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                How long does a wash cycle take?
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                Most wash cycles run 28–40 minutes depending on the machine size and cycle selected. Dryers typically take 40–60 minutes. Most customers finish their entire laundry in under 90 minutes.
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment -->
+          <div class="faq-section-group" id="payment">
+            <div class="faq-section-heading">
+              <div class="faq-section-icon">💳</div>
+              <h2>Payment</h2>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                Do I need quarters?
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                All locations accept Cash · Card · Tap — including credit/debit cards, Apple Pay, and Google Pay. The Allison St location also accepts coins and quarters, making it the only location with coin-operated machines.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                Do you have a rewards program?
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                Yes. Load $20 or more onto your account and we'll add $1 free — automatically, every time, at any location. At our Springdale location, spend $30 and earn $3 back automatically.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                Is there a change machine on-site?
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                Yes, change machines are available at our coin-operated locations. At card and tap locations, you won't need change at all.
+              </div>
+            </div>
+          </div>
+
+          <!-- Services -->
+          <div class="faq-section-group" id="services">
+            <div class="faq-section-heading">
+              <div class="faq-section-icon">✅</div>
+              <h2>Services</h2>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                What is wash-dry-fold drop-off service?
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                Drop off your laundry and our attendants wash, dry, and fold everything for you. Priced by the pound — most orders are ready same-day or next-day. Available at Springdale, Avondale, Bond Hill, Westwood, and North College Hill.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                Do you offer pickup and delivery?
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                Yes — pickup and delivery is currently available through our Springdale location. Schedule in advance; same-day pickup is subject to availability. We pick up, wash, fold, and deliver everything back to your door.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                Can I wash dry-clean-only items?
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                We don't offer dry cleaning. Items labeled dry-clean-only should be taken to a dry cleaner. Our drop-off service cannot accept leather, suede, fur, or delicate hand-wash-only garments.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                How much does wash-dry-fold cost?
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                Drop-off is priced by the pound. Current rates are posted in-store and confirmed at check-in by our attendants. Payment is due at pickup.
+              </div>
+            </div>
+          </div>
+
+          <!-- Policies -->
+          <div class="faq-section-group" id="policies">
+            <div class="faq-section-heading">
+              <div class="faq-section-icon">📋</div>
+              <h2>Policies</h2>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                I left something behind — what should I do?
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                Contact the specific location as soon as possible. Found items are logged and held for 30 days. After 30 days, unclaimed items are donated to local charity. Email info@superlaundry24.com or call (513) 873-5939.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                What happens if a machine damages my clothes?
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                Each situation is reviewed case-by-case. Contact our management team within 24 hours with the location, machine number, and details about the item. For drop-off orders, damage claims must be reported within 24 hours of pickup.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                Can I leave my laundry unattended in the machines?
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                We ask that you stay with your laundry or return promptly. Items left in washers more than 15 minutes after a cycle ends, or dryers more than 20 minutes, may be moved to folding tables or carts. Super Laundry is not responsible for unattended items.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                What is your drop-off order refund policy?
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                Unclaimed drop-off orders are held for 7 days, then logged as unclaimed. After 30 days, items are donated. Compensation for damage or loss is capped at 10× the processing charge for affected items. Normal laundering effects such as shrinkage, fading, or pilling are not covered.
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom CTA -->
+          <div class="faq-cta">
+            <div class="faq-cta-text">
+              <h3>Still have a question?</h3>
+              <p>Our team is happy to help — give us a call or send a message.</p>
+            </div>
+            <div class="faq-cta-actions">
+              <a href="tel:5138735939" class="btn-white">Call (513) 873-5939</a>
+              <a href="/contact" class="btn-outline-white">Send a Message</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include "SuperLaundry/partials/footer.html" %}
+
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+        // Close all
+        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+        // Open clicked if it was closed
+        if (!isOpen) item.classList.add('open');
+        btn.setAttribute('aria-expanded', !isOpen);
+      });
+    });
+
+    // Sidebar active state on scroll
+    const sections = document.querySelectorAll('.faq-section-group');
+    const navLinks = document.querySelectorAll('.faq-nav a');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => link.classList.remove('active'));
+          const active = document.querySelector(`.faq-nav a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -60% 0px' });
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+  {{ standard_footer_includes }}
+
+</body>
+</html>

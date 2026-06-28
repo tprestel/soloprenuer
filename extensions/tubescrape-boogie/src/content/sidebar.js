@@ -255,13 +255,24 @@
     }
   }
 
-  // ─── Extract Data Directly From Page ───────────────────────────
+  // ─── Extract Data From Page ───────────────────────────────────
+  // Content scripts are isolated from the page's JS world, so we cannot
+  // read window.ytInitialPlayerResponse directly. Instead we ask the service
+  // worker to execute a function in MAIN world and pass the result back.
+  function getPlayerResponseAsync() {
+    return new Promise((resolve) => {
+      chrome.runtime.sendMessage({ type: 'GET_PLAYER_RESPONSE' }, (response) => {
+        if (chrome.runtime.lastError || !response || response.error) {
+          resolve(null);
+          return;
+        }
+        resolve(response.playerResponse || null);
+      });
+    });
+  }
+
+  // Sync fallback: parse from script tags (works on hard page load)
   function getPlayerResponseFromPage() {
-    // YouTube updates window.ytInitialPlayerResponse on every SPA navigation
-    if (window.ytInitialPlayerResponse && window.ytInitialPlayerResponse.videoDetails) {
-      return window.ytInitialPlayerResponse;
-    }
-    // Fallback: parse from script tags (first load only)
     const scripts = document.querySelectorAll('script');
     for (const script of scripts) {
       const text = script.textContent;
@@ -299,10 +310,14 @@
   }
 
   // ─── Load Video Data ──────────────────────────────────────────
-  function loadVideoData() {
+  async function loadVideoData() {
     setTranscriptState('loading', 'Loading transcript…');
 
-    const playerResponse = getPlayerResponseFromPage();
+    // Ask service worker to read window.ytInitialPlayerResponse from MAIN world
+    let playerResponse = await getPlayerResponseAsync();
+    // Fall back to script tag parsing if service worker can't get it
+    if (!playerResponse) playerResponse = getPlayerResponseFromPage();
+
     if (!playerResponse) {
       setTranscriptState('error', 'Could not read video data. Try refreshing the page.');
       return;
@@ -351,8 +366,52 @@
     });
   }
 
+  // ─── Transcript Parsers ───────────────────────────────────────
+  function parseJson3(json) {
+    const segs = [];
+    for (const ev of (json.events || [])) {
+      if (!ev.segs) continue;
+      const text = ev.segs.map(s => s.utf8 || '').join('').replace(/\n/g, ' ').trim();
+      if (text) segs.push({ start: (ev.tStartMs || 0) / 1000, duration: (ev.dDurationMs || 0) / 1000, text });
+    }
+    return segs;
+  }
+
+  function parseTimedTextXml(xml) {
+    const ENT = { '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&apos;': "'", '&#39;': "'" };
+    function decode(s) {
+      return s.replace(/&(?:amp|lt|gt|quot|apos|#39);/g, m => ENT[m] || m).replace(/<[^>]+>/g, '');
+    }
+    function attr(str, name) {
+      const m = str.match(new RegExp(`\\b${name}="([^"]+)"`));
+      return m ? m[1] : null;
+    }
+    const segs = [];
+    let m;
+    // srv3: <p t="ms" d="ms">
+    const srv3 = /<p\b([^>]*)>([\s\S]*?)<\/p>/g;
+    while ((m = srv3.exec(xml)) !== null) {
+      const t = attr(m[1], 't');
+      if (!t) continue;
+      const d = attr(m[1], 'd');
+      const text = decode(m[2]).trim();
+      if (text) segs.push({ start: parseInt(t) / 1000, duration: d ? parseInt(d) / 1000 : 0, text });
+    }
+    if (segs.length > 0) return segs;
+    // legacy: <text start="s" dur="s">
+    const leg = /<text\b([^>]*)>([\s\S]*?)<\/text>/g;
+    while ((m = leg.exec(xml)) !== null) {
+      const start = attr(m[1], 'start');
+      if (!start) continue;
+      const dur = attr(m[1], 'dur');
+      const text = decode(m[2]).trim();
+      if (text) segs.push({ start: parseFloat(start), duration: dur ? parseFloat(dur) : 0, text });
+    }
+    return segs;
+  }
+
   // ─── Fetch Transcript ─────────────────────────────────────────
-  function fetchTranscript(captionUrl) {
+  async function fetchTranscript(captionUrl) {
     if (!captionUrl) {
       setTranscriptState('empty', 'Select a caption track above.');
       return;
@@ -360,20 +419,21 @@
     setTranscriptState('loading', 'Fetching transcript…');
 
     chrome.runtime.sendMessage({ type: 'FETCH_TRANSCRIPT', captionUrl }, (response) => {
-      if (chrome.runtime.lastError || !response || response.error) {
-        const errMsg = (response && response.error) ? response.error : 'Failed to load transcript.';
-        setTranscriptState('error', errMsg);
+      if (chrome.runtime.lastError || !response) {
+        setTranscriptState('error', 'No response: ' + (chrome.runtime.lastError?.message || 'unknown'));
         return;
       }
-
-      state.segments = response.segments || [];
-      state.filteredIndices = state.segments.map((_, i) => i);
-
-      if (state.segments.length === 0) {
-        setTranscriptState('empty', 'Transcript is empty.');
+      if (response.error) {
+        setTranscriptState('error', response.error);
         return;
       }
-
+      const segments = response.segments || [];
+      state.segments = segments;
+      state.filteredIndices = segments.map((_, i) => i);
+      if (segments.length === 0) {
+        setTranscriptState('empty', `0 segments. Raw: "${response.rawPreview || '(empty)'}"`);
+        return;
+      }
       renderTranscript();
       updateKeywordBadge();
     });
@@ -854,8 +914,37 @@
     els.videoTitle.textContent = 'Loading…';
     els.videoMeta.innerHTML = '';
 
-    if (state.isOpen) {
-      setTimeout(loadVideoData, 800); // slight delay for YouTube SPA to settle
+    if (!state.isOpen) return;
+
+    // For SPA navigation, window.ytInitialPlayerResponse won't be accessible
+    // (content script isolated world). Fetch fresh data from the service worker
+    // which will pull the new video page HTML directly.
+    const newVideoId = new URLSearchParams(location.search).get('v');
+    if (newVideoId) {
+      setTranscriptState('loading', 'Loading new video…');
+      chrome.runtime.sendMessage({ type: 'FETCH_VIDEO_DATA', videoId: newVideoId }, (response) => {
+        if (chrome.runtime.lastError || !response || response.error || !response.metadata) {
+          // Fallback to script tag parsing (might be stale)
+          loadVideoData();
+          return;
+        }
+        // Populate state from fresh fetch response
+        state.meta = response.metadata;
+        state.captionTracks = response.captionTracks || [];
+        updateVideoInfoStrip();
+        populateLangSelector();
+        loadKeywords();
+        if (state.captionTracks.length > 0) {
+          const preferred = state.captionTracks.find(t => !t.isAutoGenerated) || state.captionTracks[0];
+          state.selectedTrackUrl = preferred.url;
+          els.langSelect.value = preferred.url;
+          fetchTranscript(preferred.url);
+        } else {
+          setTranscriptState('empty', 'No captions available for this video.');
+        }
+      });
+    } else {
+      loadVideoData();
     }
   }
 

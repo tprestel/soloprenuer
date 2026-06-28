@@ -1,0 +1,205 @@
+<!--
+  TEAM CARD — Reusable Component
+  ────────────────────────────────
+  Single team member / partner card with avatar, name, role,
+  location, bio, skill badges, and social links.
+  Hover: lift + gradient glow overlay + avatar scale.
+
+  TO CUSTOMIZE:
+  - Change --tc-accent for brand color
+  - Change --tc-bg for inner card background (match your page)
+  - Swap avatar src, name, role, location, bio, skills, socials
+  - Uses inline SVGs for social icons — swap as needed
+-->
+
+<style>
+  .tc {
+    --tc-accent: #F25B19;
+    --tc-bg: rgba(255,255,255,0.02);
+
+    position: relative;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: var(--tc-bg);
+    backdrop-filter: blur(8px);
+    padding: 28px 20px;
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    overflow: hidden;
+    max-width: 420px;
+  }
+
+  .tc:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.3);
+  }
+
+  .tc-glow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--tc-accent) 8%, transparent), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+  }
+
+  .tc:hover .tc-glow { opacity: 1; }
+
+  .tc-avatar-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+
+  .tc-avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.03);
+    padding: 3px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .tc:hover .tc-avatar { transform: scale(1.05); }
+
+  .tc-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .tc-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+
+  .tc-role {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 50px;
+    background: color-mix(in srgb, var(--tc-accent) 10%, transparent);
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--tc-accent);
+    margin-bottom: 8px;
+  }
+
+  .tc-location {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .tc-location svg { width: 12px; height: 12px; }
+
+  .tc-bio {
+    font-size: 14px;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+
+  .tc-skills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .tc-skill {
+    padding: 4px 10px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.02);
+    font-size: 10px;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .tc-socials {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .tc-social {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.02);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .tc-social:hover {
+    color: var(--tc-accent);
+    background: color-mix(in srgb, var(--tc-accent) 8%, transparent);
+  }
+
+  .tc-social svg { width: 13px; height: 13px; }
+</style>
+
+<!-- ─── MARKUP ──────────────────────────────────────────── -->
+<!--
+  Copy one .tc div per team member. Swap content as needed.
+  Common social icon SVGs included below for reference.
+-->
+
+<div class="tc">
+  <div class="tc-glow"></div>
+  <div class="tc-avatar-wrap">
+    <div class="tc-avatar">
+      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" alt="Sarah Johnson">
+    </div>
+  </div>
+  <div class="tc-name">Sarah Johnson</div>
+  <div class="tc-role">CEO &amp; Founder</div>
+  <div class="tc-location">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    San Francisco
+  </div>
+  <p class="tc-bio">Visionary leader with 15+ years in tech</p>
+  <div class="tc-skills">
+    <span class="tc-skill">Strategy</span>
+    <span class="tc-skill">Leadership</span>
+    <span class="tc-skill">Innovation</span>
+  </div>
+  <div class="tc-socials">
+    <!-- Twitter -->
+    <a href="#" class="tc-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 12 7.5v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5 0-.28-.03-.56-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+    <!-- LinkedIn -->
+    <a href="#" class="tc-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+    <!-- Email -->
+    <a href="#" class="tc-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+    <!-- Phone -->
+    <a href="#" class="tc-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+    <!-- Link -->
+    <a href="#" class="tc-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a>
+  </div>
+</div>
+
+<!--
+  SOCIAL ICON REFERENCE (copy the ones you need):
+  Twitter, LinkedIn, Email, Phone, Link icons are included above.
+  GitHub: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+  Instagram: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+  Facebook: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+-->

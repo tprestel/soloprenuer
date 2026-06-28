@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Marketing Proposal — Adrenaline Fix Karting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;600;700;800;900&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #F47B20;
+    --orange-glow: rgba(244, 123, 32, 0.15);
+    --orange-dim: #c45f10;
+    --black: #0c0c0c;
+    --dark: #111;
+    --dark-card: #161616;
+    --dark-border: #222;
+    --warm: #f5f0eb;
+    --warm-alt: #eee9e2;
+    --white: #fefdfb;
+    --text: #2a2723;
+    --text-mid: #5a564f;
+    --text-muted: #8a857e;
+    --text-light: #d5d0ca;
+    --green: #3a9e65;
+    --green-soft: #e9f5ee;
+    --display: 'Big Shoulders Display', sans-serif;
+    --body: 'Figtree', sans-serif;
+    --hatch: repeating-linear-gradient(-45deg, transparent, transparent 6px, rgba(0,0,0,0.06) 6px, rgba(0,0,0,0.06) 7px);
+    --hatch-light: repeating-linear-gradient(-45deg, transparent, transparent 6px, rgba(255,255,255,0.04) 6px, rgba(255,255,255,0.04) 7px);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--body);
+    background: #d8d4ce;
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ═══ GRAIN OVERLAY ═══ */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px;
+  }
+
+  .proposal {
+    max-width: 880px;
+    margin: 0 auto;
+    background: var(--white);
+    box-shadow: 0 8px 60px rgba(0,0,0,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ═══ SCROLL REVEAL ═══ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-d1 { transition-delay: 0.1s; }
+  .reveal-d2 { transition-delay: 0.2s; }
+  .reveal-d3 { transition-delay: 0.3s; }
+  .reveal-d4 { transition-delay: 0.4s; }
+
+  /* ═══════════════════════════════════════════════
+     HEADER
+     ═══════════════════════════════════════════════ */
+  .header {
+    background: var(--black);
+    padding: 64px 60px 52px;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Top racing stripe */
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 7px;
+    background: var(--orange);
+  }
+  /* Diagonal hatching — borrowed from Feature Carousel */
+  .header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--hatch-light);
+    pointer-events: none;
+  }
+  /* Diagonal accent stripe */
+  .header-stripe {
+    position: absolute;
+    top: -60%;
+    right: 40px;
+    width: 140px;
+    height: 260%;
+    background: linear-gradient(180deg, transparent, rgba(244,123,32,0.05) 40%, rgba(244,123,32,0.05) 60%, transparent);
+    transform: skewX(-14deg);
+    pointer-events: none;
+  }
+  .header-content { position: relative; z-index: 2; }
+  .header-badge {
+    display: inline-block;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--orange);
+    border: 1px solid rgba(244,123,32,0.25);
+    padding: 8px 20px;
+    margin-bottom: 28px;
+  }
+  .header h1 {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: 64px;
+    color: var(--white);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .header h1 span {
+    color: var(--orange);
+    display: block;
+    font-size: 68px;
+  }
+  .header-meta {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 28px;
+    letter-spacing: 0.5px;
+    font-weight: 300;
+  }
+  .header-meta strong { color: var(--text-light); font-weight: 500; }
+
+  /* ═══════════════════════════════════════════════
+     SECTIONS
+     ═══════════════════════════════════════════════ */
+  .section { padding: 52px 60px; border-bottom: 1px solid #e8e4de; }
+  .section:last-of-type { border-bottom: none; }
+  .section-dark { background: var(--black); border-bottom-color: var(--dark-border); }
+  .section-warm {
+    background: var(--warm);
+    border-bottom-color: #ddd7cf;
+    border-top: 3px solid var(--orange);
+  }
+  .section-accent {
+    background: var(--orange);
+    position: relative;
+    border-bottom: none;
+  }
+  .section-accent::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--hatch);
+    pointer-events: none;
+  }
+
+  .tag {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .section-dark .tag { color: var(--orange); }
+  .section-accent .tag { color: var(--white); position: relative; z-index: 2; }
+
+  h2 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 38px;
+    line-height: 1.05;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+  .section-dark h2 { color: var(--white); }
+  .section-accent h2 { color: var(--white); position: relative; z-index: 2; }
+
+  p { margin-bottom: 16px; color: var(--text-mid); font-weight: 400; }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--text); font-weight: 600; }
+  .section-dark p { color: #999; }
+  .section-dark strong { color: var(--text-light); }
+  .section-accent p { color: rgba(255,255,255,0.85); position: relative; z-index: 2; }
+
+  /* ═══════════════════════════════════════════════
+     STAT DASHBOARD — telemetry style
+     ═══════════════════════════════════════════════ */
+  .dash {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin: 36px 0 0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .dash-cell {
+    background: var(--dark-card);
+    padding: 28px 20px;
+    text-align: center;
+    position: relative;
+  }
+  .dash-cell::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 40px; height: 3px;
+    background: var(--orange);
+    opacity: 0.6;
+  }
+  .dash-num {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: 52px;
+    color: var(--orange);
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+  }
+  .dash-label {
+    font-size: 12px;
+    color: #666;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+  }
+
+  /* ═══════════════════════════════════════════════
+     FIX ITEMS
+     ═══════════════════════════════════════════════ */
+  .fix {
+    display: flex;
+    gap: 24px;
+    padding: 32px 0;
+    border-bottom: 1px solid #e8e4de;
+    align-items: flex-start;
+  }
+  .fix:last-child { border-bottom: none; }
+  .fix-num {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    background: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--orange);
+    margin-top: 2px;
+  }
+  .fix h3 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 22px;
+    text-transform: uppercase;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+  .fix p { font-size: 15px; margin-bottom: 8px; }
+  .fix-finding {
+    background: var(--warm);
+    border-left: 3px solid var(--orange);
+    padding: 12px 18px;
+    font-size: 13px;
+    color: var(--text-mid);
+    margin: 12px 0;
+  }
+  .fix-finding code {
+    background: var(--orange-glow);
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-size: 12px;
+    color: var(--orange-dim);
+    font-family: 'Courier New', monospace;
+  }
+  .fix-result {
+    font-size: 14px;
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  /* ═══════════════════════════════════════════════
+     OPTIONS — with spotlight glow border
+     ═══════════════════════════════════════════════ */
+  .opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 32px;
+  }
+  .opt {
+    border: 2px solid #e0dbd5;
+    overflow: hidden;
+    position: relative;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .opt:hover {
+    border-color: #ccc7bf;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  }
+  .opt.rec {
+    border-color: var(--orange);
+  }
+  .opt.rec:hover {
+    box-shadow: 0 4px 24px rgba(244,123,32,0.15);
+  }
+  .opt-flag {
+    background: var(--orange);
+    color: var(--white);
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 8px;
+  }
+  .opt-head {
+    background: var(--black);
+    padding: 28px 28px 22px;
+    position: relative;
+  }
+  .opt-head::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--hatch-light);
+    pointer-events: none;
+  }
+  .opt-name {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 26px;
+    color: var(--white);
+    text-transform: uppercase;
+    line-height: 1.1;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    position: relative;
+    z-index: 2;
+  }
+  .opt-sub {
+    font-size: 13px;
+    color: #666;
+    position: relative;
+    z-index: 2;
+  }
+  .opt-price-row {
+    padding: 24px 28px;
+    background: var(--warm);
+    text-align: center;
+  }
+  .opt-price {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: 44px;
+    color: var(--orange);
+    line-height: 1;
+    letter-spacing: 2px;
+  }
+  .opt-price-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .opt-body { padding: 28px; }
+  .opt-body ul { list-style: none; padding: 0; }
+  .opt-body li {
+    position: relative;
+    padding: 10px 0 10px 28px;
+    font-size: 14px;
+    color: var(--text-mid);
+    border-bottom: 1px solid #eae6e0;
+    line-height: 1.55;
+  }
+  .opt-body li:last-child { border-bottom: none; }
+  .opt-body li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 16px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--green);
+    background: var(--green-soft);
+  }
+  .opt-body li strong { color: var(--text); }
+  .opt-note {
+    padding: 18px 28px;
+    background: #fdf7f0;
+    border-top: 1px solid #eae6e0;
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.6;
+  }
+  .opt-note strong { color: var(--orange-dim); }
+
+  /* ═══════════════════════════════════════════════
+     HUBSPOT CALLOUT
+     ═══════════════════════════════════════════════ */
+  .hs-box {
+    background: var(--dark-card);
+    border: 1px solid var(--dark-border);
+    padding: 36px;
+    margin-top: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hs-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 5px; height: 100%;
+    background: var(--orange);
+  }
+  .hs-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--hatch-light);
+    pointer-events: none;
+  }
+  .hs-box h3 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 2;
+  }
+  .hs-box p {
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 2;
+  }
+  .hs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    position: relative;
+    z-index: 2;
+    list-style: none;
+    padding: 0;
+  }
+  .hs-grid li {
+    font-size: 13px;
+    color: #bbb;
+    padding-left: 20px;
+    position: relative;
+  }
+  .hs-grid li::before {
+    content: '\25B8';
+    position: absolute;
+    left: 0;
+    color: var(--orange);
+    font-size: 12px;
+  }
+
+  /* ═══════════════════════════════════════════════
+     RETAINER
+     ═══════════════════════════════════════════════ */
+  .ret-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .ret-item {
+    background: var(--white);
+    border: 1px solid #e0dbd5;
+    padding: 24px;
+  }
+  .ret-item h4 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .ret-item p { font-size: 14px; color: var(--text-mid); margin: 0; }
+
+  /* ═══════════════════════════════════════════════
+     INVESTMENT TABLE
+     ═══════════════════════════════════════════════ */
+  .inv-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 24px;
+    font-size: 14px;
+  }
+  .inv-table thead th {
+    background: var(--black);
+    color: var(--white);
+    padding: 14px 20px;
+    text-align: left;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .inv-table thead th:not(:first-child) { text-align: center; }
+  .inv-table td {
+    padding: 18px 20px;
+    border-bottom: 1px solid #e8e4de;
+    vertical-align: top;
+    color: var(--text-mid);
+  }
+  .inv-table td:not(:first-child) { text-align: center; }
+  .inv-row-label { font-weight: 600; color: var(--text); display: block; margin-bottom: 2px; }
+  .inv-row-desc { font-size: 12px; color: var(--text-muted); }
+  .inv-price {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 24px;
+    color: var(--orange);
+    letter-spacing: 1px;
+  }
+  .inv-price-sm { font-size: 18px; }
+  .inv-incl { color: var(--green); font-weight: 500; font-size: 13px; }
+  .inv-na { color: #ccc; font-size: 13px; }
+  .inv-table tfoot td {
+    background: var(--warm);
+    border-bottom: none;
+    padding: 20px;
+  }
+  .inv-table tfoot .inv-price { font-size: 32px; }
+
+  /* ═══════════════════════════════════════════════
+     TIMELINE
+     ═══════════════════════════════════════════════ */
+  .tl { margin-top: 28px; position: relative; }
+  .tl::before {
+    content: '';
+    position: absolute;
+    left: 21px;
+    top: 14px; bottom: 14px;
+    width: 2px;
+    background: #ddd7cf;
+  }
+  .tl-item {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-dot {
+    flex-shrink: 0;
+    width: 40px; height: 40px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 15px;
+    color: var(--white);
+    background: var(--black);
+    border: 2px solid var(--orange);
+    position: relative;
+    z-index: 1;
+    transform: rotate(-2deg);
+  }
+  .tl-dot.on { background: var(--orange); border-color: var(--orange); }
+  .tl-week {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .tl-content h4 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 19px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .tl-content p { font-size: 14px; color: var(--text-mid); margin: 0; }
+
+  /* ═══════════════════════════════════════════════
+     SITE ARCHITECTURE
+     ═══════════════════════════════════════════════ */
+  .sitemap-wrap {
+    background: var(--black);
+    padding: 36px 24px 28px;
+    margin-top: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .sitemap-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--hatch-light);
+    pointer-events: none;
+  }
+  .sitemap-title {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #555;
+    text-align: center;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 2;
+  }
+  .sm-home-row {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 0;
+    z-index: 2;
+  }
+  .sm-home-row::after {
+    content: '';
+    position: absolute;
+    bottom: -22px;
+    left: 50%; transform: translateX(-50%);
+    width: 2px; height: 22px;
+    background: #444;
+  }
+  .sm-branch {
+    position: relative;
+    height: 22px;
+    margin: 0 5%;
+    z-index: 2;
+  }
+  .sm-branch::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: #444;
+  }
+  .sm-row, .sm-util-row {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+  }
+  .sm-util-row { margin-top: 10px; }
+  .sm-node { padding: 12px 14px; }
+  .sm-home {
+    background: var(--orange);
+    padding: 16px 36px;
+    min-width: 220px;
+    text-align: center;
+  }
+  .sm-seo {
+    background: var(--dark-card);
+    border: 1px solid var(--dark-border);
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .sm-util {
+    background: #222;
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .sm-name {
+    font-family: var(--display);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 3px;
+  }
+  .sm-home .sm-name { color: var(--white); font-size: 18px; }
+  .sm-seo .sm-name { color: var(--white); font-size: 13px; }
+  .sm-util .sm-name { color: #888; font-size: 12px; }
+  .sm-url { font-size: 10px; font-family: 'Courier New', monospace; }
+  .sm-home .sm-url { color: rgba(255,255,255,0.55); }
+  .sm-seo .sm-url { color: #555; }
+  .sm-util .sm-url { color: #555; }
+  .sm-kw { font-size: 10px; margin-top: 5px; font-family: var(--body); }
+  .sm-home .sm-kw { color: rgba(255,255,255,0.8); }
+  .sm-seo .sm-kw { color: var(--orange); }
+  .sm-caption {
+    text-align: center;
+    font-size: 13px;
+    color: #555;
+    margin-top: 22px;
+    font-style: italic;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ═══════════════════════════════════════════════
+     NOT INCLUDED
+     ═══════════════════════════════════════════════ */
+  .not-list { list-style: none; padding: 0; margin-top: 16px; }
+  .not-list li {
+    padding: 12px 0 12px 28px;
+    border-bottom: 1px solid #e8e4de;
+    font-size: 15px;
+    color: var(--text-mid);
+    position: relative;
+  }
+  .not-list li:last-child { border-bottom: none; }
+  .not-list li::before {
+    content: '\2014';
+    position: absolute;
+    left: 0;
+    color: #ccc;
+    font-weight: 300;
+  }
+
+  /* ═══════════════════════════════════════════════
+     CTA FOOTER
+     ═══════════════════════════════════════════════ */
+  .cta {
+    background: var(--black);
+    padding: 64px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 7px;
+    background: var(--orange);
+  }
+  .cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--hatch-light);
+    pointer-events: none;
+  }
+  .cta > * { position: relative; z-index: 2; }
+  .cta h2 { color: var(--white); font-size: 44px; margin-bottom: 16px; }
+  .cta p { color: #777; font-size: 15px; max-width: 480px; margin: 0 auto 36px; }
+  .cta-btn {
+    display: inline-block;
+    background: var(--orange);
+    color: var(--white);
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 18px 44px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .cta-btn:hover { background: var(--orange-dim); transform: translateY(-2px); }
+  .preparer {
+    margin-top: 52px;
+    padding-top: 28px;
+    border-top: 1px solid #333;
+    color: #555;
+    font-size: 13px;
+    line-height: 1.9;
+    font-weight: 300;
+  }
+  .preparer strong { color: var(--text-light); font-weight: 500; }
+
+  /* ═══════════════════════════════════════════════
+     RESPONSIVE
+     ═══════════════════════════════════════════════ */
+  @media (max-width: 768px) {
+    .header { padding: 40px 28px 36px; }
+    .header h1 { font-size: 44px; }
+    .header h1 span { font-size: 48px; }
+    .section { padding: 36px 28px; }
+    h2 { font-size: 30px; }
+    .dash { grid-template-columns: 1fr; }
+    .dash-num { font-size: 44px; }
+    .opts { grid-template-columns: 1fr; }
+    .fix { flex-direction: column; gap: 12px; }
+    .hs-grid { grid-template-columns: 1fr; }
+    .ret-grid { grid-template-columns: 1fr; }
+    .inv-table thead th, .inv-table td { padding: 12px 10px; }
+    .inv-price { font-size: 20px; }
+    .inv-table tfoot .inv-price { font-size: 24px; }
+    .sm-row, .sm-util-row { flex-direction: column; gap: 6px; }
+    .sm-branch { display: none; }
+    .opt-price { font-size: 36px; }
+    .cta { padding: 44px 28px; }
+    .cta h2 { font-size: 34px; }
+  }
+
+  @media (max-width: 480px) {
+    .header { padding: 32px 20px 28px; }
+    .header h1 { font-size: 36px; }
+    .header h1 span { font-size: 38px; }
+    .section { padding: 28px 20px; }
+    h2 { font-size: 26px; }
+    .cta h2 { font-size: 28px; }
+    .cta { padding: 36px 20px; }
+  }
+
+  @media print {
+    body { background: white; font-size: 13px; }
+    body::after { display: none; }
+    .proposal { box-shadow: none; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+<div class="proposal">
+
+  <!-- ═══ HEADER ═══ -->
+  <div class="header">
+    <div class="header-stripe"></div>
+    <div class="header-content">
+      <div class="header-badge reveal">Digital Marketing Proposal</div>
+      <h1 class="reveal reveal-d1">Adrenaline Fix<br><span>Karting</span></h1>
+      <div class="header-meta reveal reveal-d2">
+        <strong>Prepared for Jim Conlin</strong> &middot; March 26, 2026 &middot; Confidential
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ THE OPPORTUNITY ═══ -->
+  <div class="section section-dark">
+    <span class="tag reveal">The Opportunity</span>
+    <h2 class="reveal reveal-d1">720 People a Month Search for What You Do. Right Now, Google Doesn't Know You Exist.</h2>
+    <p class="reveal reveal-d2">We audited your entire digital presence — website, Google Business Profile, SEO footprint, AI search visibility, and social channels. What we found is a 19-year, $1.2M business that is almost completely invisible online.</p>
+    <p class="reveal reveal-d3">The problem isn't your reputation or your work. Drivers who find you stay. The problem is <strong style="color:var(--orange)">Google literally doesn't know what your business is</strong> — your Google Business Profile says you're a "Racing car parts store," your website has zero H1 tags, and the only structured data Google has is an internal Wix label called <code style="background:rgba(244,123,32,0.15);padding:2px 8px;border-radius:3px;color:#F47B20;font-size:13px;font-family:'Courier New',monospace;">afk-main</code>.</p>
+    <p class="reveal reveal-d3">Meanwhile, <strong>720 people every month</strong> search "go kart racing Columbus Ohio." <strong>590 more</strong> search "go kart racing Indianapolis" — 45 minutes from where you race every weekend. You don't appear for any of them.</p>
+
+    <div class="dash reveal reveal-d4">
+      <div class="dash-cell">
+        <div class="dash-num">720</div>
+        <div class="dash-label">Monthly searches<br>"go kart racing Columbus Ohio"</div>
+      </div>
+      <div class="dash-cell">
+        <div class="dash-num">590</div>
+        <div class="dash-label">Monthly searches<br>"go kart racing Indianapolis"</div>
+      </div>
+      <div class="dash-cell">
+        <div class="dash-num">0</div>
+        <div class="dash-label">AFK rankings<br>for any of these terms</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ WHAT WE'RE FIXING ═══ -->
+  <div class="section">
+    <span class="tag reveal">What We're Fixing</span>
+    <h2 class="reveal reveal-d1">Five Problems Between You and the Drivers Already Looking for You</h2>
+
+    <div class="fix reveal">
+      <div class="fix-num">1</div>
+      <div>
+        <h3>Google Thinks You Sell Car Parts</h3>
+        <p><strong>Business impact:</strong> Every person who finds your Google listing sees a business categorized as a "Racing car parts store." They're expecting an auto parts shop, not a professional racing team. The customers who ARE looking for a kart racing team never see you.</p>
+        <div class="fix-finding"><strong>Finding:</strong> GBP category set to "Racing car parts store." Website URL points to <code>/contact</code> instead of homepage. No business description. 3 reviews in 19 years — one is 1-star ("Answer your phone"). Rating: 3.7.</div>
+        <div class="fix-result">Fix: Correct category, homepage link, full description, review strategy, GBP posting schedule.</div>
+      </div>
+    </div>
+
+    <div class="fix reveal">
+      <div class="fix-num">2</div>
+      <div>
+        <h3>Your Website Gives Google Nothing to Work With</h3>
+        <p><strong>Business impact:</strong> Without H1 tags or meta descriptions, Google can't determine what any of your pages are about. Your service pages — Arrive &amp; Drive, Race Prep, Trackside Support — are invisible to search.</p>
+        <div class="fix-finding"><strong>Finding:</strong> Zero H1 tags sitewide. Meta descriptions missing on all service pages. Copyright says &copy; 2013&ndash;2021. Footer links to <code>twitter.com/wix</code> — a Wix template leftover.</div>
+        <div class="fix-result">Fix: Full on-page SEO — H1s, meta descriptions, title tags, keyword mapping on every page.</div>
+      </div>
+    </div>
+
+    <div class="fix reveal">
+      <div class="fix-num">3</div>
+      <div>
+        <h3>Google Doesn't Know What Kind of Business This Is</h3>
+        <p><strong>Business impact:</strong> Schema markup tells search engines what your business is in their language. Right now Google has nothing except an internal Wix project name.</p>
+        <div class="fix-finding"><strong>Finding:</strong> Only schema is a WebSite record named <code>afk-main</code>. No LocalBusiness schema. No Service schemas. No structured data of any kind.</div>
+        <div class="fix-result">Fix: LocalBusiness + Service schemas, keyword-mapped page structure, entity clarity content.</div>
+      </div>
+    </div>
+
+    <div class="fix reveal">
+      <div class="fix-num">4</div>
+      <div>
+        <h3>AI Search Can't Find or Cite You</h3>
+        <p><strong>Business impact:</strong> When someone asks ChatGPT, Perplexity, or Google AI "where can I do arrive and drive karting near Indianapolis," your business doesn't exist in their answers.</p>
+        <div class="fix-finding"><strong>Finding:</strong> AI bots are permitted in robots.txt, but the site has zero FAQ blocks, zero answer-formatted content, and no entity clarity. AI Score: 1/10.</div>
+        <div class="fix-result">Fix: FAQ blocks, structured answer content, and entity clarity — built into the new site.</div>
+      </div>
+    </div>
+
+    <div class="fix reveal">
+      <div class="fix-num">5</div>
+      <div>
+        <h3>The Wix Platform Is a Ceiling</h3>
+        <p><strong>Business impact:</strong> Wix generates JavaScript-heavy pages that search engines struggle to crawl. The template has broken links, outdated design, and no CRM. Patching approaches the cost of replacing it — without removing the constraint.</p>
+        <div class="fix-finding"><strong>Finding:</strong> Wix platform with crawl limitations. Broken template link in footer. No lead tracking — every inquiry goes to email with no follow-up system.</div>
+        <div class="fix-result">Fix: Rebuild on HubSpot — CRM, lead tracking, and a site built for search from day one.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ THE ENGAGEMENT ═══ -->
+  <div class="section section-warm">
+    <span class="tag reveal">The Engagement</span>
+    <h2 class="reveal reveal-d1">Two Paths Forward</h2>
+    <p class="reveal reveal-d2">Both fix the GBP and SEO fundamentals. Option B also replaces the Wix site entirely — removing the platform ceiling and adding lead tracking infrastructure you don't have today.</p>
+
+    <div class="opts">
+      <!-- OPTION A -->
+      <div class="opt reveal">
+        <div class="opt-head">
+          <div class="opt-name">Option A<br>Foundation Only</div>
+          <div class="opt-sub">Optimize in place on Wix</div>
+        </div>
+        <div class="opt-price-row">
+          <div class="opt-price">$1,750</div>
+          <div class="opt-price-note">One-time</div>
+        </div>
+        <div class="opt-body">
+          <ul>
+            <li><strong>GBP full optimization</strong> — correct category, description, homepage link, hours, initial post</li>
+            <li><strong>On-page SEO</strong> — H1 tags, meta descriptions, title tags on all existing pages</li>
+            <li><strong>LocalBusiness + Service schemas</strong> implemented on the current site</li>
+            <li><strong>Keyword mapping</strong> — each service page mapped to a primary target keyword</li>
+          </ul>
+        </div>
+        <div class="opt-note"><strong>Platform stays Wix.</strong> Fixes the signals Google needs, but crawl limitations remain. No AI search content — Wix can't accommodate the structural additions cleanly.</div>
+      </div>
+
+      <!-- OPTION B -->
+      <div class="opt rec reveal reveal-d1">
+        <div class="opt-flag">Recommended</div>
+        <div class="opt-head">
+          <div class="opt-name">Option B<br>Foundation + Rebuild</div>
+          <div class="opt-sub">New HubSpot site + full SEO</div>
+        </div>
+        <div class="opt-price-row">
+          <div class="opt-price">$4,750</div>
+          <div class="opt-price-note">One-time</div>
+        </div>
+        <div class="opt-body">
+          <ul>
+            <li><strong>Everything in Option A</strong> — GBP, schema, keyword mapping</li>
+            <li><strong>10-page HubSpot website</strong> — built from the architecture below</li>
+            <li><strong>H1s, meta, schema baked in</strong> — SEO from day one</li>
+            <li><strong>FAQ + AI search content</strong> — structured answer blocks on every service page</li>
+            <li><strong>HubSpot CRM + lead pipeline</strong> — every inquiry captured and tracked</li>
+            <li><strong>Meeting scheduler</strong> — replaces email back-and-forth</li>
+            <li><strong>Source tracking</strong> — know if leads came from Google, GBP, blog, or direct</li>
+          </ul>
+        </div>
+        <div class="opt-note"><strong>We recommend Option B</strong> because the Wix platform is the constraint behind most of the problems we found. Option A fixes the symptoms; Option B removes the cause.</div>
+      </div>
+    </div>
+
+    <!-- HUBSPOT -->
+    <div class="hs-box reveal">
+      <h3>Why HubSpot — Not Just a Website</h3>
+      <p>Most small businesses in your space track leads in their head or a spreadsheet. HubSpot changes that. Every form, every call, every lead — captured and tracked in one place.</p>
+      <ul class="hs-grid">
+        <li>CRM with every contact in one place</li>
+        <li>Lead pipeline (inquiry &rarr; contacted &rarr; booked)</li>
+        <li>Source tracking per lead</li>
+        <li>Meeting scheduler built in</li>
+        <li>Follow-up email templates</li>
+        <li>Contact forms auto-captured</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══ GROWTH RETAINER ═══ -->
+  <div class="section">
+    <span class="tag reveal">Ongoing</span>
+    <h2 class="reveal reveal-d1">Growth Retainer — $995/month</h2>
+    <p class="reveal reveal-d2">Foundation and rebuild are one-time projects. The retainer keeps the momentum — fresh content, rising rankings, an active GBP. Minimum 3-month commitment, month-to-month after.</p>
+
+    <div class="ret-grid reveal reveal-d3">
+      <div class="ret-item">
+        <h4>GBP Posting</h4>
+        <p>4 posts/month — What's New and Event posts to keep your profile active</p>
+      </div>
+      <div class="ret-item">
+        <h4>Review Management</h4>
+        <p>Monitoring and response templates — build social proof systematically</p>
+      </div>
+      <div class="ret-item">
+        <h4>SEO Content</h4>
+        <p>1 optimized blog post/month targeting long-tail keywords and AI search</p>
+      </div>
+      <div class="ret-item">
+        <h4>Performance Reporting</h4>
+        <p>Monthly keyword ranks, traffic, GBP views, calls, and ranking changes</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ADD-ON ═══ -->
+  <div class="section section-accent">
+    <div style="position:relative;z-index:2;">
+      <span class="tag" style="color:var(--white);">Add-On</span>
+      <h2 style="color:var(--white);font-size:28px;margin-bottom:10px;">Social Cleanup — $400</h2>
+      <p style="color:rgba(255,255,255,0.85);">Consistent handles, updated bios, profile photos, and branding alignment across Facebook, Instagram, YouTube, and Twitter/X. One-time cleanup.</p>
+    </div>
+  </div>
+
+  <!-- ═══ INVESTMENT ═══ -->
+  <div class="section">
+    <span class="tag reveal">Investment</span>
+    <h2 class="reveal reveal-d1">Side by Side</h2>
+
+    <table class="inv-table reveal reveal-d2">
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Option A</th>
+          <th>Option B</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="inv-row-label">Foundation</span><span class="inv-row-desc">GBP, SEO, schema, keyword mapping</span></td>
+          <td><span class="inv-price inv-price-sm">$1,750</span></td>
+          <td><span class="inv-price inv-price-sm">$1,250</span></td>
+        </tr>
+        <tr>
+          <td><span class="inv-row-label">Website Rebuild</span><span class="inv-row-desc">10-page HubSpot site + CRM</span></td>
+          <td><span class="inv-na">&mdash;</span></td>
+          <td><span class="inv-price inv-price-sm">$3,500</span></td>
+        </tr>
+        <tr>
+          <td><span class="inv-row-label">Social Cleanup</span><span class="inv-row-desc">Branding alignment across platforms</span></td>
+          <td><span class="inv-price inv-price-sm">$400</span></td>
+          <td><span class="inv-price inv-price-sm">$400</span></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td><span class="inv-row-label">One-Time Total</span></td>
+          <td><span class="inv-price">$2,150</span></td>
+          <td><span class="inv-price">$5,150</span></td>
+        </tr>
+        <tr>
+          <td><span class="inv-row-label">Growth Retainer</span><span class="inv-row-desc">3-month minimum</span></td>
+          <td><span class="inv-price inv-price-sm">$995<span style="font-size:14px;font-weight:400;color:var(--text-muted);">/mo</span></span></td>
+          <td><span class="inv-price inv-price-sm">$995<span style="font-size:14px;font-weight:400;color:var(--text-muted);">/mo</span></span></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <!-- ═══ TIMELINE ═══ -->
+  <div class="section section-warm">
+    <span class="tag reveal">Timeline</span>
+    <h2 class="reveal reveal-d1">Option B — How It Rolls Out</h2>
+    <p class="reveal reveal-d2">Option A follows the same Week 1–2 cadence without the build phase. Total for Option A: 2–3 weeks.</p>
+
+    <div class="tl">
+      <div class="tl-item reveal">
+        <div class="tl-dot on">1</div>
+        <div class="tl-content">
+          <span class="tl-week">Week 1</span>
+          <h4>GBP Optimization &amp; Entity Work</h4>
+          <p>Correct category, rewrite description, fix website URL, add hours, first GBP post. Immediate visibility improvement.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal reveal-d1">
+        <div class="tl-dot on">2</div>
+        <div class="tl-content">
+          <span class="tl-week">Week 1–2</span>
+          <h4>Social Cleanup</h4>
+          <p>Align handles, bios, profile photos, and branding across all platforms.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal reveal-d2">
+        <div class="tl-dot on">3</div>
+        <div class="tl-content">
+          <span class="tl-week">Week 2–3</span>
+          <h4>Website Build Begins</h4>
+          <p>HubSpot CRM setup, site structure built from approved architecture, content drafts for all 10 pages.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal reveal-d3">
+        <div class="tl-dot on">4</div>
+        <div class="tl-content">
+          <span class="tl-week">Week 3–5</span>
+          <h4>Build, Review, Refine</h4>
+          <p>Pages built with SEO baked in — H1s, meta, schema, FAQ blocks. Review rounds with you. CRM pipeline configured.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal reveal-d3">
+        <div class="tl-dot on">5</div>
+        <div class="tl-content">
+          <span class="tl-week">Week 5–6</span>
+          <h4>Launch &amp; DNS Cutover</h4>
+          <p>Final QA, DNS migration from Wix to HubSpot, redirects in place, site live.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal reveal-d4">
+        <div class="tl-dot">+</div>
+        <div class="tl-content">
+          <span class="tl-week">Month 2+</span>
+          <h4>Growth Retainer Kicks In</h4>
+          <p>GBP posts, blog content, rank tracking, and monthly performance reports.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SITE ARCHITECTURE ═══ -->
+  <div class="section">
+    <span class="tag reveal">Option B</span>
+    <h2 class="reveal reveal-d1">Proposed Site Architecture</h2>
+    <p class="reveal reveal-d2">Every page has a job. The SEO pages each own a validated keyword. The utility pages handle trust, scheduling, and conversion.</p>
+
+    <div class="sitemap-wrap reveal reveal-d3">
+      <div class="sitemap-title">Proposed Sitemap</div>
+      <div class="sm-home-row">
+        <div class="sm-node sm-home">
+          <div class="sm-name">Homepage</div>
+          <div class="sm-url">/</div>
+          <div class="sm-kw">go kart racing Columbus Ohio — 720/mo</div>
+        </div>
+      </div>
+      <div class="sm-branch"></div>
+      <div class="sm-row">
+        <div class="sm-node sm-seo"><div class="sm-name">Arrive &amp; Drive</div><div class="sm-url">/arrive-and-drive</div><div class="sm-kw">arrive and drive karting — 70/mo</div></div>
+        <div class="sm-node sm-seo"><div class="sm-name">Race Prep</div><div class="sm-url">/race-prep</div><div class="sm-kw">kart racing Columbus Ohio — 40/mo</div></div>
+        <div class="sm-node sm-seo"><div class="sm-name">Full Team Support</div><div class="sm-url">/full-team-support</div><div class="sm-kw">kart racing team — 70/mo</div></div>
+        <div class="sm-node sm-seo"><div class="sm-name">LO206</div><div class="sm-url">/lo206</div><div class="sm-kw">LO206 kart — 480/mo</div></div>
+        <div class="sm-node sm-seo"><div class="sm-name">Where We Race</div><div class="sm-url">/where-we-race</div><div class="sm-kw">go kart racing Indianapolis — 590/mo</div></div>
+      </div>
+      <div class="sm-util-row">
+        <div class="sm-node sm-util"><div class="sm-name">Schedule</div><div class="sm-url">/schedule</div></div>
+        <div class="sm-node sm-util"><div class="sm-name">About</div><div class="sm-url">/about</div></div>
+        <div class="sm-node sm-util"><div class="sm-name">Contact</div><div class="sm-url">/contact</div></div>
+        <div class="sm-node sm-util"><div class="sm-name">Blog</div><div class="sm-url">/blog</div></div>
+      </div>
+      <div class="sm-caption">10 pages &middot; ~2,040/mo in direct keyword reach + ~700/mo secondary</div>
+    </div>
+  </div>
+
+  <!-- ═══ NOT INCLUDED ═══ -->
+  <div class="section section-warm">
+    <span class="tag reveal">Scope</span>
+    <h2 class="reveal reveal-d1">What's Not Included</h2>
+    <p class="reveal reveal-d2">To keep the scope clean and the price honest:</p>
+    <ul class="not-list reveal reveal-d3">
+      <li>Paid advertising (Google Ads, Meta Ads)</li>
+      <li>Photography or video production</li>
+      <li>Reputation management beyond review templates</li>
+      <li>Ongoing social media content creation</li>
+      <li>Print or physical marketing materials</li>
+    </ul>
+  </div>
+
+  <!-- ═══ CTA ═══ -->
+  <div class="cta">
+    <span class="tag reveal" style="color:var(--orange);">Next Steps</span>
+    <h2 class="reveal reveal-d1">Ready When You Are</h2>
+    <p class="reveal reveal-d2">Review the proposal. If you have questions, call or email — we'll walk through anything. When you're ready, we'll send a short agreement and kick off Week 1.</p>
+    <a href="mailto:jim@conlinss.com" class="cta-btn reveal reveal-d3">Let's Get Started</a>
+    <div class="preparer reveal reveal-d4">
+      <strong>Prepared by</strong><br>
+      [Your Name]<br>
+      [your@email.com] &middot; [your phone]
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ SCROLL REVEAL SCRIPT ═══ -->
+<script>
+(function() {
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function(el) { el.classList.add('visible'); });
+    return;
+  }
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(function(el) { obs.observe(el); });
+})();
+</script>
+</body>
+</html>

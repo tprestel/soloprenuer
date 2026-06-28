@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Go Kart Racing Columbus Ohio | Adrenaline Fix Karting</title>
+  <meta name="description" content="Full-service kart racing team based in Columbus, OH. Arrive & drive, race prep, and full team support at New Castle Motorsports Park. 19 years of expertise." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Saira:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- DESIGN DIRECTION C — INDUSTRIAL / UTILITY -->
+  <!-- Light grey base (#F2F3F4), dark accent sections, spec-panel hero -->
+  <!-- Presented by: [Your Agency] — For review by Jim Conlin / Conlin SpeedSports, LLC -->
+
+  <style>
+    /* ==============================
+       RESET & BASE
+    ============================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Saira', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #333333;
+      background-color: #F2F3F4;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Chakra Petch', sans-serif;
+      line-height: 1.15;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* ─── Animations ──────────────────────────────────────────── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(24px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes borderGrow {
+      from { transform: scaleY(0); transform-origin: top; }
+      to { transform: scaleY(1); transform-origin: top; }
+    }
+
+    @keyframes scanline {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 4px; }
+    }
+
+    /* ─── Body Grain Overlay ─────────────────────────────────── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+    }
+
+    /* ==============================
+       LAYOUT UTILITIES
+    ============================== */
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-padding {
+      padding: 80px 0;
+    }
+
+    /* ==============================
+       BUTTONS
+    ============================== */
+    .btn {
+      display: inline-block;
+      padding: 14px 30px;
+      font-family: 'Chakra Petch', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-orange {
+      background-color: #F25B19;
+      color: #1C1C1E;
+      border-color: #F25B19;
+      transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-orange:hover {
+      background-color: #d9691a;
+      border-color: #d9691a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(242,91,25,0.3);
+    }
+
+    .btn-ghost-white {
+      background-color: transparent;
+      color: #ffffff;
+      border-color: rgba(255,255,255,0.5);
+    }
+
+    .btn-ghost-white:hover {
+      border-color: #ffffff;
+      background-color: rgba(255,255,255,0.08);
+    }
+
+    .btn-dark {
+      background-color: #1C1C1E;
+      color: #ffffff;
+      border-color: #1C1C1E;
+    }
+
+    .btn-dark:hover {
+      background-color: #000000;
+    }
+
+    /* ==============================
+       NAVIGATION
+    ============================== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: #ffffff;
+      border-bottom: 1px solid #dddddd;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 20px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .nav-logo-img {
+      height: 38px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .nav-links li a {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #333333;
+      padding: 6px 10px;
+      transition: color 0.2s;
+    }
+
+    .nav-links li a:hover {
+      color: #F25B19;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .nav-phone {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #333333;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .nav-cta {
+      padding: 10px 20px;
+      font-size: 13px;
+    }
+
+    /* ==============================
+       HERO
+    ============================== */
+    .hero {
+      background-color: #111111;
+      background-image: url('../assets/photos/AFK%202025_%20KRA%20%2310/_MSA3696.jpg');
+      background-size: cover;
+      background-position: center 45%;
+      padding: 80px 0 72px;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.50) 100%);
+      z-index: 1;
+    }
+
+    /* Hero animated paths — behind the photo */
+    .hero-paths {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      will-change: contents;
+      isolation: isolate;
+    }
+
+    .hero-paths svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-paths path {
+      stroke: #F25B19;
+      fill: none;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: heroPathDraw linear infinite;
+      will-change: stroke-dashoffset;
+    }
+
+    @keyframes heroPathDraw {
+      0%   { stroke-dashoffset: 1; }
+      50%  { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -1; }
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 60% 40%;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #F25B19;
+      margin-bottom: 18px;
+      animation: fadeInUp 0.5s ease both 0.1s;
+    }
+
+    .hero-h1 {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 58px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.05;
+      margin-bottom: 22px;
+      animation: fadeInUp 0.6s ease both 0.2s;
+    }
+
+    .hero-subhead {
+      font-family: 'Saira', sans-serif;
+      font-size: 17px;
+      color: #cccccc;
+      line-height: 1.65;
+      margin-bottom: 36px;
+      max-width: 520px;
+      animation: fadeInUp 0.6s ease both 0.35s;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.5s ease both 0.5s;
+    }
+
+    /* Spec Panel */
+    .spec-panel {
+      background-color: #111111;
+      border-top: 3px solid #F25B19;
+      padding: 32px 28px 28px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04);
+      position: relative;
+      animation: slideInRight 0.7s ease both 0.3s;
+    }
+
+    .spec-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(255,255,255,0.015) 3px,
+        rgba(255,255,255,0.015) 4px
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .spec-panel-label {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #F25B19;
+      margin-bottom: 20px;
+    }
+
+    .spec-list {
+      list-style: none;
+    }
+
+    .spec-list li {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #2a2a2a;
+      font-size: 13px;
+      line-height: 1.4;
+      transition: background-color 0.2s, padding-left 0.2s;
+    }
+
+    .spec-list li:hover {
+      background-color: rgba(242,91,25,0.05);
+      padding-left: 8px;
+    }
+
+    .spec-list li:last-child {
+      border-bottom: none;
+    }
+
+    .spec-key {
+      font-family: 'Chakra Petch', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #aaaaaa;
+    }
+
+    .spec-val {
+      font-family: 'Saira', sans-serif;
+      font-size: 13px;
+      color: #cccccc;
+    }
+
+    /* ==============================
+       TRUST BAR
+    ============================== */
+    .trust-bar {
+      background-color: #EAEBEC;
+      border-bottom: 1px solid #d6d7d9;
+      padding: 28px 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .trust-bar-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 6px 24px;
+      border-left: 3px solid #F25B19;
+      animation: fadeInUp 0.4s ease both;
+      transition: background-color 0.2s, padding-left 0.2s;
+    }
+
+    .trust-item:nth-child(1) { animation-delay: 0.1s; }
+    .trust-item:nth-child(2) { animation-delay: 0.2s; }
+    .trust-item:nth-child(3) { animation-delay: 0.3s; }
+    .trust-item:nth-child(4) { animation-delay: 0.4s; }
+
+    .trust-item:hover {
+      background-color: rgba(242,91,25,0.06);
+      padding-left: 28px;
+    }
+
+    .trust-item:first-child {
+      padding-left: 0;
+    }
+
+    .trust-item-main {
+      font-family: 'Chakra Petch', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: #1C1C1E;
+      line-height: 1.2;
+    }
+
+    .trust-item-sub {
+      font-family: 'Saira', sans-serif;
+      font-size: 12px;
+      color: #555555;
+      line-height: 1.3;
+    }
+
+    /* ==============================
+       SERVICES
+    ============================== */
+    .services {
+      background-color: #F2F3F4;
+      box-shadow: inset 0 2px 16px rgba(0,0,0,0.04);
+    }
+
+    .section-label {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #F25B19;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: #1C1C1E;
+      margin-bottom: 8px;
+    }
+
+    .section-intro {
+      font-size: 16px;
+      color: #555555;
+      max-width: 540px;
+      margin-bottom: 48px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+
+    .service-card {
+      background-color: #ffffff;
+      border-top: 3px solid #F25B19;
+      padding: 32px 28px 28px;
+      transition: box-shadow 0.2s, transform 0.2s, border-top-color 0.3s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
+      animation: fadeInUp 0.5s ease both;
+    }
+
+    .service-card:nth-child(1) { animation-delay: 0.1s; }
+    .service-card:nth-child(2) { animation-delay: 0.15s; }
+    .service-card:nth-child(3) { animation-delay: 0.2s; }
+    .service-card:nth-child(4) { animation-delay: 0.25s; }
+    .service-card:nth-child(5) { animation-delay: 0.3s; }
+    .service-card:nth-child(6) { animation-delay: 0.35s; }
+
+    .service-card:hover {
+      box-shadow: 0 6px 28px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.07);
+      transform: translateY(-4px);
+      border-top-color: #d9691a;
+    }
+
+    .service-name {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #1C1C1E;
+      margin-bottom: 10px;
+    }
+
+    .service-desc {
+      font-size: 15px;
+      color: #444444;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .service-link {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #F25B19;
+    }
+
+    .service-link::after {
+      content: ' →';
+    }
+
+    .service-link:hover {
+      color: #d9691a;
+    }
+
+    /* ==============================
+       ABOUT / PROOF
+    ============================== */
+    .about-proof {
+      background: linear-gradient(180deg, #181818 0%, #1C1C1E 100%);
+      position: relative;
+    }
+
+    .about-proof::before {
+      content: '';
+      position: absolute;
+      top: 40px; left: 40px;
+      width: 40px; height: 40px;
+      border-top: 3px solid #F25B19;
+      border-left: 3px solid #F25B19;
+      pointer-events: none;
+    }
+
+    .about-proof::after {
+      content: '';
+      position: absolute;
+      bottom: 40px; right: 40px;
+      width: 40px; height: 40px;
+      border-bottom: 3px solid #F25B19;
+      border-right: 3px solid #F25B19;
+      pointer-events: none;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 40% 60%;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .about-photo-wrap {
+      border-radius: 2px;
+      overflow: hidden;
+      min-height: 440px;
+      height: 100%;
+    }
+    .about-photo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 35%;
+      display: block;
+      min-height: 440px;
+    }
+
+    .stats-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .stat-block {
+      background-color: #111111;
+      padding: 28px 22px;
+      border-top: 3px solid #F25B19;
+    }
+
+    .stat-number {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 44px;
+      font-weight: 700;
+      color: #F25B19;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #aaaaaa;
+    }
+
+    .about-copy-label {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #F25B19;
+      margin-bottom: 14px;
+    }
+
+    .about-heading {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 20px;
+      line-height: 1.15;
+    }
+
+    .about-body {
+      font-size: 16px;
+      color: #cccccc;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .about-quote {
+      border-left: 3px solid #F25B19;
+      padding: 14px 0 14px 20px;
+      margin-bottom: 28px;
+    }
+
+    .about-quote p {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 18px;
+      font-style: italic;
+      color: #ffffff;
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    .about-quote-attr {
+      font-family: 'Saira', sans-serif;
+      font-size: 12px;
+      color: #aaaaaa;
+      letter-spacing: 0.04em;
+    }
+
+    .about-sponsors {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #aaaaaa;
+    }
+
+    .about-sponsors span {
+      color: #cccccc;
+    }
+
+    /* ==============================
+       TESTIMONIAL
+    ============================== */
+    .testimonial {
+      background-color: #F2F3F4;
+    }
+
+    .testimonial-inner {
+      max-width: 740px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .testimonial-section-label {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #F25B19;
+      margin-bottom: 32px;
+    }
+
+    .testimonial-card {
+      background-color: #ffffff;
+      border-left: 4px solid #F25B19;
+      padding: 44px 48px;
+      text-align: left;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06);
+      transition: box-shadow 0.3s, border-left-width 0.2s;
+    }
+
+    .testimonial-card:hover {
+      box-shadow: 0 8px 36px rgba(0,0,0,0.15), 0 2px 8px rgba(0,0,0,0.08);
+      border-left-width: 6px;
+    }
+
+    .testimonial-quote {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #1C1C1E;
+      line-height: 1.35;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-quote::before {
+      content: '\201C';
+      color: #F25B19;
+    }
+
+    .testimonial-quote::after {
+      content: '\201D';
+      color: #F25B19;
+    }
+
+    .testimonial-attr {
+      font-family: 'Saira', sans-serif;
+      font-size: 13px;
+      color: #555555;
+      letter-spacing: 0.03em;
+    }
+
+    /* ==============================
+       CTA BAND
+    ============================== */
+    .cta-band {
+      background-color: #F25B19;
+      padding: 72px 0;
+    }
+
+    .cta-band-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .cta-band h2 {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: #1C1C1E;
+      margin-bottom: 10px;
+    }
+
+    .cta-band p {
+      font-size: 16px;
+      color: #1C1C1E;
+      opacity: 0.85;
+    }
+
+    .cta-band-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .cta-band-phone {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #1C1C1E;
+      opacity: 0.75;
+    }
+
+    /* ==============================
+       FOOTER
+    ============================== */
+    .footer {
+      background-color: #1C1C1E;
+      padding: 64px 0 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1.4fr;
+      gap: 40px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid #2e2e30;
+    }
+
+    .footer-logo {
+      margin-bottom: 12px;
+    }
+    .footer-logo-img {
+      height: 38px;
+      width: auto;
+      background: #fff;
+      padding: 5px 12px;
+      border-radius: 3px;
+      display: block;
+    }
+
+    .footer-tagline {
+      font-size: 13px;
+      color: #aaaaaa;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .footer-sponsors {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #888888;
+    }
+
+    .footer-sponsors strong {
+      color: #aaaaaa;
+    }
+
+    .footer-nav-label {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #F25B19;
+      margin-bottom: 16px;
+    }
+
+    .footer-nav-list {
+      list-style: none;
+    }
+
+    .footer-nav-list li {
+      margin-bottom: 10px;
+    }
+
+    .footer-nav-list li a {
+      font-size: 14px;
+      color: #aaaaaa;
+      transition: color 0.2s;
+    }
+
+    .footer-nav-list li a:hover {
+      color: #ffffff;
+    }
+
+    .footer-contact-label {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #F25B19;
+      margin-bottom: 16px;
+    }
+
+    .footer-contact p {
+      font-size: 14px;
+      color: #aaaaaa;
+      line-height: 1.7;
+    }
+
+    .footer-contact a {
+      color: #cccccc;
+    }
+
+    .footer-contact a:hover {
+      color: #ffffff;
+    }
+
+    .footer-bottom {
+      padding: 20px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: #888888;
+    }
+
+    .footer-bottom-note {
+      font-size: 12px;
+      color: #888888;
+    }
+
+    /* ==============================
+       DIRECTION C LABEL BANNER
+    ============================== */
+    .direction-label-bar {
+      background-color: #111111;
+      border-bottom: 2px solid #F25B19;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    .direction-label-bar p {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #aaaaaa;
+    }
+
+    .direction-label-bar p strong {
+      color: #F25B19;
+    }
+
+    /* ==============================
+       RESPONSIVE — 768px
+    ============================== */
+    @media (max-width: 768px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-phone {
+        display: none;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .hero-h1 {
+        font-size: 38px;
+      }
+
+      .trust-bar-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .trust-item:first-child {
+        padding-left: 24px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .testimonial-card {
+        padding: 28px 24px;
+      }
+
+      .testimonial-quote {
+        font-size: 20px;
+      }
+
+      .cta-band-inner {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .cta-band-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .section-title {
+        font-size: 30px;
+      }
+
+      .about-heading {
+        font-size: 26px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .trust-bar-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DIRECTION LABEL (remove before live) -->
+  <div class="direction-label-bar">
+    <p><strong>Design Direction C — Industrial / Utility &nbsp;·&nbsp; For Review Only</strong> &nbsp;|&nbsp; All copy is draft — we are approving visual direction, not final wording</p>
+  </div>
+
+  <!-- ==============================
+       NAVIGATION
+  ============================== -->
+  <header class="nav">
+    <div class="container">
+      <nav class="nav-inner">
+        <a href="#" class="nav-logo"><img src="../assets/logo/AdrenalineFixKartingMaster.png" alt="Adrenaline Fix Karting" class="nav-logo-img"></a>
+        <ul class="nav-links">
+          <li><a href="#">Arrive &amp; Drive</a></li>
+          <li><a href="#">Race Prep</a></li>
+          <li><a href="#">Full Team Support</a></li>
+          <li><a href="#">LO206</a></li>
+          <li><a href="#">Where We Race</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="nav-right">
+          <span class="nav-phone">614-370-5152</span>
+          <a href="#" class="btn btn-orange nav-cta">Get Started</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==============================
+       HERO
+  ============================== -->
+  <section class="hero">
+    <div class="hero-paths" id="hero-paths-1"></div>
+    <div class="hero-paths" id="hero-paths-2"></div>
+    <div class="container">
+      <div class="hero-grid">
+
+        <!-- Left: Headline block -->
+        <div class="hero-left">
+          <span class="hero-eyebrow">Columbus, Ohio &nbsp;·&nbsp; Est. 2007</span>
+          <h1 class="hero-h1">Columbus, Ohio's<br>Go Kart Racing Team</h1>
+          <p class="hero-subhead">Full-service kart racing team operating out of Columbus, Ohio. We race at New Castle Motorsports Park every weekend. We build the kart, we haul it, we crew it. You just drive.</p>
+          <div class="hero-ctas">
+            <a href="#" class="btn btn-orange">Get Started</a>
+            <a href="tel:6143705152" class="btn btn-ghost-white">614-370-5152</a>
+          </div>
+        </div>
+
+        <!-- Right: Spec Panel -->
+        <div class="spec-panel">
+          <div class="spec-panel-label">Team Specs</div>
+          <ul class="spec-list">
+            <li>
+              <span class="spec-key">Founded</span>
+              <span class="spec-val">2007</span>
+            </li>
+            <li>
+              <span class="spec-key">Operation</span>
+              <span class="spec-val">Full-Service Racing Team</span>
+            </li>
+            <li>
+              <span class="spec-key">Shop</span>
+              <span class="spec-val">Columbus, OH</span>
+            </li>
+            <li>
+              <span class="spec-key">Race Venue</span>
+              <span class="spec-val">New Castle Motorsports Park, Indiana</span>
+            </li>
+            <li>
+              <span class="spec-key">Class</span>
+              <span class="spec-val">LO206 Specialist</span>
+            </li>
+            <li>
+              <span class="spec-key">Support</span>
+              <span class="spec-val">Arrive &amp; Drive + Full Season</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================
+       TRUST BAR
+  ============================== -->
+  <section class="trust-bar">
+    <div class="container">
+      <div class="trust-bar-grid">
+        <div class="trust-item">
+          <div>
+            <div class="trust-item-main">19 Years Active</div>
+            <div class="trust-item-sub">Founded 2007</div>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div>
+            <div class="trust-item-main">NCMP</div>
+            <div class="trust-item-sub">Primary Race Venue</div>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div>
+            <div class="trust-item-main">LO206</div>
+            <div class="trust-item-sub">Authorized Dealer</div>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div>
+            <div class="trust-item-main">Columbus, OH</div>
+            <div class="trust-item-sub">Base of Operations</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================
+       SERVICES
+  ============================== -->
+  <section class="services section-padding">
+    <div class="container">
+      <div class="section-label">Capabilities</div>
+      <h2 class="section-title">What We Offer</h2>
+      <p class="section-intro">Everything handled in-house. From kart builds to race-day crew. One team, one standard, every weekend.</p>
+
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div class="service-name">Arrive &amp; Drive</div>
+          <p class="service-desc">Book a slot. We have everything ready at the track. You show up, you race, you go home.</p>
+          <a href="#" class="service-link">Learn More</a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-name">Race Prep</div>
+          <p class="service-desc">In-house kart builds and race preparation. The same hands building your kart are crewing it on race day.</p>
+          <a href="#" class="service-link">Learn More</a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-name">Full Team Support</div>
+          <p class="service-desc">Season-long team engagement. Data review after every session, coaching between races, crew at every event.</p>
+          <a href="#" class="service-link">Learn More</a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-name">LO206</div>
+          <p class="service-desc">Authorized LO206 dealer. Class expertise built over 19 years and hundreds of race weekends.</p>
+          <a href="#" class="service-link">Learn More</a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-name">Where We Race</div>
+          <p class="service-desc">New Castle Motorsports Park, Indiana. 45 minutes from Indianapolis. We're there every weekend.</p>
+          <a href="#" class="service-link">Learn More</a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-name">About the Team</div>
+          <p class="service-desc">19 years. Everything in-house. The same crew, the same standards, every race weekend since 2007.</p>
+          <a href="#" class="service-link">Learn More</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================
+       ABOUT / PROOF
+  ============================== -->
+  <section class="about-proof section-padding">
+    <div class="container">
+      <div class="about-grid">
+
+        <!-- Left: Photo -->
+        <div class="about-photo-wrap">
+          <img src="../assets/photos/AFK%202025_%20KRA%20%2310/_MSA9928.jpg" alt="Kart racing at New Castle Motorsports Park" class="about-photo-img" loading="lazy">
+        </div>
+
+        <!-- Right: Copy -->
+        <div class="about-copy">
+          <div class="about-copy-label">About AFK</div>
+          <h2 class="about-heading">Built on Real Racing Experience</h2>
+          <p class="about-body">Nineteen years in this sport means we've seen every engine class come and go. We've worked with drivers at every level — from someone who's never been on a race track to drivers competing seriously every season. We do everything in-house. No farmed-out engine work. No third-party kart builds.</p>
+          <p class="about-body">We build the kart, we prep it, we haul it to the track, we crew it during the race, and we debrief the driver afterward with data. You show up, you drive, you go home.</p>
+          <blockquote class="about-quote">
+            <p>"The same people who built your kart are standing in your pit."</p>
+            <cite class="about-quote-attr">— Jim Conlin, Founder, Conlin SpeedSports, LLC</cite>
+          </blockquote>
+          <div class="about-sponsors">
+            Team Partners: <span>MAGiK Kart &nbsp;·&nbsp; GreyHound Racing Seats</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================
+       TESTIMONIAL
+  ============================== -->
+  <section class="testimonial section-padding">
+    <div class="container">
+      <div class="testimonial-inner">
+        <div class="testimonial-section-label">Driver Feedback</div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">I had no idea what I was missing. I thought I was just going to mess around — but now I can't stop.</p>
+          <div class="testimonial-attr">AFK Driver &nbsp;·&nbsp; First podium finish, New Castle Motorsports Park</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================
+       CTA BAND
+  ============================== -->
+  <section class="cta-band">
+    <div class="container">
+      <div class="cta-band-inner">
+        <div>
+          <h2>Ready to Race?</h2>
+          <p>Arrive-and-drive slots available at NCMP. Full-season team support for serious competitors.</p>
+        </div>
+        <div class="cta-band-actions">
+          <a href="#" class="btn btn-dark">Get Started</a>
+          <span class="cta-band-phone">Call Jim: 614-370-5152</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================
+       FOOTER
+  ============================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <!-- Col 1: Logo + tagline + sponsors -->
+        <div>
+          <div class="footer-logo"><img src="../assets/logo/AdrenalineFixKartingMaster.png" alt="Adrenaline Fix Karting" class="footer-logo-img"></div>
+          <p class="footer-tagline">Nineteen years. Nobody in this region has been doing this as long as we have. Full-service kart racing out of Columbus, Ohio — racing at NCMP every weekend.</p>
+          <div class="footer-sponsors">
+            Team Partners: <strong>MAGiK Kart &nbsp;·&nbsp; GreyHound Racing Seats</strong>
+          </div>
+        </div>
+
+        <!-- Col 2: Navigation -->
+        <div>
+          <div class="footer-nav-label">Navigation</div>
+          <ul class="footer-nav-list">
+              <li><a href="#">Arrive &amp; Drive</a></li>
+            <li><a href="#">Race Prep</a></li>
+            <li><a href="#">Full Team Support</a></li>
+            <li><a href="#">LO206</a></li>
+            <li><a href="#">Where We Race</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Contact -->
+        <div>
+          <div class="footer-contact-label">Contact</div>
+          <div class="footer-contact">
+            <p>
+              <strong style="color:#ffffff;">Conlin SpeedSports, LLC</strong><br>
+              Columbus, OH<br><br>
+              <a href="tel:6143705152">614-370-5152</a><br><br>
+              Racing at New Castle Motorsports Park,<br>
+              Indiana — every weekend.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer bottom -->
+      <div class="footer-bottom">
+        <div class="footer-copy">&copy; 2026 Conlin SpeedSports, LLC. All rights reserved.</div>
+        <div class="footer-bottom-note">Adrenaline Fix Karting &nbsp;·&nbsp; Columbus, Ohio</div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Hero background paths -->
+  <script>
+  (function() {
+    function buildPaths(id, position) {
+      var container = document.getElementById(id);
+      if (!container) return;
+      var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('viewBox', '0 0 696 316');
+      svg.setAttribute('fill', 'none');
+      svg.setAttribute('preserveAspectRatio', 'none');
+
+      for (var i = 0; i < 36; i++) {
+        var p = position;
+        var d = 'M-' + (380 - i*5*p) + ' -' + (189 + i*6) +
+                'C-' + (380 - i*5*p) + ' -' + (189 + i*6) +
+                ' -' + (312 - i*5*p) + ' ' + (216 - i*6) +
+                ' ' + (152 - i*5*p) + ' ' + (343 - i*6) +
+                'C' + (616 - i*5*p) + ' ' + (470 - i*6) +
+                ' ' + (684 - i*5*p) + ' ' + (875 - i*6) +
+                ' ' + (684 - i*5*p) + ' ' + (875 - i*6);
+
+        var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', d);
+        path.setAttribute('stroke-width', (0.5 + i * 0.03).toFixed(2));
+        path.setAttribute('stroke-opacity', (0.25 + i * 0.02).toFixed(3));
+        path.setAttribute('pathLength', '1');
+        path.style.animationDuration = (20 + Math.random() * 10).toFixed(1) + 's';
+        path.style.animationDelay = (-Math.random() * 20).toFixed(1) + 's';
+        svg.appendChild(path);
+      }
+      container.appendChild(svg);
+    }
+
+    buildPaths('hero-paths-1', 1);
+    buildPaths('hero-paths-2', -1);
+  })();
+  </script>
+
+</body>
+</html>

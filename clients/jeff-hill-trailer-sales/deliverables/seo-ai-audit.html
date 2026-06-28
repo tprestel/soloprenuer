@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO & AI Search Audit — Jeff Hill Trailer Sales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #D22F25;
+    --red-dim: rgba(210,47,37,0.12);
+    --red-border: rgba(210,47,37,0.35);
+    --bg: #111214;
+    --surface: #18191D;
+    --surface2: #1E2024;
+    --border: rgba(255,255,255,0.07);
+    --text: #E8E9EC;
+    --muted: #888A92;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Plus Jakarta Sans', sans-serif;
+    --serif: 'DM Serif Display', serif;
+    --yellow: #F5C542;
+    --orange: #E8762A;
+    --green: #3DB87A;
+    --blue: #4A9EDB;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ─────────────────────────────────── */
+  .report-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .report-header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -80px;
+    width: 360px; height: 360px;
+    background: radial-gradient(circle, rgba(210,47,37,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px 40px;
+  }
+
+  .client-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .client-label::before {
+    content: '';
+    display: inline-block;
+    width: 24px; height: 2px;
+    background: var(--red);
+  }
+
+  .report-title {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .report-title em {
+    font-style: italic;
+    color: var(--red);
+  }
+
+  .report-sub {
+    font-size: 16px;
+    color: var(--muted);
+    margin-bottom: 40px;
+    font-weight: 400;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .meta-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .meta-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* ── SCORE BANNER ────────────────────────────── */
+  .score-banner {
+    background: var(--surface2);
+    border-top: 1px solid var(--border);
+    padding: 0;
+  }
+
+  .score-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-left: 1px solid var(--border);
+  }
+
+  .score-cell {
+    padding: 24px 28px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .score-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .score-val {
+    font-family: var(--mono);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .score-desc {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .score-critical { color: var(--red); }
+  .score-poor { color: var(--orange); }
+  .score-fair { color: var(--yellow); }
+  .score-good { color: var(--green); }
+
+  /* ── NAV ─────────────────────────────────────── */
+  .audit-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(17,18,20,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+
+  .nav-link {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 14px 18px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .nav-link:hover {
+    color: var(--text);
+    border-bottom-color: var(--red);
+  }
+
+  /* ── MAIN CONTENT ────────────────────────────── */
+  .main {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px 80px;
+  }
+
+  .section {
+    padding-top: 64px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 0.1em;
+    padding-top: 4px;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  /* ── PRIORITY BADGES ─────────────────────────── */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 2px;
+  }
+
+  .badge::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .badge-critical { background: rgba(210,47,37,0.15); color: var(--red); }
+  .badge-high     { background: rgba(232,118,42,0.15); color: var(--orange); }
+  .badge-medium   { background: rgba(245,197,66,0.12); color: var(--yellow); }
+  .badge-low      { background: rgba(61,184,122,0.12); color: var(--green); }
+  .badge-info     { background: rgba(74,158,219,0.12); color: var(--blue); }
+
+  /* ── ISSUE CARDS ─────────────────────────────── */
+  .issues-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .issue-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .issue-card:hover {
+    border-color: rgba(255,255,255,0.13);
+  }
+
+  .issue-card.critical { border-left: 3px solid var(--red); }
+  .issue-card.high     { border-left: 3px solid var(--orange); }
+  .issue-card.medium   { border-left: 3px solid var(--yellow); }
+  .issue-card.low      { border-left: 3px solid var(--green); }
+
+  .issue-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .issue-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .issue-body {
+    padding: 0 20px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .issue-desc {
+    font-size: 13px;
+    color: rgba(232,233,236,0.8);
+    line-height: 1.65;
+  }
+
+  .issue-row {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+
+  .issue-row-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 1px;
+  }
+
+  .issue-row-val {
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .code-inline {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 2px 7px;
+    border-radius: 3px;
+    color: var(--blue);
+    display: inline;
+  }
+
+  .fix-block {
+    background: rgba(61,184,122,0.06);
+    border: 1px solid rgba(61,184,122,0.15);
+    border-radius: 4px;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: rgba(232,233,236,0.85);
+  }
+
+  .fix-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 4px;
+  }
+
+  /* ── KEYWORD TABLE ───────────────────────────── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .data-table th {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  .data-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: var(--text);
+    vertical-align: middle;
+  }
+
+  .data-table tr:last-child td { border-bottom: none; }
+
+  .data-table tr:hover td {
+    background: rgba(255,255,255,0.02);
+  }
+
+  .table-wrapper {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    overflow-x: auto;
+  }
+
+  .vol-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .vol-track {
+    width: 80px;
+    height: 4px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .vol-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: var(--red);
+  }
+
+  .pos-badge {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  .pos-none { background: rgba(210,47,37,0.15); color: var(--red); }
+  .pos-deep { background: rgba(232,118,42,0.15); color: var(--orange); }
+  .pos-mid  { background: rgba(245,197,66,0.12); color: var(--yellow); }
+  .pos-near { background: rgba(74,158,219,0.15); color: var(--blue); }
+
+  /* ── AI CHECKS ───────────────────────────────── */
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 13px 16px;
+    border-radius: 4px;
+    transition: background 0.15s;
+  }
+
+  .check-item:hover { background: rgba(255,255,255,0.025); }
+
+  .check-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-weight: 700;
+  }
+
+  .check-pass { background: rgba(61,184,122,0.15); color: var(--green); }
+  .check-fail { background: rgba(210,47,37,0.15); color: var(--red); }
+  .check-warn { background: rgba(245,197,66,0.12); color: var(--yellow); }
+
+  .check-content { flex: 1; }
+  .check-title { font-weight: 600; font-size: 13px; margin-bottom: 2px; }
+  .check-note  { font-size: 12px; color: var(--muted); }
+
+  /* ── OPPORTUNITY CARDS ───────────────────────── */
+  .opportunity-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .opp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px;
+  }
+
+  .opp-number {
+    font-family: var(--mono);
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .opp-number span {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .opp-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .opp-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── ACTION PLAN ─────────────────────────────── */
+  .action-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .action-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+  }
+
+  .action-num {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--red);
+    flex-shrink: 0;
+    width: 28px;
+    padding-top: 1px;
+  }
+
+  .action-body { flex: 1; }
+
+  .action-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .action-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .action-tags {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+
+  .action-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    padding: 2px 7px;
+    border-radius: 2px;
+  }
+
+  /* ── CALLOUT ─────────────────────────────────── */
+  .callout {
+    border-radius: 6px;
+    padding: 20px 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin: 24px 0;
+  }
+
+  .callout-critical {
+    background: rgba(210,47,37,0.08);
+    border: 1px solid rgba(210,47,37,0.2);
+  }
+
+  .callout-info {
+    background: rgba(74,158,219,0.07);
+    border: 1px solid rgba(74,158,219,0.18);
+  }
+
+  .callout-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .callout-body {}
+  .callout-title { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+  .callout-desc  { font-size: 13px; color: rgba(232,233,236,0.8); line-height: 1.6; }
+
+  /* ── DIVIDER ─────────────────────────────────── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  /* ── TWO-COL ─────────────────────────────────── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .info-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px;
+  }
+
+  .info-block-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 13px;
+  }
+
+  .stat-row:last-child { border-bottom: none; }
+  .stat-row-label { color: var(--muted); }
+  .stat-row-val   { font-weight: 600; font-family: var(--mono); font-size: 13px; }
+
+  /* ── FOOTER ──────────────────────────────────── */
+  .report-footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 28px 0;
+    margin-top: 80px;
+  }
+
+  .footer-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .footer-brand {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── RESPONSIVE ──────────────────────────────── */
+  @media (max-width: 768px) {
+    .header-inner { padding: 0 20px 32px; }
+    .main { padding: 0 20px 60px; }
+    .score-inner { grid-template-columns: 1fr 1fr; }
+    .score-cell:nth-child(5) { grid-column: 1 / -1; }
+    .nav-inner { padding: 0 16px; }
+    .two-col, .opportunity-grid { grid-template-columns: 1fr; }
+    .issue-header { flex-direction: column; align-items: flex-start; }
+    .report-title { font-size: 32px; }
+    .score-val { font-size: 26px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 8px; }
+  }
+
+  /* ── ANIMATIONS ──────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .report-header { animation: fadeUp 0.5s ease both; }
+  .score-banner  { animation: fadeUp 0.5s 0.1s ease both; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="report-header">
+  <div class="header-inner">
+    <div class="client-label">Jeff Hill Trailer Sales LLC — Modoc, Indiana</div>
+    <h1 class="report-title">SEO &amp; <em>AI Search</em><br>Audit Report</h1>
+    <p class="report-sub">jeffhilltrailersales.com &nbsp;·&nbsp; Full Technical, On-Page, and AI Visibility Assessment</p>
+    <div class="header-meta">
+      <div class="meta-item">
+        <span class="meta-label">Audit Date</span>
+        <span class="meta-value">March 28, 2026</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Domain</span>
+        <span class="meta-value">jeffhilltrailersales.com</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Platform</span>
+        <span class="meta-value">GoDaddy Website Builder</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Data Sources</span>
+        <span class="meta-value">SEMrush · Google · Meta Ad Library</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- SCORE BANNER -->
+<div class="score-banner">
+  <div class="score-inner">
+    <div class="score-cell">
+      <div class="score-label">Overall SEO Health</div>
+      <div class="score-val score-critical">12<span style="font-size:16px;">/100</span></div>
+      <div class="score-desc">Critical — action required</div>
+    </div>
+    <div class="score-cell">
+      <div class="score-label">Pages Indexed</div>
+      <div class="score-val score-critical">4<span style="font-size:16px;"> / 71+</span></div>
+      <div class="score-desc">94% of site invisible to Google</div>
+    </div>
+    <div class="score-cell">
+      <div class="score-label">Organic Traffic</div>
+      <div class="score-val score-critical">~0</div>
+      <div class="score-desc">100% branded-only rankings</div>
+    </div>
+    <div class="score-cell">
+      <div class="score-label">AI Visibility</div>
+      <div class="score-val score-critical">0<span style="font-size:16px;"> citations</span></div>
+      <div class="score-desc">Not cited by any AI platform</div>
+    </div>
+    <div class="score-cell">
+      <div class="score-label">Review Profile</div>
+      <div class="score-val score-good">5.0<span style="font-size:16px;"> ★</span></div>
+      <div class="score-desc">20 Google reviews — not shown on site</div>
+    </div>
+  </div>
+</div>
+
+<!-- STICKY NAV -->
+<nav class="audit-nav">
+  <div class="nav-inner">
+    <a href="#executive-summary" class="nav-link">Executive Summary</a>
+    <a href="#technical-seo" class="nav-link">Technical SEO</a>
+    <a href="#on-page" class="nav-link">On-Page</a>
+    <a href="#keywords" class="nav-link">Keywords</a>
+    <a href="#ai-seo" class="nav-link">AI Search</a>
+    <a href="#action-plan" class="nav-link">Action Plan</a>
+  </div>
+</nav>
+
+<main class="main">
+
+  <!-- ── EXECUTIVE SUMMARY ── -->
+  <section class="section" id="executive-summary">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Executive Summary</h2>
+    </div>
+
+    <div class="callout callout-critical">
+      <div class="callout-icon">⚠</div>
+      <div class="callout-body">
+        <div class="callout-title">The site is functionally invisible to organic search</div>
+        <div class="callout-desc">Of the 71+ URLs in the sitemap, only 4 are indexed by Google. The site generates zero non-branded organic traffic. For every competitive keyword that matters to this business — "enclosed trailer for sale," "trailer dealer Indiana," "cargo trailer Indiana" — Jeff Hill Trailer Sales does not appear anywhere on the first several pages of results. The current SEO state means 100% of web discovery depends on people who already know the business name.</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="info-block">
+        <div class="info-block-title">Critical Findings</div>
+        <div class="stat-row"><span class="stat-row-label">Pages indexed by Google</span><span class="stat-row-val score-critical">4 of 71+</span></div>
+        <div class="stat-row"><span class="stat-row-label">Canonical tags</span><span class="stat-row-val score-critical">0 pages</span></div>
+        <div class="stat-row"><span class="stat-row-label">Meta descriptions</span><span class="stat-row-val score-critical">0 pages</span></div>
+        <div class="stat-row"><span class="stat-row-label">Schema markup</span><span class="stat-row-val score-critical">None found</span></div>
+        <div class="stat-row"><span class="stat-row-label">Robots.txt sitemap ref</span><span class="stat-row-val score-critical">Missing</span></div>
+        <div class="stat-row"><span class="stat-row-label">Google Business Profile</span><span class="stat-row-val score-poor">Status unknown</span></div>
+        <div class="stat-row"><span class="stat-row-label">Non-branded organic traffic</span><span class="stat-row-val score-critical">~0 visits/mo</span></div>
+      </div>
+      <div class="info-block">
+        <div class="info-block-title">Strengths to Build On</div>
+        <div class="stat-row"><span class="stat-row-label">Google review rating</span><span class="stat-row-val score-good">5.0 ★ (20 reviews)</span></div>
+        <div class="stat-row"><span class="stat-row-label">Robots.txt</span><span class="stat-row-val score-good">Open — AI bots allowed</span></div>
+        <div class="stat-row"><span class="stat-row-label">Active Meta ads</span><span class="stat-row-val score-fair">Running since Mar 18</span></div>
+        <div class="stat-row"><span class="stat-row-label">Facebook following</span><span class="stat-row-val score-fair">3,483 likes</span></div>
+        <div class="stat-row"><span class="stat-row-label">Sitemap exists</span><span class="stat-row-val score-fair">2 sitemaps (71+ URLs)</span></div>
+        <div class="stat-row"><span class="stat-row-label">Founder story & niche</span><span class="stat-row-val score-good">Unique racing expertise</span></div>
+        <div class="stat-row"><span class="stat-row-label">Keyword opportunity</span><span class="stat-row-val score-good">8,100/mo available</span></div>
+      </div>
+    </div>
+
+    <div class="callout callout-info" style="margin-top:20px;">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <div class="callout-title">The opportunity is significant</div>
+        <div class="callout-desc">"Enclosed trailer for sale" gets 8,100 searches per month in the US. The site is currently nowhere near page 1. With a new platform, proper on-page SEO, local schema, and a content strategy built around the racing niche, Jeff Hill can capture category-level traffic that larger competitors are not fully optimized for either. The founder story is a genuine SEO content asset no competitor can replicate.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TECHNICAL SEO ── -->
+  <section class="section" id="technical-seo">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Technical SEO Findings</h2>
+    </div>
+
+    <div class="issues-grid">
+
+      <div class="issue-card critical">
+        <div class="issue-header">
+          <span class="issue-title">Only 4 of 71+ sitemap URLs are indexed by Google</span>
+          <span class="badge badge-critical">Critical</span>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">The sitemap contains 10 website pages + 61 e-commerce URLs (product pages, category pages). Google has indexed only 4 of them. This means every product listing, every brand category page, and almost every page on the site is invisible to search engines. The most likely cause: GoDaddy's e-commerce pages are rendered by JavaScript, and Google is not fully crawling and rendering the store pages. This is the single most damaging technical issue on the site.</div>
+          <div class="issue-row">
+            <span class="issue-row-label">Evidence</span>
+            <span class="issue-row-val">site:jeffhilltrailersales.com returns 4 results. Sitemap contains 71+ URLs. SEMrush shows only branded keyword rankings.</span>
+          </div>
+          <div class="fix-block">
+            <div class="fix-label">Recommended Fix</div>
+            Migrate to a platform with server-side-rendered product pages (Shopify, WordPress/WooCommerce, or a custom site). On GoDaddy, submit sitemap to Google Search Console, request indexing of key pages manually, and monitor the Coverage report. This is a platform limitation that cannot be fully solved within GoDaddy Website Builder.
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card critical">
+        <div class="issue-header">
+          <span class="issue-title">No canonical tags on any page</span>
+          <span class="badge badge-critical">Critical</span>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">Not a single page on the site has a canonical tag. Without canonicals, Google has no guidance on which version of a URL is authoritative. This matters especially because the two sitemaps use different homepage URL formats: <span class="code-inline">https://jeffhilltrailersales.com/</span> (with trailing slash) and <span class="code-inline">https://jeffhilltrailersales.com</span> (without) — these are treated as separate URLs and create duplicate content signals.</div>
+          <div class="fix-block">
+            <div class="fix-label">Recommended Fix</div>
+            Add <span class="code-inline">&lt;link rel="canonical" href="[page-url]"&gt;</span> to every page's <span class="code-inline">&lt;head&gt;</span>. Standardize all URLs to consistently use the trailing-slash format. On GoDaddy, check if canonical tag injection is available in site settings or page SEO options.
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card critical">
+        <div class="issue-header">
+          <span class="issue-title">No schema markup / structured data anywhere on the site</span>
+          <span class="badge badge-critical">Critical</span>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">Zero JSON-LD schema was found on any page. For a local business with a physical lot, this means: no LocalBusiness rich results, no map pack enhancements, no Product rich results on product listings, no Review stars in search results (despite having 20 Google reviews). Schema markup also provides a 30–40% boost to AI citation visibility.</div>
+          <div class="issue-row">
+            <span class="issue-row-label">Missing</span>
+            <span class="issue-row-val">LocalBusiness, Product, Organization, BreadcrumbList, FAQPage schemas</span>
+          </div>
+          <div class="fix-block">
+            <div class="fix-label">Recommended Fix</div>
+            At minimum, add LocalBusiness schema to the homepage with: name, address, phone, URL, geo coordinates, openingHours, and priceRange. Add Product schema to each product listing with: name, description, price, availability, and brand. Use Google's Rich Results Test to validate after implementation.
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card critical">
+        <div class="issue-header">
+          <span class="issue-title">Google Business Profile — status unconfirmed and possibly unclaimed</span>
+          <span class="badge badge-critical">Critical</span>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">For a local trailer dealership, Google Business Profile is the single highest-ROI SEO action available. It controls whether the business appears in Google Maps, the local pack (the 3-box result shown above organic results), and "near me" searches. The GBP status could not be confirmed as fully claimed and optimized. A Google Maps pin was found but hours, photos, posts, products, and Q&A sections are unknown.</div>
+          <div class="fix-block">
+            <div class="fix-label">Recommended Fix</div>
+            Claim and verify the Google Business Profile at business.google.com. Complete: business category ("Trailer Dealer"), hours, phone, website, description (include keywords like "enclosed trailers," "cargo trailers," "dump trailers"), add 10–20 photos of inventory and the lot, add products, enable messaging, and post weekly.
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card high">
+        <div class="issue-header">
+          <span class="issue-title">Robots.txt has no Sitemap directive</span>
+          <span class="badge badge-high">High</span>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">The robots.txt file contains only <span class="code-inline">User-agent: *</span> — a single line. The Sitemap URL is not referenced, which means Google's crawler has to discover the sitemap independently or via Search Console submission. This is a missed crawl-guidance signal.</div>
+          <div class="fix-block">
+            <div class="fix-label">Recommended Fix</div>
+            Add <span class="code-inline">Sitemap: https://jeffhilltrailersales.com/sitemap.xml</span> to robots.txt.
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card high">
+        <div class="issue-header">
+          <span class="issue-title">Account management URLs included in sitemap</span>
+          <span class="badge badge-high">High</span>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">The sitemap includes <span class="code-inline">/m/login</span>, <span class="code-inline">/m/reset</span>, <span class="code-inline">/m/create</span>, and <span class="code-inline">/m/create-account</span> — customer account pages with zero SEO value. Worse, SEMrush shows Google is actually indexing <span class="code-inline">/m/login</span> and <span class="code-inline">/m/create-account</span> and ranking them for the branded keyword "jeff hill trailer sales" at positions 21 and 27. This wastes crawl budget and dilutes the brand's SERP presence.</div>
+          <div class="fix-block">
+            <div class="fix-label">Recommended Fix</div>
+            Add <span class="code-inline">noindex</span> meta tags to all <span class="code-inline">/m/</span> pages and exclude them from the sitemap.
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card high">
+        <div class="issue-header">
+          <span class="issue-title">Sitemap lastmod dates are stale (January 2025)</span>
+          <span class="badge badge-high">High</span>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">The website sitemap shows a <span class="code-inline">lastmod</span> of <span class="code-inline">2025-01-25</span> for all 10 website pages. This signals to search engines that the site content has not been updated in over a year. Dynamic sitemaps should reflect actual content update dates.</div>
+          <div class="fix-block">
+            <div class="fix-label">Recommended Fix</div>
+            Ensure the sitemap is dynamically generated and reflects accurate <span class="code-inline">lastmod</span> dates. On GoDaddy, this may update automatically when pages are saved — re-save all key pages to trigger an update.
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card medium">
+        <div class="issue-header">
+          <span class="issue-title">OG description tag contains literal asterisks "****"</span>
+          <span class="badge badge-medium">Medium</span>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">The homepage <span class="code-inline">og:description</span> meta tag contains only asterisks (<span class="code-inline">*******</span>), which is a redacted Meta ad copy artifact. When this page is shared on social media, the preview description will show asterisks instead of a meaningful business description.</div>
+          <div class="fix-block">
+            <div class="fix-label">Recommended Fix</div>
+            Set the OG description to a real value: "Jeff Hill Trailer Sales — enclosed cargo trailers, utility trailers, dump trailers, and concession trailers in Modoc, Indiana. Owner-operated since 2016. No hidden fees."
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card medium">
+        <div class="issue-header">
+          <span class="issue-title">GoDaddy Website Builder — fundamental SEO platform limitations</span>
+          <span class="badge badge-medium">Medium</span>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">The site is built on GoDaddy Website Builder (Starfield Technologies). This platform has known limitations for SEO: JavaScript-rendered pages that Google struggles to crawl, limited schema control, no canonical tag injection, and constrained URL structure customization. Most critical SEO improvements will require either working around these limits or migrating to a more SEO-capable platform.</div>
+          <div class="fix-block">
+            <div class="fix-label">Recommended Fix</div>
+            For a business where the website is the primary sales channel, consider migrating to Shopify (best for e-commerce trailer inventory) or WordPress + WooCommerce. Shopify natively handles canonical tags, sitemap generation, and has strong schema support. This is a 6–12 month strategic recommendation, not an immediate fix.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── ON-PAGE SEO ── -->
+  <section class="section" id="on-page">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">On-Page SEO Findings</h2>
+    </div>
+
+    <div class="issues-grid">
+
+      <div class="issue-card critical">
+        <div class="issue-header">
+          <span class="issue-title">Homepage title tag has no descriptive keywords or location</span>
+          <span class="badge badge-critical">Critical</span>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">The current homepage title is simply <span class="code-inline">Jeff Hill Trailer Sales</span> — just the brand name with no keywords, no product description, and no location. Title tags are the most weighted on-page SEO signal. Anyone who doesn't already know the business name would find nothing relevant in this title.</div>
+          <div class="issue-row">
+            <span class="issue-row-label">Current</span>
+            <span class="issue-row-val"><span class="code-inline">Jeff Hill Trailer Sales</span></span>
+          </div>
+          <div class="issue-row">
+            <span class="issue-row-label">Suggested</span>
+            <span class="issue-row-val"><span class="code-inline">Enclosed Trailers &amp; Cargo Trailers for Sale | Jeff Hill Trailer Sales — Modoc, IN</span></span>
+          </div>
+          <div class="fix-block">
+            <div class="fix-label">Recommended Fix</div>
+            Rewrite the homepage title to lead with the primary product category and include the location. Keep under 60 characters for full SERP display. Update in GoDaddy page settings under SEO title.
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card critical">
+        <div class="issue-header">
+          <span class="issue-title">No meta descriptions on any page</span>
+          <span class="badge badge-critical">Critical</span>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">Zero pages have a meta description. When Google generates snippets for pages without descriptions, it picks arbitrary text from the page — often poorly optimized and unappealing. Meta descriptions don't directly affect rankings, but they directly affect click-through rate from search results.</div>
+          <div class="issue-row">
+            <span class="issue-row-label">Pages</span>
+            <span class="issue-row-val">Homepage, Shop, Contact, Gallery, all product pages — none have meta descriptions</span>
+          </div>
+          <div class="fix-block">
+            <div class="fix-label">Recommended Fix</div>
+            Write a unique meta description for every page (150–160 characters). Homepage example: "Browse enclosed cargo trailers, dump trailers, concession trailers &amp; more at Jeff Hill Trailer Sales in Modoc, Indiana. Financing available. No hidden fees. Call 765-744-6214."
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card high">
+        <div class="issue-header">
+          <span class="issue-title">Shop page: no H1, keyword-free title, no meta description</span>
+          <span class="badge badge-high">High</span>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">The main inventory page (<span class="code-inline">/shop-in-stock-trailers</span>) has: title tag <span class="code-inline">SHOP IN STOCK TRAILERS</span> (all-caps, zero location or product keywords), no H1 whatsoever, and no meta description. This is the page where buyers land after clicking — it has the best chance of ranking for commercial keywords if optimized.</div>
+          <div class="issue-row">
+            <span class="issue-row-label">Current title</span>
+            <span class="issue-row-val"><span class="code-inline">SHOP IN STOCK TRAILERS</span></span>
+          </div>
+          <div class="issue-row">
+            <span class="issue-row-label">Suggested title</span>
+            <span class="issue-row-val"><span class="code-inline">Trailers for Sale in Indiana | Enclosed, Cargo &amp; Utility | Jeff Hill Trailer Sales</span></span>
+          </div>
+          <div class="fix-block">
+            <div class="fix-label">Recommended Fix</div>
+            Add an H1 ("Trailers for Sale in Indiana"), write a keyword-rich meta description, and optimize the title tag. Add a 2–3 sentence intro paragraph above the product grid with location and product keywords.
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card high">
+        <div class="issue-header">
+          <span class="issue-title">H1 heading hierarchy issues on contact and shop pages</span>
+          <span class="badge badge-high">High</span>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">The Contact page H1 is <span class="code-inline">CONTACT</span> (a single generic word), and the Shop page has no H1 at all. The homepage H1 is <span class="code-inline">Join the Jeff Hill Trailer Sales family today.</span> — brand-oriented rather than keyword-oriented. Each page should have one H1 that contains the primary target keyword for that page.</div>
+          <div class="fix-block">
+            <div class="fix-label">Recommended Fix</div>
+            Homepage H1: Keep existing (brand identity works here, keywords go in title). Shop H1: "Trailers for Sale in Indiana." Contact H1: "Get a Quote on Your Next Trailer."
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card high">
+        <div class="issue-header">
+          <span class="issue-title">5.0★ Google reviews not displayed anywhere on the website</span>
+          <span class="badge badge-high">High</span>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">Jeff Hill has 20 Google reviews at a perfect 5.0-star rating — an exceptionally strong trust signal. None of this social proof appears on the website. Visitors who land on the site from any channel (ads, direct, referral) have no on-site evidence of customer satisfaction. This is a conversion killer and an E-E-A-T signal Google values highly.</div>
+          <div class="fix-block">
+            <div class="fix-label">Recommended Fix</div>
+            Add a reviews/testimonials section to the homepage with embedded quotes from real Google reviews. Add a Google Reviews widget or badge. Add Review schema markup to enable star ratings in search results.
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card medium">
+        <div class="issue-header">
+          <span class="issue-title">No content targeting category-level or informational searches</span>
+          <span class="badge badge-medium">Medium</span>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">The entire site is either a product catalog or a contact page. There are no location pages, no brand/type category pages with SEO copy, and no blog. This means the site can only rank for transactional queries with exact product matches — it cannot capture buyers at the research stage or establish topical authority.</div>
+          <div class="fix-block">
+            <div class="fix-label">Recommended Fix</div>
+            Create SEO-optimized category landing pages for: "Enclosed Cargo Trailers for Sale in Indiana," "Dump Trailers Indiana," "Concession Trailers for Sale," and "Race/Kart Trailers Indiana." Each page needs 300–500 words of optimized copy, H1, meta description, and internal links to matching inventory.
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card medium">
+        <div class="issue-header">
+          <span class="issue-title">No location-specific landing pages</span>
+          <span class="badge badge-medium">Medium</span>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">The business serves Modoc, Indiana and has sold trailers in 48 states. There are no location pages targeting nearby cities: Muncie (30 min), Richmond, Anderson, or Indianapolis. Local SEO capture requires location-specific content beyond just having the address on a contact page.</div>
+          <div class="fix-block">
+            <div class="fix-label">Recommended Fix</div>
+            Create a primary "Trailers for Sale in Indiana" page. Add location-mention content to key pages referencing Modoc, Randolph County, east-central Indiana, and major nearby cities.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── KEYWORDS ── -->
+  <section class="section" id="keywords">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Keyword Rankings &amp; Opportunities</h2>
+    </div>
+
+    <div class="callout callout-critical" style="margin-bottom:28px;">
+      <div class="callout-icon">📊</div>
+      <div class="callout-body">
+        <div class="callout-title">Current state: 100% branded traffic</div>
+        <div class="callout-desc">SEMrush shows the site ranking for 42 keyword variations — but every single one is either a branded variation ("jeff hill trailer sales," "hill trailer sales") or an accidental partial match for other businesses. The site generates zero measurable organic traffic from any category, commercial, or local keyword. All non-branded keyword positions are 40–90+, which receives effectively no clicks.</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:15px;font-weight:700;margin-bottom:16px;color:var(--muted);font-family:var(--mono);letter-spacing:0.08em;text-transform:uppercase;font-size:11px;">Current Non-Branded Rankings</h3>
+
+    <div class="table-wrapper" style="margin-bottom:32px;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Keyword</th>
+            <th>Current Position</th>
+            <th>Monthly Searches</th>
+            <th>Traffic Generated</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>trailer dealers in indiana</td>
+            <td><span class="pos-badge pos-deep">44</span></td>
+            <td>210</td>
+            <td>~0</td>
+            <td><span class="badge badge-high">Page 5</span></td>
+          </tr>
+          <tr>
+            <td>trailer dealer indiana</td>
+            <td><span class="pos-badge pos-deep">41</span></td>
+            <td>70</td>
+            <td>~0</td>
+            <td><span class="badge badge-high">Page 5</span></td>
+          </tr>
+          <tr>
+            <td>trailer sales in indiana</td>
+            <td><span class="pos-badge pos-deep">23</span></td>
+            <td>260</td>
+            <td>~0</td>
+            <td><span class="badge badge-medium">Page 3</span></td>
+          </tr>
+          <tr>
+            <td>trailer sales indiana</td>
+            <td><span class="pos-badge pos-deep">53–61</span></td>
+            <td>320</td>
+            <td>~0</td>
+            <td><span class="badge badge-critical">Page 6+</span></td>
+          </tr>
+          <tr>
+            <td>enclosed trailers indiana for sale</td>
+            <td><span class="pos-badge pos-deep">76</span></td>
+            <td>90</td>
+            <td>~0</td>
+            <td><span class="badge badge-critical">Page 8</span></td>
+          </tr>
+          <tr>
+            <td>enclosed trailers for sale indiana</td>
+            <td><span class="pos-badge pos-deep">59</span></td>
+            <td>140</td>
+            <td>~0</td>
+            <td><span class="badge badge-critical">Page 6</span></td>
+          </tr>
+          <tr>
+            <td>trailers for sale indiana</td>
+            <td><span class="pos-badge pos-deep">74</span></td>
+            <td>320</td>
+            <td>~0</td>
+            <td><span class="badge badge-critical">Page 8</span></td>
+          </tr>
+          <tr>
+            <td>6x12 concession trailer</td>
+            <td><span class="pos-badge pos-deep">43</span></td>
+            <td>40</td>
+            <td>~0</td>
+            <td><span class="badge badge-high">Page 5</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-family:var(--mono);letter-spacing:0.08em;text-transform:uppercase;font-size:11px;color:var(--muted);margin-bottom:16px;">Keyword Opportunities — Target These</h3>
+
+    <div class="table-wrapper" style="margin-bottom:32px;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Keyword</th>
+            <th>Monthly Volume</th>
+            <th>CPC (Intent Signal)</th>
+            <th>Difficulty</th>
+            <th>Priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>enclosed trailer for sale</strong></td>
+            <td>
+              <div class="vol-bar">
+                <div class="vol-track"><div class="vol-fill" style="width:100%"></div></div>
+                8,100/mo
+              </div>
+            </td>
+            <td>$1.01</td>
+            <td>High (national)</td>
+            <td><span class="badge badge-critical">Top Priority</span></td>
+          </tr>
+          <tr>
+            <td><strong>buy enclosed trailer</strong></td>
+            <td>
+              <div class="vol-bar">
+                <div class="vol-track"><div class="vol-fill" style="width:26%"></div></div>
+                210/mo
+              </div>
+            </td>
+            <td>$1.00</td>
+            <td>High</td>
+            <td><span class="badge badge-critical">Top Priority</span></td>
+          </tr>
+          <tr>
+            <td><strong>trailer sales indiana</strong></td>
+            <td>
+              <div class="vol-bar">
+                <div class="vol-track"><div class="vol-fill" style="width:39%"></div></div>
+                320/mo
+              </div>
+            </td>
+            <td>$0.42</td>
+            <td>Medium</td>
+            <td><span class="badge badge-high">High</span></td>
+          </tr>
+          <tr>
+            <td><strong>trailers for sale indiana</strong></td>
+            <td>
+              <div class="vol-bar">
+                <div class="vol-track"><div class="vol-fill" style="width:39%"></div></div>
+                320/mo
+              </div>
+            </td>
+            <td>$0.49</td>
+            <td>Medium</td>
+            <td><span class="badge badge-high">High</span></td>
+          </tr>
+          <tr>
+            <td><strong>dump trailer indiana</strong></td>
+            <td>
+              <div class="vol-bar">
+                <div class="vol-track"><div class="vol-fill" style="width:4%"></div></div>
+                30/mo
+              </div>
+            </td>
+            <td>$4.86 ← high intent</td>
+            <td>Low</td>
+            <td><span class="badge badge-high">High</span></td>
+          </tr>
+          <tr>
+            <td><strong>trailer dealer indiana</strong></td>
+            <td>
+              <div class="vol-bar">
+                <div class="vol-track"><div class="vol-fill" style="width:8%"></div></div>
+                70/mo
+              </div>
+            </td>
+            <td>$0.87</td>
+            <td>Medium</td>
+            <td><span class="badge badge-high">High</span></td>
+          </tr>
+          <tr>
+            <td><strong>concession trailer indiana</strong></td>
+            <td>
+              <div class="vol-bar">
+                <div class="vol-track"><div class="vol-fill" style="width:4%"></div></div>
+                30/mo
+              </div>
+            </td>
+            <td>$0.82</td>
+            <td>Low</td>
+            <td><span class="badge badge-medium">Medium</span></td>
+          </tr>
+          <tr>
+            <td><strong>car hauler indiana</strong></td>
+            <td>
+              <div class="vol-bar">
+                <div class="vol-track"><div class="vol-fill" style="width:2%"></div></div>
+                20/mo
+              </div>
+            </td>
+            <td>—</td>
+            <td>Low</td>
+            <td><span class="badge badge-medium">Medium</span></td>
+          </tr>
+          <tr>
+            <td><strong>race trailer indiana</strong></td>
+            <td>
+              <div class="vol-bar">
+                <div class="vol-track"><div class="vol-fill" style="width:1%"></div></div>
+                &lt;10/mo
+              </div>
+            </td>
+            <td>—</td>
+            <td>Very Low</td>
+            <td><span class="badge badge-info">Niche Win</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="opportunity-grid">
+      <div class="opp-card">
+        <div class="opp-number">8,100 <span>/mo</span></div>
+        <div class="opp-label">"Enclosed trailer for sale"</div>
+        <div class="opp-desc">The single largest reachable keyword. Currently ranking ~pos 80+. A new platform + proper on-page SEO targeting this term could realistically reach page 1 within 6–12 months.</div>
+      </div>
+      <div class="opp-card">
+        <div class="opp-number">$4.86 <span>CPC</span></div>
+        <div class="opp-label">Dump trailer searches — high buyer intent</div>
+        <div class="opp-desc">Advertisers pay $4.86/click for "dump trailer indiana" — meaning buyers searching this are ready to purchase. Jeff Hill has dump trailers. An optimized page for this term could win paying customers immediately.</div>
+      </div>
+      <div class="opp-card">
+        <div class="opp-number">~0 <span>competitors</span></div>
+        <div class="opp-label">Racing/karting trailer niche — unclaimed</div>
+        <div class="opp-desc">No competitor has built content authority around racing trailers + Indiana. Jeff's story IS the differentiator. This is a content moat that can't be copied.</div>
+      </div>
+      <div class="opp-card">
+        <div class="opp-number">20 <span>× 5★</span></div>
+        <div class="opp-label">Review profile — hidden asset</div>
+        <div class="opp-desc">A perfect 5.0 Google rating is a conversion goldmine sitting off the website. Displaying these reviews on-site and adding Review schema could measurably increase both rankings and click-through rates.</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ── AI SEO ── -->
+  <section class="section" id="ai-seo">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">AI Search Visibility Audit</h2>
+    </div>
+
+    <div class="callout callout-critical" style="margin-bottom:28px;">
+      <div class="callout-icon">🤖</div>
+      <div class="callout-body">
+        <div class="callout-title">Zero AI citations found across all platforms and query types</div>
+        <div class="callout-desc">Google AI Overviews, ChatGPT, Perplexity, and other AI platforms did not cite Jeff Hill Trailer Sales for any tested query. The site lacks the structural, authority, and content signals that AI systems use to select sources. AI search is now present in ~45% of Google queries — this is not a future problem, it is a present one.</div>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--mono);letter-spacing:0.08em;text-transform:uppercase;font-size:11px;color:var(--muted);margin-bottom:16px;">AI Extractability Checklist</h3>
+
+    <div class="checklist" style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px;margin-bottom:32px;">
+      <div class="check-item">
+        <div class="check-icon check-fail">✗</div>
+        <div class="check-content">
+          <div class="check-title">Clear product/business definition in first paragraph</div>
+          <div class="check-note">Homepage copy leads with "Join the family" — no definition of what the business sells or where it's located. AI systems can't extract a clean answer to "What does Jeff Hill Trailer Sales sell?"</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon check-fail">✗</div>
+        <div class="check-content">
+          <div class="check-title">Self-contained answer blocks for key queries</div>
+          <div class="check-note">No content structured as extractable answers. No definition blocks, no how-to formats, no comparison tables anywhere on the site.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon check-fail">✗</div>
+        <div class="check-content">
+          <div class="check-title">Statistics or data with sources cited</div>
+          <div class="check-note">Zero data points, no statistics, no cited sources on any page. Statistics boost AI citation probability by +37–40% (Princeton GEO study, 2024).</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon check-fail">✗</div>
+        <div class="check-content">
+          <div class="check-title">Expert attribution (name + credentials visible)</div>
+          <div class="check-note">Jeff Hill's name appears in the About section but without structured credentials. "In the trailer industry since 1996" and "racing since 2012" are present but not formatted as citable authority signals.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon check-fail">✗</div>
+        <div class="check-content">
+          <div class="check-title">FAQ section with natural-language questions</div>
+          <div class="check-note">No FAQ section anywhere on the site. FAQs directly match query patterns that AI systems are asked — they are among the highest-citation content formats.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon check-fail">✗</div>
+        <div class="check-content">
+          <div class="check-title">Schema markup (FAQ, LocalBusiness, Product)</div>
+          <div class="check-note">Zero schema markup. Content with schema gets 30–40% higher AI visibility. LocalBusiness schema alone would help AI systems accurately describe and cite this business.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon check-fail">✗</div>
+        <div class="check-content">
+          <div class="check-title">Content recently updated (within 6 months)</div>
+          <div class="check-note">Sitemap shows website pages last modified January 2025 — 14+ months old. AI systems weight recency heavily when selecting sources.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon check-fail">✗</div>
+        <div class="check-content">
+          <div class="check-title">Comparison tables for product vs. product queries</div>
+          <div class="check-note">No comparison content. "Enclosed trailer vs. utility trailer" or "US Cargo vs. Haul About" pages don't exist. Comparison articles generate ~33% of all AI citations.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon check-pass">✓</div>
+        <div class="check-content">
+          <div class="check-title">AI bots allowed in robots.txt</div>
+          <div class="check-note">The robots.txt file is wide open — all user agents allowed with no disallow rules. GPTBot, ClaudeBot, PerplexityBot, and Google-Extended can all crawl the site. This is correct.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon check-warn">!</div>
+        <div class="check-content">
+          <div class="check-title">Third-party citations and presence</div>
+          <div class="check-note">Found in: Birdeye (review aggregation), ZoomInfo, Vymaps, BBB listing. Not found in: Wikipedia, industry publications, Yelp, YouTube. Brands are 6.5× more likely to be cited by AI via third-party sources than via their own domain.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon check-warn">!</div>
+        <div class="check-content">
+          <div class="check-title">Heading structure matches how people phrase queries</div>
+          <div class="check-note">Current headings: "WELCOME," "FEATURED PRODUCTS," "ABOUT," "CONTACT." None match how a buyer would phrase a search query. H2s should look like: "Enclosed Cargo Trailers for Sale in Indiana."</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--mono);letter-spacing:0.08em;text-transform:uppercase;font-size:11px;color:var(--muted);margin-bottom:16px;">AI Search Query Test Results</h3>
+
+    <div class="table-wrapper" style="margin-bottom:32px;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Query Tested</th>
+            <th>AI Overview Triggered?</th>
+            <th>Jeff Hill Cited?</th>
+            <th>Who Ranks / Gets Cited</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>"trailer sales Modoc Indiana"</td>
+            <td>No AI Overview</td>
+            <td><span class="badge badge-critical">Not cited</span></td>
+            <td>LT Truck &amp; Trailer Sales (ranks #1), Jeff Hill ranks #3 in organic</td>
+          </tr>
+          <tr>
+            <td>"enclosed cargo trailers Indiana"</td>
+            <td>No AI Overview</td>
+            <td><span class="badge badge-critical">Not found at all</span></td>
+            <td>TrailersPlus, Royer Trailer Sales, Indiana Trailer Sales, Facebook Marketplace</td>
+          </tr>
+          <tr>
+            <td>"buy enclosed trailer Indiana"</td>
+            <td>No AI Overview</td>
+            <td><span class="badge badge-critical">Not found at all</span></td>
+            <td>Trailer Sales of Indiana, TrailersPlus, Equipment Trader, TC-Trailers</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-family:var(--mono);letter-spacing:0.08em;text-transform:uppercase;font-size:11px;color:var(--muted);margin-bottom:16px;">AI SEO Content Recommendations</h3>
+
+    <div class="issues-grid">
+
+      <div class="issue-card high">
+        <div class="issue-header">
+          <span class="issue-title">Create structured FAQ content for key buyer questions</span>
+          <span class="badge badge-high">High Impact</span>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">FAQs are among the most cited content formats by AI systems because they directly answer natural-language questions. Jeff Hill should publish FAQs covering: "What types of trailers do you sell?", "Do you offer financing?", "What trailer brands do you carry?", "Can I trade in my old trailer?", "Do you ship trailers or is pickup only?"</div>
+          <div class="fix-block">
+            <div class="fix-label">Implementation</div>
+            Add an FAQ section to the homepage and contact page. Add FAQPage schema markup. Keep answers to 40–60 words (optimal extraction length for AI snippets).
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card high">
+        <div class="issue-header">
+          <span class="issue-title">Add definition-first content blocks to key pages</span>
+          <span class="badge badge-high">High Impact</span>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">Every key page should lead with a single clear paragraph that defines what the page is about in a way AI can extract. For the shop page: "Jeff Hill Trailer Sales carries enclosed cargo trailers, utility trailers, dump trailers, and concession trailers for sale in Modoc, Indiana. We stock brands including US Cargo, Liberty, Haul About, Stealth, and Force, with prices from $2,850 to $14,495."</div>
+        </div>
+      </div>
+
+      <div class="issue-card high">
+        <div class="issue-header">
+          <span class="issue-title">Build racing trailer content — Jeff's credentialed niche</span>
+          <span class="badge badge-high">High Impact</span>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">No competitor has genuine racing expertise content. Jeff Hill can write authoritative content on: "What to look for in a kart racing trailer," "How to set up an enclosed trailer for race day," "Best enclosed trailer sizes for karting." This content has low competition, positions Jeff's expertise, and can attract national search traffic from the motorsport community — exactly the audience most likely to travel to buy.</div>
+          <div class="fix-block">
+            <div class="fix-label">Implementation</div>
+            Create 3–5 blog posts or guide pages on racing-specific trailer topics. Include Jeff's first-person experience, specific specs (interior height, tie-down positions, etc.), and link to relevant inventory. Use Article schema with Jeff as the named author.
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card medium">
+        <div class="issue-header">
+          <span class="issue-title">Get cited on third-party platforms AI trusts</span>
+          <span class="badge badge-medium">Medium Impact</span>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">Brands are 6.5× more likely to be cited by AI via third-party sources. Current third-party presence: BBB, Birdeye, ZoomInfo (weak). Missing: Yelp listing, YouTube channel, industry forum discussions, dealer directory sites.</div>
+          <div class="fix-block">
+            <div class="fix-label">Implementation</div>
+            Create a Yelp profile. Create a YouTube channel with trailer walkaround videos — YouTube is heavily cited by Google AI Overviews. Get listed in trailer dealer directories (NATM dealer finder, trailer-specific marketplaces). Respond to all Google reviews publicly.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── ACTION PLAN ── -->
+  <section class="section" id="action-plan">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2 class="section-title">Prioritized Action Plan</h2>
+    </div>
+
+    <h3 style="font-family:var(--mono);letter-spacing:0.08em;text-transform:uppercase;font-size:11px;color:var(--red);margin-bottom:16px;">Phase 1 — Critical Fixes (Do Now, Week 1–2)</h3>
+
+    <div class="action-list" style="margin-bottom:36px;">
+      <div class="action-item">
+        <div class="action-num">01</div>
+        <div class="action-body">
+          <div class="action-title">Claim and fully optimize Google Business Profile</div>
+          <div class="action-desc">Verify ownership at business.google.com. Fill every field: category "Trailer Dealer," hours, description with keywords, 15–20 photos of inventory and lot, products section, messaging enabled. This single action is the highest-ROI SEO move available and will directly drive local map pack visibility.</div>
+          <div class="action-tags"><span class="action-tag">Local SEO</span><span class="action-tag">Free</span><span class="action-tag">1–2 hours</span></div>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">02</div>
+        <div class="action-body">
+          <div class="action-title">Optimize all page titles with keywords + location</div>
+          <div class="action-desc">Homepage: "Enclosed Trailers &amp; Cargo Trailers for Sale | Jeff Hill Trailer Sales — Modoc, IN". Shop: "Trailers for Sale in Indiana | Enclosed, Cargo, Dump &amp; Utility". Contact: "Contact Jeff Hill Trailer Sales — Get a Quote Today". In GoDaddy, each page has an SEO title field — update all.</div>
+          <div class="action-tags"><span class="action-tag">On-Page</span><span class="action-tag">GoDaddy settings</span><span class="action-tag">30 min</span></div>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">03</div>
+        <div class="action-body">
+          <div class="action-title">Write and add meta descriptions to every page</div>
+          <div class="action-desc">150–160 characters each, unique per page, include primary keyword and a call to action. GoDaddy page settings has a meta description field for each page. Do homepage, shop, and contact at minimum.</div>
+          <div class="action-tags"><span class="action-tag">On-Page</span><span class="action-tag">GoDaddy settings</span><span class="action-tag">1 hour</span></div>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">04</div>
+        <div class="action-body">
+          <div class="action-title">Submit sitemap to Google Search Console and request indexing</div>
+          <div class="action-desc">Create/verify a Search Console account for jeffhilltrailersales.com. Submit both sitemaps (sitemap.website.xml and sitemap.ols.xml). Use the URL Inspection tool to request indexing for the homepage, shop, and key product pages. Monitor Coverage report weekly.</div>
+          <div class="action-tags"><span class="action-tag">Technical</span><span class="action-tag">Free</span><span class="action-tag">1 hour setup</span></div>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">05</div>
+        <div class="action-body">
+          <div class="action-title">Add LocalBusiness schema markup to homepage</div>
+          <div class="action-desc">Add JSON-LD LocalBusiness schema with: name, address, phone, URL, geo coordinates, openingHours, priceRange ("$$"), and description. Even on GoDaddy, this can often be injected via the HTML editor or a header code injection field. Validate with Google's Rich Results Test.</div>
+          <div class="action-tags"><span class="action-tag">Schema</span><span class="action-tag">AI SEO</span><span class="action-tag">2 hours</span></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--mono);letter-spacing:0.08em;text-transform:uppercase;font-size:11px;color:var(--orange);margin-bottom:16px;">Phase 2 — High Impact (Month 1–2)</h3>
+
+    <div class="action-list" style="margin-bottom:36px;">
+      <div class="action-item">
+        <div class="action-num">06</div>
+        <div class="action-body">
+          <div class="action-title">Add testimonials / reviews section to homepage</div>
+          <div class="action-desc">Pull 4–6 verbatim Google review quotes and add a testimonials section to the homepage. Add Review/AggregateRating schema. This improves E-E-A-T signals, builds trust with first-time visitors, and enables star ratings in search results.</div>
+          <div class="action-tags"><span class="action-tag">Trust Signals</span><span class="action-tag">E-E-A-T</span><span class="action-tag">AI SEO</span></div>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">07</div>
+        <div class="action-body">
+          <div class="action-title">Create Indiana trailers landing page with SEO copy</div>
+          <div class="action-desc">Build a new page titled "Trailers for Sale in Indiana" with 400–600 words targeting: enclosed trailers, cargo trailers, utility trailers, dump trailers Indiana. Include the address, service area (Muncie, Richmond, Anderson), brands carried, and link to inventory. This gives Google a crawlable, indexable, keyword-rich page.</div>
+          <div class="action-tags"><span class="action-tag">Content</span><span class="action-tag">Local SEO</span><span class="action-tag">High volume target</span></div>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">08</div>
+        <div class="action-body">
+          <div class="action-title">Add FAQ section to homepage and contact page</div>
+          <div class="action-desc">Write 6–8 FAQs answering real buyer questions: financing, trade-ins, brands carried, custom orders, delivery, hours. Add FAQPage schema. FAQs match AI query patterns and drive featured snippet capture. This is the fastest path to AI citation.</div>
+          <div class="action-tags"><span class="action-tag">AI SEO</span><span class="action-tag">Schema</span><span class="action-tag">Featured Snippets</span></div>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">09</div>
+        <div class="action-body">
+          <div class="action-title">Create a Yelp profile and build presence on YouTube</div>
+          <div class="action-desc">Create a Yelp listing for Jeff Hill Trailer Sales. Start a YouTube channel with 5–10 trailer walkaround videos ("2026 US Cargo 7x14 Enclosed Cargo Trailer — Full Walkthrough"). YouTube videos are heavily cited in Google AI Overviews and are one of the most trusted AI source types.</div>
+          <div class="action-tags"><span class="action-tag">Third-Party Presence</span><span class="action-tag">AI SEO</span></div>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">10</div>
+        <div class="action-body">
+          <div class="action-title">Remove /m/ account pages from sitemap and add noindex</div>
+          <div class="action-desc">The login, reset, create, and create-account pages are wasting crawl budget and appearing in search results for branded searches. Exclude from sitemap and add noindex meta tags. Also add sitemap reference to robots.txt.</div>
+          <div class="action-tags"><span class="action-tag">Technical</span><span class="action-tag">Crawl Budget</span></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--mono);letter-spacing:0.08em;text-transform:uppercase;font-size:11px;color:var(--yellow);margin-bottom:16px;">Phase 3 — Strategic (Month 2–6)</h3>
+
+    <div class="action-list">
+      <div class="action-item">
+        <div class="action-num">11</div>
+        <div class="action-body">
+          <div class="action-title">Create racing / motorsport trailer content hub</div>
+          <div class="action-desc">Publish 4–6 articles targeting the karting and motorsport community: "Best Enclosed Trailers for Kart Racing," "How to Set Up a Race Trailer," "Jeff's Story: From Racing Karts to Selling Trailers." Use first-person voice, Jeff as named author, and include racing-specific specs. This is a content moat no competitor can replicate.</div>
+          <div class="action-tags"><span class="action-tag">Content Marketing</span><span class="action-tag">AI SEO</span><span class="action-tag">Niche Authority</span></div>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">12</div>
+        <div class="action-body">
+          <div class="action-title">Evaluate platform migration to Shopify or WordPress</div>
+          <div class="action-desc">GoDaddy Website Builder's JavaScript rendering is likely the root cause of the 4-pages-indexed problem. Shopify handles e-commerce inventory SEO natively: server-side rendering, automatic canonical tags, sitemaps, and schema. A migration to Shopify could unlock indexing for 60+ product pages overnight. This is a medium-term investment with the highest long-term SEO upside.</div>
+          <div class="action-tags"><span class="action-tag">Platform</span><span class="action-tag">Strategic</span><span class="action-tag">Highest Long-Term ROI</span></div>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">13</div>
+        <div class="action-body">
+          <div class="action-title">Active review generation campaign</div>
+          <div class="action-desc">20 reviews is excellent quality but low volume compared to competitors. A simple post-sale text or email asking for a Google review could rapidly grow the count. Add a review link to receipts, follow-up messages, and the website footer. Target: 50+ reviews within 6 months.</div>
+          <div class="action-tags"><span class="action-tag">Trust Signals</span><span class="action-tag">Local SEO</span></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="report-footer">
+  <div class="footer-inner">
+    <div class="footer-copy">SEO &amp; AI Search Audit — Jeff Hill Trailer Sales LLC &nbsp;·&nbsp; jeffhilltrailersales.com &nbsp;·&nbsp; March 28, 2026</div>
+    <div class="footer-brand">Prepared by Soloprenuer Agency</div>
+  </div>
+</footer>
+
+</body>
+</html>

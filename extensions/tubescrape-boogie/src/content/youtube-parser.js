@@ -2,6 +2,9 @@
   'use strict';
 
   function getPlayerResponse() {
+    if (window.ytInitialPlayerResponse?.videoDetails?.videoId) {
+      return window.ytInitialPlayerResponse;
+    }
     const scripts = document.querySelectorAll('script');
     for (const script of scripts) {
       const text = script.textContent;

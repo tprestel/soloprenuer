@@ -1,0 +1,1297 @@
+<!--
+  templateType: "page"
+  isAvailableForNewContent: true
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/webp" href="https://244988351.fs1.hubspotusercontent-na2.net/hubfs/244988351/logos/superlaundry_favicon.webp">
+  <title>Careers — Join the Super Laundry Cincinnati Team</title>
+  <meta name="description" content="Now hiring at Super Laundry Cincinnati. Flexible hours, competitive pay, 6 locations across the city. No experience required — apply in under 2 minutes.">
+
+  <!-- JobPosting Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    "title": "Laundromat Team Member",
+    "description": "Join the Super Laundry Cincinnati team. Help customers with self-service machines, assist with wash-dry-fold drop-offs, maintain cleanliness, and be a trusted presence in your Cincinnati neighborhood. No experience required.",
+    "hiringOrganization": {
+      "@type": "Organization",
+      "name": "Super Laundry Cincinnati",
+      "sameAs": "https://www.superlaundry24.com"
+    },
+    "jobLocation": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cincinnati",
+        "addressRegion": "OH",
+        "addressCountry": "US"
+      }
+    },
+    "employmentType": ["FULL_TIME", "PART_TIME"],
+    "workHours": "Flexible — full-time, part-time, and overnight shifts available",
+    "experienceRequirements": "No prior experience required"
+  }
+  </script>
+
+  <link rel="canonical" href="https://www.superlaundry24.com/careers">
+  {{ standard_header_includes }}
+
+</head>
+<body>
+
+  {% include "SuperLaundry/partials/header.html" %}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== DESIGN SYSTEM ===== */
+    :root {
+      --green-dark: #1C4A25;
+      --green: #2D7F3C;
+      --green-light: #4A9B58;
+      --green-pale: #EAF4EC;
+      --cream: #F5F1E8;
+      --warm-white: #FAFAF6;
+      --text-dark: #1A2B1C;
+      --text-body: #3C4A3E;
+      --text-muted: #4E6150;
+      --border: #DDD8CE;
+      --shadow-sm: 0 2px 8px rgba(28,74,37,0.08);
+      --shadow-md: 0 4px 20px rgba(28,74,37,0.12);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-body);
+      background: var(--warm-white);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== REVIEW BANNER ===== */
+    .review-banner {
+      background: var(--green-dark);
+      border-bottom: 3px solid var(--green);
+      padding: 10px 24px;
+      text-align: center;
+    }
+    .review-banner p {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+    .review-banner span { color: #A8E6B0; }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      background: var(--green-dark);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 68px;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .nav-logo img {
+      height: 44px;
+      width: auto;
+      mix-blend-mode: screen;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a.active {
+      color: #fff;
+      font-weight: 700;
+    }
+        .nav-cta {
+      background: var(--green) !important;
+      color: #fff !important;
+      padding: 10px 20px !important;
+      border-radius: 6px !important;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--green-light) !important; }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 2px;
+    }
+    .nav-mobile {
+      display: none;
+      background: var(--green-dark);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 12px 24px 20px;
+    }
+    .nav-mobile.open { display: block; }
+    .nav-mobile a {
+      display: block;
+      padding: 12px 0;
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      min-height: 44px;
+    }
+    .nav-mobile a:last-child { border-bottom: none; }
+    .nav-mobile a.active { color: #fff; font-weight: 700; }
+
+    /* ===== PAGE HERO ===== */
+    /* ===== CAREERS HERO (split layout) ===== */
+    .page-hero {
+      background: var(--cream);
+      padding: 64px 0 72px;
+      overflow: hidden;
+    }
+    .page-hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 64px;
+      align-items: center;
+    }
+    .page-hero-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      background: var(--green-pale);
+      padding: 5px 12px;
+      border-radius: 4px;
+      margin-bottom: 18px;
+    }
+    .page-hero h1 {
+      font-size: clamp(30px, 3.8vw, 50px);
+      font-weight: 700;
+      margin-bottom: 18px;
+      line-height: 1.12;
+    }
+    .page-hero-sub {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 480px;
+      margin-bottom: 32px;
+    }
+    .page-hero-ctas {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--green);
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 13px 26px;
+      border-radius: 8px;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 3px 12px rgba(45,127,60,0.3);
+    }
+    .btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--text-dark);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 13px 26px;
+      border-radius: 8px;
+      border: 2px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--green-dark); color: var(--green-dark); }
+    .page-hero-photo {
+      position: relative;
+    }
+    .page-hero-photo img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+    }
+    .hero-photo-badge {
+      position: absolute;
+      bottom: -18px;
+      left: -18px;
+      background: var(--green-dark);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      box-shadow: var(--shadow-md);
+    }
+    .hero-photo-badge strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+    .hero-photo-badge span {
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ===== TRUST BAR ===== */
+    .trust-bar {
+      background: var(--green-dark);
+      padding: 22px 0;
+    }
+    .trust-bar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.88);
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .trust-icon { font-size: 20px; }
+    .trust-divider {
+      width: 1px;
+      height: 24px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* ===== SECTION SHARED ===== */
+    .section-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 12px;
+    }
+
+    /* ===== WHY WORK HERE ===== */
+    .why-section {
+      background: var(--warm-white);
+      padding: 72px 0;
+    }
+    .why-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .why-header h2 {
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .why-header p {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .why-card {
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .why-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .why-card-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--green-pale);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .why-card-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--green-dark);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .why-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-dark);
+    }
+    .why-card p {
+      font-size: 15px;
+      color: var(--text-body);
+      line-height: 1.65;
+    }
+
+    /* ===== OPEN POSITION ===== */
+    .position-section {
+      background: var(--cream);
+      padding: 64px 0;
+    }
+    .position-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .position-header h2 {
+      font-size: clamp(26px, 3.2vw, 38px);
+      font-weight: 800;
+    }
+    .job-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      padding: 44px 48px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .job-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .job-card-title-group h3 {
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 800;
+      margin-bottom: 14px;
+      color: var(--text-dark);
+    }
+    .job-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .job-tag {
+      background: var(--green-pale);
+      color: var(--green-dark);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 100px;
+      letter-spacing: 0.02em;
+    }
+    .job-tag.location {
+      background: var(--cream);
+      color: var(--text-muted);
+    }
+    .job-card-apply-btn {
+      background: var(--green);
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+      white-space: nowrap;
+      min-height: 52px;
+    }
+    .job-card-apply-btn:hover { background: var(--green-dark); color: #fff; }
+    .job-card-apply-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .job-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 28px 0;
+    }
+    .job-desc {
+      font-size: 16px;
+      color: var(--text-body);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .job-requirements h4 {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .job-requirements ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .job-requirements ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      color: var(--text-body);
+      line-height: 1.5;
+    }
+    .job-requirements ul li::before {
+      content: '';
+      display: block;
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      background: var(--green-pale);
+      border-radius: 50%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%231C4A25' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      margin-top: 2px;
+    }
+
+    /* ===== APPLY SECTION ===== */
+    .apply-section {
+      background: var(--warm-white);
+      padding: 72px 0;
+    }
+    .apply-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .apply-header h2 {
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+    .apply-header p {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+    .apply-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* Form */
+    .apply-form {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 40px;
+      box-shadow: var(--shadow-sm);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .form-group {
+      margin-bottom: 22px;
+    }
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 7px;
+      letter-spacing: 0.01em;
+    }
+    .form-group label .optional {
+      font-weight: 400;
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+    .form-group input:not([type="checkbox"]):not([type="radio"]),
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-size: 15px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-dark);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234E6150' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+      cursor: pointer;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(45,127,60,0.12);
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #9aaba0;
+    }
+
+    /* Checkboxes for location */
+    .location-checkboxes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      cursor: pointer;
+    }
+    .checkbox-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0;
+      cursor: pointer;
+      accent-color: var(--green);
+    }
+    .checkbox-item span {
+      font-size: 14px;
+      color: var(--text-body);
+      font-weight: 500;
+    }
+
+    .form-submit {
+      width: 100%;
+      background: var(--green);
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 0 24px;
+      height: 52px;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 8px;
+      letter-spacing: 0.01em;
+    }
+    .form-submit:hover { background: var(--green-dark); }
+
+    .form-followup {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 14px;
+    }
+
+    /* Apply sidebar */
+    .apply-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .sidebar-panel {
+      background: var(--green-dark);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      color: #fff;
+    }
+    .sidebar-panel h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+    .sidebar-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .sidebar-contact-item:last-of-type { margin-bottom: 0; }
+    .sidebar-contact-icon {
+      width: 38px;
+      height: 38px;
+      min-width: 38px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sidebar-contact-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: #A8E6B0;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .sidebar-contact-text {
+      flex: 1;
+    }
+    .sidebar-contact-text span {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 3px;
+    }
+    .sidebar-contact-text a {
+      font-size: 15px;
+      font-weight: 600;
+      color: #A8E6B0;
+      transition: color 0.2s;
+    }
+    .sidebar-contact-text a:hover { color: #fff; }
+    .sidebar-note {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-style: italic;
+    }
+
+    /* ===== NEWSLETTER ===== */
+    .newsletter-section { background: var(--cream); }
+    .newsletter-inner {
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 80px 24px;
+    }
+    .newsletter-inner .section-label { margin-bottom: 10px; }
+    .newsletter-inner h2 { font-size: clamp(24px, 3vw, 34px); margin-bottom: 10px; }
+    .newsletter-inner p { font-size: 15px; color: var(--text-muted); margin-bottom: 28px; }
+    .newsletter-form { display: flex; flex-direction: column; gap: 12px; }
+    .newsletter-form input {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      padding: 14px 18px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .newsletter-form input:focus { border-color: var(--green); }
+    .newsletter-form button {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      background: var(--green);
+      color: #fff;
+      padding: 14px 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .newsletter-form button:hover { background: var(--green-light); }
+    .newsletter-fine { font-size: 12px; color: var(--text-muted); margin-top: 10px; }
+
+    /* ===== QUOTE SECTION ===== */
+    .quote-section {
+      position: relative;
+      background: var(--green-dark);
+      padding: 56px 0;
+      overflow: hidden;
+    }
+    .quote-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .quote-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.22;
+    }
+    .quote-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .quote-mark {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 72px;
+      line-height: 0.6;
+      color: rgba(168,230,176,0.35);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .quote-content blockquote {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.4;
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+    .quote-attribution {
+      font-size: 14px;
+      font-weight: 600;
+      color: #A8E6B0;
+      letter-spacing: 0.06em;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--green-dark);
+      padding: 60px 0 0;
+      border-top: 3px solid var(--green);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+    }
+    .footer-brand img {
+      height: 48px;
+      width: auto;
+      mix-blend-mode: screen;
+      margin-bottom: 16px;
+    }
+    .footer-tagline {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.65;
+      max-width: 240px;
+    }
+    .footer-col h5 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-col ul li a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: #A8E6B0; }
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .footer-contact-item svg {
+      width: 16px;
+      height: 16px;
+      stroke: rgba(255,255,255,0.45);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      min-width: 16px;
+      margin-top: 2px;
+    }
+    .footer-contact-item a, .footer-contact-item span {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.2s;
+    }
+    .footer-contact-item a:hover { color: #A8E6B0; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 20px 0;
+    }
+    .footer-bottom-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-bottom p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+      }
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .apply-layout {
+        grid-template-columns: 1fr;
+      }
+      .apply-sidebar {
+        order: 2;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+      .job-card { padding: 28px 24px; }
+      .job-card-header {
+        flex-direction: column;
+        gap: 16px;
+      }
+      .job-card-apply-btn { width: 100%; justify-content: center; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      .apply-form { padding: 28px 24px; }
+      .location-checkboxes { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      .page-hero-inner { grid-template-columns: 1fr; }
+      .page-hero-photo { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .why-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .location-checkboxes { grid-template-columns: 1fr; }
+    }
+  </style>
+
+
+  <!-- ===== CAREERS HERO ===== -->
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-inner">
+        <div class="page-hero-content">
+          <div class="page-hero-label">Now Hiring</div>
+          <h1>Do Good Work.<br>With Good People.</h1>
+          <p class="page-hero-sub">Super Laundry is more than a laundromat — it's a neighborhood staple. Join a team that genuinely shows up for the community.</p>
+          <div class="page-hero-ctas">
+            <a href="#apply" class="btn-primary">Apply Now &rarr;</a>
+            <a href="#positions" class="btn-outline">See Open Positions</a>
+          </div>
+        </div>
+        <div class="page-hero-photo">
+          <img src="/hubfs/244988351/images/north-college-int.webp" alt="Inside a Super Laundry Cincinnati location" loading="lazy">
+          <div class="hero-photo-badge">
+            <strong>6 Locations</strong>
+            <span>Now hiring across Cincinnati</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="container">
+      <div class="trust-bar-inner">
+        <div class="trust-item"><span class="trust-icon">📍</span> 6 Cincinnati locations</div>
+        <div class="trust-divider"></div>
+        <div class="trust-item"><span class="trust-icon">💵</span> Competitive pay</div>
+        <div class="trust-divider"></div>
+        <div class="trust-item"><span class="trust-icon">🕐</span> Flexible scheduling</div>
+        <div class="trust-divider"></div>
+        <div class="trust-item"><span class="trust-icon">🌱</span> Room to grow</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== WHY WORK HERE ===== -->
+  <section class="why-section" id="why">
+    <div class="container">
+      <div class="why-header">
+        <div class="section-label">Why Super Laundry</div>
+        <h2>A neighborhood job that fits your life.</h2>
+      </div>
+      <div class="why-grid">
+
+        <!-- Flexible Hours -->
+        <div class="why-card">
+          <div class="why-card-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <h3>Flexible Hours</h3>
+          <p>Full-time, part-time, and overnight shifts available. We work around your life.</p>
+        </div>
+
+        <!-- Real Community -->
+        <div class="why-card">
+          <div class="why-card-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3>Real Community</h3>
+          <p>You're not just doing laundry — you're a familiar, trusted face in the neighborhood.</p>
+        </div>
+
+        <!-- Growth Opportunities -->
+        <div class="why-card">
+          <div class="why-card-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+              <polyline points="17 6 23 6 23 12"/>
+            </svg>
+          </div>
+          <h3>Growth Opportunities</h3>
+          <p>Team members who show initiative have the opportunity to take on leadership roles.</p>
+        </div>
+
+        <!-- Consistent Pay -->
+        <div class="why-card">
+          <div class="why-card-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <line x1="12" y1="1" x2="12" y2="23"/>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+          <h3>Consistent Pay</h3>
+          <p>Competitive hourly wages, paid on time, every time.</p>
+        </div>
+
+        <!-- Safe Environment -->
+        <div class="why-card">
+          <div class="why-card-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3>Safe Environment</h3>
+          <p>Modern equipment, well-lit spaces, and a team that takes pride in keeping each location spotless.</p>
+        </div>
+
+        <!-- Inclusive Hiring -->
+        <div class="why-card">
+          <div class="why-card-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <h3>Inclusive Hiring</h3>
+          <p>No prior experience required — just a positive attitude and a willingness to show up.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== OPEN POSITION ===== -->
+  <section class="position-section" id="positions">
+    <div class="container">
+      <div class="position-header">
+        <div class="section-label">Current Opening</div>
+        <h2>One role, six neighborhoods.</h2>
+      </div>
+
+      <div class="job-card">
+        <div class="job-card-header">
+          <div class="job-card-title-group">
+            <h3>Laundromat Team Member</h3>
+            <div class="job-tags">
+              <span class="job-tag">Full-time</span>
+              <span class="job-tag">Part-time</span>
+              <span class="job-tag">Overnight</span>
+              <span class="job-tag location">
+                <svg viewBox="0 0 24 24" width="12" height="12" style="display:inline;vertical-align:-1px;stroke:#4E6150;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-right:4px;" aria-hidden="true">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                6 Cincinnati Locations
+              </span>
+            </div>
+          </div>
+          <a href="#apply" class="job-card-apply-btn">
+            Apply Now
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        </div>
+
+        <hr class="job-divider">
+
+        <p class="job-desc">
+          As a Laundromat Team Member, you'll be the heart of your location — helping customers navigate our self-service machines, assisting with wash-dry-fold drop-offs, keeping the facility clean and welcoming, and being a friendly, familiar face in the neighborhood. No two days are exactly alike, and the work you do genuinely matters to the people you serve.
+        </p>
+
+        <div class="job-requirements">
+          <h4>What we're looking for</h4>
+          <ul>
+            <li>Dependable and punctual</li>
+            <li>Comfortable working independently and with a team</li>
+            <li>Good with people — friendly, approachable</li>
+            <li>No prior laundry experience required</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== APPLY SECTION ===== -->
+  <section class="apply-section" id="apply">
+    <div class="container">
+      <div class="apply-header">
+        <div class="section-label">How to Apply</div>
+        <h2>No resume required.</h2>
+        <p>Just let us know who you are, how to reach you, and which location(s) interest you. Takes less than 2 minutes.</p>
+      </div>
+
+      <div class="apply-layout">
+        <!-- Form -->
+        <div class="apply-form">
+          <script charset="utf-8" type="text/javascript" src="//js-na2.hsforms.net/forms/embed/v2.js"></script>
+          <script>
+            hbspt.forms.create({
+              portalId: "244988351",
+              formId: "1ab3a65e-7434-4395-ac8b-c8d1ecf3174d",
+              region: "na2"
+            });
+          </script>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="apply-sidebar">
+          <div class="sidebar-panel">
+            <h4>Or reach us directly</h4>
+
+            <div class="sidebar-contact-item">
+              <div class="sidebar-contact-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div class="sidebar-contact-text">
+                <span>Email</span>
+                <a href="mailto:info@superlaundry24.com">info@superlaundry24.com</a>
+              </div>
+            </div>
+
+            <div class="sidebar-contact-item">
+              <div class="sidebar-contact-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.29h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.03-.97a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </div>
+              <div class="sidebar-contact-text">
+                <span>Phone</span>
+                <a href="tel:5138735939">(513) 873-5939</a>
+              </div>
+            </div>
+
+            <p class="sidebar-note">We're a local team — you'll hear back from a real person.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUOTE SECTION ===== -->
+  <section class="quote-section">
+    <div class="quote-bg">
+      <img src="/hubfs/244988351/images/north-college-int2.webp" alt="" role="presentation" loading="lazy">
+    </div>
+    <div class="quote-content">
+      <span class="quote-mark">&ldquo;</span>
+      <blockquote>You're not just doing laundry — you're a familiar, trusted face in the neighborhood.</blockquote>
+      <p class="quote-attribution">— Super Laundry Cincinnati</p>
+    </div>
+  </section>
+
+    <!-- NEWSLETTER -->
+  <section class="section newsletter-section">
+    <div class="container">
+      <div class="newsletter-inner">
+        <p class="section-label">Stay Connected</p>
+        <h2>News, Deals &amp; Updates</h2>
+        <p>Be the first to hear about new locations, promotions, and community events like Laundry Love days.</p>
+        <form class="newsletter-form" id="newsletter-signup">
+          <input type="text" placeholder="Your name" name="firstname">
+          <input type="email" placeholder="Your email address" name="email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+        <div id="newsletter-thank-you" style="display:none; color:#1C4A25; font-size:16px; font-weight:600; padding:12px 0;">Thanks for subscribing!</div>
+        <p class="newsletter-fine">No spam. You can unsubscribe any time.</p>
+      </div>
+    </div>
+  </section>
+
+  {% include "SuperLaundry/partials/footer.html" %}
+
+  <script>
+    // Mobile nav toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMobile = document.getElementById('nav-mobile');
+    hamburger.addEventListener('click', function() {
+      const isOpen = navMobile.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Job application form — intercept submit, show thank you in place
+    var jobForm = document.getElementById('job-application');
+    if (jobForm) {
+      jobForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var name = jobForm.querySelector('[name="name"]');
+        var email = jobForm.querySelector('[name="email"]');
+        if (!name || !name.value.trim()) { name && name.focus(); return; }
+        if (!email || !email.value.trim()) { email && email.focus(); return; }
+        jobForm.style.display = 'none';
+        document.getElementById('careers-thank-you').style.display = 'block';
+      });
+    }
+
+    // Newsletter form — intercept submit, show thank you in place
+    var newsletterForm = document.getElementById('newsletter-signup');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var emailInput = newsletterForm.querySelector('[name="email"]');
+        if (!emailInput || !emailInput.value.trim()) { emailInput && emailInput.focus(); return; }
+        newsletterForm.style.display = 'none';
+        document.getElementById('newsletter-thank-you').style.display = 'block';
+      });
+    }
+
+    // Smooth scroll for Apply Now
+    document.querySelectorAll('a[href="#apply"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.getElementById('apply');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Focus first form input for accessibility
+          const firstInput = target.querySelector('input, select, textarea');
+          if (firstInput) setTimeout(function() { firstInput.focus(); }, 500);
+        }
+      });
+    });
+  </script>
+
+  {{ standard_footer_includes }}
+
+</body>
+</html>

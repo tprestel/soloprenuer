@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Presence Audit — Super Laundry Cincinnati</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #2D7F3C;
+    --green-dark: #1C4A25;
+    --green-light: #EBF4EC;
+    --green-mid: #3d9e4e;
+    --page: #F8F7F4;
+    --white: #FFFFFF;
+    --text: #1A1A1A;
+    --text-muted: #6B7280;
+    --border: #E2E0DB;
+    --red: #DC2626;
+    --red-light: #FEF2F2;
+    --amber: #D97706;
+    --amber-light: #FFFBEB;
+    --score-green: #16A34A;
+    --score-green-light: #F0FDF4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--page);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  .syne { font-family: 'Lora', serif; }
+
+  /* LAYOUT */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--green-dark);
+    color: white;
+    padding: 48px 0 40px;
+  }
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .header-logo {
+    font-family: 'Lora', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 12px;
+  }
+  .header-title {
+    font-family: 'Lora', serif;
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.15;
+    color: white;
+  }
+  .header-title span {
+    color: #7DD88A;
+  }
+  .header-meta {
+    text-align: right;
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    font-family: 'IBM Plex Mono', monospace;
+    line-height: 1.8;
+    flex-shrink: 0;
+  }
+
+  /* OPPORTUNITY BAND */
+  .opportunity-band {
+    background: var(--green);
+    color: white;
+    padding: 36px 0;
+  }
+  .opportunity-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .opp-stat {
+    flex-shrink: 0;
+    text-align: center;
+  }
+  .opp-stat-number {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 1;
+    color: white;
+  }
+  .opp-stat-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    margin-top: 4px;
+  }
+  .opp-divider {
+    width: 1px;
+    height: 56px;
+    background: rgba(255,255,255,0.3);
+    flex-shrink: 0;
+  }
+  .opp-text {
+    font-size: 16px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.92);
+  }
+  .opp-text strong {
+    color: white;
+    font-weight: 700;
+  }
+
+  /* SECTION STRUCTURE */
+  .section {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .section:last-child { border-bottom: none; }
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--green);
+    flex-shrink: 0;
+  }
+  .section-heading {
+    font-family: 'Lora', serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .section-subhead {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    max-width: 620px;
+  }
+
+  /* SCORE CARDS */
+  .score-grid {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .score-card {
+    flex: 1;
+    min-width: 140px;
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .score-card-bar {
+    height: 5px;
+    width: 100%;
+  }
+  .score-card-bar.red { background: var(--red); }
+  .score-card-bar.amber { background: var(--amber); }
+  .score-card-bar.green { background: var(--score-green); }
+  .score-card-body {
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .score-card-category {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    line-height: 1.4;
+    text-align: center;
+    min-height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .score-card-number {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .score-card-number .denom {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-muted);
+    vertical-align: baseline;
+  }
+  .score-card-number.red { color: var(--red); }
+  .score-card-number.amber { color: var(--amber); }
+  .score-card-number.green { color: var(--score-green); }
+  .score-card-note {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.45;
+    flex: 1;
+    text-align: center;
+  }
+
+  /* COMPETITIVE TABLE */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 4px;
+  }
+  .comp-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--border);
+    background: transparent;
+  }
+  .comp-table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .comp-table tr.highlight td {
+    background: var(--green-light);
+    font-weight: 600;
+  }
+  .comp-table tr.highlight td:first-child {
+    border-left: 3px solid var(--green);
+  }
+  .stars {
+    color: #F59E0B;
+    font-size: 13px;
+    letter-spacing: -1px;
+  }
+  .tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .tag-green { background: var(--green-light); color: var(--green-dark); }
+  .tag-amber { background: var(--amber-light); color: #92400E; }
+
+  /* GBP CATEGORY */
+  .gbp-current {
+    background: var(--green-light);
+    border: 1.5px solid #B7DFC0;
+    border-radius: 6px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .gbp-current-check {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .gbp-current-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 3px;
+  }
+  .gbp-current-value {
+    font-family: 'Lora', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--green-dark);
+  }
+  .gbp-suggestion {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-left: 3px solid var(--amber);
+    border-radius: 6px;
+    padding: 16px 20px;
+  }
+  .gbp-suggestion-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 6px;
+  }
+  .gbp-suggestion p {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* FINDINGS */
+  .finding {
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .finding:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  .finding-number {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .finding-title {
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .finding-body {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+  .callout {
+    background: #FEF2F2;
+    border-left: 3px solid var(--red);
+    border-radius: 0 4px 4px 0;
+    padding: 16px 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: #991B1B;
+    line-height: 1.6;
+  }
+  .callout-green {
+    background: var(--green-light);
+    border-left: 3px solid var(--green);
+    border-radius: 0 4px 4px 0;
+    padding: 16px 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--green-dark);
+    line-height: 1.6;
+  }
+
+  /* KEYWORD TABLE */
+  .kw-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .kw-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--border);
+  }
+  .kw-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .kw-table tr:last-child td { border-bottom: none; }
+  .kw-vol {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .kw-rank {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--red);
+  }
+  .kw-rank.ranking {
+    color: var(--amber);
+  }
+  .comp-level {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+  .comp-level.low { background: var(--score-green-light); color: var(--score-green); }
+  .comp-level.medium { background: var(--amber-light); color: #92400E; }
+  .comp-level.high { background: #FEF2F2; color: var(--red); }
+  .kw-section-header td {
+    background: var(--page);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green);
+    padding: 10px 12px 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .kw-table tbody tr:hover td { background: #FAFAF8; }
+
+  /* QUICK WIN */
+  .quick-win {
+    background: var(--green-dark);
+    color: white;
+    padding: 48px 0;
+  }
+  .quick-win-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .quick-win-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #7DD88A;
+    margin-bottom: 8px;
+  }
+  .quick-win-title {
+    font-family: 'Lora', serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 6px;
+  }
+  .quick-win-subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 28px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .quick-win-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 640px;
+  }
+  .qw-step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .qw-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px;
+    font-weight: 800;
+    color: #7DD88A;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 28px;
+    padding-top: 2px;
+  }
+  .qw-text {
+    font-size: 15px;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.55;
+  }
+  .qw-text strong {
+    color: white;
+  }
+
+  /* VISION */
+  .vision-box {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-left: 4px solid var(--green);
+    border-radius: 0 6px 6px 0;
+    padding: 24px 28px;
+    margin-top: 4px;
+  }
+  .vision-box p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .vision-box p + p {
+    margin-top: 12px;
+  }
+
+  /* CTA */
+  .cta-section {
+    background: var(--green-dark);
+    color: white;
+    padding: 56px 0;
+  }
+  .cta-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+    text-align: center;
+  }
+  .cta-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #7DD88A;
+    margin-bottom: 16px;
+  }
+  .cta-heading {
+    font-family: 'Lora', serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .cta-body {
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    max-width: 520px;
+    margin: 0 auto 28px;
+    line-height: 1.65;
+  }
+  .cta-button {
+    display: inline-block;
+    background: var(--green-mid);
+    color: white;
+    font-family: 'Lora', serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-bottom: 28px;
+  }
+  .cta-contact {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.9;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: #111D13;
+    padding: 20px 24px;
+    text-align: center;
+  }
+  .footer p {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* RESPONSIVE */
+  @media screen and (max-width: 640px) {
+    .header-inner { flex-direction: column; align-items: flex-start; }
+    .header-meta { text-align: left; }
+    .header-title { font-size: 24px; }
+    .opportunity-inner { flex-direction: column; gap: 20px; }
+    .opp-divider { width: 40px; height: 1px; }
+    .opp-stat-number { font-size: 42px; }
+    .score-grid { flex-direction: column; }
+    .score-card { flex-direction: row; min-width: unset; }
+    .score-card-bar { width: 5px; height: auto; min-height: 60px; }
+    .score-card-body { flex-direction: row; align-items: center; gap: 16px; }
+    .score-card-number { font-size: 28px; margin-bottom: 0; }
+    .comp-table { font-size: 13px; }
+    .cta-heading { font-size: 22px; }
+  }
+
+  @page {
+    margin: 0;
+  }
+
+  @media print {
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    html, body {
+      height: auto !important;
+      overflow: visible !important;
+      background: #F8F7F4 !important;
+    }
+    body {
+      padding: 12mm 14mm !important;
+    }
+    /* Force all 5 score cards onto one row — prevents split and blank-space issue */
+    .score-grid {
+      flex-wrap: nowrap !important;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .score-card {
+      min-width: 0 !important;
+      flex: 1 1 0 !important;
+    }
+    .gap-item {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div>
+      <div class="header-logo">Digital Presence Audit</div>
+      <h1 class="header-title">Super Laundry<br><span>Cincinnati</span></h1>
+    </div>
+    <div class="header-meta">
+      Prepared by [Your Name]<br>
+      March 26, 2026<br>
+      Confidential
+    </div>
+  </div>
+</header>
+
+<!-- OPPORTUNITY BAND -->
+<div class="opportunity-band">
+  <div class="opportunity-inner">
+    <div class="opp-stat">
+      <div class="opp-stat-number mono">25K+</div>
+      <div class="opp-stat-label">Monthly Searches</div>
+    </div>
+    <div class="opp-divider"></div>
+    <p class="opp-text">
+      Every month, more than <strong>25,000 people</strong> search for laundry services in Cincinnati — "wash and fold near me," "24 hour laundromat," "drop off laundry." Super Laundry has 6 locations, 24/7 hours, and every service those searchers are looking for. <strong>They just can't find you yet.</strong>
+    </p>
+  </div>
+</div>
+
+<!-- SCORES -->
+<div class="section">
+  <div class="container">
+    <div class="section-label">01 · Score Summary</div>
+    <h2 class="section-heading">How You Show Up Today</h2>
+    <p class="section-subhead">Five areas that determine whether customers find you online — or find your competitors instead.</p>
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="score-card-bar red"></div>
+        <div class="score-card-body">
+          <div class="score-card-category">Website</div>
+          <div class="score-card-number red">3<span class="denom">/10</span></div>
+          <div class="score-card-note">Zero H1 tags, COVID-era copy still live, empty schema, 2 of 6 locations missing</div>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-card-bar amber"></div>
+        <div class="score-card-body">
+          <div class="score-card-category">Google Business Profile</div>
+          <div class="score-card-number amber">5<span class="denom">/10</span></div>
+          <div class="score-card-note">All listed as Laundromat but 4 different name formats across 6 locations</div>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-card-bar red"></div>
+        <div class="score-card-body">
+          <div class="score-card-category">Traditional SEO</div>
+          <div class="score-card-number red">2<span class="denom">/10</span></div>
+          <div class="score-card-note">Brand-only rankings; invisible for every service and location search</div>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-card-bar red"></div>
+        <div class="score-card-body">
+          <div class="score-card-category">AI Search</div>
+          <div class="score-card-number red">1<span class="denom">/10</span></div>
+          <div class="score-card-note">Every AI crawler blocked by default — invisible on ChatGPT, Perplexity, and Google AI</div>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-card-bar red"></div>
+        <div class="score-card-body">
+          <div class="score-card-category">Social</div>
+          <div class="score-card-number red">3<span class="denom">/10</span></div>
+          <div class="score-card-note">130 Facebook followers, sporadic posting, no Instagram presence found</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPETITIVE CONTEXT -->
+<div class="section">
+  <div class="container">
+    <div class="section-label">02 · Competitive Context</div>
+    <h2 class="section-heading">How the Local Pack Looks</h2>
+    <p class="section-subhead">Super Laundry has more locations and more services than either competitor. The problem is purely digital — their ratings and review volume don't reflect it yet.</p>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Business</th>
+          <th>Rating</th>
+          <th>Reviews</th>
+          <th>Category</th>
+          <th>Web Presence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td>Super Laundry (Bond Hill)</td>
+          <td><span class="stars">★★★★</span> <span class="mono" style="font-size:13px">4.0</span></td>
+          <td class="mono">482</td>
+          <td>Laundromat</td>
+          <td><span class="tag tag-amber">Outdated</span></td>
+        </tr>
+        <tr class="highlight">
+          <td>Super Laundry (Avondale)</td>
+          <td><span class="stars">★★★★</span> <span class="mono" style="font-size:13px">4.2</span></td>
+          <td class="mono">218</td>
+          <td>Laundromat</td>
+          <td><span class="tag tag-amber">Outdated</span></td>
+        </tr>
+        <tr>
+          <td>Laundromax</td>
+          <td><span class="stars">★★★★★</span> <span class="mono" style="font-size:13px">4.9</span></td>
+          <td class="mono">668</td>
+          <td>Laundromat</td>
+          <td><span class="tag tag-green">Strong</span></td>
+        </tr>
+        <tr>
+          <td>City Limits (Clifton)</td>
+          <td><span class="stars">★★★★</span> <span class="mono" style="font-size:13px">4.0</span></td>
+          <td class="mono">551</td>
+          <td>Laundromat</td>
+          <td><span class="tag tag-green">Strong</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px;color:var(--text-muted);margin-top:12px;font-style:italic">Super Laundry has 6 locations — the above shows only 2 of them. Combined reviews across all locations exceed 1,700.</p>
+  </div>
+</div>
+
+<!-- GBP CATEGORIES -->
+<div class="section">
+  <div class="container">
+    <div class="section-label">03 · Google Business Profile Category</div>
+    <h2 class="section-heading">You're in the Right Category</h2>
+    <p class="section-subhead">Unlike many businesses we audit, Super Laundry's primary Google Business Profile category is accurate — but there's an opportunity to go further.</p>
+    <div class="gbp-current">
+      <div class="gbp-current-check">✓</div>
+      <div>
+        <div class="gbp-current-label">Current Primary Category</div>
+        <div class="gbp-current-value">Laundromat</div>
+      </div>
+    </div>
+    <div class="gbp-suggestion">
+      <div class="gbp-suggestion-label">Opportunity — Secondary Category</div>
+      <p>Adding <strong>"Laundry service"</strong> as a secondary Google Business Profile category (a confirmed category in Google's list) would make your listings appear for service-oriented searches like "laundry service Cincinnati" — capturing drop-off and pickup customers who aren't necessarily searching for a laundromat by name. This takes 2 minutes per listing.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FINDINGS -->
+<div class="section">
+  <div class="container">
+    <div class="section-label">04 · What We Found</div>
+    <h2 class="section-heading">The Three Gaps That Matter</h2>
+    <p class="section-subhead">These aren't technical complaints — they're the reasons customers who are looking for you right now aren't finding you.</p>
+
+    <div class="finding">
+      <div class="finding-number">Finding 01</div>
+      <h3 class="finding-title">AI is asking about Cincinnati laundromats — and can't mention you</h3>
+      <p class="finding-body">More and more people ask ChatGPT, Perplexity, and Google's AI Overview for local recommendations before they ever do a traditional search. When someone asks "best 24-hour laundromat in Cincinnati," Super Laundry doesn't come up — not because you're unknown, but because the current website has actively blocked every AI crawler from reading it. This isn't a content problem. It's a single platform setting.</p>
+      <div class="callout">robots.txt (superlaundry24.com) — Disallow: GPTBot, ClaudeBot, anthropic-ai, Google-Extended, PerplexityBot, Amazonbot, FacebookBot + 15 more AI crawlers</div>
+    </div>
+
+    <div class="finding">
+      <div class="finding-number">Finding 02</div>
+      <h3 class="finding-title">Google knows your name — but not what you do or where you are</h3>
+      <p class="finding-body">The current website ranks #1 for "super laundry" — your brand name. But for every search that matters ("wash and fold near me," "laundromat open 24 hours," "drop off laundry Cincinnati"), you're essentially invisible. The reason: zero H1 tags across the entire site, a LocalBusiness schema record with no address, no phone number, and no hours, and a homepage that still mentions "Coronavirus concerns" as current news. Google needs clear signals to know what a site is about. Right now, those signals aren't there.</p>
+      <div class="callout">LocalBusiness schema on superlaundry24.com → address: "" (empty) · telephone: (none) · openingHours: (none)</div>
+    </div>
+
+    <div class="finding">
+      <div class="finding-number">Finding 03</div>
+      <h3 class="finding-title">Six locations, four different names — Google doesn't see a chain</h3>
+      <p class="finding-body">When Google's local algorithm evaluates a multi-location business, consistent naming across Google Business Profile listings is a key signal that these are part of the same brand. Right now, your six locations appear under four different name formats — which means Google treats them as loosely related independents rather than a unified 6-location chain. That fragmentation reduces the brand authority that helps individual listings rank higher in local packs.</p>
+      <div class="callout">
+        "Super Laundry" (Bond Hill) · "Super Laundry-Avondale" · "Super Laundry North College Hill"<br>
+        "Westwood Super Laundry" · "Super Laundry" (Allison — same name as Bond Hill)
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KEYWORDS -->
+<div class="section">
+  <div class="container">
+    <div class="section-label">05 · Keyword Opportunity</div>
+    <h2 class="section-heading">Searches You Should Be Winning</h2>
+    <p class="section-subhead">Every keyword below represents real customers actively looking for what Super Laundry already offers. Current rank is what shows up when we searched today.</p>
+    <table class="kw-table">
+      <thead>
+        <tr>
+          <th>Keyword</th>
+          <th>Monthly Volume</th>
+          <th>Current Rank</th>
+          <th>Competition</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="kw-section-header">
+          <td colspan="4">Near-Me Intent — Highest Priority</td>
+        </tr>
+        <tr>
+          <td>wash and fold near me</td>
+          <td><span class="kw-vol">14,800</span></td>
+          <td><span class="kw-rank">Not ranking</span></td>
+          <td><span class="comp-level medium">Medium</span></td>
+        </tr>
+        <tr>
+          <td>24 hour laundry near me</td>
+          <td><span class="kw-vol">6,600</span></td>
+          <td><span class="kw-rank kw-rank ranking">#63</span></td>
+          <td><span class="comp-level low">Low</span></td>
+        </tr>
+        <tr>
+          <td>drop off laundry near me</td>
+          <td><span class="kw-vol">4,400</span></td>
+          <td><span class="kw-rank">Not ranking</span></td>
+          <td><span class="comp-level medium">Medium</span></td>
+        </tr>
+        <tr>
+          <td>laundromat open near me</td>
+          <td><span class="kw-vol">2,900</span></td>
+          <td><span class="kw-rank">Not ranking</span></td>
+          <td><span class="comp-level low">Low</span></td>
+        </tr>
+        <tr>
+          <td>laundry pickup and delivery near me</td>
+          <td><span class="kw-vol">1,300</span></td>
+          <td><span class="kw-rank">Not ranking</span></td>
+          <td><span class="comp-level high">High</span></td>
+        </tr>
+        <tr class="kw-section-header">
+          <td colspan="4">Cincinnati-Specific</td>
+        </tr>
+        <tr>
+          <td>laundry service cincinnati</td>
+          <td><span class="kw-vol">320</span></td>
+          <td><span class="kw-rank">Not ranking</span></td>
+          <td><span class="comp-level high">High</span></td>
+        </tr>
+        <tr>
+          <td>laundromat cincinnati</td>
+          <td><span class="kw-vol">260</span></td>
+          <td><span class="kw-rank">Not ranking</span></td>
+          <td><span class="comp-level medium">Medium</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- QUICK WIN -->
+<div class="quick-win">
+  <div class="quick-win-inner">
+    <div class="quick-win-label">Quick Win</div>
+    <h2 class="quick-win-title">Unblock AI Search in 5 Minutes</h2>
+    <div class="quick-win-subtitle">Takes 5 minutes · No developer needed · Immediate impact</div>
+    <div class="quick-win-steps">
+      <div class="qw-step">
+        <div class="qw-num">1</div>
+        <div class="qw-text">Log in to your <strong>Squarespace account</strong> at squarespace.com</div>
+      </div>
+      <div class="qw-step">
+        <div class="qw-num">2</div>
+        <div class="qw-text">Go to <strong>Settings → SEO → Crawler Access</strong> (or search "crawlers" in the settings search bar)</div>
+      </div>
+      <div class="qw-step">
+        <div class="qw-num">3</div>
+        <div class="qw-text">Find the blocked AI crawlers list — uncheck <strong>GPTBot, Google-Extended, ClaudeBot,</strong> and <strong>PerplexityBot</strong></div>
+      </div>
+      <div class="qw-step">
+        <div class="qw-num">4</div>
+        <div class="qw-text"><strong>Save.</strong> Your site is now readable by every major AI search engine — ChatGPT, Perplexity, Google AI Overviews, and more</div>
+      </div>
+      <div class="qw-step">
+        <div class="qw-num">5</div>
+        <div class="qw-text">Do the same check on day one of your new HubSpot site launch — <strong>make sure these are never blocked again</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VISION -->
+<div class="section">
+  <div class="container">
+    <div class="section-label">06 · What Good Looks Like</div>
+    <h2 class="section-heading">Where Super Laundry Could Be</h2>
+    <div class="vision-box">
+      <p>A customer in Westwood asks their phone "where can I drop off laundry near me?" — and Super Laundry Westwood appears at the top of the local pack, with a listing that says exactly what you do, your 24/7 hours, and a direct link to book drop-off. Another customer asks ChatGPT for the best laundromat in Cincinnati and gets a paragraph recommending Super Laundry by name, citing your 6 locations and Best of 2025 award.</p>
+      <p>With the new HubSpot site already built, Google Business Profile listings cleaned up, and AI crawlers unblocked, that version of Super Laundry is close. The infrastructure is there — it just needs to be connected.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-label">Next Steps</div>
+    <h2 class="cta-heading">Let's Walk Through This Together</h2>
+    <p class="cta-body">I'd love to take 20 minutes to go through these findings with you and talk about what fixing them would look like for Super Laundry — starting with the quick wins and working toward the bigger opportunities.</p>
+    <a href="#" class="cta-button">Book a 20-Minute Call</a>
+    <div class="cta-contact">
+      [Your Name] &nbsp;·&nbsp; [Phone] &nbsp;·&nbsp; [Email]
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>Super Laundry Cincinnati · Digital Presence Audit · March 2026 · Prepared by [Your Name] · Confidential</p>
+</footer>
+
+</body>
+</html>

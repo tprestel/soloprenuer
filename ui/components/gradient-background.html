@@ -1,0 +1,144 @@
+<!--
+  GRADIENT BACKGROUND — Reusable Component
+  ──────────────────────────────────────────
+  Smoothly animating gradient that morphs colors continuously.
+
+  TO CUSTOMIZE:
+  - Edit the @keyframes gb-flow color stops to change the palette
+  - Edit the @property initial-value colors to set the starting state
+  - Change animation duration on .gb-bg (default 16s)
+  - Add class="with-overlay" for a dark overlay
+  - Set --gb-overlay-opacity for overlay strength (default 0.3)
+  - Place any content inside .gb-content
+
+  HOW IT WORKS:
+  CSS @property registers --gb-c1, --gb-c2, --gb-c3, and --gb-angle
+  as typed values the browser can interpolate. The keyframes smoothly
+  morph all three color stops AND the angle simultaneously — no JS
+  needed, no slideshow snapping.
+
+  BROWSER SUPPORT:
+  @property is supported in Chrome 85+, Edge 85+, Safari 15.4+,
+  Firefox 128+. Covers ~95% of users. Older browsers see a static
+  gradient (the initial values).
+-->
+
+<style>
+  /* ─── Animatable gradient properties ────────────────── */
+  @property --gb-c1 {
+    syntax: '<color>';
+    initial-value: #2d1b69;
+    inherits: false;
+  }
+  @property --gb-c2 {
+    syntax: '<color>';
+    initial-value: #11998e;
+    inherits: false;
+  }
+  @property --gb-c3 {
+    syntax: '<color>';
+    initial-value: #4a00e0;
+    inherits: false;
+  }
+  @property --gb-angle {
+    syntax: '<angle>';
+    initial-value: 135deg;
+    inherits: false;
+  }
+
+  .gb {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  .gb-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(var(--gb-angle), var(--gb-c1) 0%, var(--gb-c2) 50%, var(--gb-c3) 100%);
+    animation: gb-flow 16s ease-in-out infinite;
+  }
+
+  @keyframes gb-flow {
+    0% {
+      --gb-c1: #2d1b69;
+      --gb-c2: #11998e;
+      --gb-c3: #4a00e0;
+      --gb-angle: 135deg;
+    }
+    20% {
+      --gb-c1: #8e2de2;
+      --gb-c2: #4a00e0;
+      --gb-c3: #0f3460;
+      --gb-angle: 180deg;
+    }
+    40% {
+      --gb-c1: #0f3460;
+      --gb-c2: #e94560;
+      --gb-c3: #134e5e;
+      --gb-angle: 225deg;
+    }
+    60% {
+      --gb-c1: #134e5e;
+      --gb-c2: #71b280;
+      --gb-c3: #2d1b69;
+      --gb-angle: 270deg;
+    }
+    80% {
+      --gb-c1: #4a00e0;
+      --gb-c2: #2d1b69;
+      --gb-c3: #11998e;
+      --gb-angle: 315deg;
+    }
+    100% {
+      --gb-c1: #2d1b69;
+      --gb-c2: #11998e;
+      --gb-c3: #4a00e0;
+      --gb-angle: 135deg;
+    }
+  }
+
+  /* Optional dark overlay */
+  .gb-overlay {
+    display: none;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: #000;
+    opacity: var(--gb-overlay-opacity, 0.3);
+    pointer-events: none;
+  }
+
+  .gb.with-overlay .gb-overlay {
+    display: block;
+  }
+
+  .gb-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+  }
+</style>
+
+<!-- ─── MARKUP ──────────────────────────────────────────── -->
+
+<section class="gb">
+  <div class="gb-bg"></div>
+  <div class="gb-overlay"></div>
+
+  <div class="gb-content">
+    <div style="text-align:center; color:#fff;">
+      <h1 style="font-size:clamp(36px,6vw,60px); font-weight:800; margin-bottom:16px;">
+        Animated Gradient Background
+      </h1>
+    </div>
+  </div>
+</section>
+
+<!-- No JS needed — CSS @property handles smooth gradient interpolation -->

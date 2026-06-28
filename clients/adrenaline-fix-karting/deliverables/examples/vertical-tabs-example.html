@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vertical Tabs — AFK Example</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Saira:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      overflow-y: scroll;
+    }
+
+    body {
+      font-family: 'Saira', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #ffffff;
+      background: #111111;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Chakra Petch', sans-serif;
+    }
+
+    /* ─── Vertical Tabs Component ───────────────────────── */
+    .vt {
+      width: 100%;
+      padding: 80px 0;
+      --vt-duration: 5000;
+      --vt-accent: #F25B19;
+      overflow: hidden;
+    }
+
+    .vt-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .vt-left {
+      display: flex;
+      flex-direction: column;
+      padding-top: 8px;
+    }
+
+    .vt-heading {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .vt-subhead {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: #F25B19;
+      margin-bottom: 24px;
+      margin-left: 2px;
+    }
+
+    .vt-tabs {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .vt-tab {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 14px 0;
+      border: none;
+      background: none;
+      text-align: left;
+      cursor: pointer;
+      font-family: 'Saira', sans-serif;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      transition: color 0.4s ease;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .vt-tab:first-child {
+      border-top: none;
+    }
+
+    .vt-tab.active {
+      color: #fff;
+    }
+
+    .vt-tab:not(.active):hover {
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* Progress bar */
+    .vt-progress-track {
+      position: absolute;
+      left: -24px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .vt-progress-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0%;
+      background: var(--vt-accent);
+    }
+
+    .vt-tab.active .vt-progress-fill {
+      animation: vt-fill calc(var(--vt-duration) * 1ms) linear forwards;
+    }
+
+    .vt-tab.active.paused .vt-progress-fill {
+      animation-play-state: paused;
+    }
+
+    @keyframes vt-fill {
+      from { height: 0%; }
+      to { height: 100%; }
+    }
+
+    .vt-tab-num {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      opacity: 0.4;
+      margin-top: 8px;
+      font-variant-numeric: tabular-nums;
+      color: #F25B19;
+      flex-shrink: 0;
+    }
+
+    .vt-tab-body {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .vt-tab-title {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+    }
+
+    .vt-tab-desc {
+      font-size: 14px;
+      line-height: 1.55;
+      color: #aaaaaa;
+      max-width: 380px;
+      opacity: 0;
+      visibility: hidden;
+      height: 0;
+      overflow: hidden;
+      transition: opacity 0.3s ease;
+    }
+
+    .vt-tab.active .vt-tab-desc {
+      opacity: 1;
+      visibility: visible;
+      height: auto;
+    }
+
+    /* ─── Right: image gallery ──────────────────────────── */
+    .vt-gallery {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vt-gallery-frame {
+      position: relative;
+      aspect-ratio: 16 / 11;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #1a1a1a;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .vt-slide {
+      position: absolute;
+      inset: 0;
+      transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.4s ease;
+      will-change: transform, opacity;
+    }
+
+    .vt-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s ease;
+    }
+
+    .vt-slide:hover img {
+      transform: scale(1.04);
+    }
+
+    .vt-slide.active {
+      transform: translateY(0);
+      opacity: 1;
+      z-index: 2;
+    }
+
+    .vt-slide.exit-up {
+      transform: translateY(100%);
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .vt-slide.exit-down {
+      transform: translateY(-100%);
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .vt-slide.hidden {
+      transform: translateY(0);
+      opacity: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .vt-slide::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.25) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    /* Nav arrows */
+    .vt-arrows {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .vt-arrow {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(17,17,17,0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 18px;
+      color: #fff;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .vt-arrow:hover {
+      background: #F25B19;
+      border-color: #F25B19;
+      color: #111;
+    }
+
+    .vt-arrow:active {
+      transform: scale(0.92);
+    }
+
+    /* ─── Responsive ────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .vt-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 0 20px;
+      }
+
+      .vt-left { order: 2; }
+      .vt-gallery { order: 1; }
+
+      .vt-gallery-frame {
+        aspect-ratio: 4 / 5;
+        border-radius: 16px;
+      }
+
+      .vt-progress-track { left: -12px; }
+      .vt-tab { padding: 20px 0; }
+      .vt { padding: 48px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="vt">
+    <div class="vt-inner">
+
+      <div class="vt-left">
+        <h2 class="vt-heading">What We Do</h2>
+        <span class="vt-subhead">(Services)</span>
+
+        <div class="vt-tabs" id="vt-tabs">
+          <button class="vt-tab active" data-index="0">
+            <div class="vt-progress-track"><div class="vt-progress-fill"></div></div>
+            <span class="vt-tab-num">/01</span>
+            <div class="vt-tab-body">
+              <span class="vt-tab-title">Arrive &amp; Drive</span>
+              <p class="vt-tab-desc">Book a slot. We have the kart ready at the track. You show up, you race, you go home. Everything else is on us.</p>
+            </div>
+          </button>
+
+          <button class="vt-tab" data-index="1">
+            <div class="vt-progress-track"><div class="vt-progress-fill"></div></div>
+            <span class="vt-tab-num">/02</span>
+            <div class="vt-tab-body">
+              <span class="vt-tab-title">Race Prep</span>
+              <p class="vt-tab-desc">In-house kart builds and race prep. The same hands that built your kart are crewing it on race day at NCMP.</p>
+            </div>
+          </button>
+
+          <button class="vt-tab" data-index="2">
+            <div class="vt-progress-track"><div class="vt-progress-fill"></div></div>
+            <span class="vt-tab-num">/03</span>
+            <div class="vt-tab-body">
+              <span class="vt-tab-title">Full Team Support</span>
+              <p class="vt-tab-desc">Data, coaching, and crew in your corner — every race, all season long. A real team relationship.</p>
+            </div>
+          </button>
+
+          <button class="vt-tab" data-index="3">
+            <div class="vt-progress-track"><div class="vt-progress-fill"></div></div>
+            <span class="vt-tab-num">/04</span>
+            <div class="vt-tab-body">
+              <span class="vt-tab-title">LO206</span>
+              <p class="vt-tab-desc">Authorized dealer and class specialists. The best entry-level class in the sport, done right. 19 years of expertise.</p>
+            </div>
+          </button>
+
+          <button class="vt-tab" data-index="4">
+            <div class="vt-progress-track"><div class="vt-progress-fill"></div></div>
+            <span class="vt-tab-num">/05</span>
+            <div class="vt-tab-body">
+              <span class="vt-tab-title">Where We Race</span>
+              <p class="vt-tab-desc">New Castle Motorsports Park, Indiana. 45 minutes from Indianapolis. We're there every single weekend.</p>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <div class="vt-gallery" id="vt-gallery">
+        <div class="vt-gallery-frame">
+          <div class="vt-slide active" data-index="0">
+            <img src="../assets/photos/AFK%202025_%20KRA%20%2310/_MSA3145.jpg" alt="Arrive and Drive" loading="lazy">
+          </div>
+          <div class="vt-slide hidden" data-index="1">
+            <img src="../assets/photos/AFK%202025_%20KRA%20%2310/_MSA2062.jpg" alt="Race Prep" loading="lazy">
+          </div>
+          <div class="vt-slide hidden" data-index="2">
+            <img src="../assets/photos/AFK%202025_%20KRA%20%2310/_MSA3083.jpg" alt="Full Team Support" loading="lazy">
+          </div>
+          <div class="vt-slide hidden" data-index="3">
+            <img src="../assets/photos/AFK%202025_%20KRA%20%2310/_MSA1908.jpg" alt="LO206" loading="lazy">
+          </div>
+          <div class="vt-slide hidden" data-index="4">
+            <img src="../assets/photos/AFK%202025_%20KRA%20%2310/_MSA3696.jpg" alt="Where We Race" loading="lazy">
+          </div>
+        </div>
+
+        <div class="vt-arrows">
+          <button class="vt-arrow" id="vt-prev" aria-label="Previous">&larr;</button>
+          <button class="vt-arrow" id="vt-next" aria-label="Next">&rarr;</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+  (function() {
+    var TOTAL = document.querySelectorAll('.vt-tab').length;
+    var DURATION = 5000;
+    var current = 0;
+    var paused = false;
+    var timer;
+
+    var tabs = document.querySelectorAll('.vt-tab');
+    var slides = document.querySelectorAll('.vt-slide');
+    var gallery = document.getElementById('vt-gallery');
+
+    function goTo(index, dir) {
+      if (index === current) return;
+      if (typeof dir === 'undefined') dir = index > current ? 1 : -1;
+
+      slides.forEach(function(s, i) {
+        s.classList.remove('active', 'exit-up', 'exit-down', 'hidden');
+        if (i === index) {
+          s.classList.add('active');
+        } else if (i === current) {
+          s.classList.add(dir > 0 ? 'exit-up' : 'exit-down');
+        } else {
+          s.classList.add('hidden');
+        }
+      });
+
+      tabs.forEach(function(t, i) {
+        t.classList.remove('active', 'paused');
+        if (i === index) t.classList.add('active');
+      });
+
+      current = index;
+    }
+
+    function next() { goTo((current + 1) % TOTAL, 1); }
+    function prev() { goTo((current - 1 + TOTAL) % TOTAL, -1); }
+
+    function startTimer() {
+      clearInterval(timer);
+      timer = setInterval(function() {
+        if (!paused) next();
+      }, DURATION);
+    }
+
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        goTo(parseInt(tab.dataset.index, 10));
+        startTimer();
+      });
+    });
+
+    document.getElementById('vt-prev').addEventListener('click', function(e) {
+      e.stopPropagation(); prev(); startTimer();
+    });
+    document.getElementById('vt-next').addEventListener('click', function(e) {
+      e.stopPropagation(); next(); startTimer();
+    });
+
+    gallery.addEventListener('mouseenter', function() {
+      paused = true;
+      var active = document.querySelector('.vt-tab.active');
+      if (active) active.classList.add('paused');
+    });
+    gallery.addEventListener('mouseleave', function() {
+      paused = false;
+      var active = document.querySelector('.vt-tab.active');
+      if (active) active.classList.remove('paused');
+    });
+
+    startTimer();
+  })();
+  </script>
+
+</body>
+</html>

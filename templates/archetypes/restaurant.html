@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ember & Oak — Wood-Fired Bistro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;1,400;1,500&family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #16080E;
+      --surface:     #221118;
+      --card:        #2A1620;
+      --text:        #F5E6D3;
+      --muted:       #9C8070;
+      --amber:       #D4852A;
+      --amber-light: #F0A84A;
+      --divider:     #3A2030;
+      --green:       #4A7C59;
+      --footer-bg:   #0E050A;
+
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body:    'Plus Jakarta Sans', sans-serif;
+      --font-accent:  'Cormorant', Georgia, serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a   { color: inherit; text-decoration: none; }
+
+    /* ─── UTILITY ─── */
+    .amber-label {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      color: var(--amber);
+      text-transform: uppercase;
+    }
+
+    .section-fade {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .section-fade.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── EMBER PARTICLES ─── */
+    @keyframes ember-float {
+      0%   { opacity: 0; transform: translateY(0) translateX(0) scale(1); }
+      15%  { opacity: 0.9; }
+      70%  { opacity: 0.35; }
+      100% { opacity: 0; transform: translateY(-180px) translateX(8px) scale(0.4); }
+    }
+
+    .ember-particle {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--amber);
+      box-shadow: 0 0 6px 2px rgba(212, 133, 42, 0.55);
+      animation: ember-float var(--dur, 3.5s) var(--delay, 0s) infinite ease-out;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ─── NAVIGATION ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 72px;
+      background: var(--bg);
+      border-bottom: 1px solid rgba(212, 133, 42, 0.18);
+      transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(22, 8, 14, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-shrink: 0;
+    }
+    .nav-logo svg { width: 26px; height: 26px; flex-shrink: 0; }
+    .nav-logo-text {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.25rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      opacity: 0.82;
+      transition: opacity 0.2s, color 0.2s;
+      padding: 8px 0;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--amber-light); }
+
+    .nav-cta {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--amber);
+      border: 1.5px solid var(--amber);
+      padding: 10px 20px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      border-radius: 2px;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav-cta:hover {
+      background: var(--amber);
+      color: var(--bg);
+      box-shadow: 0 0 24px rgba(212, 133, 42, 0.35);
+    }
+
+    /* Mobile hamburger */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      min-height: 44px;
+      min-width: 44px;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--text);
+      margin: 5px 0;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .nav-mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: rgba(22, 8, 14, 0.98);
+      backdrop-filter: blur(12px);
+      z-index: 99;
+      padding: 1.5rem 2rem 2rem;
+      border-bottom: 1px solid var(--divider);
+      flex-direction: column;
+      gap: 0;
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu a {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text);
+      padding: 14px 0;
+      border-bottom: 1px solid var(--divider);
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .nav-mobile-menu a:last-of-type { border-bottom: none; }
+    .nav-mobile-menu .mobile-cta {
+      margin-top: 1.25rem;
+      border: 1.5px solid var(--amber);
+      color: var(--amber);
+      justify-content: center;
+      border-radius: 2px;
+      padding: 14px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      padding-top: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 38% 52%, #3D1C10 0%, #231210 38%, #16080E 68%);
+    }
+
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 36% 58%, rgba(175, 75, 18, 0.2) 0%, transparent 58%),
+        radial-gradient(ellipse at 64% 38%, rgba(212, 133, 42, 0.08) 0%, transparent 52%);
+      pointer-events: none;
+    }
+
+    .hero-noise {
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
+      max-width: 780px;
+    }
+
+    @keyframes hero-reveal {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-label {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: 1rem;
+      letter-spacing: 0.16em;
+      color: var(--amber);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: hero-reveal 0.9s ease 0.3s forwards;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 8vw, 6.5rem);
+      line-height: 1.03;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin-bottom: 1.25rem;
+      text-shadow: 0 0 80px rgba(180, 70, 20, 0.3);
+      opacity: 0;
+      animation: hero-reveal 1s ease 0.55s forwards;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+      opacity: 0;
+      animation: hero-reveal 1s ease 0.8s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.75rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: hero-reveal 1s ease 1.05s forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 2rem;
+      background: var(--amber);
+      color: var(--bg);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--amber-light);
+      box-shadow: 0 0 40px rgba(212, 133, 42, 0.42);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+      opacity: 0.72;
+      letter-spacing: 0.04em;
+      min-height: 44px;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .btn-ghost-link:hover { opacity: 1; color: var(--amber-light); }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @keyframes scroll-line-pulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50%       { opacity: 0.8; transform: scaleY(1.15); }
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 44px;
+      background: linear-gradient(to bottom, transparent, rgba(212, 133, 42, 0.65));
+      opacity: 0;
+      animation: hero-reveal 1s ease 1.6s forwards;
+    }
+    .scroll-line.visible-line {
+      animation: scroll-line-pulse 2.5s ease infinite;
+    }
+
+    /* ─── MENU PREVIEW ─── */
+    #menu {
+      background: var(--surface);
+      padding: 6rem 2rem;
+      position: relative;
+    }
+    #menu::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(212,133,42,0.4), transparent);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--text);
+      margin-top: 0.5rem;
+      line-height: 1.12;
+    }
+
+    .menu-columns {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    .menu-column {
+      padding: 0 2.75rem;
+      border-right: 1px solid var(--divider);
+    }
+    .menu-column:first-child { padding-left: 1rem; }
+    .menu-column:last-child  { padding-right: 1rem; border-right: none; }
+
+    .menu-column-title {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--amber);
+      letter-spacing: 0.08em;
+      margin-bottom: 1.75rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .menu-item {
+      margin-bottom: 1.5rem;
+      padding: 0.5rem 0.6rem 0.5rem 0.7rem;
+      border-left: 2px solid transparent;
+      margin-left: -0.7rem;
+      transition: border-color 0.2s;
+      cursor: default;
+    }
+    .menu-item:hover { border-left-color: var(--amber); }
+
+    .menu-item-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.4rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .menu-item-name {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--text);
+      line-height: 1.2;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .menu-dot-leader {
+      flex: 1;
+      border-bottom: 2px dotted rgba(212, 133, 42, 0.28);
+      margin-bottom: 4px;
+      min-width: 10px;
+    }
+
+    .menu-price {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--amber);
+      white-space: nowrap;
+      line-height: 1.2;
+      flex-shrink: 0;
+    }
+
+    .menu-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.55;
+      font-weight: 300;
+    }
+
+    .menu-tag {
+      display: inline-block;
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: 0.68rem;
+      color: var(--green);
+      border: 1px solid rgba(74, 124, 89, 0.4);
+      padding: 1px 6px;
+      border-radius: 2px;
+      margin-left: 0.4rem;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+    }
+
+    .menu-cta-row {
+      text-align: center;
+      margin: 3rem auto 0;
+      padding-top: 2.25rem;
+      border-top: 1px solid var(--divider);
+      max-width: 1060px;
+    }
+
+    .link-arrow {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--amber);
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 44px;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .link-arrow:hover { color: var(--amber-light); gap: 0.75rem; }
+
+    /* ─── STORY ─── */
+    #story {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 620px;
+    }
+
+    .story-image {
+      background: radial-gradient(ellipse at 45% 42%, #5C2510 0%, #2A1008 55%, #16080E 100%);
+      position: relative;
+      overflow: hidden;
+      min-height: 500px;
+    }
+
+    .story-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 65%, rgba(212, 133, 42, 0.1) 0%, transparent 60%);
+    }
+
+    .story-image-decor {
+      position: absolute;
+      bottom: 12%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+
+    .story-content {
+      background: var(--bg);
+      padding: 5rem 4.5rem 5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .story-content .amber-label { margin-bottom: 0.6rem; display: block; }
+    .story-content .section-title { text-align: left; margin-bottom: 1.5rem; margin-top: 0; }
+
+    .story-content p {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+    .story-content p strong { color: var(--text); font-weight: 500; }
+
+    .story-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--amber);
+      min-height: 44px;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .story-link:hover { color: var(--amber-light); gap: 0.75rem; }
+
+    /* ─── HOURS & RESERVATIONS ─── */
+    #hours {
+      background: var(--surface);
+      padding: 5.5rem 2rem;
+      position: relative;
+    }
+    #hours::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(212,133,42,0.3), transparent);
+    }
+
+    .hours-grid {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr 1px 1fr;
+      gap: 0;
+      max-width: 920px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .hours-divider {
+      background: linear-gradient(to bottom, transparent, rgba(212, 133, 42, 0.3), transparent);
+      align-self: stretch;
+      min-height: 180px;
+    }
+
+    .hours-col {
+      padding: 0.5rem 2.75rem;
+      text-align: center;
+    }
+    .hours-col .amber-label { display: block; margin-bottom: 1rem; }
+
+    .hours-list { list-style: none; }
+    .hours-list li {
+      font-size: 0.9rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      line-height: 1.55;
+    }
+    .hours-list .day {
+      color: var(--muted);
+      font-size: 0.78rem;
+      display: block;
+      margin-bottom: 0.1rem;
+    }
+
+    .hours-address {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.85;
+    }
+    .hours-address .neighborhood {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-style: italic;
+    }
+
+    .hours-phone {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: var(--text);
+      display: block;
+      margin-bottom: 1rem;
+      transition: color 0.2s;
+    }
+    .hours-phone:hover { color: var(--amber-light); }
+
+    /* ─── GALLERY ─── */
+    #gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 240px);
+    }
+
+    .gallery-cell {
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    .gallery-cell::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(22, 8, 14, 0.28);
+      transition: background 0.35s;
+    }
+    .gallery-cell:hover::after { background: rgba(22, 8, 14, 0.08); }
+
+    .gallery-cell-inner {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.55s ease;
+    }
+    .gallery-cell:hover .gallery-cell-inner { transform: scale(1.07); }
+
+    .gc-1 { background: radial-gradient(ellipse at 35% 50%, #6B3010 0%, #3A1608 50%, #1A0A06 100%); }
+    .gc-2 { background: radial-gradient(ellipse at 60% 40%, #4A1A14 0%, #2A0E10 55%, #16080E 100%); }
+    .gc-3 { background: radial-gradient(ellipse at 45% 55%, #5C2208 0%, #321405 55%, #1A0C08 100%); }
+    .gc-4 { background: radial-gradient(ellipse at 50% 45%, #3A1830 0%, #1E0C1C 55%, #10060E 100%); }
+    .gc-5 { background: radial-gradient(ellipse at 40% 60%, #582A0A 0%, #2E1508 50%, #160A06 100%); }
+    .gc-6 { background: radial-gradient(ellipse at 55% 45%, #44160E 0%, #241008 55%, #120806 100%); }
+
+    /* ─── EVENTS ─── */
+    #events {
+      background: var(--bg);
+      padding: 6rem 2rem;
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1020px;
+      margin: 0 auto;
+    }
+
+    .event-card {
+      background: var(--card);
+      border-top: 2px solid var(--amber);
+      padding: 2rem 1.75rem 1.75rem;
+      transition: box-shadow 0.3s, transform 0.25s;
+    }
+    .event-card:hover {
+      box-shadow: 0 0 40px rgba(212, 133, 42, 0.15), 0 8px 32px rgba(0, 0, 0, 0.4);
+      transform: translateY(-3px);
+    }
+
+    .event-date {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--amber);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.6rem;
+    }
+
+    .event-name {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+
+    .event-desc {
+      font-size: 0.845rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+
+    .event-link {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--amber);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      min-height: 44px;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .event-link:hover { color: var(--amber-light); gap: 0.65rem; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--footer-bg);
+      padding: 4.5rem 2rem 2.5rem;
+      position: relative;
+    }
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(212, 133, 42, 0.5), transparent);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 3rem;
+      max-width: 1060px;
+      margin: 0 auto 3rem;
+    }
+
+    .footer-brand .nav-logo { margin-bottom: 0.75rem; }
+
+    .footer-tagline {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-socials { display: flex; gap: 0.6rem; }
+    .footer-social-icon {
+      width: 40px;
+      height: 40px;
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--divider);
+      border-radius: 2px;
+      color: var(--muted);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .footer-social-icon:hover { border-color: var(--amber); color: var(--amber); }
+
+    .footer-col-title {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      color: var(--amber);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .footer-links a {
+      font-size: 0.875rem;
+      color: var(--muted);
+      transition: color 0.2s;
+      display: block;
+      min-height: 28px;
+      line-height: 1.6;
+    }
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--divider);
+      padding-top: 1.5rem;
+      max-width: 1060px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copyright { font-size: 0.78rem; color: var(--muted); opacity: 0.7; }
+    .footer-note {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: 0.78rem;
+      color: var(--muted);
+      opacity: 0.5;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+
+      .hero-headline { font-size: clamp(2.5rem, 10vw, 3.8rem); }
+      .hero-actions  { flex-direction: column; gap: 1rem; align-items: center; }
+
+      .menu-columns {
+        grid-template-columns: 1fr;
+      }
+      .menu-column {
+        border-right: none;
+        border-bottom: 1px solid var(--divider);
+        padding: 2rem 0;
+      }
+      .menu-column:last-child { border-bottom: none; }
+
+      #story { grid-template-columns: 1fr; }
+      .story-image  { min-height: 280px; }
+      .story-content { padding: 3.5rem 1.75rem; }
+
+      .hours-grid { grid-template-columns: 1fr; gap: 2.25rem; }
+      .hours-divider { display: none; }
+      .hours-col { padding: 0; }
+
+      #gallery {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 200px);
+      }
+
+      .events-grid { grid-template-columns: 1fr; max-width: 480px; }
+
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      #menu   { padding: 4rem 1.25rem; }
+      #events { padding: 4rem 1.25rem; }
+      #hours  { padding: 4rem 1.25rem; }
+      .story-content { padding: 3rem 1.25rem; }
+      footer  { padding: 3.5rem 1.25rem 2rem; }
+
+      #gallery {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6, 180px);
+      }
+
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo" aria-label="Ember &amp; Oak — home">
+    <!-- Flame icon -->
+    <svg viewBox="0 0 28 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M14 2C14 2 6 10 6 18C6 22.4 9.6 26 14 26C18.4 26 22 22.4 22 18C22 13.5 17.5 9 17.5 9C17.5 9 19 13 17 15.5C16.2 16.5 14.8 16.8 13.8 16C12.3 14.8 12.8 12.5 14 10.5C12.5 12.5 12 15 13.2 16.8C14 18 15.5 18 17 16.5C18.5 15 18.5 12.5 17 10C17 12 17 14 16 15.5C15.2 16.5 14 16.8 13 16C11.5 14.5 12 12 13.5 10.5C12 12 11.5 14.5 13 16C14 16.8 15.2 16.5 16 15.5L14 2Z" fill="#D4852A" opacity="0.45"/>
+      <path d="M14 6C14 6 8 13 8 18C8 21.3 10.7 24 14 24C17.3 24 20 21.3 20 18C20 14.5 16.5 11 16.5 11C16.5 11 17.5 13.5 16 15.5C15.3 16.4 14 16.6 13.2 15.8C12 14.5 12.5 12.5 14 11C12.5 12.5 12 14.5 13.2 15.8C14 16.6 15.3 16.4 16 15.5C17.5 13.5 17 11 16 9.5C15 11 15 13 14 14.5C13.3 15.5 12.2 15.5 11.5 14.5C10.5 13 11 10.5 12.5 9C11 10.5 10.5 13 11.5 14.5C12.2 15.5 13.3 15.5 14 14.5L14 6Z" fill="#F0A84A"/>
+      <ellipse cx="14" cy="27" rx="5" ry="1.8" fill="#D4852A" opacity="0.2"/>
+    </svg>
+    <span class="nav-logo-text">Ember &amp; Oak</span>
+  </a>
+
+  <ul class="nav-links" role="list">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#story">About</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#hours">Contact</a></li>
+  </ul>
+
+  <a href="#hours" class="nav-cta">Reserve a Table</a>
+
+  <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile nav -->
+<div class="nav-mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+  <a href="#menu"   class="mobile-link">Menu</a>
+  <a href="#story"  class="mobile-link">About</a>
+  <a href="#events" class="mobile-link">Events</a>
+  <a href="#hours"  class="mobile-link">Contact</a>
+  <a href="#hours"  class="mobile-link mobile-cta">Reserve a Table</a>
+</div>
+
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-glow"  aria-hidden="true"></div>
+  <div class="hero-noise" aria-hidden="true"></div>
+
+  <!-- Ember particles -->
+  <div class="ember-particle" style="width:3px;height:3px;bottom:26%;left:38%;--dur:3.8s;--delay:0s;"   aria-hidden="true"></div>
+  <div class="ember-particle" style="width:4px;height:4px;bottom:20%;left:46%;--dur:4.6s;--delay:0.8s;" aria-hidden="true"></div>
+  <div class="ember-particle" style="width:2px;height:2px;bottom:30%;left:55%;--dur:3.2s;--delay:1.5s;" aria-hidden="true"></div>
+  <div class="ember-particle" style="width:5px;height:5px;bottom:16%;left:43%;--dur:5.2s;--delay:0.3s;" aria-hidden="true"></div>
+  <div class="ember-particle" style="width:3px;height:3px;bottom:22%;left:59%;--dur:4.1s;--delay:2.2s;" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <p class="hero-label">Est. 2019 &nbsp;&middot;&nbsp; Wood-Fired Cuisine</p>
+    <h1 class="hero-headline">Fire. Season.<br>Craft.</h1>
+    <p class="hero-tagline">A changing menu driven by what's best right now.</p>
+    <div class="hero-actions">
+      <a href="#hours" class="btn-primary">Reserve Your Table</a>
+      <a href="#menu"  class="btn-ghost-link">Explore the Menu &thinsp;&rarr;</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+
+<!-- ─── MENU PREVIEW ─── -->
+<section id="menu" aria-labelledby="menu-heading">
+  <div class="section-fade">
+    <div class="section-header">
+      <span class="amber-label">Tonight&rsquo;s Menu</span>
+      <h2 class="section-title" id="menu-heading">Seasonal &amp; Wood-Fired</h2>
+    </div>
+
+    <div class="menu-columns">
+
+      <!-- Small Plates -->
+      <div class="menu-column">
+        <div class="menu-column-title">Small Plates</div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Ember-Roasted Beet<span class="menu-tag">seasonal</span></span>
+            <span class="menu-dot-leader"></span>
+            <span class="menu-price">$14</span>
+          </div>
+          <p class="menu-desc">Whipped chèvre, toasted walnut, bitter greens, wildflower honey</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Wood-Grilled Oysters</span>
+            <span class="menu-dot-leader"></span>
+            <span class="menu-price">$18</span>
+          </div>
+          <p class="menu-desc">Charred leek mignonette, smoked butter, crisp sourdough</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Chicken Liver Crostini</span>
+            <span class="menu-dot-leader"></span>
+            <span class="menu-price">$12</span>
+          </div>
+          <p class="menu-desc">Pickled shallot, currant jam, fleur de sel, fresh thyme</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Flame-Kissed Burrata<span class="menu-tag">new</span></span>
+            <span class="menu-dot-leader"></span>
+            <span class="menu-price">$16</span>
+          </div>
+          <p class="menu-desc">Roasted stone fruit, basil oil, aged balsamic reduction</p>
+        </div>
+      </div>
+
+      <!-- Mains -->
+      <div class="menu-column">
+        <div class="menu-column-title">Mains</div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Oak-Fired Duck Breast</span>
+            <span class="menu-dot-leader"></span>
+            <span class="menu-price">$42</span>
+          </div>
+          <p class="menu-desc">Sour cherry jus, celery root purée, crispy duck fat potatoes</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Dry-Aged Ribeye<span class="menu-tag">chef&rsquo;s pick</span></span>
+            <span class="menu-dot-leader"></span>
+            <span class="menu-price">$58</span>
+          </div>
+          <p class="menu-desc">14-oz, wood-roasted marrow, chimichurri, charred shallot</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Halibut en Papillote</span>
+            <span class="menu-dot-leader"></span>
+            <span class="menu-price">$38</span>
+          </div>
+          <p class="menu-desc">Spring fennel, preserved lemon, saffron broth, crispy capers</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Forest Mushroom Risotto<span class="menu-tag">v</span></span>
+            <span class="menu-dot-leader"></span>
+            <span class="menu-price">$29</span>
+          </div>
+          <p class="menu-desc">Truffle oil, aged Parmigiano, toasted breadcrumbs, chive</p>
+        </div>
+      </div>
+
+      <!-- Desserts -->
+      <div class="menu-column">
+        <div class="menu-column-title">Desserts</div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Burnt Honey Panna Cotta</span>
+            <span class="menu-dot-leader"></span>
+            <span class="menu-price">$13</span>
+          </div>
+          <p class="menu-desc">Lavender shortbread, poached quince, pistachios</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Dark Chocolate Tart</span>
+            <span class="menu-dot-leader"></span>
+            <span class="menu-price">$14</span>
+          </div>
+          <p class="menu-desc">Smoked sea salt caramel, whiskey cream, candied pecans</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Seasonal Sorbet Trio<span class="menu-tag">seasonal</span></span>
+            <span class="menu-dot-leader"></span>
+            <span class="menu-price">$11</span>
+          </div>
+          <p class="menu-desc">Ask your server for today&rsquo;s selections, tuile</p>
+        </div>
+      </div>
+
+    </div><!-- /menu-columns -->
+
+    <div class="menu-cta-row">
+      <a href="#" class="link-arrow">View Full Menu &thinsp;&rarr;</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── STORY ─── -->
+<section id="story" aria-labelledby="story-heading">
+  <!-- Left: atmospheric fire-lit kitchen placeholder -->
+  <div class="story-image section-fade" aria-hidden="true">
+    <!-- Decorative flame silhouette -->
+    <svg class="story-image-decor" width="180" height="250" viewBox="0 0 180 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M90 20C90 20 35 75 35 145C35 178 60 205 90 205C120 205 145 178 145 145C145 112 115 82 108 65C112 88 108 112 90 128C81 135 70 135 63 126C50 112 57 85 73 65C57 85 50 112 63 126C70 135 81 135 90 128C108 112 112 88 108 65C104 86 100 108 100 132C100 150 89 160 90 163C79 158 79 144 81 132C79 144 79 158 90 163C93 160 104 151 104 139C104 121 96 103 90 88C88 102 85 116 79 126C75 131 70 132 65 128C54 118 58 99 68 86C55 99 52 118 63 130C69 137 78 137 83 130C90 119 92 104 90 88L90 20Z" fill="#D4852A" opacity="0.1"/>
+    </svg>
+  </div>
+
+  <!-- Right: story copy -->
+  <div class="story-content section-fade">
+    <span class="amber-label">Our Story</span>
+    <h2 class="section-title" id="story-heading">Cooking with<br>conviction.</h2>
+    <p>
+      <strong>James Calloway</strong> spent twelve years working beside wood-burning hearths in kitchens across Lyon, Barcelona, and Charleston before opening Ember &amp; Oak in 2019. The restaurant began as a simple belief: that fire, handled with patience, brings out a truth in ingredients that no other method can.
+    </p>
+    <p>
+      The menu changes with the seasons — sometimes week to week — because <strong>the market dictates everything.</strong> A spring delivery of young garlic might reshape a sauce. A late summer haul of stone fruit might appear three ways in a single evening. Nothing is static. Nothing is predictable.
+    </p>
+    <p>
+      What remains constant is the care. The oak logs sourced from a single farm in the Shenandoah Valley. The bread made each morning. The wine list built around producers who farm as thoughtfully as we cook.
+    </p>
+    <a href="#" class="story-link">Meet James &thinsp;&rarr;</a>
+  </div>
+</section>
+
+
+<!-- ─── HOURS & RESERVATIONS ─── -->
+<section id="hours" aria-labelledby="hours-heading">
+  <div class="section-fade">
+    <div class="hours-grid">
+
+      <div class="hours-col">
+        <span class="amber-label" id="hours-heading">Hours</span>
+        <ul class="hours-list">
+          <li><span class="day">Tuesday &ndash; Friday</span>Dinner 5&thinsp;pm &ndash; 10&thinsp;pm</li>
+          <li><span class="day">Saturday</span>Dinner 5&thinsp;pm &ndash; 11&thinsp;pm</li>
+          <li><span class="day">Sunday</span>Brunch 10&thinsp;am &ndash; 2&thinsp;pm<br>Dinner 4:30&thinsp;pm &ndash; 9&thinsp;pm</li>
+          <li><span class="day">Monday</span>Closed</li>
+        </ul>
+      </div>
+
+      <div class="hours-divider" aria-hidden="true"></div>
+
+      <div class="hours-col">
+        <span class="amber-label">Location</span>
+        <address class="hours-address" style="font-style:normal;">
+          224 Hollowell Street<br>
+          Suite 101<br>
+          <span class="neighborhood">The Merchant District, Downtown</span><br><br>
+          Valet available Thu &ndash; Sat<br>
+          Street parking after 6&thinsp;pm
+        </address>
+      </div>
+
+      <div class="hours-divider" aria-hidden="true"></div>
+
+      <div class="hours-col">
+        <span class="amber-label">Reservations</span>
+        <a href="tel:+15402218844" class="hours-phone">(540) 221-8844</a>
+        <a href="#" class="btn-primary" style="display:inline-flex;margin-bottom:1.25rem;">Book Online</a>
+        <p style="font-size:0.8rem;color:var(--muted);line-height:1.65;">Walk-ins welcome at the bar.<br>Private dining for groups of 8+.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── GALLERY ─── -->
+<section id="gallery" aria-label="Restaurant gallery">
+  <div class="gallery-cell" role="img" aria-label="Wood-fired grill">
+    <div class="gallery-cell-inner gc-1"></div>
+  </div>
+  <div class="gallery-cell" role="img" aria-label="Seasonal ingredients">
+    <div class="gallery-cell-inner gc-2"></div>
+  </div>
+  <div class="gallery-cell" role="img" aria-label="Plated dish">
+    <div class="gallery-cell-inner gc-3"></div>
+  </div>
+  <div class="gallery-cell" role="img" aria-label="Dining room atmosphere">
+    <div class="gallery-cell-inner gc-4"></div>
+  </div>
+  <div class="gallery-cell" role="img" aria-label="Craft cocktails">
+    <div class="gallery-cell-inner gc-5"></div>
+  </div>
+  <div class="gallery-cell" role="img" aria-label="Dessert course">
+    <div class="gallery-cell-inner gc-6"></div>
+  </div>
+</section>
+
+
+<!-- ─── EVENTS ─── -->
+<section id="events" aria-labelledby="events-heading">
+  <div class="section-fade">
+    <div class="section-header">
+      <span class="amber-label">Mark Your Calendar</span>
+      <h2 class="section-title" id="events-heading">Upcoming Events</h2>
+    </div>
+
+    <div class="events-grid">
+
+      <article class="event-card">
+        <p class="event-date">Saturday, April 12</p>
+        <h3 class="event-name">Wine Dinner</h3>
+        <p class="event-desc">A six-course evening pairing the wood-fired menu with selections from a small Burgundy producer. Limited to 28 guests. Chef James leads the dinner personally.</p>
+        <a href="#" class="event-link">Reserve &thinsp;&rarr;</a>
+      </article>
+
+      <article class="event-card">
+        <p class="event-date">Saturday, April 19</p>
+        <h3 class="event-name">Chef&rsquo;s Table</h3>
+        <p class="event-desc">Eight seats. Ten courses. The most intimate experience at Ember &amp; Oak — seated beside the hearth, watching each course come to life. Menu unveiled night-of.</p>
+        <a href="#" class="event-link">Reserve &thinsp;&rarr;</a>
+      </article>
+
+      <article class="event-card">
+        <p class="event-date">Every Sunday</p>
+        <h3 class="event-name">Jazz Brunch</h3>
+        <p class="event-desc">Live jazz trio, wood-fired brunch plates, and craft cocktails starting at 10&thinsp;am. Walk-ins welcome at the bar. Dining room reservations recommended.</p>
+        <a href="#" class="event-link">Reserve &thinsp;&rarr;</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-top">
+
+    <div class="footer-brand">
+      <div class="nav-logo">
+        <svg viewBox="0 0 28 34" fill="none" xmlns="http://www.w3.org/2000/svg" width="20" height="22" aria-hidden="true">
+          <path d="M14 6C14 6 8 13 8 18C8 21.3 10.7 24 14 24C17.3 24 20 21.3 20 18C20 14.5 16.5 11 16.5 11C16.5 11 17.5 13.5 16 15.5C15.3 16.4 14 16.6 13.2 15.8C12 14.5 12.5 12.5 14 11C12.5 12.5 12 14.5 13.2 15.8C14 16.6 15.3 16.4 16 15.5C17.5 13.5 17 11 16 9.5L14 6Z" fill="#F0A84A"/>
+        </svg>
+        <span class="nav-logo-text" style="font-size:1.1rem;">Ember &amp; Oak</span>
+      </div>
+      <p class="footer-tagline">Where every meal is a moment.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social-icon" aria-label="Instagram">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="#" class="footer-social-icon" aria-label="Facebook">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+        <a href="#" class="footer-social-icon" aria-label="Reserve a table">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <span class="footer-col-title">Menus</span>
+      <ul class="footer-links">
+        <li><a href="#">Dinner Menu</a></li>
+        <li><a href="#">Weekend Brunch</a></li>
+        <li><a href="#">Cocktail Bar</a></li>
+        <li><a href="#">Wine List</a></li>
+        <li><a href="#">Private Dining</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <span class="footer-col-title">Visit</span>
+      <ul class="footer-links">
+        <li><a href="#">Hours &amp; Location</a></li>
+        <li><a href="#">Reservations</a></li>
+        <li><a href="#">Events</a></li>
+        <li><a href="#">Gift Cards</a></li>
+        <li><a href="#">Accessibility</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <span class="footer-col-title">Connect</span>
+      <ul class="footer-links">
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Meet the Team</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copyright">&copy; 2026 Ember &amp; Oak. All rights reserved.</p>
+    <p class="footer-note">224 Hollowell Street &nbsp;&middot;&nbsp; (540) 221-8844</p>
+  </div>
+</footer>
+
+
+<!-- ─── JS ─── -->
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Mobile nav toggle
+  const navToggle   = document.getElementById('nav-toggle');
+  const mobileMenu  = document.getElementById('mobile-menu');
+
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Close mobile menu when a link is tapped
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // IntersectionObserver — section fade-in on scroll
+  const fadeEls = document.querySelectorAll('.section-fade');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+
+  fadeEls.forEach(el => io.observe(el));
+
+  // Start scroll-line pulse animation after it fades in
+  const scrollLine = document.querySelector('.scroll-line');
+  if (scrollLine) {
+    setTimeout(() => scrollLine.classList.add('visible-line'), 2700);
+  }
+</script>
+
+</body>
+</html>

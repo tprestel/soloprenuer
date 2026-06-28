@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[TITLE_TAG] | [BUSINESS_NAME]</title>
+<meta name="description" content="[META_DESCRIPTION]">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #1B4FD8;       /* Replace with client primary color */
+    --accent-dark: #1440b0;
+    --accent-light: #EEF2FF;
+    --bg: #ffffff;
+    --bg-light: #F8F9FC;
+    --bg-dark: #0F172A;
+    --text: #0F172A;
+    --text-muted: #64748B;
+    --border: #E2E8F0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.65; }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--bg);
+    padding: 0 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--accent) !important;
+    color: #fff !important;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+  }
+  .nav-cta:hover { background: var(--accent-dark) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 96px 64px 80px;
+    background: var(--bg);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  .hero-badge::before { content: '★'; font-size: 11px; }
+  .hero h1 {
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--text);
+    letter-spacing: -1.5px;
+    max-width: 680px;
+    margin-bottom: 20px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+  .hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--accent-dark); }
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 14px 28px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s;
+  }
+  .btn-outline:hover { border-color: #aaa; }
+
+  /* ── TRUST BAR ── */
+  .trust-bar {
+    background: var(--bg-light);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 64px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 0 20px;
+    border-right: 1px solid var(--border);
+  }
+  .trust-item:last-child { border-right: none; }
+  .trust-icon { color: var(--accent); font-size: 15px; }
+
+  /* ── SERVICES ── */
+  .services { padding: 96px 64px; background: var(--bg); }
+  .section-header { text-align: center; margin-bottom: 56px; }
+  .section-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .section-sub { font-size: 17px; color: var(--text-muted); max-width: 520px; margin: 0 auto; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .service-card {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 28px;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  .service-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); border-color: var(--accent); }
+  .service-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--accent-light);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    font-size: 20px;
+  }
+  .service-card h3 { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .service-card p { font-size: 14px; color: var(--text-muted); line-height: 1.65; margin-bottom: 16px; }
+  .service-link { font-size: 13px; font-weight: 600; color: var(--accent); text-decoration: none; }
+
+  /* ── ABOUT ── */
+  .about { padding: 96px 64px; background: var(--bg-light); }
+  .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1100px; margin: 0 auto; }
+  .about-image {
+    background: var(--border);
+    border-radius: 16px;
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  .about-text .section-label { text-align: left; }
+  .about-text .section-title { text-align: left; font-size: 36px; margin-bottom: 20px; }
+  .about-body { color: var(--text-muted); font-size: 15px; line-height: 1.75; margin-bottom: 14px; }
+  .about-body strong { color: var(--text); }
+  .credentials { display: flex; flex-direction: column; gap: 12px; margin-top: 28px; }
+  .credential {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .credential-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--accent-light);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  /* ── STATS ── */
+  .stats { padding: 64px; background: var(--accent); }
+  .stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; max-width: 1100px; margin: 0 auto; }
+  .stat-item { text-align: center; padding: 16px; border-right: 1px solid rgba(255,255,255,0.15); }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-size: 48px; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 4px; letter-spacing: -1px; }
+  .stat-label { font-size: 13px; color: rgba(255,255,255,0.75); font-weight: 500; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { padding: 96px 64px; background: var(--bg); }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; max-width: 1100px; margin: 56px auto 0; }
+  .testimonial-card {
+    background: var(--bg-light);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+  }
+  .stars { color: #F59E0B; font-size: 14px; margin-bottom: 12px; letter-spacing: 2px; }
+  .testimonial-text { font-size: 14px; color: var(--text); line-height: 1.7; margin-bottom: 16px; font-style: italic; }
+  .testimonial-author { font-size: 13px; font-weight: 600; color: var(--text-muted); }
+
+  /* ── CTA ── */
+  .cta-section { padding: 96px 64px; background: var(--bg-dark); text-align: center; }
+  .cta-section h2 { font-size: 48px; font-weight: 700; color: #fff; letter-spacing: -1px; line-height: 1.15; margin-bottom: 16px; }
+  .cta-section p { color: #94A3B8; font-size: 17px; max-width: 480px; margin: 0 auto 36px; }
+  .btn-white {
+    display: inline-block;
+    background: #fff;
+    color: var(--accent);
+    font-size: 15px;
+    font-weight: 700;
+    padding: 16px 36px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-right: 12px;
+  }
+  .btn-ghost-white {
+    display: inline-block;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 16px 36px;
+    border-radius: 8px;
+    border: 1.5px solid #334155;
+    text-decoration: none;
+  }
+
+  /* ── FOOTER ── */
+  footer { background: #0a0f1e; padding: 64px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
+  .footer-logo { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 12px; display: block; }
+  .footer-logo span { color: var(--accent); }
+  .footer-desc { font-size: 13px; color: #475569; line-height: 1.7; }
+  .footer-col h4 { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #64748B; margin-bottom: 16px; }
+  .footer-col a { display: block; font-size: 13px; color: #475569; text-decoration: none; margin-bottom: 8px; }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom { background: #0a0f1e; padding: 20px 64px; border-top: 1px solid #1e293b; display: flex; justify-content: space-between; }
+  .footer-bottom p { font-size: 12px; color: #334155; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav, .hero, .services, .about, .stats, .testimonials, .cta-section, footer { padding-left: 24px; padding-right: 24px; }
+    .hero h1 { font-size: 36px; }
+    .about-inner { grid-template-columns: 1fr; }
+    .stats-inner { grid-template-columns: 1fr 1fr; }
+    footer { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">[BUSINESS_<span>NAME</span>]</div>
+  <div class="nav-links">
+    <a href="/services">[SERVICE_1]</a>
+    <a href="/services">[SERVICE_2]</a>
+    <a href="/services">[SERVICE_3]</a>
+    <a href="/about">About</a>
+    <a href="/contact" class="nav-cta">Get a Free Quote</a>
+  </div>
+</nav>
+
+<section class="hero" style="max-width:100%;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="hero-badge">[RATING] · [REVIEW_COUNT] Reviews on Google</div>
+    <h1>[H1 with <span>Primary Keyword</span> Here]</h1>
+    <p class="hero-sub">[HERO_SUBHEADLINE — 1-2 sentences. Lead with the customer benefit and location.]</p>
+    <div class="hero-actions">
+      <a href="/contact" class="btn-primary">Get a Free Quote</a>
+      <a href="tel:[PHONE]" class="btn-outline">Call [PHONE]</a>
+    </div>
+  </div>
+</section>
+
+<div class="trust-bar">
+  <div class="trust-item"><span class="trust-icon">✓</span>[TRUST_POINT_1]</div>
+  <div class="trust-item"><span class="trust-icon">✓</span>[TRUST_POINT_2]</div>
+  <div class="trust-item"><span class="trust-icon">✓</span>[TRUST_POINT_3]</div>
+  <div class="trust-item"><span class="trust-icon">✓</span>[YEARS]+ Years in Business</div>
+</div>
+
+<section class="services">
+  <div class="section-header">
+    <div class="section-label">What We Do</div>
+    <div class="section-title">Services Built for [TARGET_CUSTOMER]</div>
+    <p class="section-sub">[SERVICES_INTRO — one sentence framing the service offering.]</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🔧</div>
+      <h3>[SERVICE_1]</h3>
+      <p>[SERVICE_1_DESC]</p>
+      <a href="/[slug]" class="service-link">Learn more →</a>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚡</div>
+      <h3>[SERVICE_2]</h3>
+      <p>[SERVICE_2_DESC]</p>
+      <a href="/[slug]" class="service-link">Learn more →</a>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📋</div>
+      <h3>[SERVICE_3]</h3>
+      <p>[SERVICE_3_DESC]</p>
+      <a href="/[slug]" class="service-link">Learn more →</a>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛡️</div>
+      <h3>[SERVICE_4]</h3>
+      <p>[SERVICE_4_DESC]</p>
+      <a href="/[slug]" class="service-link">Learn more →</a>
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="about-inner">
+    <div class="about-image">[Photo placeholder — client photography here]</div>
+    <div class="about-text">
+      <div class="section-label">About Us</div>
+      <div class="section-title">[YEARS]+ Years Serving [CITY] & [REGION]</div>
+      <p class="about-body">[ABOUT_PARAGRAPH_1 — In their voice. Reference intake form Q1.]</p>
+      <p class="about-body">[ABOUT_PARAGRAPH_2 — Differentiator. Reference intake form Q7.]</p>
+      <div class="credentials">
+        <div class="credential"><div class="credential-icon">✓</div>[CREDENTIAL_1]</div>
+        <div class="credential"><div class="credential-icon">✓</div>[CREDENTIAL_2]</div>
+        <div class="credential"><div class="credential-icon">✓</div>[CREDENTIAL_3]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">[YEARS]+</div>
+      <div class="stat-label">Years in Business</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">[STAT_A]</div>
+      <div class="stat-label">[STAT_A_LABEL]</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">[STAT_B]</div>
+      <div class="stat-label">[STAT_B_LABEL]</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">[RATING]★</div>
+      <div class="stat-label">Google Rating</div>
+    </div>
+  </div>
+</div>
+
+<section class="testimonials">
+  <div class="section-header">
+    <div class="section-label">Reviews</div>
+    <div class="section-title">What Our Clients Say</div>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"[TESTIMONIAL_1]"</p>
+      <div class="testimonial-author">[REVIEWER_1] · [CONTEXT_1]</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"[TESTIMONIAL_2]"</p>
+      <div class="testimonial-author">[REVIEWER_2] · [CONTEXT_2]</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"[TESTIMONIAL_3]"</p>
+      <div class="testimonial-author">[REVIEWER_3] · [CONTEXT_3]</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Ready to Get Started?</h2>
+  <p>[CTA_SUBTEXT — specific to their customer and service area.]</p>
+  <a href="/contact" class="btn-white">Get a Free Quote</a>
+  <a href="tel:[PHONE]" class="btn-ghost-white">Call Us Now</a>
+</section>
+
+<footer>
+  <div>
+    <span class="footer-logo">[BUSINESS_<span>NAME</span>]</span>
+    <p class="footer-desc">[FOOTER_DESC — 1-2 sentences.]</p>
+    <p style="font-size:13px; color:#334155; margin-top:12px;">[PHONE]<br>[EMAIL]<br>[ADDRESS]</p>
+  </div>
+  <div class="footer-col">
+    <h4>Services</h4>
+    <a href="#">[SERVICE_1]</a>
+    <a href="#">[SERVICE_2]</a>
+    <a href="#">[SERVICE_3]</a>
+    <a href="#">[SERVICE_4]</a>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="/about">About Us</a>
+    <a href="/contact">Contact</a>
+    <a href="/blog">Blog</a>
+  </div>
+  <div class="footer-col">
+    <h4>Service Areas</h4>
+    <a href="#">[CITY_1]</a>
+    <a href="#">[CITY_2]</a>
+    <a href="#">[CITY_3]</a>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© [YEAR] [BUSINESS_NAME]. All rights reserved.</p>
+  <p>Serving [CITY], [STATE] and surrounding areas.</p>
+</div>
+
+</body>
+</html>

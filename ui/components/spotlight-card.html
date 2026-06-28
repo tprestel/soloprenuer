@@ -1,0 +1,114 @@
+<!--
+  SPOTLIGHT CARD — Reusable Component
+  ─────────────────────────────────────
+  Cards with a mouse-following glow on the border only.
+  Outer wrapper is transparent with 1px padding. A radial gradient
+  ::before sits behind a solid inner card, so the glow only peeks
+  through the 1px border gap.
+
+  TO CUSTOMIZE:
+  - Change data-hue-base and data-hue-spread on each .glow-card
+    (orange=20, blue=220, purple=280, green=120, red=0)
+  - Change --glow-size for spotlight radius
+  - Change --border-w for border thickness
+  - Change .glow-card-inner background to match your page bg
+  - Place any content inside .glow-card-inner
+-->
+
+<style>
+  .glow-row {
+    display: flex;
+    gap: 24px;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 24px;
+  }
+
+  .glow-card {
+    --base: 220;
+    --spread: 200;
+    --glow-size: 250px;
+    --border-w: 1px;
+    --radius: 14px;
+
+    position: relative;
+    width: 260px;
+    border-radius: var(--radius);
+    padding: var(--border-w);
+    touch-action: none;
+    background: transparent;
+  }
+
+  /* Glow layer — behind the inner card, visible only in the border gap */
+  .glow-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+    pointer-events: none;
+    background: radial-gradient(
+      var(--glow-size) var(--glow-size)
+      at calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
+      hsl(calc(var(--base) + var(--xp, 0) * var(--spread)) 100% 60% / 0.8),
+      transparent 100%
+    );
+    background-attachment: fixed;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .glow-card:hover::before {
+    opacity: 1;
+  }
+
+  /* Inner card — solid bg covers everything except the border gap */
+  .glow-card-inner {
+    position: relative;
+    z-index: 1;
+    background: #141414;
+    border-radius: calc(var(--radius) - var(--border-w));
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 100%;
+  }
+</style>
+
+<!-- ─── MARKUP ──────────────────────────────────────────── -->
+
+<div class="glow-row" id="glow-row">
+  <div class="glow-card" data-hue-base="220" data-hue-spread="200">
+    <div class="glow-card-inner"></div>
+  </div>
+  <div class="glow-card" data-hue-base="280" data-hue-spread="300">
+    <div class="glow-card-inner"></div>
+  </div>
+  <div class="glow-card" data-hue-base="120" data-hue-spread="200">
+    <div class="glow-card-inner"></div>
+  </div>
+</div>
+
+<!-- ─── SCRIPT ──────────────────────────────────────────── -->
+<script>
+(function() {
+  var cards = document.querySelectorAll('.glow-card');
+
+  document.addEventListener('pointermove', function(e) {
+    var x = e.clientX;
+    var y = e.clientY;
+    var xp = (x / window.innerWidth).toFixed(3);
+
+    cards.forEach(function(card) {
+      var base = card.getAttribute('data-hue-base') || '220';
+      var spread = card.getAttribute('data-hue-spread') || '200';
+      card.style.setProperty('--x', x.toFixed(2));
+      card.style.setProperty('--y', y.toFixed(2));
+      card.style.setProperty('--xp', xp);
+      card.style.setProperty('--base', base);
+      card.style.setProperty('--spread', spread);
+    });
+  });
+})();
+</script>

@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Marketing Proposal — Super Laundry Cincinnati</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-dark:  #1C4A25;
+      --green:       #2D7F3C;
+      --green-mid:   #3A9E4E;
+      --green-light: #EAF4EC;
+      --green-tint:  #F2FAF3;
+      --cream:       #F8F7F4;
+      --white:       #FFFFFF;
+      --charcoal:    #1E2620;
+      --body:        #374040;
+      --muted:       #6B7A6D;
+      --border:      #D0E3D3;
+      --red-light:   #FDF2F2;
+      --red:         #C0392B;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--cream);
+      color: var(--body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── LAYOUT ─────────────────────────────── */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    section { padding: 56px 0; }
+    section + section { border-top: 1px solid var(--border); }
+
+    /* ─── HEADER ─────────────────────────────── */
+    .proposal-header {
+      background: var(--green-dark);
+      background-image: radial-gradient(ellipse at 80% 20%, rgba(45,127,60,0.35) 0%, transparent 60%);
+      color: var(--white);
+      padding: 48px 0 44px;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .header-logo img {
+      height: 48px;
+      width: auto;
+      display: block;
+      mix-blend-mode: screen;
+    }
+
+    .header-meta { text-align: right; }
+
+    .header-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .header-sub {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .header-prepared {
+      margin-top: 20px;
+      display: flex;
+      gap: 32px;
+    }
+
+    .header-prepared-item { }
+
+    .header-prepared-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.45);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .header-prepared-value {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.9);
+      font-weight: 500;
+    }
+
+    .header-accent-bar {
+      height: 3px;
+      background: var(--green-mid);
+      margin-top: 32px;
+      border-radius: 2px;
+    }
+
+    /* ─── TYPOGRAPHY ─────────────────────────── */
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.75rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+    }
+
+    h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--green);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    p { margin-bottom: 16px; line-height: 1.7; }
+    p:last-child { margin-bottom: 0; }
+
+    strong { font-weight: 600; color: var(--charcoal); }
+
+    .mono {
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    /* ─── SECTION LABELS ─────────────────────── */
+    .section-label {
+      display: inline-block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--green);
+      font-weight: 700;
+      border: 1.5px solid var(--green);
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+
+    /* ─── OPENING ────────────────────────────── */
+    .opening { background: var(--white); }
+
+    .opening-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--body);
+      max-width: 760px;
+    }
+
+    /* ─── WHAT WE'RE FIXING ──────────────────── */
+    .fixing { background: var(--cream); }
+
+    .gap-list { display: flex; flex-direction: column; gap: 16px; margin-top: 8px; }
+
+    .gap-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--green);
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .gap-item.gap-critical {
+      border-left-color: var(--red);
+    }
+
+    .gap-number {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--muted);
+      padding-top: 3px;
+      min-width: 20px;
+    }
+
+    .gap-content { }
+
+    .gap-title {
+      font-weight: 600;
+      color: var(--charcoal);
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+
+    .gap-detail {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .gap-finding {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      background: var(--green-light);
+      color: var(--green-dark);
+      padding: 8px 12px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .gap-item.gap-critical .gap-finding {
+      background: var(--red-light);
+      color: var(--red);
+    }
+
+    /* ─── ENGAGEMENT ─────────────────────────── */
+    .engagement { background: var(--white); }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 8px;
+    }
+
+    .option-card {
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .option-card.recommended {
+      border-color: var(--green);
+      box-shadow: 0 4px 24px rgba(45,127,60,0.12);
+    }
+
+    .option-header {
+      background: var(--green-light);
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .option-card.recommended .option-header {
+      background: var(--green-dark);
+    }
+
+    .option-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 4px;
+    }
+
+    .option-card.recommended .option-label {
+      color: rgba(255,255,255,0.65);
+    }
+
+    .option-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      color: var(--charcoal);
+    }
+
+    .option-card.recommended .option-name {
+      color: var(--white);
+    }
+
+    .option-rec-badge {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: var(--green-mid);
+      color: var(--white);
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .option-body { padding: 20px 24px; }
+
+    .option-phase {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--green);
+      font-weight: 700;
+      margin: 16px 0 8px;
+    }
+
+    .option-phase:first-child { margin-top: 0; }
+
+    .deliverable-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .deliverable-list li {
+      font-size: 0.875rem;
+      color: var(--body);
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      line-height: 1.5;
+    }
+
+    .deliverable-list li::before {
+      content: '—';
+      color: var(--green);
+      font-weight: 600;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .option-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-style: italic;
+      padding: 10px 12px;
+      background: var(--cream);
+      border-radius: 6px;
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    .hubspot-callout {
+      background: var(--green-tint);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-top: 12px;
+    }
+
+    .hubspot-callout-label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--green);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .hubspot-callout p {
+      font-size: 0.82rem;
+      color: var(--body);
+      line-height: 1.6;
+    }
+
+    /* Growth retainer */
+    .retainer-block {
+      margin-top: 24px;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .retainer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .retainer-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      color: var(--charcoal);
+    }
+
+    .retainer-price {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1rem;
+      color: var(--green-dark);
+      font-weight: 500;
+      text-align: right;
+    }
+
+    .retainer-price small {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--muted);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin-top: 2px;
+    }
+
+    .retainer-items {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .retainer-item {
+      font-size: 0.83rem;
+      color: var(--body);
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .retainer-item::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ─── SITE ARCHITECTURE ──────────────────── */
+    .sitemap-section { background: var(--cream); }
+
+    .sitemap-wrapper { overflow-x: auto; padding-bottom: 8px; }
+
+    /* Diagram shell */
+    .sm-diagram {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      min-width: 700px;
+    }
+
+    /* Shared card */
+    .sm-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+    .sm-home  { background: var(--green-dark); border-color: var(--green-dark); min-width: 150px; }
+    .sm-hub   { background: var(--green-light); border-color: var(--green); min-width: 140px; }
+    .sm-kw-card  { border-color: var(--green); width: 108px; flex-shrink: 0; }
+    .sm-allison  { border-color: var(--green); background: var(--green-tint); min-width: 100px; }
+    .sm-util-card { background: var(--cream); border-style: dashed; min-width: 90px; }
+
+    .sm-name { font-weight: 700; font-size: 0.72rem; color: var(--charcoal); line-height: 1.3; margin-bottom: 3px; }
+    .sm-home .sm-name { color: var(--white); }
+    .sm-hub  .sm-name { color: var(--green-dark); }
+    .sm-slug { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; color: var(--muted); margin-bottom: 3px; }
+    .sm-home .sm-slug { color: rgba(255,255,255,0.55); }
+    .sm-kw   { font-size: 0.6rem; color: var(--green); font-weight: 600; line-height: 1.4; }
+
+    /* Tier 1 — homepage */
+    .sm-t1 { display: flex; justify-content: center; }
+
+    /* Tier 2 — vline + two branches */
+    .sm-t2 { display: flex; flex-direction: column; align-items: center; width: 100%; }
+
+    .sm-t2-line { width: 2px; height: 24px; background: var(--border); }
+
+    .sm-two-branches {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      position: relative;
+    }
+
+    /* Horizontal bar connecting the two branch hubs */
+    .sm-two-branches::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 2px;
+      background: var(--border);
+    }
+
+    /* Individual branch: hub card + children below */
+    .sm-branch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Vertical line from horizontal bar down to hub card */
+    .sm-branch::before {
+      content: '';
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 24px;
+      background: var(--border);
+    }
+
+    /* Children container — vertical line from hub, then horizontal bar, then cards */
+    .sm-children {
+      position: relative;
+      padding-top: 24px;
+    }
+
+    .sm-children::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 24px;
+      background: var(--border);
+    }
+
+    /* Service children: single row of 4 */
+    .sm-svc-children {
+      display: flex;
+      gap: 8px;
+    }
+
+    /* Horizontal bar across service cards */
+    .sm-svc-children::after {
+      content: '';
+      position: absolute;
+      top: 24px;
+      left: 16px;
+      right: 16px;
+      height: 2px;
+      background: var(--border);
+    }
+
+    /* Each service card gets a drop line */
+    .sm-svc-children .sm-card {
+      position: relative;
+    }
+    .sm-svc-children .sm-card::before {
+      content: '';
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 24px;
+      background: var(--border);
+    }
+
+    /* Location children: 3-column grid */
+    .sm-loc-children {
+      display: grid;
+      grid-template-columns: repeat(3, 108px);
+      gap: 8px;
+    }
+
+    /* Horizontal bar across location cards — spans first row */
+    .sm-loc-children::after {
+      content: '';
+      position: absolute;
+      top: 24px;
+      left: 16px;
+      right: 16px;
+      height: 2px;
+      background: var(--border);
+    }
+
+    /* First row of location cards get a drop line */
+    .sm-loc-children .sm-card:nth-child(-n+3) {
+      position: relative;
+    }
+    .sm-loc-children .sm-card:nth-child(-n+3)::before {
+      content: '';
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 24px;
+      background: var(--border);
+    }
+
+    /* Utility row */
+    .sm-utility {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px dashed var(--border);
+      flex-wrap: wrap;
+    }
+
+    .sitemap-caption {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .sitemap-caption strong {
+      color: var(--green-dark);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+    }
+
+    /* ─── INVESTMENT ─────────────────────────── */
+    .investment { background: var(--white); }
+
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
+
+    .pricing-table th {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      color: var(--muted);
+      padding: 10px 16px;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .pricing-table th:last-child { text-align: right; }
+
+    .pricing-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+      vertical-align: top;
+    }
+
+    .pricing-table td:last-child {
+      text-align: right;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--green-dark);
+      white-space: nowrap;
+    }
+
+    .pricing-table .row-section td {
+      background: var(--cream);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      color: var(--muted);
+      padding: 8px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pricing-table .row-total td {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--charcoal);
+      padding: 18px 16px;
+      border-top: 2px solid var(--green);
+      border-bottom: 2px solid var(--green);
+      background: var(--green-light);
+    }
+
+    .pricing-table .row-total td:last-child {
+      font-size: 1.1rem;
+      color: var(--green-dark);
+      font-weight: 700;
+    }
+
+    .pricing-table .row-monthly td {
+      color: var(--body);
+    }
+
+    .pricing-table .row-monthly td:last-child {
+      color: var(--green);
+    }
+
+    .price-note {
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: block;
+      margin-top: 2px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+    }
+
+    .price-addon {
+      margin-top: 20px;
+      padding: 16px 20px;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .price-addon-info { }
+
+    .price-addon-label {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--charcoal);
+      margin-bottom: 3px;
+    }
+
+    .price-addon-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .price-addon-amount {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--green-dark);
+      white-space: nowrap;
+    }
+
+    /* ─── TIMELINE ───────────────────────────── */
+    .timeline-section { background: var(--cream); }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 8px;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 79px;
+      top: 12px;
+      bottom: 12px;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 12px 0;
+    }
+
+    .timeline-week {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-align: right;
+      padding-top: 2px;
+    }
+
+    .timeline-content {
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .timeline-content::before {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: 8px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--green);
+      border: 2px solid var(--white);
+      box-shadow: 0 0 0 1px var(--green);
+    }
+
+    .timeline-milestone {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--charcoal);
+      margin-bottom: 2px;
+    }
+
+    .timeline-detail {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* ─── NOT INCLUDED ───────────────────────── */
+    .not-included { background: var(--white); }
+
+    .not-included-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .not-included-list li {
+      font-size: 0.875rem;
+      color: var(--muted);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.5;
+    }
+
+    .not-included-list li::before {
+      content: '×';
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 1rem;
+      flex-shrink: 0;
+      line-height: 1.3;
+    }
+
+    /* ─── NEXT STEPS ─────────────────────────── */
+    .next-steps {
+      background: var(--green-dark);
+      background-image: radial-gradient(ellipse at 20% 80%, rgba(45,127,60,0.3) 0%, transparent 60%);
+    }
+
+    .next-steps h2 { color: var(--white); }
+    .next-steps h4 { color: rgba(255,255,255,0.5); }
+
+    .next-steps p {
+      color: rgba(255,255,255,0.8);
+      font-size: 1rem;
+    }
+
+    .steps-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 20px 0 28px;
+    }
+
+    .steps-list li {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--green-mid);
+      background: rgba(45,127,60,0.2);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-text {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.85);
+      padding-top: 4px;
+      line-height: 1.5;
+    }
+
+    .contact-block {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 24px;
+      margin-top: 4px;
+    }
+
+    .contact-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .contact-details {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .contact-details a {
+      color: var(--green-mid);
+      text-decoration: none;
+    }
+
+    /* ─── FOOTER ─────────────────────────────── */
+    .proposal-footer {
+      background: var(--charcoal);
+      padding: 24px 0;
+      text-align: center;
+    }
+
+    .proposal-footer p {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.3);
+      margin: 0;
+    }
+
+    /* ─── MOBILE ─────────────────────────────── */
+    @media screen and (max-width: 768px) {
+      .container { padding: 0 20px; }
+      section { padding: 40px 0; }
+
+      .header-inner { flex-direction: column; gap: 16px; }
+      .header-meta { text-align: left; }
+      .header-prepared { flex-wrap: wrap; gap: 16px; }
+      .header-title { font-size: 1.5rem; }
+
+      h2 { font-size: 1.4rem; }
+
+      .option-grid { grid-template-columns: 1fr; }
+
+      .retainer-items { grid-template-columns: 1fr; }
+
+      .pricing-table th:nth-child(2),
+      .pricing-table td:nth-child(2) { display: none; }
+
+      .not-included-list { grid-template-columns: 1fr; }
+
+      .sitemap-wrapper { overflow-x: scroll; }
+
+      .timeline::before { left: 59px; }
+      .timeline-item { grid-template-columns: 60px 1fr; }
+    }
+
+    /* ─── PRINT ──────────────────────────────── */
+    @page {
+      margin: 0;
+    }
+
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      html, body {
+        height: auto !important;
+        overflow: visible !important;
+      }
+      body {
+        padding: 12mm 14mm 0 !important;
+      }
+      .gap-item, .timeline-item, .retainer-block, .option-card {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      /* Prevent thead from repeating at the top of each page */
+      .pricing-table thead {
+        display: table-row-group !important;
+      }
+      /* Sitemap: scale down to fit print width */
+      .sitemap-wrapper {
+        overflow: visible !important;
+      }
+      .sm-diagram {
+        zoom: 0.72;
+      }
+      /* Total rows: apply background + color to td (not tr) so Chrome prints them */
+      .pricing-table .row-total td {
+        background: #EAF4EC !important;
+        color: #1E2620 !important;
+      }
+      .pricing-table .row-total td:last-child {
+        color: #1C4A25 !important;
+        font-size: 1.1rem !important;
+        font-weight: 700 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ HEADER ═══════════════════════════════════════════════════ -->
+  <header class="proposal-header">
+    <div class="container">
+      <div class="header-inner">
+        <div class="header-logo">
+          <img src="data:image/webp;base64,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" alt="Super Laundry Cincinnati">
+        </div>
+        <div class="header-meta">
+          <div class="header-title">Digital Marketing Proposal</div>
+          <div class="header-sub">Super Laundry Cincinnati</div>
+        </div>
+      </div>
+      <div class="header-prepared">
+        <div class="header-prepared-item">
+          <span class="header-prepared-label">Prepared for</span>
+          <span class="header-prepared-value">Super Laundry Cincinnati</span>
+        </div>
+        <div class="header-prepared-item">
+          <span class="header-prepared-label">Date</span>
+          <span class="header-prepared-value">March 27, 2026</span>
+        </div>
+        <div class="header-prepared-item">
+          <span class="header-prepared-label">Prepared by</span>
+          <span class="header-prepared-value">[Your Name / Agency]</span>
+        </div>
+      </div>
+      <div class="header-accent-bar"></div>
+    </div>
+  </header>
+
+  <!-- ═══ OPENING ══════════════════════════════════════════════════ -->
+  <section class="opening">
+    <div class="container">
+      <div class="section-label">Overview</div>
+      <h2>Based on Our Audit</h2>
+      <p class="opening-text">
+        We ran a full digital presence audit on Super Laundry Cincinnati — website, Google Business Profile, search rankings, and AI search visibility. The findings confirmed what the search data suggests: the operational foundation is strong (6 locations, 24/7 access, 100+ machines, drop-off and pickup services), but the digital presence doesn't reflect any of it. The most urgent issue wasn't outdated copy or a dated website — it was that your Squarespace robots.txt file is actively blocking every major AI crawler, including the ones that power ChatGPT, Google AI Overviews, and Perplexity. While competitors can be recommended to anyone asking an AI assistant for a Cincinnati laundromat, Super Laundry can't appear in those results at all. That's a platform default most businesses don't know is on.
+      </p>
+      <p class="opening-text">
+        This proposal covers the work required to fix the foundational gaps, complete and optimize the HubSpot rebuild currently in progress, and establish a monthly growth program to build rankings and Google Business Profile presence over time.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ WHAT WE'RE FIXING ════════════════════════════════════════ -->
+  <section class="fixing">
+    <div class="container">
+      <div class="section-label">Audit Findings</div>
+      <h2>What We're Fixing</h2>
+
+      <div class="gap-list">
+
+        <div class="gap-item gap-critical">
+          <div class="gap-number">01</div>
+          <div class="gap-content">
+            <div class="gap-title">AI search is completely blocked — you can't be recommended by ChatGPT or Google AI Overviews</div>
+            <div class="gap-detail">When someone asks ChatGPT, Perplexity, or Google's AI Overviews for a laundromat in Cincinnati, AI assistants pull from websites they're allowed to read. Squarespace's default settings block all of them — and because your HubSpot rebuild needs the right configuration at launch, this must be a day-one requirement before the new site goes live.</div>
+            <span class="gap-finding">robots.txt blocks: GPTBot, ClaudeBot, anthropic-ai, Google-Extended — all four major AI crawlers</span>
+          </div>
+        </div>
+
+        <div class="gap-item">
+          <div class="gap-number">02</div>
+          <div class="gap-content">
+            <div class="gap-title">Google can't determine what you are, where you are, or what you offer</div>
+            <div class="gap-detail">Your production site has zero H1 tags sitewide — none. The LocalBusiness schema that exists has no address, no phone number, and no hours. Google needs these signals to rank you for searches like "laundromat near me" or "wash and fold Cincinnati." Without them, you're invisible for every search that isn't someone already looking up your name.</div>
+            <span class="gap-finding">H1 tags found: 0 across entire site · LocalBusiness schema: name only, no address/phone/hours</span>
+          </div>
+        </div>
+
+        <div class="gap-item">
+          <div class="gap-number">03</div>
+          <div class="gap-content">
+            <div class="gap-title">Your Google Business Profile listings present as six unrelated businesses, not one chain</div>
+            <div class="gap-detail">Google uses your business name across all listings to build its understanding of your brand. Right now, four different naming formats are in use across six locations — which means Google doesn't recognize Super Laundry as a unified business. Fixing this is a one-time cleanup with compounding long-term benefit as Google builds entity recognition across all six GBPs.</div>
+            <span class="gap-finding">Active formats: "Super Laundry" / "Super Laundry-Avondale" / "Super Laundry North College Hill" / "Westwood Super Laundry"</span>
+          </div>
+        </div>
+
+        <div class="gap-item">
+          <div class="gap-number">04</div>
+          <div class="gap-content">
+            <div class="gap-title">The production site is years out of date — customers are landing on an incomplete, dated impression</div>
+            <div class="gap-detail">Your live site references "Coronavirus concerns" in the hero section, lists only 4 of 6 locations, uses outdated "smart card" language, and has a 3-item navigation. Any customer who finds you through search and lands on the production site gets a version of the business that doesn't exist anymore. The HubSpot rebuild addresses this — but it needs to be the right build from an SEO standpoint.</div>
+            <span class="gap-finding">Hero copy: "Coronavirus concerns" still live · Locations shown: 4 of 6 · Nav items: 3</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ENGAGEMENT ═══════════════════════════════════════════════ -->
+  <section class="engagement">
+    <div class="container">
+      <div class="section-label">The Engagement</div>
+      <h2>How We Work Together</h2>
+
+      <div class="option-grid">
+
+        <!-- Option A -->
+        <div class="option-card">
+          <div class="option-header">
+            <div>
+              <div class="option-label">Option A</div>
+              <div class="option-name">Foundation Only</div>
+            </div>
+          </div>
+          <div class="option-body">
+            <div class="option-phase">Phase 1 — Foundation Setup</div>
+            <ul class="deliverable-list">
+              <li>Google Business Profile optimization across all 6 listings — unified naming, categories, descriptions, hours, and initial post</li>
+              <li>H1 tags, title tags, and meta descriptions written and implemented on all existing pages</li>
+              <li>LocalBusiness schema added to homepage with complete address, phone, hours, and services</li>
+              <li>Keyword mapping — each service page mapped to its primary target keyword</li>
+            </ul>
+            <div class="option-note">Option A optimizes the existing Squarespace site. The platform remains a ceiling — Squarespace limits crawlability, schema depth, and AI content structure. The issues are fixed, but the structural constraint stays.</div>
+          </div>
+        </div>
+
+        <!-- Option B -->
+        <div class="option-card recommended">
+          <div class="option-header">
+            <div>
+              <div class="option-label">Option B</div>
+              <div class="option-name">Foundation + Website Rebuild</div>
+            </div>
+            <span class="option-rec-badge">Recommended</span>
+          </div>
+          <div class="option-body">
+            <div class="option-phase">Phase 1 — Foundation Setup</div>
+            <ul class="deliverable-list">
+              <li>Google Business Profile optimization across all 6 listings — unified naming, categories, descriptions, hours, and initial post</li>
+              <li>Entity clarity content — what Super Laundry is, where it operates, who it serves (structures you for GBP + AI recognition)</li>
+            </ul>
+
+            <div class="option-phase">Phase 2 — HubSpot Website Rebuild</div>
+            <ul class="deliverable-list">
+              <li>17-page SEO-structured site built on HubSpot — H1s, meta, schema, and keyword mapping built in from the start</li>
+              <li>4 service pages targeting 28,000+/mo in near-me searches (wash &amp; fold, pickup &amp; delivery, 24-hour, self-service)</li>
+              <li>6 individual location pages with full LocalBusiness schema, accurate hours, and Google Maps integration</li>
+              <li>AI search content blocks (FAQ schema) on every service and location page — structured for ChatGPT and Google AI Overviews</li>
+              <li>HubSpot CRM configured — every form submission captured as a contact, lead pipeline set up, source tracking active</li>
+              <li>Meeting scheduler integration — no more back-and-forth email for booking pickups or drop-off consultations</li>
+              <li>Mobile-optimized, fast-loading, printable service pages</li>
+            </ul>
+
+            <div class="hubspot-callout">
+              <div class="hubspot-callout-label">Why HubSpot matters beyond the website</div>
+              <p>Every business running on HubSpot knows exactly where their leads come from, has every contact in one place, and never loses a follow-up. Most laundromats at this scale track pickup/delivery requests by phone and text. HubSpot turns that into a pipeline — New Inquiry → Contacted → Confirmed. It's the infrastructure that makes growth trackable.</p>
+            </div>
+
+            <div class="option-note">We recommend Option B because the Squarespace platform blocks the full SEO and AI search work this business needs. Option A is available if you'd prefer to move faster or defer the rebuild.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Growth Retainer -->
+      <div class="retainer-block">
+        <div class="retainer-header">
+          <div>
+            <h3 style="margin-bottom:4px;">Growth Retainer</h3>
+            <div style="font-size:0.82rem;color:var(--muted);">Ongoing monthly — 3-month minimum, month-to-month after</div>
+          </div>
+          <div class="retainer-price">
+            $995<span>/month</span>
+            <small>Either option</small>
+          </div>
+        </div>
+        <div class="retainer-items">
+          <div class="retainer-item">4 Google Business Profile posts/month</div>
+          <div class="retainer-item">1 SEO-optimized blog post/month</div>
+          <div class="retainer-item">Review monitoring &amp; response templates</div>
+          <div class="retainer-item">Monthly keyword rank tracking</div>
+          <div class="retainer-item">Monthly performance report</div>
+          <div class="retainer-item">Traffic, GBP views, calls, rankings</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ SITE ARCHITECTURE ════════════════════════════════════════ -->
+  <section class="sitemap-section">
+    <div class="container">
+      <div class="section-label">Option B — Site Structure</div>
+      <h2>Proposed Site Architecture</h2>
+      <p style="margin-bottom:28px;font-size:0.9rem;color:var(--muted);">Every page is built with its target keyword, H1, meta description, and schema from day one. Green-bordered cards are SEO-targeted. Dashed-bordered cards are utility pages.</p>
+
+      <div class="sitemap-wrapper">
+        <div class="sm-diagram">
+
+          <!-- TIER 1: Homepage -->
+          <div class="sm-t1">
+            <div class="sm-card sm-home">
+              <div class="sm-name" style="color:#fff;">Homepage</div>
+              <div class="sm-slug" style="color:rgba(255,255,255,0.55);">/</div>
+              <div class="sm-kw" style="color:rgba(255,255,255,0.75);">laundromat cincinnati · 260/mo</div>
+            </div>
+          </div>
+
+          <!-- TIER 2: Two hubs side by side -->
+          <div class="sm-t2">
+            <!-- left vline from homepage -->
+            <div class="sm-t2-line"></div>
+
+            <div class="sm-two-branches">
+
+              <!-- SERVICES BRANCH -->
+              <div class="sm-branch">
+                <div class="sm-card sm-hub">
+                  <div class="sm-name">Services Hub</div>
+                  <div class="sm-slug">/services</div>
+                  <div class="sm-kw">laundry service cincinnati · 320/mo</div>
+                </div>
+                <div class="sm-children sm-svc-children">
+                  <div class="sm-card sm-kw-card">
+                    <div class="sm-name">Self-Service</div>
+                    <div class="sm-slug">/services/self-service</div>
+                    <div class="sm-kw">self service laundry near me · 1,900/mo</div>
+                  </div>
+                  <div class="sm-card sm-kw-card">
+                    <div class="sm-name">Wash &amp; Fold</div>
+                    <div class="sm-slug">/services/wash-and-fold</div>
+                    <div class="sm-kw">wash and fold near me · 14,800/mo</div>
+                  </div>
+                  <div class="sm-card sm-kw-card">
+                    <div class="sm-name">Pickup &amp; Delivery</div>
+                    <div class="sm-slug">/services/pickup-delivery</div>
+                    <div class="sm-kw">laundry pickup &amp; delivery near me · 1,300/mo</div>
+                  </div>
+                  <div class="sm-card sm-kw-card">
+                    <div class="sm-name">24-Hour Laundry</div>
+                    <div class="sm-slug">/services/24-hour-laundry</div>
+                    <div class="sm-kw">24 hour laundry near me · 6,600/mo</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- LOCATIONS BRANCH -->
+              <div class="sm-branch">
+                <div class="sm-card sm-hub">
+                  <div class="sm-name">Locations Hub</div>
+                  <div class="sm-slug">/locations</div>
+                  <div class="sm-kw">super laundry locations · 20/mo</div>
+                </div>
+                <div class="sm-children sm-loc-children">
+                  <div class="sm-card">
+                    <div class="sm-name">Springdale</div>
+                    <div class="sm-slug">/locations/springdale</div>
+                  </div>
+                  <div class="sm-card">
+                    <div class="sm-name">Avondale</div>
+                    <div class="sm-slug">/locations/avondale</div>
+                  </div>
+                  <div class="sm-card">
+                    <div class="sm-name">Bond Hill</div>
+                    <div class="sm-slug">/locations/bond-hill</div>
+                  </div>
+                  <div class="sm-card">
+                    <div class="sm-name">Westwood</div>
+                    <div class="sm-slug">/locations/westwood</div>
+                  </div>
+                  <div class="sm-card">
+                    <div class="sm-name">North College Hill</div>
+                    <div class="sm-slug">/locations/north-college-hill</div>
+                  </div>
+                  <div class="sm-card sm-allison">
+                    <div class="sm-name">Allison St</div>
+                    <div class="sm-slug">/locations/allison-st</div>
+                    <div class="sm-kw">coin laundromat near me · 2,900/mo</div>
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /.sm-two-branches -->
+          </div><!-- /.sm-t2 -->
+
+          <!-- UTILITY ROW -->
+          <div class="sm-utility">
+            <div class="sm-card sm-util-card"><div class="sm-name">About</div><div class="sm-slug">/about</div></div>
+            <div class="sm-card sm-util-card"><div class="sm-name">Contact</div><div class="sm-slug">/contact</div></div>
+            <div class="sm-card sm-util-card"><div class="sm-name">FAQ</div><div class="sm-slug">/faq</div></div>
+            <div class="sm-card sm-util-card"><div class="sm-name">Store Policies</div><div class="sm-slug">/store-policies</div></div>
+          </div>
+
+        </div><!-- /.sm-diagram -->
+      </div>
+
+      <div class="sitemap-caption">
+        <strong>17 pages</strong> · <strong>~28,140/mo</strong> in combined keyword search volume across 8 SEO-targeted pages
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ INVESTMENT ═══════════════════════════════════════════════ -->
+  <section class="investment">
+    <div class="container">
+      <div class="section-label">Investment</div>
+      <h2>Pricing</h2>
+
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th>Details</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr class="row-section"><td colspan="3">Option A — Foundation Only (one-time)</td></tr>
+          <tr>
+            <td><strong>Foundation — Optimize in Place</strong></td>
+            <td>Google Business Profile optimization, on-page SEO (H1s, meta, title tags), LocalBusiness schema, keyword mapping</td>
+            <td>$1,750</td>
+          </tr>
+          <tr class="row-total">
+            <td><strong>Option A Total</strong></td>
+            <td></td>
+            <td>$1,750</td>
+          </tr>
+
+          <tr class="row-section"><td colspan="3">Option B — Foundation + Rebuild (one-time) · Recommended</td></tr>
+          <tr>
+            <td><strong>Foundation — With Rebuild</strong></td>
+            <td>Google Business Profile optimization across all 6 listings + entity clarity content</td>
+            <td>$1,250</td>
+          </tr>
+          <tr>
+            <td><strong>Website Rebuild — Extended</strong></td>
+            <td>17-page HubSpot build · H1s, meta, schema, AI content blocks · HubSpot CRM + pipeline + source tracking</td>
+            <td>$3,500</td>
+          </tr>
+          <tr class="row-total">
+            <td><strong>Option B Total</strong></td>
+            <td></td>
+            <td>$4,750</td>
+          </tr>
+
+          <tr class="row-section"><td colspan="3">Monthly (either option)</td></tr>
+          <tr class="row-monthly">
+            <td><strong>Growth Retainer</strong></td>
+            <td>4 Google Business Profile posts, 1 blog post, review monitoring, rank tracking, monthly report · 3-month minimum</td>
+            <td>$995/mo</td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <div class="price-addon">
+        <div class="price-addon-info">
+          <div class="price-addon-label">Optional Add-On: Content Rewrite</div>
+          <div class="price-addon-desc">Full rewrite of service page copy, homepage messaging, and about page. Recommended if existing copy is thin or off-brand.</div>
+        </div>
+        <div class="price-addon-amount">+$1,000</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ TIMELINE ════════════════════════════════════════════════ -->
+  <section class="timeline-section">
+    <div class="container">
+      <div class="section-label">Timeline</div>
+      <h2>Delivery Schedule</h2>
+      <p style="font-size:0.85rem;color:var(--muted);margin-bottom:24px;">Option B — Foundation + Extended Rebuild</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-week">Week 1</div>
+          <div class="timeline-content">
+            <div class="timeline-milestone">Google Business Profile optimization live</div>
+            <div class="timeline-detail">All 6 listings unified, categories confirmed, descriptions updated, hours verified, first GBP post published</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-week">Week 1–2</div>
+          <div class="timeline-content">
+            <div class="timeline-milestone">Site architecture &amp; design direction approved</div>
+            <div class="timeline-detail">Page structure, URL scheme, and design direction confirmed before build begins — no rework after approval</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-week">Week 2–4</div>
+          <div class="timeline-content">
+            <div class="timeline-milestone">HubSpot build in progress</div>
+            <div class="timeline-detail">All 17 pages built with keyword-optimized H1s, meta descriptions, schema, and AI content blocks. CRM pipeline and source tracking configured.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-week">Week 4–5</div>
+          <div class="timeline-content">
+            <div class="timeline-milestone">Review &amp; QA</div>
+            <div class="timeline-detail">Full site review — mobile, desktop, schema validation, internal linking audit. Revisions incorporated.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-week">Week 5–6</div>
+          <div class="timeline-content">
+            <div class="timeline-milestone">Site live + Growth Retainer begins</div>
+            <div class="timeline-detail">New HubSpot site published. AI crawlers confirmed open. First monthly report delivered at end of Month 1.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ NOT INCLUDED ════════════════════════════════════════════ -->
+  <section class="not-included">
+    <div class="container">
+      <div class="section-label">Scope</div>
+      <h2>What's Not Included</h2>
+      <p style="font-size:0.875rem;color:var(--muted);margin-bottom:20px;">The following are outside the scope of this engagement. These can be added or scoped separately if needed.</p>
+      <ul class="not-included-list">
+        <li>Paid advertising (Google Ads, Meta/Facebook campaigns)</li>
+        <li>Photography or video production</li>
+        <li>Reputation management (personally responding to reviews)</li>
+        <li>Laundry Love program administration or coordination</li>
+        <li>Rewards program app development or backend changes</li>
+        <li>Email marketing campaigns or newsletter setup</li>
+        <li>Social media content creation (covered in Growth Retainer separately)</li>
+        <li>Ongoing copywriting beyond the initial build</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ NEXT STEPS ══════════════════════════════════════════════ -->
+  <section class="next-steps">
+    <div class="container">
+      <div class="section-label" style="color:rgba(255,255,255,0.5);border-color:rgba(255,255,255,0.2);">Next Steps</div>
+      <h2>Ready to Move Forward?</h2>
+      <p>Review this proposal and let us know which direction you'd like to go. If you have questions or want to talk through any part of it, we're happy to jump on a call.</p>
+
+      <ol class="steps-list">
+        <li>
+          <span class="step-num">1</span>
+          <span class="step-text">Select Option A or Option B and confirm whether to include the Growth Retainer and/or Content Rewrite add-on</span>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <span class="step-text">Sign and return the engagement agreement — we'll send it within 24 hours of your decision</span>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <span class="step-text">We kick off with Google Business Profile optimization in Week 1 — no waiting for the build to start seeing results</span>
+        </li>
+      </ol>
+
+      <div class="contact-block">
+        <div class="contact-name">[Your Name]</div>
+        <div class="contact-details">
+          [Your Agency Name] &nbsp;·&nbsp;
+          <a href="mailto:you@youragency.com">you@youragency.com</a> &nbsp;·&nbsp;
+          [Your Phone]
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ══════════════════════════════════════════════════ -->
+  <footer class="proposal-footer">
+    <div class="container">
+      <p>Prepared for Super Laundry Cincinnati · March 27, 2026 · Confidential</p>
+    </div>
+  </footer>
+
+</body>
+</html>

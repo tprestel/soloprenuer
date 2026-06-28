@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero Section — AFK Example</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Saira:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Saira', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+    }
+    h1,h2,h3 { font-family: 'Chakra Petch', sans-serif; }
+    a { color: inherit; text-decoration: none; }
+
+    .hs {
+      --hs-accent: #F25B19;
+      --hs-bg: #0a0a0a;
+      --hs-fg: #fff;
+      --hs-muted: rgba(255,255,255,0.5);
+      --hs-border: rgba(255,255,255,0.06);
+      --hs-muted-bg: rgba(255,255,255,0.04);
+      overflow: hidden;
+    }
+
+    /* ─── Header ────────────────────────────────────────── */
+    .hs-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      padding: 8px;
+    }
+
+    .hs-nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      transition: all 0.3s ease;
+      border-radius: 0;
+      border: 1px solid transparent;
+    }
+
+    .hs-nav.scrolled .hs-nav-inner {
+      max-width: 800px;
+      background: rgba(10,10,10,0.7);
+      backdrop-filter: blur(12px);
+      border-color: var(--hs-border);
+      border-radius: 16px;
+      padding: 0 20px;
+    }
+
+    .hs-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .hs-logo img {
+      height: 32px;
+      width: auto;
+      background: #fff;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .hs-nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .hs-nav-links a {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.45);
+      transition: color 0.15s;
+    }
+    .hs-nav-links a:hover { color: #fff; }
+
+    .hs-nav-ctas { display: flex; gap: 8px; }
+
+    .hs-nav-btn {
+      padding: 7px 16px;
+      border-radius: 6px;
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid var(--hs-border);
+      background: transparent;
+      color: rgba(255,255,255,0.6);
+    }
+    .hs-nav-btn:hover { color: #fff; border-color: rgba(255,255,255,0.15); }
+
+    .hs-nav-btn-primary {
+      background: var(--hs-accent);
+      color: #111;
+      border-color: var(--hs-accent);
+    }
+    .hs-nav-btn-primary:hover { opacity: 0.9; }
+
+    /* ─── Hero ──────────────────────────────────────────── */
+    .hs-hero {
+      position: relative;
+      padding-top: 140px;
+      text-align: center;
+    }
+
+    .hs-hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hs-hero-bg img {
+      width: 100%;
+      position: absolute;
+      top: 80px;
+      opacity: 0.15;
+      animation: hs-fadeIn 2s ease forwards;
+      animation-delay: 0.8s;
+      opacity: 0;
+    }
+
+    .hs-hero-bg-fade {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: radial-gradient(125% 125% at 50% 100%, transparent 0%, var(--hs-bg) 75%);
+    }
+
+    .hs-hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .hs-anim {
+      opacity: 0;
+      filter: blur(12px);
+      transform: translateY(12px);
+      animation: hs-fadeIn 1.2s ease forwards;
+    }
+    .hs-anim:nth-child(1) { animation-delay: 0.2s; }
+    .hs-anim:nth-child(2) { animation-delay: 0.4s; }
+    .hs-anim:nth-child(3) { animation-delay: 0.55s; }
+    .hs-anim:nth-child(4) { animation-delay: 0.7s; }
+    .hs-anim:nth-child(5) { animation-delay: 0.85s; }
+
+    @keyframes hs-fadeIn {
+      to { opacity: 1; filter: blur(0); transform: translateY(0); }
+    }
+
+    .hs-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 5px 5px 5px 16px;
+      border-radius: 50px;
+      border: 1px solid var(--hs-border);
+      background: var(--hs-muted-bg);
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 36px;
+      transition: background 0.2s;
+    }
+    .hs-pill:hover { background: rgba(255,255,255,0.06); }
+
+    .hs-pill-sep { width: 1px; height: 16px; background: rgba(255,255,255,0.1); }
+
+    .hs-pill-arrow {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--hs-accent);
+    }
+
+    .hs-h1 {
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      color: #fff;
+      max-width: 860px;
+      margin: 0 auto 28px;
+    }
+
+    .hs-sub {
+      font-size: clamp(16px, 2vw, 18px);
+      color: rgba(255,255,255,0.45);
+      max-width: 540px;
+      margin: 0 auto 40px;
+      line-height: 1.65;
+    }
+
+    .hs-ctas {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .hs-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 13px 28px;
+      border-radius: 10px;
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .hs-btn-primary-wrap {
+      background: rgba(242,91,25,0.15);
+      border-radius: 12px;
+      border: 1px solid rgba(242,91,25,0.2);
+      padding: 2px;
+    }
+
+    .hs-btn-primary {
+      background: var(--hs-accent);
+      color: #111;
+    }
+    .hs-btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(242,91,25,0.25);
+    }
+
+    .hs-btn-ghost {
+      background: transparent;
+      color: rgba(255,255,255,0.7);
+      border: none;
+    }
+    .hs-btn-ghost:hover { color: #fff; background: rgba(255,255,255,0.04); }
+
+    /* Screenshot */
+    .hs-screenshot-wrap {
+      position: relative;
+      margin-top: 8px;
+      padding: 0 8px;
+    }
+
+    .hs-screenshot-fade {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      background: linear-gradient(to bottom, transparent 35%, var(--hs-bg));
+      pointer-events: none;
+    }
+
+    .hs-screenshot {
+      max-width: 960px;
+      margin: 0 auto;
+      border-radius: 16px;
+      border: 1px solid var(--hs-border);
+      overflow: hidden;
+      background: #111;
+      padding: 12px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+    }
+
+    .hs-screenshot img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+    }
+
+    /* Logo strip */
+    .hs-logos {
+      padding: 48px 24px 80px;
+      max-width: 680px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hs-logos-label {
+      text-align: center;
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 28px;
+    }
+
+    .hs-logos-grid {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .hs-logos-grid span {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+      transition: color 0.3s;
+    }
+
+    .hs-logos-grid span:hover { color: rgba(255,255,255,0.5); }
+
+    @media (max-width: 768px) {
+      .hs-nav-links { display: none; }
+      .hs-hero { padding-top: 100px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hs">
+    <header>
+      <nav class="hs-nav" id="hs-nav">
+        <div class="hs-nav-inner">
+          <a href="#" class="hs-logo"><img src="../assets/logo/AdrenalineFixKartingMaster.png" alt="Adrenaline Fix Karting"></a>
+          <ul class="hs-nav-links">
+            <li><a href="#">Arrive & Drive</a></li>
+            <li><a href="#">Race Prep</a></li>
+            <li><a href="#">Full Team Support</a></li>
+            <li><a href="#">LO206</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+          <div class="hs-nav-ctas">
+            <a href="tel:6143705152" class="hs-nav-btn">614-370-5152</a>
+            <a href="#" class="hs-nav-btn hs-nav-btn-primary">Get Started</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <section class="hs-hero">
+      <div class="hs-hero-bg">
+        <img src="../assets/photos/AFK%202025_%20KRA%20%2310/_MSA1908.jpg" alt="">
+        <div class="hs-hero-bg-fade"></div>
+      </div>
+
+      <div class="hs-hero-inner">
+        <div class="hs-anim">
+          <a href="#" class="hs-pill">
+            <span>Columbus, Ohio · Est. 2007 · 19 Years Racing</span>
+            <span class="hs-pill-sep"></span>
+            <span class="hs-pill-arrow">&rarr;</span>
+          </a>
+        </div>
+
+        <h1 class="hs-h1 hs-anim">Columbus, Ohio's Go Kart Racing Team</h1>
+
+        <p class="hs-sub hs-anim">Full-service kart racing. We build the kart, prep it, haul it, crew it, and coach you. You show up. You race. We handle the rest.</p>
+
+        <div class="hs-ctas hs-anim">
+          <div class="hs-btn-primary-wrap">
+            <a href="#" class="hs-btn hs-btn-primary">Book Arrive &amp; Drive</a>
+          </div>
+          <a href="tel:6143705152" class="hs-btn hs-btn-ghost">Call Jim: 614-370-5152</a>
+        </div>
+
+        <div class="hs-screenshot-wrap hs-anim">
+          <div class="hs-screenshot-fade"></div>
+          <div class="hs-screenshot">
+            <img src="../assets/photos/AFK%202025_%20KRA%20%2310/_MSA3083.jpg" alt="Racing at NCMP">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hs-logos">
+      <div class="hs-logos-label">Team Partners</div>
+      <div class="hs-logos-grid">
+        <span>MAGiK Kart</span>
+        <span>GreyHound Racing Seats</span>
+        <span>Briggs LO206</span>
+        <span>NCMP</span>
+      </div>
+    </section>
+  </div>
+
+  <script>
+  (function() {
+    var nav = document.getElementById('hs-nav');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+  })();
+  </script>
+
+</body>
+</html>

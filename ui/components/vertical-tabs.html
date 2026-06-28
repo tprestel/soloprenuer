@@ -1,0 +1,446 @@
+<!--
+  VERTICAL TABS — Reusable Component
+  ────────────────────────────────────
+  Left: numbered tab buttons with active progress bar + expanding description.
+  Right: image panel that slides vertically on change.
+  Auto-plays, pauses on hover, prev/next arrows.
+
+  TO CUSTOMIZE:
+  - Edit the .vt-tab items (number, title, description) and .vt-slide images
+  - Change --vt-duration for auto-play speed (ms, default 5000)
+  - Change --vt-accent for the progress bar color
+-->
+
+<style>
+  .vt {
+    width: 100%;
+    padding: 48px 0;
+    --vt-duration: 5000;
+    --vt-accent: currentColor;
+    overflow: hidden;
+  }
+
+  .vt-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  /* ─── Left: tabs ──────────────────────────────────────── */
+  .vt-left {
+    display: flex;
+    flex-direction: column;
+    padding-top: 8px;
+  }
+
+  .vt-heading {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+
+  .vt-subhead {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    opacity: 0.45;
+    margin-bottom: 24px;
+    margin-left: 2px;
+  }
+
+  .vt-tabs {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vt-tab {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 14px 0;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    border-top: 1px solid rgba(128,128,128,0.15);
+    transition: color 0.4s ease;
+    color: rgba(128,128,128,0.5);
+  }
+
+  .vt-tab:first-child {
+    border-top: none;
+  }
+
+  .vt-tab.active {
+    color: inherit;
+  }
+
+  .vt-tab:not(.active):hover {
+    color: inherit;
+  }
+
+  /* Progress bar track */
+  .vt-progress-track {
+    position: absolute;
+    left: -20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(128,128,128,0.15);
+  }
+
+  .vt-progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background: var(--vt-accent);
+    transition: none;
+  }
+
+  .vt-tab.active .vt-progress-fill {
+    animation: vt-fill calc(var(--vt-duration) * 1ms) linear forwards;
+  }
+
+  .vt-tab.active.paused .vt-progress-fill {
+    animation-play-state: paused;
+  }
+
+  @keyframes vt-fill {
+    from { height: 0%; }
+    to { height: 100%; }
+  }
+
+  .vt-tab-num {
+    font-size: 9px;
+    font-weight: 500;
+    opacity: 0.5;
+    margin-top: 6px;
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+  }
+
+  .vt-tab-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+  }
+
+  .vt-tab-title {
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  .vt-tab-desc {
+    font-size: 14px;
+    line-height: 1.55;
+    max-width: 360px;
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease;
+  }
+
+  .vt-tab.active .vt-tab-desc {
+    opacity: 0.55;
+    visibility: visible;
+    height: auto;
+  }
+
+  /* ─── Right: image gallery ────────────────────────────── */
+  .vt-gallery {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .vt-gallery-frame {
+    position: relative;
+    aspect-ratio: 16 / 11;
+    border-radius: 24px;
+    overflow: hidden;
+    background: rgba(128,128,128,0.1);
+    border: 1px solid rgba(128,128,128,0.12);
+  }
+
+  .vt-slide {
+    position: absolute;
+    inset: 0;
+    transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.4s ease;
+    will-change: transform, opacity;
+  }
+
+  .vt-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.7s ease;
+  }
+
+  .vt-slide:hover img {
+    transform: scale(1.04);
+  }
+
+  .vt-slide.active {
+    transform: translateY(0);
+    opacity: 1;
+    z-index: 2;
+  }
+
+  .vt-slide.exit-up {
+    transform: translateY(100%);
+    opacity: 0;
+    z-index: 1;
+  }
+
+  .vt-slide.exit-down {
+    transform: translateY(-100%);
+    opacity: 0;
+    z-index: 1;
+  }
+
+  .vt-slide.hidden {
+    transform: translateY(0);
+    opacity: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Bottom gradient */
+  .vt-slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.15) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  /* Nav arrows */
+  .vt-arrows {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+  }
+
+  .vt-arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: #111;
+    transition: all 0.2s ease;
+  }
+
+  .vt-arrow:hover {
+    background: #fff;
+  }
+
+  .vt-arrow:active {
+    transform: scale(0.92);
+  }
+
+  /* ─── Responsive ──────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .vt-inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .vt-left {
+      order: 2;
+    }
+
+    .vt-gallery {
+      order: 1;
+    }
+
+    .vt-gallery-frame {
+      aspect-ratio: 4 / 5;
+      border-radius: 20px;
+    }
+
+    .vt-progress-track {
+      left: -12px;
+    }
+
+    .vt-tab {
+      padding: 20px 0;
+    }
+  }
+</style>
+
+<!-- ─── MARKUP ──────────────────────────────────────────── -->
+
+<section class="vt">
+  <div class="vt-inner">
+
+    <div class="vt-left">
+      <h2 class="vt-heading">How I can help you</h2>
+      <span class="vt-subhead">(Services)</span>
+
+      <div class="vt-tabs" id="vt-tabs">
+        <button class="vt-tab active" data-index="0">
+          <div class="vt-progress-track"><div class="vt-progress-fill"></div></div>
+          <span class="vt-tab-num">/01</span>
+          <div class="vt-tab-body">
+            <span class="vt-tab-title">Web Design</span>
+            <p class="vt-tab-desc">Creating beautiful, functional, and user-centric digital experiences.</p>
+          </div>
+        </button>
+
+        <button class="vt-tab" data-index="1">
+          <div class="vt-progress-track"><div class="vt-progress-fill"></div></div>
+          <span class="vt-tab-num">/02</span>
+          <div class="vt-tab-body">
+            <span class="vt-tab-title">Framer Development</span>
+            <p class="vt-tab-desc">Building high-performance, animated websites with Framer.</p>
+          </div>
+        </button>
+
+        <button class="vt-tab" data-index="2">
+          <div class="vt-progress-track"><div class="vt-progress-fill"></div></div>
+          <span class="vt-tab-num">/03</span>
+          <div class="vt-tab-body">
+            <span class="vt-tab-title">Branding</span>
+            <p class="vt-tab-desc">Defining your brand's visual identity and voice for a lasting impression.</p>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <div class="vt-gallery" id="vt-gallery">
+      <div class="vt-gallery-frame">
+        <div class="vt-slide active" data-index="0">
+          <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200" alt="Web Design">
+        </div>
+        <div class="vt-slide hidden" data-index="1">
+          <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=1200" alt="Framer Development">
+        </div>
+        <div class="vt-slide hidden" data-index="2">
+          <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200" alt="Branding">
+        </div>
+      </div>
+
+      <div class="vt-arrows">
+        <button class="vt-arrow" id="vt-prev" aria-label="Previous">&larr;</button>
+        <button class="vt-arrow" id="vt-next" aria-label="Next">&rarr;</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── SCRIPT ──────────────────────────────────────────── -->
+<script>
+(function() {
+  var TOTAL = document.querySelectorAll('.vt-tab').length;
+  var DURATION = 5000;
+  var current = 0;
+  var paused = false;
+  var timer;
+
+  var tabs = document.querySelectorAll('.vt-tab');
+  var slides = document.querySelectorAll('.vt-slide');
+  var gallery = document.getElementById('vt-gallery');
+
+  function goTo(index, dir) {
+    if (index === current) return;
+    if (typeof dir === 'undefined') dir = index > current ? 1 : -1;
+
+    // Update slides
+    slides.forEach(function(s, i) {
+      s.classList.remove('active', 'exit-up', 'exit-down', 'hidden');
+      if (i === index) {
+        s.classList.add('active');
+      } else if (i === current) {
+        s.classList.add(dir > 0 ? 'exit-up' : 'exit-down');
+      } else {
+        s.classList.add('hidden');
+      }
+    });
+
+    // Update tabs
+    tabs.forEach(function(t, i) {
+      t.classList.remove('active', 'paused');
+      if (i === index) t.classList.add('active');
+    });
+
+    current = index;
+  }
+
+  function next() {
+    goTo((current + 1) % TOTAL, 1);
+  }
+
+  function prev() {
+    goTo((current - 1 + TOTAL) % TOTAL, -1);
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(function() {
+      if (!paused) next();
+    }, DURATION);
+  }
+
+  // Tab clicks
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      var idx = parseInt(tab.dataset.index, 10);
+      goTo(idx);
+      startTimer();
+    });
+  });
+
+  // Arrows
+  document.getElementById('vt-prev').addEventListener('click', function(e) {
+    e.stopPropagation();
+    prev();
+    startTimer();
+  });
+  document.getElementById('vt-next').addEventListener('click', function(e) {
+    e.stopPropagation();
+    next();
+    startTimer();
+  });
+
+  // Pause on gallery hover
+  gallery.addEventListener('mouseenter', function() {
+    paused = true;
+    var active = document.querySelector('.vt-tab.active');
+    if (active) active.classList.add('paused');
+  });
+  gallery.addEventListener('mouseleave', function() {
+    paused = false;
+    var active = document.querySelector('.vt-tab.active');
+    if (active) active.classList.remove('paused');
+  });
+
+  startTimer();
+})();
+</script>

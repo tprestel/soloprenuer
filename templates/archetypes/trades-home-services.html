@@ -1,0 +1,1942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ironclad Home Services — HVAC, Plumbing & Electrical</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Outfit:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =============================================
+       CSS CUSTOM PROPERTIES
+    ============================================= */
+    :root {
+      --navy:       #0F1F35;
+      --navy-mid:   #1B3A5C;
+      --navy-light: #2A5078;
+      --off-white:  #F4F6F8;
+      --white:      #FFFFFF;
+      --text-dark:  #0F1F35;
+      --orange:     #F05A28;
+      --orange-hov: #D44A1A;
+      --muted:      #8A9BB0;
+      --border:     #E2E8EF;
+      --tint:       #EEF1F5;
+
+      --font-head: 'Bricolage Grotesque', sans-serif;
+      --font-body: 'Outfit', sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+
+      --radius: 4px;
+      --transition: 0.2s ease;
+      --shadow: 0 4px 20px rgba(15,31,53,0.12);
+      --shadow-lg: 0 8px 40px rgba(15,31,53,0.18);
+    }
+
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background: var(--off-white);
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    a { text-decoration: none; color: inherit; }
+
+    ul { list-style: none; }
+
+    /* =============================================
+       UTILITY
+    ============================================= */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+
+    .section-label--white {
+      color: var(--orange);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+      min-height: 48px;
+      white-space: nowrap;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn--orange {
+      background: var(--orange);
+      color: var(--white);
+      border-color: var(--orange);
+    }
+    .btn--orange:hover {
+      background: var(--orange-hov);
+      border-color: var(--orange-hov);
+      box-shadow: 0 4px 16px rgba(240,90,40,0.4);
+    }
+
+    .btn--outline-white {
+      background: transparent;
+      color: var(--white);
+      border-color: var(--white);
+    }
+    .btn--outline-white:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .btn--white-filled {
+      background: var(--white);
+      color: var(--orange);
+      border-color: var(--white);
+    }
+    .btn--white-filled:hover {
+      background: var(--off-white);
+      box-shadow: 0 4px 16px rgba(255,255,255,0.3);
+    }
+
+    .btn--white-outline {
+      background: transparent;
+      color: var(--white);
+      border-color: rgba(255,255,255,0.7);
+    }
+    .btn--white-outline:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: var(--white);
+    }
+
+    /* =============================================
+       NAV
+    ============================================= */
+    .nav {
+      background: var(--navy);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      gap: 20px;
+    }
+
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .nav__logo-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+    }
+
+    .nav__logo-text {
+      font-family: var(--font-head);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+
+    .nav__logo-sub {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      display: block;
+      margin-top: 2px;
+    }
+
+    .nav__phone {
+      font-family: var(--font-mono);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: 0.02em;
+      text-align: center;
+      flex: 1;
+      transition: color var(--transition);
+    }
+
+    .nav__phone:hover { color: var(--orange-hov); }
+
+    .nav__right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav__link {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      transition: color var(--transition);
+    }
+    .nav__link:hover { color: var(--white); }
+
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      background: none;
+      border: none;
+      min-height: 44px;
+      min-width: 44px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav__hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav__hamburger.is-open span:nth-child(2) { opacity: 0; }
+    .nav__hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav__mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--navy-mid);
+      padding: 16px 24px 24px;
+      gap: 4px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav__mobile-menu.is-open { display: flex; }
+
+    .nav__mobile-link {
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav__mobile-cta {
+      margin-top: 12px;
+      width: 100%;
+    }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    .hero {
+      display: grid;
+      grid-template-columns: 55% 45%;
+      min-height: 640px;
+      clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+      margin-bottom: -60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero__left {
+      background: var(--navy);
+      padding: 80px 56px 120px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      /* Align text with the container's left edge */
+      padding-left: calc((100vw - 1200px) / 2 + 24px);
+    }
+
+    /* push left panel content to the right with container alignment */
+    .hero__left-inner {
+      max-width: 560px;
+      margin-left: auto;
+    }
+
+    .hero__eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero__eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 2px;
+      background: var(--orange);
+      flex-shrink: 0;
+    }
+
+    .hero__heading {
+      font-family: var(--font-head);
+      font-size: clamp(42px, 5vw, 68px);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    .hero__heading em {
+      font-style: normal;
+      color: var(--orange);
+    }
+
+    .hero__sub {
+      font-family: var(--font-body);
+      font-size: 17px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.65;
+      margin-bottom: 36px;
+      max-width: 460px;
+    }
+
+    .hero__ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .hero__badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .hero__badge {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .hero__badge svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      color: var(--orange);
+    }
+
+    .hero__right {
+      background: linear-gradient(135deg, #1B3A5C 0%, #2A5078 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* decorative lines on hero right */
+    .hero__right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 39px,
+          rgba(255,255,255,0.03) 39px,
+          rgba(255,255,255,0.03) 40px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 39px,
+          rgba(255,255,255,0.03) 39px,
+          rgba(255,255,255,0.03) 40px
+        );
+    }
+
+    .hero__right::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      right: -40px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(240,90,40,0.12) 0%, transparent 70%);
+    }
+
+    .hero__badge-overlay {
+      position: relative;
+      z-index: 2;
+      background: var(--orange);
+      color: var(--white);
+      border-radius: 6px;
+      padding: 28px 32px;
+      text-align: center;
+      box-shadow: 0 12px 48px rgba(240,90,40,0.4), 0 0 0 6px rgba(240,90,40,0.15);
+      transform: rotate(-3deg);
+    }
+
+    .hero__badge-overlay-num {
+      font-family: var(--font-mono);
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .hero__badge-overlay-text {
+      font-family: var(--font-head);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+
+    /* =============================================
+       SERVICES
+    ============================================= */
+    .services {
+      background: var(--off-white);
+      padding: 120px 0 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .services__header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .services__heading {
+      font-family: var(--font-head);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .services__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-top: 3px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      transition: border-top-color var(--transition), box-shadow var(--transition), transform var(--transition);
+      cursor: default;
+    }
+
+    .service-card:hover {
+      border-top-color: var(--orange);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+    }
+
+    .service-card__icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 20px;
+      color: var(--orange);
+    }
+
+    .service-card__name {
+      font-family: var(--font-head);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .service-card__desc {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* =============================================
+       WHY CHOOSE US
+    ============================================= */
+    .why {
+      background: var(--navy);
+      padding: 96px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--orange), transparent);
+    }
+
+    .why__header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .why__heading {
+      font-family: var(--font-head);
+      font-size: clamp(30px, 4vw, 46px);
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .why__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .why-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      text-align: center;
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .why-card:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(240,90,40,0.4);
+    }
+
+    .why-card__icon {
+      font-family: var(--font-mono);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .why-card__title {
+      font-family: var(--font-head);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .why-card__desc {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* =============================================
+       PROJECTS
+    ============================================= */
+    .projects {
+      background: var(--off-white);
+      padding: 96px 0;
+    }
+
+    .projects__header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .projects__heading {
+      font-family: var(--font-head);
+      font-size: clamp(30px, 4vw, 46px);
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+    }
+
+    .projects__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .project-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .project-card__photo {
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card__photo-inner {
+      width: 100%;
+      height: 100%;
+    }
+
+    .project-card:nth-child(1) .project-card__photo-inner {
+      background: linear-gradient(135deg, #1B3A5C 0%, #2A5078 60%, #1A4060 100%);
+    }
+
+    .project-card:nth-child(2) .project-card__photo-inner {
+      background: linear-gradient(135deg, #2C3E50 0%, #1B4A3A 60%, #0F2D2D 100%);
+    }
+
+    .project-card:nth-child(3) .project-card__photo-inner {
+      background: linear-gradient(135deg, #2D1B3A 0%, #3A2252 60%, #1F1535 100%);
+    }
+
+    .project-card__photo-inner::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(15,31,53,0.7) 100%);
+    }
+
+    .project-card__tag {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--orange);
+      color: var(--white);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border-radius: 2px;
+      z-index: 2;
+    }
+
+    .project-card__body {
+      padding: 24px;
+    }
+
+    .project-card__name {
+      font-family: var(--font-head);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .project-card__location {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .project-card__link {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--orange);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap var(--transition), color var(--transition);
+    }
+
+    .project-card__link:hover {
+      color: var(--orange-hov);
+      gap: 10px;
+    }
+
+    /* =============================================
+       REVIEWS
+    ============================================= */
+    .reviews {
+      background: var(--tint);
+      padding: 96px 0;
+    }
+
+    .reviews__header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .reviews__heading {
+      font-family: var(--font-head);
+      font-size: clamp(30px, 4vw, 46px);
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+    }
+
+    .reviews__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .review-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .review-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .review-card__stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 18px;
+    }
+
+    .review-card__stars svg {
+      width: 18px;
+      height: 18px;
+      color: var(--orange);
+      fill: var(--orange);
+    }
+
+    .review-card__quote {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: #3A4A5C;
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 24px;
+    }
+
+    .review-card__quote::before {
+      content: '\201C';
+      font-family: var(--font-head);
+      font-size: 40px;
+      font-weight: 800;
+      color: var(--orange);
+      opacity: 0.3;
+      line-height: 0.8;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .review-card__author {
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    .review-card__name {
+      font-family: var(--font-head);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 3px;
+    }
+
+    .review-card__meta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* =============================================
+       SERVICE AREA
+    ============================================= */
+    .area {
+      background: var(--navy);
+      padding: 96px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* dot grid background */
+    .area::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    .area__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .area__left {}
+
+    .area__heading {
+      font-family: var(--font-head);
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .area__sub {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .area__cities {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 32px;
+    }
+
+    .area__city {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 0;
+    }
+
+    .area__city::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      background: var(--orange);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .area__cta-card {
+      background: var(--orange);
+      border-radius: 6px;
+      padding: 48px 40px;
+      text-align: center;
+      box-shadow: 0 16px 56px rgba(240,90,40,0.4);
+    }
+
+    .area__cta-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 12px;
+    }
+
+    .area__cta-heading {
+      font-family: var(--font-head);
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .area__cta-desc {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 28px;
+    }
+
+    .area__cta-phone {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--white);
+      display: block;
+      margin-bottom: 24px;
+      letter-spacing: 0.02em;
+    }
+
+    /* =============================================
+       FINAL CTA BANNER
+    ============================================= */
+    .cta-banner {
+      background: var(--orange);
+      padding: 80px 0 88px;
+      clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 100%);
+      margin-top: -20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-banner__inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-banner__label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 16px;
+    }
+
+    .cta-banner__heading {
+      font-family: var(--font-head);
+      font-size: clamp(36px, 5vw, 62px);
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+
+    .cta-banner__sub {
+      font-family: var(--font-body);
+      font-size: 17px;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 36px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-banner__btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer {
+      background: var(--navy);
+      border-top: 3px solid var(--orange);
+      padding: 64px 0 32px;
+    }
+
+    .footer__main {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer__brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .footer__tagline {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 240px;
+      margin-bottom: 20px;
+    }
+
+    .footer__col-title {
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+
+    .footer__links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer__link {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--muted);
+      transition: color var(--transition);
+      min-height: 24px;
+      display: flex;
+      align-items: center;
+    }
+
+    .footer__link:hover { color: var(--white); }
+
+    .footer__bottom {
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer__copy {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.04em;
+    }
+
+    .footer__badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer__badge::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      opacity: 0.6;
+    }
+
+    /* =============================================
+       STATS BAR
+    ============================================= */
+    .stats-bar {
+      background: var(--orange);
+      padding: 0;
+    }
+
+    .stats-bar__inner {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .stats-bar__item {
+      flex: 1;
+      padding: 20px 24px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stats-bar__item:last-child { border-right: none; }
+
+    .stats-bar__num {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stats-bar__label {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Mobile phone bar — shown only on mobile below nav */
+    .nav__mobile-phone-bar {
+      display: none;
+      background: var(--navy-mid);
+      padding: 10px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav__mobile-phone-bar a {
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: 0.02em;
+    }
+
+    /* =============================================
+       RESPONSIVE — 768px
+    ============================================= */
+    @media (max-width: 768px) {
+      /* NAV */
+      .nav__phone {
+        display: none;
+      }
+
+      .nav__mobile-phone-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav__inner {
+        height: 60px;
+        padding: 0;
+      }
+
+      .nav__logo { order: 1; }
+      .nav__hamburger { order: 2; display: flex; }
+      .nav__right { display: none; }
+
+      /* HERO */
+      .hero {
+        grid-template-columns: 1fr;
+        clip-path: polygon(0 0, 100% 0, 100% 96%, 0 100%);
+        margin-bottom: -40px;
+      }
+
+      .hero__left {
+        padding: 60px 24px 80px;
+      }
+
+      .hero__left-inner {
+        margin-left: 0;
+        max-width: 100%;
+      }
+
+      .hero__right {
+        min-height: 240px;
+      }
+
+      .hero__badge-overlay {
+        padding: 20px 24px;
+      }
+
+      .hero__badge-overlay-num { font-size: 40px; }
+
+      /* SERVICES */
+      .services__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      /* WHY */
+      .why__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      /* PROJECTS & REVIEWS */
+      .projects__grid,
+      .reviews__grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      /* AREA */
+      .area__inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      /* FOOTER */
+      .footer__main {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+
+      /* STATS BAR */
+      .stats-bar__inner {
+        flex-wrap: wrap;
+      }
+      .stats-bar__item {
+        flex: 1 1 50%;
+        border-right: 1px solid rgba(255,255,255,0.2);
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+      }
+      .stats-bar__item:nth-child(2n) { border-right: none; }
+      .stats-bar__item:nth-last-child(-n+2) { border-bottom: none; }
+    }
+
+    /* =============================================
+       RESPONSIVE — 480px
+    ============================================= */
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+
+      .hero__heading { font-size: 36px; }
+
+      .hero__ctas { flex-direction: column; }
+      .hero__ctas .btn { width: 100%; }
+
+      .services__grid { grid-template-columns: 1fr; }
+
+      .why__grid { grid-template-columns: 1fr; }
+
+      .area__cities { grid-template-columns: 1fr; }
+
+      .footer__main { grid-template-columns: 1fr; gap: 28px; }
+
+      .footer__bottom { flex-direction: column; text-align: center; }
+
+      .cta-banner__btns { flex-direction: column; align-items: center; }
+      .cta-banner__btns .btn { width: 100%; max-width: 340px; }
+
+      .stats-bar__item { flex: 1 1 100%; border-right: none; }
+    }
+
+    /* =============================================
+       PAGE LOAD ANIMATIONS
+    ============================================= */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero__eyebrow,
+    .hero__heading,
+    .hero__sub,
+    .hero__ctas,
+    .hero__badges {
+      animation: fadeUp 0.5s ease both;
+    }
+    .hero__eyebrow  { animation-delay: 0.05s; }
+    .hero__heading  { animation-delay: 0.12s; }
+    .hero__sub      { animation-delay: 0.20s; }
+    .hero__ctas     { animation-delay: 0.28s; }
+    .hero__badges   { animation-delay: 0.36s; }
+
+    .hero__badge-overlay {
+      animation: fadeUp 0.55s ease 0.25s both;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =============================================
+       NAV
+  ============================================= -->
+  <header class="nav" role="banner">
+    <div class="container">
+      <div class="nav__inner">
+
+        <!-- Logo -->
+        <a href="#" class="nav__logo" aria-label="Ironclad Home Services">
+          <svg class="nav__logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="36" height="36" rx="4" fill="#F05A28"/>
+            <!-- Wrench icon -->
+            <path d="M22.5 8C19.46 8 17 10.46 17 13.5c0 .68.13 1.33.36 1.92L8.7 24.08A2.5 2.5 0 0 0 12.92 28.3l8.66-8.66c.59.23 1.24.36 1.92.36C26.54 20 29 17.54 29 14.5c0-.73-.15-1.43-.41-2.07l-3.04 3.04-2.02-2.02 3.04-3.04A5.46 5.46 0 0 0 22.5 8z" fill="white"/>
+            <circle cx="11" cy="26" r="1.5" fill="#F05A28"/>
+          </svg>
+          <div>
+            <span class="nav__logo-text">IRONCLAD</span>
+            <span class="nav__logo-sub">Home Services</span>
+          </div>
+        </a>
+
+        <!-- Center Phone -->
+        <a href="tel:5138000000" class="nav__phone" aria-label="Call us at (513) 800-0000">
+          (513) 800-0000
+        </a>
+
+        <!-- Right Side -->
+        <div class="nav__right">
+          <nav aria-label="Main navigation">
+            <ul class="nav__links">
+              <li><a href="#services" class="nav__link">Services</a></li>
+              <li><a href="#projects" class="nav__link">Projects</a></li>
+              <li><a href="#area" class="nav__link">Service Area</a></li>
+            </ul>
+          </nav>
+          <a href="#estimate" class="btn btn--orange">Free Estimate</a>
+        </div>
+
+        <!-- Mobile Hamburger -->
+        <button class="nav__hamburger" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Mobile Phone Bar -->
+    <div class="nav__mobile-phone-bar" aria-label="Phone number">
+      <a href="tel:5138000000">(513) 800-0000</a>
+    </div>
+
+    <!-- Mobile Menu -->
+    <nav class="nav__mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+      <a href="#services" class="nav__mobile-link">Services</a>
+      <a href="#projects" class="nav__mobile-link">Projects</a>
+      <a href="#reviews" class="nav__mobile-link">Reviews</a>
+      <a href="#area" class="nav__mobile-link">Service Area</a>
+      <a href="#estimate" class="btn btn--orange nav__mobile-cta">Get Free Estimate</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- =============================================
+         HERO
+    ============================================= -->
+    <section class="hero" aria-label="Hero">
+      <!-- Left: Text Content -->
+      <div class="hero__left">
+        <div class="hero__left-inner">
+          <div class="hero__eyebrow">Licensed &amp; Insured · 20+ Years</div>
+
+          <h1 class="hero__heading">
+            Home Repairs<br>Done <em>RIGHT.</em>
+          </h1>
+
+          <p class="hero__sub">
+            Fast response, quality work, guaranteed satisfaction.<br>
+            Serving Greater Cincinnati since 2003.
+          </p>
+
+          <div class="hero__ctas">
+            <a href="#estimate" class="btn btn--orange">
+              <!-- Calendar icon -->
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <rect x="1" y="2" width="14" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M1 6h14" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M5 1v2M11 1v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              Get Free Estimate
+            </a>
+            <a href="tel:5138000000" class="btn btn--outline-white">
+              <!-- Phone icon -->
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M2.5 2h3l1.5 3.5-1.75 1.25a8.5 8.5 0 0 0 4 4L10.5 9 14 10.5V13.5A1.5 1.5 0 0 1 12.5 15 12.5 12.5 0 0 1 1 3.5 1.5 1.5 0 0 1 2.5 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+              </svg>
+              Call Now: (513) 800-0000
+            </a>
+          </div>
+
+          <div class="hero__badges">
+            <div class="hero__badge">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <circle cx="8" cy="8" r="7" stroke="#F05A28" stroke-width="1.5"/>
+                <path d="M4.5 8.5l2.5 2 4.5-5" stroke="#F05A28" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Licensed
+            </div>
+            <div class="hero__badge">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <circle cx="8" cy="8" r="7" stroke="#F05A28" stroke-width="1.5"/>
+                <path d="M4.5 8.5l2.5 2 4.5-5" stroke="#F05A28" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Fully Insured
+            </div>
+            <div class="hero__badge">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <circle cx="8" cy="8" r="7" stroke="#F05A28" stroke-width="1.5"/>
+                <path d="M4.5 8.5l2.5 2 4.5-5" stroke="#F05A28" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              5-Star Rated
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Photo Placeholder with Badge -->
+      <div class="hero__right" aria-hidden="true">
+        <div class="hero__badge-overlay">
+          <span class="hero__badge-overlay-num">20+</span>
+          <span class="hero__badge-overlay-text">Years Serving<br>Cincinnati</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <div class="container">
+        <div class="stats-bar__inner">
+          <div class="stats-bar__item">
+            <div class="stats-bar__num">4,800+</div>
+            <div class="stats-bar__label">Jobs Completed</div>
+          </div>
+          <div class="stats-bar__item">
+            <div class="stats-bar__num">4.9★</div>
+            <div class="stats-bar__label">Google Rating</div>
+          </div>
+          <div class="stats-bar__item">
+            <div class="stats-bar__num">2–4 hr</div>
+            <div class="stats-bar__label">Avg Response Time</div>
+          </div>
+          <div class="stats-bar__item">
+            <div class="stats-bar__num">100%</div>
+            <div class="stats-bar__label">Satisfaction Guaranteed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =============================================
+         SERVICES
+    ============================================= -->
+    <section class="services" id="services" aria-labelledby="services-heading">
+      <div class="container">
+        <div class="services__header">
+          <div class="section-label">What We Fix</div>
+          <h2 class="services__heading" id="services-heading">Expert Trades, Every Job</h2>
+        </div>
+
+        <div class="services__grid">
+
+          <!-- HVAC Installation -->
+          <div class="service-card">
+            <svg class="service-card__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <!-- HVAC unit simplified -->
+              <rect x="6" y="10" width="36" height="24" rx="3" stroke="currentColor" stroke-width="2.5"/>
+              <rect x="10" y="14" width="12" height="8" rx="1.5" stroke="currentColor" stroke-width="2"/>
+              <circle cx="34" cy="18" r="5" stroke="currentColor" stroke-width="2"/>
+              <path d="M34 15v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M10 38h28" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M18 34v4M30 34v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+            <div class="service-card__name">HVAC Installation</div>
+            <div class="service-card__desc">New system installs, replacements, and upgrades for homes and businesses.</div>
+          </div>
+
+          <!-- Heating Repair -->
+          <div class="service-card">
+            <svg class="service-card__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <!-- Flame -->
+              <path d="M24 6C24 6 14 16 14 26a10 10 0 0 0 20 0c0-4-3-8-3-8s-1 4-4 5c0 0 4-10-3-17z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M24 32a4 4 0 0 1-4-4c0-3 2-5 4-7 2 2 4 4 4 7a4 4 0 0 1-4 4z" fill="currentColor" opacity="0.4"/>
+            </svg>
+            <div class="service-card__name">Heating Repair</div>
+            <div class="service-card__desc">Furnace diagnostics, heat pump repair, and emergency heating restoration.</div>
+          </div>
+
+          <!-- Air Conditioning -->
+          <div class="service-card">
+            <svg class="service-card__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <!-- Snowflake / AC unit -->
+              <rect x="6" y="14" width="36" height="20" rx="4" stroke="currentColor" stroke-width="2.5"/>
+              <path d="M14 24h20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M10 32v6M38 32v6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M17 19.5L16 21.5M17 28.5L16 26.5M31 19.5L32 21.5M31 28.5L32 26.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="24" cy="24" r="3" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            <div class="service-card__name">Air Conditioning</div>
+            <div class="service-card__desc">AC tune-ups, coolant recharge, compressor repair, and full replacements.</div>
+          </div>
+
+          <!-- Plumbing -->
+          <div class="service-card">
+            <svg class="service-card__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <!-- Droplet / pipe -->
+              <path d="M24 8C24 8 14 20 14 28a10 10 0 0 0 20 0C34 20 24 8 24 8z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M18 30a6 6 0 0 0 10 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+            </svg>
+            <div class="service-card__name">Plumbing Services</div>
+            <div class="service-card__desc">Leak repair, drain clearing, water heater install, and fixture upgrades.</div>
+          </div>
+
+          <!-- Electrical -->
+          <div class="service-card">
+            <svg class="service-card__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <!-- Lightning bolt -->
+              <path d="M28 6L14 26h12l-6 16 20-22H28L34 6z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+            </svg>
+            <div class="service-card__name">Electrical Work</div>
+            <div class="service-card__desc">Panel upgrades, outlet installation, lighting, and code compliance work.</div>
+          </div>
+
+          <!-- Emergency -->
+          <div class="service-card">
+            <svg class="service-card__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <!-- Shield with bolt -->
+              <path d="M24 6L8 12v14c0 9 7 16 16 16s16-7 16-16V12L24 6z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M26 18l-6 8h6l-2 8 8-10h-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="currentColor" fill-opacity="0.25"/>
+            </svg>
+            <div class="service-card__name">Emergency Repairs</div>
+            <div class="service-card__desc">24/7 urgent response for burst pipes, no heat, power failures, and more.</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         WHY CHOOSE US
+    ============================================= -->
+    <section class="why" aria-labelledby="why-heading">
+      <div class="container">
+        <div class="why__header">
+          <div class="section-label section-label--white">Why Ironclad</div>
+          <h2 class="why__heading" id="why-heading">Built on Trust. Backed by Results.</h2>
+        </div>
+
+        <div class="why__grid">
+          <div class="why-card">
+            <span class="why-card__icon">LIC</span>
+            <div class="why-card__title">Licensed &amp; Insured</div>
+            <div class="why-card__desc">Fully licensed in Ohio and Kentucky. $2M liability coverage on every job.</div>
+          </div>
+          <div class="why-card">
+            <span class="why-card__icon">2HR</span>
+            <div class="why-card__title">Same-Day Service</div>
+            <div class="why-card__desc">Emergency calls answered fast. We're on-site within 2 hours in most cases.</div>
+          </div>
+          <div class="why-card">
+            <span class="why-card__icon">100%</span>
+            <div class="why-card__title">Satisfaction Guarantee</div>
+            <div class="why-card__desc">Not happy? We come back and make it right — at no additional charge.</div>
+          </div>
+          <div class="why-card">
+            <span class="why-card__icon">$0</span>
+            <div class="why-card__title">Upfront Pricing</div>
+            <div class="why-card__desc">Written estimate before we start. No hidden fees. No surprise invoices.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         RECENT PROJECTS
+    ============================================= -->
+    <section class="projects" id="projects" aria-labelledby="projects-heading">
+      <div class="container">
+        <div class="projects__header">
+          <div class="section-label">Our Work</div>
+          <h2 class="projects__heading" id="projects-heading">Recent Projects</h2>
+        </div>
+
+        <div class="projects__grid">
+
+          <article class="project-card">
+            <div class="project-card__photo">
+              <div class="project-card__photo-inner"></div>
+              <div class="project-card__tag">HVAC</div>
+            </div>
+            <div class="project-card__body">
+              <div class="project-card__name">Full HVAC System Replacement</div>
+              <div class="project-card__location">West Chester, OH · 4,200 sq ft Home</div>
+              <a href="#" class="project-card__link">View Project →</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-card__photo">
+              <div class="project-card__photo-inner"></div>
+              <div class="project-card__tag">Plumbing</div>
+            </div>
+            <div class="project-card__body">
+              <div class="project-card__name">Commercial Plumbing Overhaul</div>
+              <div class="project-card__location">Blue Ash, OH · Office Building</div>
+              <a href="#" class="project-card__link">View Project →</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-card__photo">
+              <div class="project-card__photo-inner"></div>
+              <div class="project-card__tag">Electrical</div>
+            </div>
+            <div class="project-card__body">
+              <div class="project-card__name">200A Panel Upgrade &amp; Rewire</div>
+              <div class="project-card__location">Mason, OH · Historic Residence</div>
+              <a href="#" class="project-card__link">View Project →</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         REVIEWS
+    ============================================= -->
+    <section class="reviews" id="reviews" aria-labelledby="reviews-heading">
+      <div class="container">
+        <div class="reviews__header">
+          <div class="section-label">What Customers Say</div>
+          <h2 class="reviews__heading" id="reviews-heading">Real Words from Real Neighbors</h2>
+        </div>
+
+        <div class="reviews__grid">
+
+          <div class="review-card">
+            <div class="review-card__stars" aria-label="5 stars">
+              <svg viewBox="0 0 18 18"><path d="M9 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L9 13.27l-4.77 2.44.91-5.32-3.87-3.77 5.34-.78z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 18 18"><path d="M9 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L9 13.27l-4.77 2.44.91-5.32-3.87-3.77 5.34-.78z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 18 18"><path d="M9 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L9 13.27l-4.77 2.44.91-5.32-3.87-3.77 5.34-.78z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 18 18"><path d="M9 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L9 13.27l-4.77 2.44.91-5.32-3.87-3.77 5.34-.78z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 18 18"><path d="M9 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L9 13.27l-4.77 2.44.91-5.32-3.87-3.77 5.34-.78z" fill="currentColor"/></svg>
+            </div>
+            <p class="review-card__quote">Our furnace died on a Thursday night in January. Ironclad had someone at the house by 10pm and it was fixed before midnight. Can't say enough about how professional and fair they were.</p>
+            <div class="review-card__author">
+              <div class="review-card__name">Mike R.</div>
+              <div class="review-card__meta">Fairfield, OH · Google Review</div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-card__stars" aria-label="5 stars">
+              <svg viewBox="0 0 18 18"><path d="M9 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L9 13.27l-4.77 2.44.91-5.32-3.87-3.77 5.34-.78z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 18 18"><path d="M9 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L9 13.27l-4.77 2.44.91-5.32-3.87-3.77 5.34-.78z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 18 18"><path d="M9 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L9 13.27l-4.77 2.44.91-5.32-3.87-3.77 5.34-.78z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 18 18"><path d="M9 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L9 13.27l-4.77 2.44.91-5.32-3.87-3.77 5.34-.78z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 18 18"><path d="M9 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L9 13.27l-4.77 2.44.91-5.32-3.87-3.77 5.34-.78z" fill="currentColor"/></svg>
+            </div>
+            <p class="review-card__quote">Used Ironclad for a full bathroom plumbing rough-in on an addition. Price came in under three other quotes and the work passed inspection first try. These guys are the real deal.</p>
+            <div class="review-card__author">
+              <div class="review-card__name">Sarah T.</div>
+              <div class="review-card__meta">Mason, OH · Google Review</div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-card__stars" aria-label="5 stars">
+              <svg viewBox="0 0 18 18"><path d="M9 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L9 13.27l-4.77 2.44.91-5.32-3.87-3.77 5.34-.78z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 18 18"><path d="M9 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L9 13.27l-4.77 2.44.91-5.32-3.87-3.77 5.34-.78z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 18 18"><path d="M9 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L9 13.27l-4.77 2.44.91-5.32-3.87-3.77 5.34-.78z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 18 18"><path d="M9 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L9 13.27l-4.77 2.44.91-5.32-3.87-3.77 5.34-.78z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 18 18"><path d="M9 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L9 13.27l-4.77 2.44.91-5.32-3.87-3.77 5.34-.78z" fill="currentColor"/></svg>
+            </div>
+            <p class="review-card__quote">Needed my electrical panel upgraded before selling my house. They gave me a written quote same day and finished the work in one afternoon. Clean, professional, zero hassle.</p>
+            <div class="review-card__author">
+              <div class="review-card__name">Dave K.</div>
+              <div class="review-card__meta">Montgomery, OH · Google Review</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         SERVICE AREA
+    ============================================= -->
+    <section class="area" id="area" aria-labelledby="area-heading">
+      <div class="container">
+        <div class="area__inner">
+
+          <div class="area__left">
+            <div class="section-label section-label--white">Coverage</div>
+            <h2 class="area__heading" id="area-heading">We Serve Greater Cincinnati</h2>
+            <p class="area__sub">Licensed and operating throughout Hamilton County, Warren County, and Butler County.</p>
+
+            <ul class="area__cities" aria-label="Service area cities">
+              <li class="area__city">Hamilton</li>
+              <li class="area__city">Hyde Park</li>
+              <li class="area__city">Fairfield</li>
+              <li class="area__city">Montgomery</li>
+              <li class="area__city">West Chester</li>
+              <li class="area__city">Blue Ash</li>
+              <li class="area__city">Mason</li>
+              <li class="area__city">Anderson Twp.</li>
+              <li class="area__city">Loveland</li>
+              <li class="area__city">Kenwood</li>
+              <li class="area__city">Symmes Twp.</li>
+              <li class="area__city">Landen</li>
+            </ul>
+          </div>
+
+          <div class="area__right">
+            <div class="area__cta-card">
+              <div class="area__cta-label">Ready to Schedule?</div>
+              <h3 class="area__cta-heading">Is your area covered?<br>Give us a call.</h3>
+              <p class="area__cta-desc">We'll confirm coverage and get you scheduled — often same day.</p>
+              <a href="tel:5138000000" class="area__cta-phone">(513) 800-0000</a>
+              <a href="#estimate" class="btn btn--white-filled" style="width:100%;">Request Free Estimate</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         FINAL CTA BANNER
+    ============================================= -->
+    <section class="cta-banner" id="estimate" aria-labelledby="cta-heading">
+      <div class="container cta-banner__inner">
+        <div class="cta-banner__label">Get Started Today</div>
+        <h2 class="cta-banner__heading" id="cta-heading">Ready to Get It Fixed?</h2>
+        <p class="cta-banner__sub">Same-day service available. Licensed, insured, and ready to work. Don't wait on a problem that only gets worse.</p>
+        <div class="cta-banner__btns">
+          <a href="#" class="btn btn--white-filled">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <rect x="1" y="2" width="14" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M1 6h14" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M5 1v2M11 1v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            Schedule Service
+          </a>
+          <a href="tel:5138000000" class="btn btn--white-outline">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M2.5 2h3l1.5 3.5-1.75 1.25a8.5 8.5 0 0 0 4 4L10.5 9 14 10.5V13.5A1.5 1.5 0 0 1 12.5 15 12.5 12.5 0 0 1 1 3.5 1.5 1.5 0 0 1 2.5 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+            Call Now: (513) 800-0000
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =============================================
+       FOOTER
+  ============================================= -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__main">
+
+        <!-- Brand -->
+        <div>
+          <div class="footer__brand-logo">
+            <svg width="32" height="32" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+              <rect width="36" height="36" rx="4" fill="#F05A28"/>
+              <path d="M22.5 8C19.46 8 17 10.46 17 13.5c0 .68.13 1.33.36 1.92L8.7 24.08A2.5 2.5 0 0 0 12.92 28.3l8.66-8.66c.59.23 1.24.36 1.92.36C26.54 20 29 17.54 29 14.5c0-.73-.15-1.43-.41-2.07l-3.04 3.04-2.02-2.02 3.04-3.04A5.46 5.46 0 0 0 22.5 8z" fill="white"/>
+            </svg>
+            <span style="font-family:var(--font-head);font-weight:800;color:#fff;font-size:20px;letter-spacing:0.04em;">IRONCLAD</span>
+          </div>
+          <p class="footer__tagline">Quality work. Fair price. Every time.</p>
+          <a href="tel:5138000000" style="font-family:var(--font-mono);font-size:16px;font-weight:600;color:var(--orange);letter-spacing:0.02em;">(513) 800-0000</a>
+        </div>
+
+        <!-- Services -->
+        <div>
+          <div class="footer__col-title">Services</div>
+          <ul class="footer__links">
+            <li><a href="#" class="footer__link">HVAC Installation</a></li>
+            <li><a href="#" class="footer__link">Heating Repair</a></li>
+            <li><a href="#" class="footer__link">Air Conditioning</a></li>
+            <li><a href="#" class="footer__link">Plumbing Services</a></li>
+            <li><a href="#" class="footer__link">Electrical Work</a></li>
+            <li><a href="#" class="footer__link">Emergency Repairs</a></li>
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div>
+          <div class="footer__col-title">Company</div>
+          <ul class="footer__links">
+            <li><a href="#" class="footer__link">About Us</a></li>
+            <li><a href="#" class="footer__link">Our Projects</a></li>
+            <li><a href="#" class="footer__link">Reviews</a></li>
+            <li><a href="#" class="footer__link">Service Area</a></li>
+            <li><a href="#" class="footer__link">Careers</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <div class="footer__col-title">Contact</div>
+          <ul class="footer__links">
+            <li><a href="tel:5138000000" class="footer__link">(513) 800-0000</a></li>
+            <li><a href="mailto:info@ironcladhomeservices.com" class="footer__link">info@ironclad.com</a></li>
+            <li><span class="footer__link" style="cursor:default;">Greater Cincinnati, OH</span></li>
+            <li><a href="#estimate" class="footer__link" style="color:var(--orange);font-weight:600;">Free Estimate →</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <div class="footer__copy">© 2026 Ironclad Home Services LLC. All rights reserved.</div>
+        <div class="footer__badge">Licensed · Insured · Cincinnati, OH</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =============================================
+       JAVASCRIPT
+  ============================================= -->
+  <script>
+    // Mobile Nav Toggle
+    (function() {
+      var toggle = document.getElementById('navToggle');
+      var menu   = document.getElementById('mobileMenu');
+
+      if (!toggle || !menu) return;
+
+      toggle.addEventListener('click', function() {
+        var isOpen = menu.classList.contains('is-open');
+        menu.classList.toggle('is-open');
+        toggle.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', !isOpen);
+      });
+
+      // Close menu when a link is clicked
+      menu.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          menu.classList.remove('is-open');
+          toggle.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+      anchor.addEventListener('click', function(e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          var offset = 80; // nav height
+          var top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Intersection Observer — fade-up on scroll for sections
+    (function() {
+      var style = document.createElement('style');
+      style.textContent = [
+        '.fade-up-init { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }',
+        '.fade-up-init.visible { opacity: 1; transform: translateY(0); }'
+      ].join('');
+      document.head.appendChild(style);
+
+      var selectors = [
+        '.service-card',
+        '.why-card',
+        '.project-card',
+        '.review-card',
+        '.stats-bar__item',
+        '.area__left',
+        '.area__cta-card'
+      ];
+
+      var elements = document.querySelectorAll(selectors.join(', '));
+
+      elements.forEach(function(el, i) {
+        el.classList.add('fade-up-init');
+        // Stagger delay by position within parent
+        var siblings = el.parentElement ? el.parentElement.querySelectorAll('.fade-up-init') : [];
+        var idx = Array.prototype.indexOf.call(siblings, el);
+        el.style.transitionDelay = (idx * 0.07) + 's';
+      });
+
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+
+        elements.forEach(function(el) { observer.observe(el); });
+      } else {
+        // Fallback: show all
+        elements.forEach(function(el) { el.classList.add('visible'); });
+      }
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Rotate — AFK Example</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Saira:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Saira', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+    }
+
+    h1,h2 { font-family: 'Chakra Petch', sans-serif; }
+
+    .tr {
+      --tr-accent: #F25B19;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      white-space: pre;
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: clamp(28px, 6vw, 56px);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .tr-static {
+      padding-top: 0.1em;
+    }
+
+    .tr-slot {
+      display: inline-flex;
+      overflow: hidden;
+      background: var(--tr-accent);
+      color: #111;
+      padding: 0.06em 0.3em;
+      border-radius: 8px;
+      position: relative;
+      min-width: 2em;
+    }
+
+    .tr-char {
+      display: inline-block;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.3s ease;
+    }
+
+    .tr-char.entering {
+      transform: translateY(120%);
+      opacity: 0;
+    }
+
+    .tr-char.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .tr-char.exiting {
+      transform: translateY(-130%);
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="tr">
+    <span class="tr-static">We </span>
+    <span class="tr-slot" id="tr-slot"></span>
+    <span class="tr-static"> it.</span>
+  </div>
+
+  <script>
+  (function() {
+    var WORDS = ['build', 'prep', 'haul', 'crew', 'race', 'coach'];
+    var INTERVAL = 2000;
+    var STAGGER = 30;
+    var current = 0;
+    var slot = document.getElementById('tr-slot');
+
+    function splitChars(text) {
+      if (typeof Intl !== 'undefined' && 'Segmenter' in Intl) {
+        var seg = new Intl.Segmenter('en', { granularity: 'grapheme' });
+        return Array.from(seg.segment(text), function(s) { return s.segment; });
+      }
+      return Array.from(text);
+    }
+
+    function renderWord(text) {
+      var oldChars = slot.querySelectorAll('.tr-char');
+
+      oldChars.forEach(function(ch, i) {
+        var delay = (oldChars.length - 1 - i) * STAGGER;
+        setTimeout(function() {
+          ch.classList.remove('visible');
+          ch.classList.add('exiting');
+        }, delay);
+      });
+
+      var exitTime = oldChars.length * STAGGER + 200;
+
+      setTimeout(function() {
+        slot.innerHTML = '';
+        var chars = splitChars(text);
+
+        chars.forEach(function(ch, i) {
+          var span = document.createElement('span');
+          span.className = 'tr-char entering';
+          span.textContent = ch;
+          span.style.transitionDelay = ((chars.length - 1 - i) * STAGGER) + 'ms';
+          slot.appendChild(span);
+        });
+
+        requestAnimationFrame(function() {
+          requestAnimationFrame(function() {
+            slot.querySelectorAll('.tr-char').forEach(function(ch) {
+              ch.classList.remove('entering');
+              ch.classList.add('visible');
+            });
+          });
+        });
+      }, exitTime);
+    }
+
+    // Init
+    var initChars = splitChars(WORDS[0]);
+    initChars.forEach(function(ch) {
+      var span = document.createElement('span');
+      span.className = 'tr-char visible';
+      span.textContent = ch;
+      slot.appendChild(span);
+    });
+
+    setInterval(function() {
+      current = (current + 1) % WORDS.length;
+      renderWord(WORDS[current]);
+    }, INTERVAL);
+  })();
+  </script>
+
+</body>
+</html>

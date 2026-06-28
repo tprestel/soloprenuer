@@ -1,0 +1,160 @@
+<!--
+  TEXT ROTATE — Reusable Component
+  ─────────────────────────────────
+  Animated text that cycles through a list of words/phrases,
+  sliding each one up with per-character stagger.
+
+  TO CUSTOMIZE:
+  - Edit WORDS array in the script
+  - Change INTERVAL for rotation speed (ms)
+  - Change --tr-accent for the highlight background color
+  - Adjust font sizes in .tr-static and .tr-slot
+-->
+
+<style>
+  .tr {
+    --tr-accent: #ff5941;
+    display: flex;
+    align-items: center;
+    white-space: pre;
+    font-size: clamp(24px, 5vw, 48px);
+    font-weight: 300;
+    line-height: 1.2;
+  }
+
+  .tr-static {
+    padding-top: 0.1em;
+  }
+
+  .tr-slot {
+    display: inline-flex;
+    overflow: hidden;
+    background: var(--tr-accent);
+    color: #fff;
+    padding: 0.08em 0.35em;
+    border-radius: 8px;
+    position: relative;
+    min-width: 2em;
+    vertical-align: bottom;
+  }
+
+  .tr-word {
+    display: inline-flex;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.35s ease;
+  }
+
+  .tr-char {
+    display: inline-block;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.3s ease;
+  }
+
+  /* Entry animation */
+  .tr-char.entering {
+    transform: translateY(120%);
+    opacity: 0;
+  }
+
+  .tr-char.visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* Exit animation */
+  .tr-char.exiting {
+    transform: translateY(-130%);
+    opacity: 0;
+  }
+</style>
+
+<!-- ─── MARKUP ──────────────────────────────────────────── -->
+
+<div class="tr">
+  <span class="tr-static">Make it </span>
+  <span class="tr-slot" id="tr-slot"></span>
+</div>
+
+<!-- ─── SCRIPT ──────────────────────────────────────────── -->
+<script>
+(function() {
+  var WORDS = ['work!', 'fancy ✽', 'right', 'fast', 'fun', 'rock', '🕶️🕶️🕶️'];
+  var INTERVAL = 2000;
+  var STAGGER = 25; // ms per character
+  var current = 0;
+  var slot = document.getElementById('tr-slot');
+
+  function renderWord(text) {
+    // Clear existing
+    var oldChars = slot.querySelectorAll('.tr-char');
+
+    // Exit old characters (stagger from last)
+    oldChars.forEach(function(ch, i) {
+      var delay = (oldChars.length - 1 - i) * STAGGER;
+      setTimeout(function() {
+        ch.classList.remove('visible');
+        ch.classList.add('exiting');
+      }, delay);
+    });
+
+    // Wait for exit to finish, then swap
+    var exitTime = oldChars.length * STAGGER + 200;
+
+    setTimeout(function() {
+      slot.innerHTML = '';
+
+      // Split into characters (handle emoji)
+      var chars;
+      if (typeof Intl !== 'undefined' && 'Segmenter' in Intl) {
+        var seg = new Intl.Segmenter('en', { granularity: 'grapheme' });
+        chars = Array.from(seg.segment(text), function(s) { return s.segment; });
+      } else {
+        chars = Array.from(text);
+      }
+
+      chars.forEach(function(ch, i) {
+        var span = document.createElement('span');
+        span.className = 'tr-char entering';
+        span.textContent = ch;
+        // Stagger from last
+        span.style.transitionDelay = ((chars.length - 1 - i) * STAGGER) + 'ms';
+        slot.appendChild(span);
+      });
+
+      // Trigger enter on next frame
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          slot.querySelectorAll('.tr-char').forEach(function(ch) {
+            ch.classList.remove('entering');
+            ch.classList.add('visible');
+          });
+        });
+      });
+    }, exitTime);
+  }
+
+  // Init first word immediately
+  (function() {
+    var text = WORDS[0];
+    var chars;
+    if (typeof Intl !== 'undefined' && 'Segmenter' in Intl) {
+      var seg = new Intl.Segmenter('en', { granularity: 'grapheme' });
+      chars = Array.from(seg.segment(text), function(s) { return s.segment; });
+    } else {
+      chars = Array.from(text);
+    }
+
+    chars.forEach(function(ch) {
+      var span = document.createElement('span');
+      span.className = 'tr-char visible';
+      span.textContent = ch;
+      slot.appendChild(span);
+    });
+  })();
+
+  setInterval(function() {
+    current = (current + 1) % WORDS.length;
+    renderWord(WORDS[current]);
+  }, INTERVAL);
+})();
+</script>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[TITLE_TAG] | [BUSINESS_NAME]</title>
+<meta name="description" content="[META_DESCRIPTION]">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #F47B20;       /* Replace with client primary color */
+    --accent-dark: #c06010;
+    --bg: #111111;
+    --bg-mid: #1a1a1a;
+    --bg-light: #f4f4f4;
+    --text: #ffffff;
+    --text-muted: #999999;
+    --text-dark: #1a1a1a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var(--text-dark); font-size: 15px; line-height: 1.65; }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--bg);
+    padding: 0 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 3px solid var(--accent);
+  }
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--accent);
+    color: #fff !important;
+    padding: 9px 20px;
+    border-radius: 4px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.5px !important;
+  }
+  .nav-cta:hover { background: var(--accent-dark) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--bg);
+    padding: 100px 52px 90px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 45%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent 0%, rgba(244,123,32,0.06) 100%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 76px;
+    font-weight: 800;
+    line-height: 0.95;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    max-width: 780px;
+    margin-bottom: 24px;
+  }
+  .hero h1 em { color: var(--accent); font-style: normal; }
+  .hero-sub {
+    font-size: 17px;
+    color: #aaa;
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+  .hero-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--accent-dark); }
+  .btn-ghost {
+    color: #aaa;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid #444;
+    padding-bottom: 2px;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    margin-top: 64px;
+    padding-top: 48px;
+    border-top: 1px solid #2a2a2a;
+    flex-wrap: wrap;
+  }
+  .hero-stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .hero-stat-label { font-size: 12px; color: #777; letter-spacing: 0.5px; text-transform: uppercase; }
+
+  /* ── TRUST BAR ── */
+  .trust-bar {
+    background: var(--bg-mid);
+    padding: 18px 52px;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #222;
+  }
+  .trust-bar-label { font-size: 11px; color: #888; letter-spacing: 2px; text-transform: uppercase; }
+  .trust-bar-items { display: flex; gap: 32px; flex-wrap: wrap; justify-content: center; }
+  .trust-item { font-size: 13px; color: #bbb; display: flex; align-items: center; gap: 8px; }
+  .trust-item::before { content: '✓'; color: var(--accent); font-weight: 700; }
+
+  /* ── SERVICES ── */
+  .services { padding: 80px 52px; background: var(--bg-light); }
+  .services-inner { max-width: 1200px; margin: 0 auto; }
+  .services .section-eyebrow,
+  .services .section-title { text-align: center; }
+  .section-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    line-height: 1.0;
+    margin-bottom: 48px;
+    letter-spacing: -0.5px;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 2px;
+  }
+  .service-card {
+    background: var(--bg);
+    padding: 32px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+  }
+  .service-card-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    color: #444;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .service-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+  .service-card p { font-size: 13px; color: #888; line-height: 1.6; }
+  .service-card-link {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── ABOUT / DIFFERENTIATOR ── */
+  .about { padding: 80px 52px; background: var(--bg); }
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .about-text .section-title { color: var(--text); }
+  .about-text .section-eyebrow { }
+  .about-body { color: #aaa; font-size: 15px; line-height: 1.75; margin-bottom: 16px; }
+  .about-body strong { color: var(--text); }
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .about-stat {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 6px;
+    padding: 24px;
+  }
+  .about-stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .about-stat-label { font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* ── SOCIAL PROOF ── */
+  .proof { padding: 80px 52px; background: #0d0d0d; }
+  .proof-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+  .proof-headline .section-title { color: var(--text); font-size: 56px; }
+  .proof-headline .big-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 120px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 0.9;
+    display: block;
+  }
+  .proof-items { display: flex; flex-direction: column; gap: 24px; }
+  .proof-item {
+    background: #1a1a1a;
+    border-left: 3px solid var(--accent);
+    padding: 24px 28px;
+    border-radius: 0 6px 6px 0;
+  }
+  .proof-quote { font-size: 15px; color: #ccc; line-height: 1.7; margin-bottom: 12px; font-style: italic; }
+  .proof-author { font-size: 12px; color: #999; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--accent);
+    padding: 80px 52px;
+    text-align: center;
+  }
+  .cta-section h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 56px;
+    font-weight: 800;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 1.0;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+  .cta-section p { color: rgba(255,255,255,0.8); font-size: 16px; max-width: 480px; margin: 0 auto 36px; }
+  .btn-dark {
+    display: inline-block;
+    background: var(--bg);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 18px 44px;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0a0a0a;
+    padding: 48px 52px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 48px;
+    border-top: 1px solid #1a1a1a;
+  }
+  .footer-brand .nav-logo { font-size: 20px; margin-bottom: 12px; display: block; }
+  .footer-desc { font-size: 13px; color: #777; line-height: 1.7; }
+  .footer-col h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #777;
+    margin-bottom: 16px;
+  }
+  .footer-col a { display: block; font-size: 13px; color: #888; text-decoration: none; margin-bottom: 8px; }
+  .footer-col a:hover { color: var(--accent); }
+  .footer-bottom {
+    background: #0a0a0a;
+    padding: 20px 52px;
+    border-top: 1px solid #1a1a1a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-bottom p { font-size: 12px; color: #666; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav, .hero, .services, .about, .proof, .cta-section, footer { padding-left: 24px; padding-right: 24px; }
+    .hero h1 { font-size: 48px; }
+    .about-inner, .proof-inner, footer { grid-template-columns: 1fr; gap: 40px; }
+    .section-title { font-size: 36px; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">[BUSINESS_<span>NAME</span>]</div>
+  <div class="nav-links">
+    <a href="/services">[SERVICE_1]</a>
+    <a href="/services">[SERVICE_2]</a>
+    <a href="/services">[SERVICE_3]</a>
+    <a href="/about">About</a>
+    <a href="/contact" class="nav-cta">Get Started</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">[CITY], [STATE] · Est. [YEAR]</div>
+  <h1>[H1_PRIMARY_<em>KEYWORD</em>]</h1>
+  <p class="hero-sub">[HERO_SUBHEADLINE — one or two sentences. Lead with the customer outcome, not a list of services.]</p>
+  <div class="hero-actions">
+    <a href="/contact" class="btn-primary">Book a Consultation</a>
+    <a href="/services" class="btn-ghost">See What We Do →</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-num">[YEARS]+</div>
+      <div class="hero-stat-label">Years in Business</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">[STAT_2]</div>
+      <div class="hero-stat-label">[STAT_2_LABEL]</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">[STAT_3]</div>
+      <div class="hero-stat-label">[STAT_3_LABEL]</div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-bar">
+  <span class="trust-bar-label">Trusted for</span>
+  <div class="trust-bar-items">
+    <span class="trust-item">[TRUST_POINT_1]</span>
+    <span class="trust-item">[TRUST_POINT_2]</span>
+    <span class="trust-item">[TRUST_POINT_3]</span>
+    <span class="trust-item">[TRUST_POINT_4]</span>
+  </div>
+</div>
+
+<section class="services">
+  <div class="services-inner">
+  <div class="section-eyebrow">What We Do</div>
+  <div class="section-title">Our Services</div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-card-num">01</div>
+      <h3>[SERVICE_1]</h3>
+      <p>[SERVICE_1_DESC — 2 sentences. What it is and who it's for.]</p>
+      <a href="/[service-1-slug]" class="service-card-link">Learn more →</a>
+    </div>
+    <div class="service-card">
+      <div class="service-card-num">02</div>
+      <h3>[SERVICE_2]</h3>
+      <p>[SERVICE_2_DESC]</p>
+      <a href="/[service-2-slug]" class="service-card-link">Learn more →</a>
+    </div>
+    <div class="service-card">
+      <div class="service-card-num">03</div>
+      <h3>[SERVICE_3]</h3>
+      <p>[SERVICE_3_DESC]</p>
+      <a href="/[service-3-slug]" class="service-card-link">Learn more →</a>
+    </div>
+    <div class="service-card">
+      <div class="service-card-num">04</div>
+      <h3>[SERVICE_4]</h3>
+      <p>[SERVICE_4_DESC]</p>
+      <a href="/[service-4-slug]" class="service-card-link">Learn more →</a>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="about-inner">
+    <div class="about-text">
+      <div class="section-eyebrow">Who We Are</div>
+      <div class="section-title">Built Different.<br>By Design.</div>
+      <p class="about-body">[ABOUT_PARAGRAPH_1 — 2-3 sentences. Their story, in their voice. Reference the intake form Q1 answer.]</p>
+      <p class="about-body">[ABOUT_PARAGRAPH_2 — The differentiator. What makes them the right choice. Reference intake form Q7.]</p>
+      <a href="/about" class="btn-primary" style="margin-top:8px;">Our Story</a>
+    </div>
+    <div class="about-stats">
+      <div class="about-stat">
+        <div class="about-stat-num">[YEARS]+</div>
+        <div class="about-stat-label">Years of Experience</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num">[STAT_A]</div>
+        <div class="about-stat-label">[STAT_A_LABEL]</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num">[STAT_B]</div>
+        <div class="about-stat-label">[STAT_B_LABEL]</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num">[STAT_C]</div>
+        <div class="about-stat-label">[STAT_C_LABEL]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="proof">
+  <div class="proof-inner">
+    <div class="proof-headline">
+      <div class="section-eyebrow">What Clients Say</div>
+      <span class="big-num">[REVIEW_COUNT]</span>
+      <div class="section-title" style="font-size:32px; margin-bottom:0;">Five-Star Reviews</div>
+    </div>
+    <div class="proof-items">
+      <div class="proof-item">
+        <p class="proof-quote">"[TESTIMONIAL_1 — verbatim from intake form Q8 or Google reviews]"</p>
+        <div class="proof-author">[REVIEWER_1_NAME] · [REVIEWER_1_CONTEXT]</div>
+      </div>
+      <div class="proof-item">
+        <p class="proof-quote">"[TESTIMONIAL_2]"</p>
+        <div class="proof-author">[REVIEWER_2_NAME] · [REVIEWER_2_CONTEXT]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Ready to [CLIENT_OUTCOME]?</h2>
+  <p>[CTA_SUBTEXT — one sentence. Make it specific to the client's customer, not generic.]</p>
+  <a href="/contact" class="btn-dark">[CTA_BUTTON_TEXT]</a>
+</section>
+
+<footer>
+  <div class="footer-brand">
+    <span class="nav-logo">[BUSINESS_NAME]</span>
+    <p class="footer-desc">[FOOTER_DESC — 1-2 sentences. What they do, where they operate.]</p>
+    <p style="font-size:13px; color:#777; margin-top:12px;">[PHONE] · [EMAIL]</p>
+  </div>
+  <div class="footer-col">
+    <h4>Services</h4>
+    <a href="/[slug]">[SERVICE_1]</a>
+    <a href="/[slug]">[SERVICE_2]</a>
+    <a href="/[slug]">[SERVICE_3]</a>
+    <a href="/[slug]">[SERVICE_4]</a>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/blog">Blog</a>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© [YEAR] [BUSINESS_NAME]. All rights reserved.</p>
+  <p>[CITY], [STATE]</p>
+</div>
+
+</body>
+</html>

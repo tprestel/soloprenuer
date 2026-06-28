@@ -1,0 +1,600 @@
+<!--
+  BENTO CARD — Reusable Component
+  ─────────────────────────────────
+  A card containing a mini dashboard UI with sidebar tabs
+  and switchable content panels. Fake "app window" chrome
+  with dots and workspace label.
+
+  TO CUSTOMIZE:
+  - Edit tab labels and icons in the HTML
+  - Edit panel content in each .bc-panel div
+  - Change --bc-accent for brand color
+  - Panels are shown/hidden via data-panel matching data-tab
+-->
+
+<style>
+  .bc {
+    --bc-accent: hsl(220, 90%, 56%);
+    --bc-bg: #fff;
+    --bc-card: #fff;
+    --bc-muted: #f4f4f5;
+    --bc-border: rgba(0,0,0,0.08);
+    --bc-fg: #111;
+    --bc-fg-muted: #888;
+    --bc-fg-dim: #bbb;
+    max-width: 560px;
+    width: 100%;
+    border-radius: 24px;
+    border: 1px solid var(--bc-border);
+    background: var(--bc-card);
+    box-shadow: 0 24px 48px -12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .bc:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 32px 64px -16px rgba(0,0,0,0.12);
+  }
+
+  .bc-header {
+    padding: 20px 24px;
+  }
+
+  .bc-header-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--bc-fg-muted);
+    margin-bottom: 6px;
+  }
+
+  .bc-header-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--bc-fg);
+    line-height: 1.35;
+    max-width: 420px;
+  }
+
+  /* Browser chrome */
+  .bc-window {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+    border-radius: 16px;
+    margin: 0;
+  }
+
+  .bc-shadow-card {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    right: -40px;
+    bottom: -40px;
+    background: var(--bc-muted);
+    border-radius: 20px;
+    border: 1px solid var(--bc-border);
+    opacity: 0.7;
+  }
+
+  .bc-app {
+    position: absolute;
+    top: 8px;
+    left: 24px;
+    right: -60px;
+    bottom: -60px;
+    background: var(--bc-bg);
+    border-radius: 20px 0 0 0;
+    box-shadow: 0 0 0 4px var(--bc-border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .bc-chrome {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--bc-border);
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .bc-dots {
+    display: flex;
+    gap: 5px;
+  }
+
+  .bc-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--bc-fg-dim);
+    opacity: 0.3;
+  }
+
+  .bc-chrome-label {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--bc-fg-dim);
+  }
+
+  /* App body */
+  .bc-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* Sidebar */
+  .bc-sidebar {
+    width: 130px;
+    border-right: 1px solid var(--bc-border);
+    padding: 16px 6px 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex-shrink: 0;
+    background: rgba(0,0,0,0.01);
+  }
+
+  .bc-tab {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 10px;
+    border-radius: 8px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--bc-fg-muted);
+    text-align: left;
+    transition: color 0.2s, background 0.2s;
+    white-space: nowrap;
+  }
+
+  .bc-tab:hover {
+    color: var(--bc-fg);
+  }
+
+  .bc-tab.active {
+    color: var(--bc-fg);
+    background: var(--bc-muted);
+  }
+
+  .bc-tab.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 14px;
+    border-radius: 2px;
+    background: var(--bc-accent);
+  }
+
+  .bc-tab svg {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+    opacity: 0.6;
+  }
+
+  .bc-tab.active svg {
+    opacity: 1;
+  }
+
+  .bc-badge {
+    margin-left: auto;
+    font-size: 8px;
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: var(--bc-muted);
+    color: var(--bc-fg-muted);
+    font-weight: 600;
+  }
+
+  .bc-tab.active .bc-badge {
+    background: color-mix(in srgb, var(--bc-accent) 10%, transparent);
+    color: var(--bc-accent);
+  }
+
+  /* Content area */
+  .bc-content {
+    flex: 1;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .bc-content-header {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--bc-fg);
+    opacity: 0.5;
+  }
+
+  .bc-content-desc {
+    font-size: 10px;
+    color: var(--bc-fg-muted);
+    margin-top: -8px;
+  }
+
+  .bc-panel {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    animation: bc-fadeIn 0.25s ease;
+  }
+
+  .bc-panel.active {
+    display: flex;
+  }
+
+  @keyframes bc-fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Fade at bottom */
+  .bc-content::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 32px;
+    background: linear-gradient(to top, var(--bc-bg), transparent);
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  /* Panel widgets */
+  .bc-stat-card {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid var(--bc-border);
+    background: rgba(0,0,0,0.01);
+  }
+
+  .bc-stat-label {
+    font-size: 9px;
+    color: var(--bc-fg-muted);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .bc-stat-value {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--bc-fg);
+    letter-spacing: -0.02em;
+  }
+
+  .bc-progress-track {
+    height: 4px;
+    background: var(--bc-muted);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 6px;
+  }
+
+  .bc-progress-fill {
+    height: 100%;
+    background: var(--bc-accent);
+    border-radius: 4px;
+    width: 0;
+    transition: width 0.8s ease;
+  }
+
+  .bc-mini-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .bc-mini-stat {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--bc-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .bc-mini-stat-val {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--bc-fg);
+  }
+
+  .bc-mini-stat-label {
+    font-size: 8px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--bc-fg-muted);
+  }
+
+  .bc-list-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 8px;
+    border-radius: 8px;
+    transition: background 0.15s;
+  }
+
+  .bc-list-item:hover {
+    background: var(--bc-muted);
+  }
+
+  .bc-list-avatar {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--bc-muted);
+    border: 1px solid var(--bc-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: var(--bc-fg-muted);
+    flex-shrink: 0;
+  }
+
+  .bc-list-name {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--bc-fg);
+  }
+
+  .bc-list-role {
+    font-size: 8px;
+    color: var(--bc-fg-muted);
+  }
+
+  .bc-list-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: 1px solid var(--bc-bg);
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+  }
+
+  .bc-action-card {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid var(--bc-border);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .bc-action-title {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--bc-fg);
+  }
+
+  .bc-action-desc {
+    font-size: 9px;
+    color: var(--bc-fg-muted);
+  }
+
+  .bc-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 5px;
+    border: none;
+    background: var(--bc-fg);
+    color: var(--bc-bg);
+    font-family: inherit;
+    font-size: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    width: fit-content;
+    margin-top: 4px;
+  }
+
+  .bc-file-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 8px;
+    border-radius: 8px;
+    transition: background 0.15s;
+    cursor: pointer;
+  }
+
+  .bc-file-item:hover {
+    background: var(--bc-muted);
+  }
+
+  .bc-file-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: var(--bc-muted);
+    border: 1px solid var(--bc-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: var(--bc-fg-muted);
+    flex-shrink: 0;
+  }
+
+  .bc-file-name {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--bc-fg);
+  }
+
+  .bc-file-meta {
+    font-size: 8px;
+    color: var(--bc-fg-muted);
+    text-transform: uppercase;
+  }
+</style>
+
+<!-- ─── MARKUP ──────────────────────────────────────────── -->
+
+<div class="bc">
+  <div class="bc-header">
+    <div class="bc-header-label">Project Dashboard</div>
+    <div class="bc-header-title">High-performance analytics and team collaboration tools in one place.</div>
+  </div>
+
+  <div class="bc-window">
+    <div class="bc-shadow-card"></div>
+    <div class="bc-app">
+      <div class="bc-chrome">
+        <div class="bc-dots"><span class="bc-dot"></span><span class="bc-dot"></span><span class="bc-dot"></span></div>
+        <span class="bc-chrome-label">Workspace</span>
+      </div>
+
+      <div class="bc-body">
+        <div class="bc-sidebar" id="bc-sidebar">
+          <button class="bc-tab active" data-tab="overview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            Dashboard
+          </button>
+          <button class="bc-tab" data-tab="team">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Team
+            <span class="bc-badge">10</span>
+          </button>
+          <button class="bc-tab" data-tab="threads">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Threads
+            <span class="bc-badge">12</span>
+          </button>
+          <button class="bc-tab" data-tab="files">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            Resources
+          </button>
+        </div>
+
+        <div class="bc-content" id="bc-content">
+          <!-- Overview panel -->
+          <div class="bc-panel active" data-panel="overview">
+            <div class="bc-stat-card">
+              <div class="bc-stat-label">Team Performance</div>
+              <div class="bc-stat-value">94.2%</div>
+              <div class="bc-progress-track"><div class="bc-progress-fill" data-width="94"></div></div>
+            </div>
+            <div class="bc-mini-grid">
+              <div class="bc-mini-stat">
+                <div><div class="bc-mini-stat-val">1,070</div><div class="bc-mini-stat-label">Keywords</div></div>
+              </div>
+              <div class="bc-mini-stat">
+                <div><div class="bc-mini-stat-val">2.3M</div><div class="bc-mini-stat-label">Credits</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Team panel -->
+          <div class="bc-panel" data-panel="team">
+            <div class="bc-list-item">
+              <div class="bc-list-avatar" style="position:relative;">A<span class="bc-list-dot" style="background:#fbbf24;"></span></div>
+              <div><div class="bc-list-name">Anthony Dionne</div><div class="bc-list-role">Pending approval</div></div>
+            </div>
+            <div class="bc-list-item">
+              <div class="bc-list-avatar" style="position:relative;">N<span class="bc-list-dot" style="background:#34d399;"></span></div>
+              <div><div class="bc-list-name">Nick Yahodin</div><div class="bc-list-role">Group admin</div></div>
+            </div>
+            <div class="bc-list-item">
+              <div class="bc-list-avatar" style="position:relative;">M<span class="bc-list-dot" style="background:#34d399;"></span></div>
+              <div><div class="bc-list-name">Mujeeb Aimaq</div><div class="bc-list-role">Group user</div></div>
+            </div>
+          </div>
+
+          <!-- Threads panel -->
+          <div class="bc-panel" data-panel="threads">
+            <div class="bc-mini-grid">
+              <div class="bc-action-card">
+                <div class="bc-action-title">Create a Page</div>
+                <div class="bc-action-desc">Build your project base.</div>
+                <button class="bc-action-btn">+ Create</button>
+              </div>
+              <div class="bc-action-card">
+                <div class="bc-action-title">Create a Task</div>
+                <div class="bc-action-desc">Organize with team.</div>
+                <button class="bc-action-btn">+ Create</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Files panel -->
+          <div class="bc-panel" data-panel="files">
+            <div class="bc-file-item">
+              <div class="bc-file-icon">P</div>
+              <div><div class="bc-file-name">design_spec_v2.pdf</div><div class="bc-file-meta">2.4 MB · PDF</div></div>
+            </div>
+            <div class="bc-file-item">
+              <div class="bc-file-icon">X</div>
+              <div><div class="bc-file-name">q4_performance.xls</div><div class="bc-file-meta">1.1 MB · XLS</div></div>
+            </div>
+            <div class="bc-file-item">
+              <div class="bc-file-icon">Z</div>
+              <div><div class="bc-file-name">branding_assets.zip</div><div class="bc-file-meta">48 MB · ZIP</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── SCRIPT ──────────────────────────────────────────── -->
+<script>
+(function() {
+  var tabs = document.querySelectorAll('.bc-tab');
+  var panels = document.querySelectorAll('.bc-panel');
+
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      var target = tab.dataset.tab;
+
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+
+      panels.forEach(function(p) { p.classList.remove('active'); });
+      var panel = document.querySelector('.bc-panel[data-panel="' + target + '"]');
+      if (panel) panel.classList.add('active');
+
+      // Animate progress bars in the new panel
+      panel.querySelectorAll('.bc-progress-fill').forEach(function(bar) {
+        var w = bar.dataset.width || '0';
+        bar.style.width = '0';
+        setTimeout(function() { bar.style.width = w + '%'; }, 50);
+      });
+    });
+  });
+
+  // Init progress bars
+  document.querySelectorAll('.bc-panel.active .bc-progress-fill').forEach(function(bar) {
+    var w = bar.dataset.width || '0';
+    setTimeout(function() { bar.style.width = w + '%'; }, 300);
+  });
+})();
+</script>

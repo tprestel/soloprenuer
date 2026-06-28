@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glowy Waves Hero — AFK Example</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Saira:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Saira', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+    }
+
+    h1,h2,h3 { font-family: 'Chakra Petch', sans-serif; }
+
+    .gw {
+      position: relative;
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .gw canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .gw-content {
+      position: relative;
+      z-index: 10;
+      max-width: 860px;
+      width: 100%;
+      padding: 64px 24px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .gw-content > * {
+      animation: gw-fadeUp 0.7s ease both;
+    }
+    .gw-content > *:nth-child(1) { animation-delay: 0s; }
+    .gw-content > *:nth-child(2) { animation-delay: 0.1s; }
+    .gw-content > *:nth-child(3) { animation-delay: 0.2s; }
+    .gw-content > *:nth-child(4) { animation-delay: 0.3s; }
+    .gw-content > *:nth-child(5) { animation-delay: 0.4s; }
+    .gw-content > *:nth-child(6) { animation-delay: 0.5s; }
+
+    @keyframes gw-fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .gw-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(17,17,17,0.6);
+      backdrop-filter: blur(8px);
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #F25B19;
+      margin-bottom: 24px;
+    }
+
+    .gw-h1 {
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+
+    .gw-h1 span {
+      background: linear-gradient(to right, #F25B19, #ff8c42, rgba(255,255,255,0.8));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .gw-sub {
+      font-size: clamp(16px, 2vw, 20px);
+      color: rgba(255,255,255,0.55);
+      max-width: 580px;
+      line-height: 1.65;
+      margin-bottom: 40px;
+    }
+
+    .gw-ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+
+    .gw-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .gw-btn-primary {
+      background: #F25B19;
+      color: #111;
+    }
+
+    .gw-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(242,91,25,0.3);
+    }
+
+    .gw-btn-outline {
+      background: rgba(17,17,17,0.6);
+      color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+    }
+
+    .gw-btn-outline:hover {
+      border-color: rgba(255,255,255,0.25);
+      color: #fff;
+    }
+
+    .gw-pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 40px;
+      list-style: none;
+    }
+
+    .gw-pill {
+      padding: 7px 16px;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(17,17,17,0.6);
+      backdrop-filter: blur(8px);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .gw-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding: 24px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(17,17,17,0.6);
+      backdrop-filter: blur(8px);
+      width: 100%;
+      max-width: 680px;
+    }
+
+    .gw-stat-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 4px;
+    }
+
+    .gw-stat-value {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    @media (max-width: 640px) {
+      .gw-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="gw">
+    <canvas id="gw-canvas"></canvas>
+
+    <div class="gw-content">
+      <div class="gw-badge">
+        &#9733; Columbus, Ohio · Est. 2007
+      </div>
+
+      <h1 class="gw-h1">Your Next Race<br><span>Starts Here.</span></h1>
+
+      <p class="gw-sub">Full-service kart racing team. We build it, prep it, haul it, crew it, and coach you. You show up. You race. We handle the rest.</p>
+
+      <div class="gw-ctas">
+        <a href="#" class="gw-btn gw-btn-primary">Book Arrive &amp; Drive &rarr;</a>
+        <a href="tel:6143705152" class="gw-btn gw-btn-outline">Call 614-370-5152</a>
+      </div>
+
+      <ul class="gw-pills">
+        <li class="gw-pill">Arrive &amp; Drive</li>
+        <li class="gw-pill">Race Prep</li>
+        <li class="gw-pill">Full Team Support</li>
+        <li class="gw-pill">LO206 Specialist</li>
+      </ul>
+
+      <div class="gw-stats">
+        <div>
+          <div class="gw-stat-label">Years Racing</div>
+          <div class="gw-stat-value">19</div>
+        </div>
+        <div>
+          <div class="gw-stat-label">Home Track</div>
+          <div class="gw-stat-value">NCMP</div>
+        </div>
+        <div>
+          <div class="gw-stat-label">Class</div>
+          <div class="gw-stat-value">LO206</div>
+        </div>
+        <div>
+          <div class="gw-stat-label">In-House</div>
+          <div class="gw-stat-value">100%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+  (function() {
+    var canvas = document.getElementById('gw-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    var BG_TOP = '#0a0a0a';
+    var BG_BOTTOM = '#111111';
+
+    var WAVES = [
+      { offset: 0,            amplitude: 70, frequency: 0.003,  color: 'rgba(242,91,25,0.7)',  opacity: 0.45 },
+      { offset: Math.PI/2,    amplitude: 90, frequency: 0.0026, color: 'rgba(255,140,66,0.5)', opacity: 0.35 },
+      { offset: Math.PI,      amplitude: 60, frequency: 0.0034, color: 'rgba(180,60,10,0.5)',  opacity: 0.30 },
+      { offset: Math.PI*1.5,  amplitude: 80, frequency: 0.0022, color: 'rgba(100,40,10,0.3)',  opacity: 0.25 },
+      { offset: Math.PI*2,    amplitude: 55, frequency: 0.004,  color: 'rgba(255,255,255,0.1)',opacity: 0.15 }
+    ];
+
+    var mouse = { x: 0, y: 0 };
+    var target = { x: 0, y: 0 };
+    var time = 0;
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      mouse.x = target.x = canvas.width / 2;
+      mouse.y = target.y = canvas.height / 2;
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', function(e) { target.x = e.clientX; target.y = e.clientY; });
+    window.addEventListener('mouseleave', function() { target.x = canvas.width/2; target.y = canvas.height/2; });
+
+    function drawWave(wave) {
+      ctx.save();
+      ctx.beginPath();
+      for (var x = 0; x <= canvas.width; x += 4) {
+        var dx = x - mouse.x;
+        var dy = canvas.height/2 - mouse.y;
+        var dist = Math.sqrt(dx*dx + dy*dy);
+        var inf = Math.max(0, 1 - dist/320);
+        var me = inf * 70 * Math.sin(time*0.001 + x*0.01 + wave.offset);
+        var y = canvas.height/2
+          + Math.sin(x*wave.frequency + time*0.002 + wave.offset) * wave.amplitude
+          + Math.sin(x*wave.frequency*0.4 + time*0.003) * (wave.amplitude*0.45)
+          + me;
+        if (x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      }
+      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = wave.color;
+      ctx.globalAlpha = wave.opacity;
+      ctx.shadowBlur = 35;
+      ctx.shadowColor = wave.color;
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function animate() {
+      time++;
+      mouse.x += (target.x - mouse.x) * 0.1;
+      mouse.y += (target.y - mouse.y) * 0.1;
+      var grad = ctx.createLinearGradient(0,0,0,canvas.height);
+      grad.addColorStop(0, BG_TOP);
+      grad.addColorStop(1, BG_BOTTOM);
+      ctx.fillStyle = grad;
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
+      WAVES.forEach(drawWave);
+      requestAnimationFrame(animate);
+    }
+
+    requestAnimationFrame(animate);
+  })();
+  </script>
+
+</body>
+</html>

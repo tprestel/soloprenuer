@@ -1,0 +1,1617 @@
+<!--
+  templateType: "page"
+  isAvailableForNewContent: true
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/webp" href="https://244988351.fs1.hubspotusercontent-na2.net/hubfs/244988351/logos/superlaundry_favicon.webp">
+  <title>Laundry Pickup & Delivery in Cincinnati | Super Laundry</title>
+  <meta name="description" content="Laundry pickup and delivery in Cincinnati. We pick up, wash, dry, fold, and return to your door. Served from our Springdale location on Springfield Pike.">
+
+  <!-- Service Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Laundry Pickup and Delivery",
+    "serviceType": "Laundry Pickup and Delivery",
+    "description": "Super Laundry picks up your laundry, washes, dries, and folds it, then delivers it back to your door. Available from our Springdale location serving the greater Cincinnati area.",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Super Laundry Springdale",
+      "telephone": "(513) 376-7129",
+      "url": "https://www.superlaundry24.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "11627 Springfield Pike",
+        "addressLocality": "Springdale",
+        "addressRegion": "OH",
+        "postalCode": "45246",
+        "addressCountry": "US"
+      }
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Cincinnati",
+      "containedIn": "Ohio"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "servicePhone": {
+        "@type": "ContactPoint",
+        "telephone": "(513) 376-7129",
+        "contactType": "customer service"
+      }
+    }
+  }
+  </script>
+
+  <!-- FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I schedule a laundry pickup?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Call us at (513) 376-7129 to schedule your pickup. Our team at the Springdale location will work out a time that's convenient for you."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What areas do you serve for laundry pickup and delivery?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pickup and delivery is currently available from our Springdale location on Springfield Pike, serving the greater Cincinnati area. Call us at (513) 376-7129 to confirm whether we cover your address."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What detergent do you use for pickup and delivery orders?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We use fresh commercial-grade detergent on every order. If you have a preference or a sensitivity, let us know when you schedule your pickup and we'll do our best to accommodate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is pricing determined for laundry pickup and delivery?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pricing is based on the weight and volume of your laundry. Call us at (513) 376-7129 for current rates before scheduling your first pickup."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does laundry pickup and delivery take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We work quickly. Turnaround time depends on your order and current volume. When you schedule your pickup, we'll give you an estimated delivery window."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to be home for pickup or delivery?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We recommend being available for both pickup and delivery, but call us to discuss your situation — we can often work something out based on your address and building setup."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.superlaundry24.com"},
+      {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.superlaundry24.com/services"},
+      {"@type": "ListItem", "position": 3, "name": "Pickup &amp; Delivery", "item": "https://www.superlaundry24.com/services/pickup-delivery"}
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== DESIGN SYSTEM — Direction A ===== */
+    :root {
+      --green-dark: #1C4A25;
+      --green: #2D7F3C;
+      --green-light: #4A9B58;
+      --green-pale: #EAF4EC;
+      --cream: #F5F1E8;
+      --warm-white: #FAFAF6;
+      --text-dark: #1A2B1C;
+      --text-body: #3C4A3E;
+      --text-muted: #4E6150;
+      --border: #DDD8CE;
+      --shadow-sm: 0 2px 8px rgba(28,74,37,0.08);
+      --shadow-md: 0 4px 20px rgba(28,74,37,0.12);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-body);
+      background: var(--warm-white);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== REVIEW BANNER ===== */
+    .review-banner {
+      background: var(--green-dark);
+      color: rgba(255,255,255,0.9);
+      text-align: center;
+      padding: 10px 24px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .review-banner strong { color: #fff; font-weight: 700; }
+    .review-banner .sep { margin: 0 10px; opacity: 0.4; }
+
+
+    /* ===== AWARD BAR ===== */
+    .award-bar {
+      background: #B5D300;
+      padding: 9px 24px;
+      text-align: center;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .award-bar p {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #1C4A25;
+    }
+    .award-bar span { color: #1C4A25; font-weight: 700; }
+    .award-bar .dot { margin: 0 10px; opacity: 0.75; color: #1C4A25; font-size: 16px; vertical-align: middle; }
+
+    /* ===== NAV ===== */
+    nav {
+      background: var(--green-dark);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 68px;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .nav-logo img {
+      height: 44px;
+      width: auto;
+      mix-blend-mode: screen;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a.active { color: #fff; font-weight: 700; }
+    .nav-cta {
+      background: var(--green) !important;
+      color: #fff !important;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+    .nav-cta:hover { background: var(--green-light) !important; }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      min-width: 44px;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .mobile-menu {
+      display: none;
+      background: var(--green-dark);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 16px 24px 20px;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .mobile-menu ul li a {
+      display: flex;
+      align-items: center;
+      color: rgba(255,255,255,0.85);
+      font-size: 15px;
+      font-weight: 500;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      min-height: 44px;
+    }
+    .mobile-menu ul li a.active { color: #fff; font-weight: 700; }
+    .mobile-menu ul li:last-child a { border-bottom: none; }
+    .mobile-menu-cta { margin-top: 16px; }
+    .mobile-menu-cta a {
+      display: block;
+      background: var(--green);
+      color: #fff !important;
+      text-align: center;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 15px;
+      min-height: 44px;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      background: var(--green);
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 13px 28px;
+      border-radius: 8px;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 3px 12px rgba(45,127,60,0.3);
+      min-height: 44px;
+    }
+    .btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      background: transparent;
+      color: var(--text-dark);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 13px 28px;
+      border-radius: 8px;
+      border: 2px solid var(--border);
+      transition: border-color 0.2s, color 0.2s;
+      min-height: 44px;
+    }
+    .btn-outline:hover { border-color: var(--green-dark); color: var(--green-dark); }
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      background: #fff;
+      color: var(--green-dark);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 13px 28px;
+      border-radius: 8px;
+      transition: background 0.2s, transform 0.15s;
+      min-height: 44px;
+    }
+    .btn-white:hover { background: var(--cream); transform: translateY(-1px); }
+    .btn-outline-white {
+      display: inline-flex;
+      align-items: center;
+      background: transparent;
+      color: #fff;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 13px 28px;
+      border-radius: 8px;
+      border: 2px solid rgba(255,255,255,0.5);
+      transition: border-color 0.2s;
+      min-height: 44px;
+    }
+    .btn-outline-white:hover { border-color: #fff; }
+
+    /* ===== BREADCRUMB ===== */
+    .breadcrumb-bar {
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+    }
+    .breadcrumb-bar nav {
+      background: transparent;
+      position: static;
+      box-shadow: none;
+      z-index: auto;
+    }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+    .breadcrumb a { color: var(--green); }
+    .breadcrumb a:hover { color: var(--green-dark); }
+    .breadcrumb-sep { color: var(--border); }
+    .breadcrumb { background: transparent; }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      background: var(--cream);
+      padding: 64px 0 56px;
+      overflow: hidden;
+    }
+    .page-hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 64px;
+      align-items: center;
+    }
+    .page-hero-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      background: var(--green-pale);
+      padding: 5px 12px;
+      border-radius: 4px;
+      margin-bottom: 18px;
+    }
+    .page-hero h1 {
+      font-size: clamp(30px, 3.8vw, 50px);
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 18px;
+      line-height: 1.12;
+    }
+    .page-hero-sub {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 480px;
+      margin-bottom: 32px;
+    }
+    .page-hero-ctas {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .page-hero-photo {
+      position: relative;
+    }
+    .page-hero-photo img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+    }
+    .hero-photo-badge {
+      position: absolute;
+      bottom: -18px;
+      left: -18px;
+      background: var(--green-dark);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      box-shadow: var(--shadow-md);
+    }
+    .hero-photo-badge strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+    .hero-photo-badge span {
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ===== TRUST BAR ===== */
+    .trust-bar {
+      background: var(--green-dark);
+      padding: 22px 0;
+    }
+    .trust-bar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.88);
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .trust-icon { font-size: 20px; }
+    .trust-divider {
+      width: 1px;
+      height: 24px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* ===== SECTIONS ===== */
+    .section { padding: 80px 0; }
+    .section-alt { background: var(--cream); }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(26px, 3.2vw, 38px);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 540px;
+      line-height: 1.65;
+    }
+    .section-header { margin-bottom: 52px; }
+    .section-header-center { text-align: center; }
+    .section-header-center .section-sub { margin: 0 auto; }
+
+    /* ===== HOW IT WORKS ===== */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .steps-grid::before {
+      content: '';
+      position: absolute;
+      top: 52px;
+      left: calc(16.66% + 24px);
+      right: calc(16.66% + 24px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--green) 0%, var(--green-pale) 50%, var(--green) 100%);
+      z-index: 0;
+    }
+    .step-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 28px 32px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      box-shadow: var(--shadow-sm);
+    }
+    .step-card + .step-card { margin-left: 24px; }
+    .step-number {
+      width: 56px;
+      height: 56px;
+      background: var(--green-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      border: 4px solid var(--warm-white);
+      box-shadow: 0 0 0 2px var(--green);
+    }
+    .step-card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .step-card p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ===== WHAT'S INCLUDED ===== */
+    .included-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .included-photo {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      background: var(--cream);
+    }
+    .included-list { display: flex; flex-direction: column; gap: 0; }
+    .included-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .included-item:first-child { border-top: 1px solid var(--border); }
+    .included-check {
+      width: 24px;
+      height: 24px;
+      background: var(--green-pale);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .included-item h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 3px;
+    }
+    .included-item p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+    .pricing-note {
+      background: var(--green-pale);
+      border: 1px solid rgba(45,127,60,0.2);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      margin-top: 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .pricing-note-icon { font-size: 18px; flex-shrink: 0; }
+    .pricing-note p {
+      font-size: 13px;
+      color: var(--text-dark);
+      line-height: 1.55;
+    }
+    .pricing-note strong { color: var(--green-dark); }
+
+    /* ===== WHO IT'S FOR ===== */
+    .who-section {
+      background: var(--warm-white);
+      padding: 80px 0;
+    }
+    .who-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .who-left h2 {
+      font-size: clamp(24px, 3.5vw, 34px);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .who-left p {
+      font-size: 16px;
+      color: var(--text-body);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .use-case-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .use-case-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 18px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .use-case-icon {
+      width: 42px;
+      height: 42px;
+      background: var(--green-pale);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 20px;
+    }
+    .use-case-card h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 3px;
+    }
+    .use-case-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ===== SERVICE AREA ===== */
+    .area-section {
+      background: var(--cream);
+      padding: 80px 0;
+    }
+    .area-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .area-text h2 {
+      font-size: clamp(24px, 3.5vw, 34px);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .area-text p {
+      font-size: 16px;
+      color: var(--text-body);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .area-address-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .area-address-card h3 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+    .area-address-card .badge-springdale {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--green);
+      padding: 4px 9px;
+      border-radius: 4px;
+      margin-bottom: 14px;
+    }
+    .area-address-card .addr-line {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .area-address-card .addr-phone {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--green-dark);
+    }
+    .area-address-card .addr-phone a {
+      color: var(--green-dark);
+    }
+    .area-address-card .addr-phone a:hover {
+      color: var(--green);
+    }
+    .area-note {
+      background: var(--green-pale);
+      border: 1px solid rgba(45,127,60,0.2);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--text-dark);
+      line-height: 1.55;
+    }
+    .area-note strong { color: var(--green-dark); }
+
+    /* ===== CTA SECTION ===== */
+    .cta-section {
+      background: #0F2E17;
+      padding: 96px 0 88px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Faint decorative circles */
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      right: -120px;
+      bottom: -120px;
+      width: 560px;
+      height: 560px;
+      border: 1.5px solid rgba(255,255,255,0.045);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .cta-section::after {
+      content: '';
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      width: 340px;
+      height: 340px;
+      border: 1px solid rgba(255,255,255,0.03);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .cta-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(40px, 5.5vw, 78px);
+      line-height: 1.04;
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin: 0 0 44px;
+      max-width: 860px;
+    }
+    .cta-headline em {
+      color: #B5D300;
+      font-style: italic;
+    }
+    .cta-rule {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin: 0 0 44px;
+    }
+    .cta-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .cta-phone-block {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .cta-phone-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+    .cta-phone-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3.5vw, 46px);
+      color: #fff;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .cta-phone-number a { color: inherit; text-decoration: none; transition: color 0.2s; }
+    .cta-phone-number a:hover { color: rgba(255,255,255,0.75); }
+    .cta-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-end;
+    }
+    .cta-actions .btn-white {
+      white-space: nowrap;
+    }
+    .cta-location-link {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.2s;
+    }
+    .cta-location-link:hover { color: rgba(255,255,255,0.8); }
+    .cta-location-link svg { flex-shrink: 0; }
+
+    /* ===== FAQ SECTION ===== */
+    .faq-section {
+      background: var(--cream);
+      padding: 80px 0;
+    }
+    .faq-section h2 {
+      font-size: clamp(22px, 3.5vw, 32px);
+      font-weight: 700;
+      margin-bottom: 36px;
+    }
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #fff;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.45;
+      transition: background 0.15s;
+      min-height: 44px;
+    }
+    .faq-question:hover { background: var(--green-pale); }
+    .faq-question[aria-expanded="true"] { background: var(--green-pale); }
+    .faq-chevron {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      transition: transform 0.3s;
+      color: var(--green);
+    }
+    .faq-question[aria-expanded="true"] .faq-chevron {
+      transform: rotate(180deg);
+    }
+    .faq-answer {
+      padding: 0 24px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    .faq-answer.open {
+      max-height: 300px;
+      padding: 0 24px 20px;
+    }
+    .faq-answer p {
+      font-size: 15px;
+      color: var(--text-body);
+      line-height: 1.7;
+    }
+
+    /* ===== NEWSLETTER ===== */
+    /* ===== RELATED SERVICES ===== */
+    .related-section {
+      background: #1C4A25;
+      padding: 52px 0;
+    }
+    .related-heading {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+    .related-heading em {
+      font-style: italic;
+      color: #B5D300;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .related-card {
+      display: flex;
+      flex-direction: column;
+      border-radius: 12px;
+      overflow: hidden;
+      text-decoration: none;
+      background: #fff;
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+    }
+    .related-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.30);
+    }
+    .related-photo-wrap {
+      overflow: hidden;
+      height: 160px;
+      flex-shrink: 0;
+    }
+    .related-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.55s ease;
+    }
+    .related-card:hover .related-photo {
+      transform: scale(1.06);
+    }
+    .related-body {
+      padding: 18px 20px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .related-card-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 6px;
+    }
+    .related-card h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(15px, 1.8vw, 18px);
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+    .related-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 14px;
+    }
+    .related-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green);
+    }
+    .related-cta-arrow {
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+    .related-card:hover .related-cta-arrow {
+      transform: translateX(5px);
+    }
+
+    /* ===== NEWSLETTER ===== */
+    .newsletter-section { background: var(--cream); padding: 72px 0; }
+    .newsletter-inner {
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .newsletter-inner h2 { font-size: clamp(24px, 3vw, 34px); margin-bottom: 10px; }
+    .newsletter-inner p { font-size: 15px; color: var(--text-muted); margin-bottom: 28px; }
+    .newsletter-form { display: flex; flex-direction: column; gap: 12px; }
+    .newsletter-form input {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      padding: 14px 18px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .newsletter-form input:focus { border-color: var(--green); }
+    .newsletter-form button {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      background: var(--green);
+      color: #fff;
+      padding: 14px 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .newsletter-form button:hover { background: var(--green-light); }
+    .newsletter-fine { font-size: 12px; color: var(--text-muted); margin-top: 10px; }
+
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--green-dark);
+      color: rgba(255,255,255,0.72);
+      padding: 56px 0 32px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .footer-brand img {
+      height: 40px;
+      width: auto;
+      mix-blend-mode: screen;
+      margin-bottom: 16px;
+    }
+    .footer-brand p {
+      font-size: 13px;
+      line-height: 1.65;
+      max-width: 240px;
+    }
+    .footer-col h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 14px;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .footer-col ul li a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-contact-item {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 8px;
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1000px) {
+      .included-inner { grid-template-columns: 1fr; }
+      .included-photo { height: 280px; }
+      .who-inner { grid-template-columns: 1fr; gap: 40px; }
+      .area-inner { grid-template-columns: 1fr; gap: 40px; }
+      .newsletter-inner { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+
+      .page-hero { padding: 48px 0 40px; }
+      .page-hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .page-hero-photo { display: none; }
+      .page-hero h1 { font-size: 28px; }
+      .page-hero-sub { font-size: 15px; }
+
+      .trust-bar-inner { gap: 20px; justify-content: flex-start; }
+      .trust-divider { display: none; }
+
+      .section { padding: 56px 0; }
+      .who-section { padding: 56px 0; }
+      .area-section { padding: 56px 0; }
+
+      .steps-grid { grid-template-columns: 1fr; gap: 16px; }
+      .steps-grid::before { display: none; }
+      .step-card + .step-card { margin-left: 0; }
+
+      .faq-section { padding: 56px 0; }
+
+      .related-section { padding: 56px 0; }
+      .related-grid { grid-template-columns: 1fr; }
+      .related-photo-wrap { height: 190px; }
+      .newsletter-section { padding: 48px 0; }
+
+      .cta-section { padding: 64px 0 56px; }
+      .cta-bottom { flex-direction: column; align-items: flex-start; gap: 28px; }
+      .cta-actions { align-items: flex-start; }
+      .cta-actions .btn-white { width: 100%; justify-content: center; }
+      .related-photo { width: 100%; min-width: unset; height: 160px; }
+      .related-arrow { display: none; }
+
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-hamburger { display: flex; }
+      .page-hero-ctas { flex-direction: column; align-items: flex-start; }
+      .page-hero-ctas .btn-primary,
+      .page-hero-ctas .btn-outline { width: 100%; justify-content: center; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      print-color-adjust: exact !important;
+      -webkit-print-color-adjust: exact !important;
+      nav, .review-banner, .mobile-menu { display: none !important; }
+      .page-hero { padding: 24px 0; }
+      .cta-section { background: #1C4A25 !important; }
+      a[href]::after { content: none !important; }
+    }
+  </style>
+
+  <link rel="canonical" href="https://www.superlaundry24.com/services/pickup-delivery">
+  {{ standard_header_includes }}
+
+</head>
+<body>
+
+  {% include "SuperLaundry/partials/header.html" %}
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb-bar">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="/services">Services</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Pickup &amp; Delivery</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-inner">
+        <div class="page-hero-content">
+          <span class="page-hero-label">Pickup &amp; Delivery</span>
+          <h1>We Pick Up, Wash, Fold &amp; Deliver Back to Your Door</h1>
+          <p class="page-hero-sub">Skip the laundromat entirely. We come to you, handle everything — wash, dry, fold — and bring your clothes back clean. Served from our Springdale location, available across Cincinnati and surrounding areas.</p>
+          <div class="page-hero-ctas">
+            <a href="#locations" class="btn-primary">Find a Location Near You</a>
+            <a href="#faq" class="btn-outline">FAQ</a>
+          </div>
+        </div>
+        <div class="page-hero-photo">
+          <img loading="eager" src="/hubfs/244988351/images/gen-pickup-2.webp" alt="Laundry pickup and delivery service from Super Laundry Cincinnati">
+          <div class="hero-photo-badge">
+            <strong>Pickup &amp; Delivery</strong>
+            <span>Greater Cincinnati area</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="container">
+      <div class="trust-bar-inner">
+        <div class="trust-item"><span class="trust-icon">🚗</span> We come to you</div>
+        <div class="trust-divider"></div>
+        <div class="trust-item"><span class="trust-icon">🫧</span> Washed, dried &amp; folded</div>
+        <div class="trust-divider"></div>
+        <div class="trust-item"><span class="trust-icon">📍</span> Cincinnati &amp; surrounding areas</div>
+        <div class="trust-divider"></div>
+        <div class="trust-item"><span class="trust-icon">⭐</span> 1,700+ Google reviews</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="section-header section-header-center">
+        <p class="section-label">How It Works</p>
+        <h2 class="section-title">Three Steps. Zero Laundry Time.</h2>
+        <p class="section-sub">Call to schedule, we pick up from your door, and your clothes come back clean. That's it.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Schedule Your Pickup</h3>
+          <p>Call us at (513) 376-7129 or log in to your account at <a href="https://mylaundryorder.com" target="_blank" rel="noopener" style="color:var(--green-dark, #1C4A25); text-decoration:underline;">mylaundryorder.com</a> to set up your pickup. We'll confirm your address, agree on a time, and answer any questions before we arrive.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>We Wash &amp; Fold</h3>
+          <p>We bring your laundry to our Springdale facility and run it through our commercial washers and dryers. Everything gets washed, fully dried, and neatly folded — handled with care from start to finish.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Delivered Back Clean</h3>
+          <p>Your clean, folded laundry is delivered back to your door. Ready to put straight into the drawer. No sorting, no waiting, no trips to the laundromat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="included-inner">
+        <img loading="lazy" src="/hubfs/244988351/images/gen-pickup-4.webp" alt="Neatly folded and packaged laundry from Super Laundry pickup and delivery" class="included-photo">
+        <div>
+          <p class="section-label">What's Included</p>
+          <h2 class="section-title">Everything Handled for You</h2>
+          <div class="included-list">
+            <div class="included-item">
+              <div class="included-check">✓</div>
+              <div>
+                <h4>Pickup from Your Door</h4>
+                <p>We come to you at a time you set. No driving, no parking, no carrying laundry bags anywhere.</p>
+              </div>
+            </div>
+            <div class="included-item">
+              <div class="included-check">✓</div>
+              <div>
+                <h4>Full Wash &amp; Dry Cycle</h4>
+                <p>Cleaned in commercial-grade machines with fresh detergent. Right temperature for your load type. Fully dry — no damp items.</p>
+              </div>
+            </div>
+            <div class="included-item">
+              <div class="included-check">✓</div>
+              <div>
+                <h4>Neatly Folded</h4>
+                <p>Everything comes back folded and organized. Ready to go straight into the drawer or closet.</p>
+              </div>
+            </div>
+            <div class="included-item">
+              <div class="included-check">✓</div>
+              <div>
+                <h4>Clean Packaging</h4>
+                <p>Your laundry is returned packaged clean and protected. Treated with care from pickup to delivery.</p>
+              </div>
+            </div>
+            <div class="included-item">
+              <div class="included-check">✓</div>
+              <div>
+                <h4>Everyday Clothing &amp; Household Items</h4>
+                <p>Shirts, pants, socks, towels, bedding, and more. Call to ask about specific items before your first pickup.</p>
+              </div>
+            </div>
+          </div>
+          <div class="pricing-note">
+            <span class="pricing-note-icon">💬</span>
+            <p><strong>Call for pricing.</strong> Rates depend on the weight and volume of your order. We'll give you a clear quote before your first pickup — no surprises.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="who-section">
+    <div class="container">
+      <div class="who-inner">
+        <div class="who-left">
+          <p class="section-label">Who Uses This Service</p>
+          <h2>For anyone who'd rather spend that time on something else.</h2>
+          <p>Laundry is one of those things that just keeps coming back. Pickup and delivery turns it from a time-consuming chore into something that gets handled without you thinking about it.</p>
+          <p>Whether you're managing a busy household, working full-time with no room in your schedule, or simply living without in-unit laundry — this service is for you.</p>
+        </div>
+        <div class="who-right">
+          <div class="use-case-cards">
+            <div class="use-case-card">
+              <div class="use-case-icon" aria-hidden="true">👨‍👩‍👧‍👦</div>
+              <div>
+                <h4>Busy Families</h4>
+                <p>Managing laundry for a full household takes hours every week. Give that time back. We'll handle it while you handle everything else.</p>
+              </div>
+            </div>
+            <div class="use-case-card">
+              <div class="use-case-icon" aria-hidden="true">💼</div>
+              <div>
+                <h4>Working Professionals</h4>
+                <p>Long days, packed schedules, no time for laundry. Schedule a pickup before work, get your clothes back fresh by the end of the week.</p>
+              </div>
+            </div>
+            <div class="use-case-card">
+              <div class="use-case-icon" aria-hidden="true">🏠</div>
+              <div>
+                <h4>No In-Unit Laundry</h4>
+                <p>Apartment life without a washer and dryer means hauling bags and spending hours at a laundromat. Pickup and delivery removes that entirely.</p>
+              </div>
+            </div>
+            <div class="use-case-card">
+              <div class="use-case-icon" aria-hidden="true">🧺</div>
+              <div>
+                <h4>Anyone Who Wants It Done Right</h4>
+                <p>Commercial machines, fresh detergent, neatly folded. Your laundry comes back cleaner than a home washer can get it — and you didn't lift a finger.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE AREA -->
+  <section class="area-section" id="locations">
+    <div class="container">
+      <div class="area-inner">
+        <div class="area-text">
+          <p class="section-label">Service Area</p>
+          <h2>Currently serving Cincinnati and surrounding areas</h2>
+          <p>Laundry pickup and delivery is available from our Springdale location on Springfield Pike. We serve the greater Cincinnati area — call us to confirm we cover your address before scheduling your first pickup.</p>
+          <p>This service is expanding. If you're not sure whether we reach your neighborhood, the quickest way to find out is to give us a call.</p>
+          <div class="area-note">
+            <strong>Note:</strong> Pickup and delivery is currently available from the Springdale location only. Drop-off wash-dry-fold is available at all 5 staffed Super Laundry locations.
+          </div>
+        </div>
+        <div class="area-address-card">
+          <span class="badge-springdale">Pickup &amp; Delivery Hub</span>
+          <h3>Springdale</h3>
+          <p class="addr-line">
+            11627 Springfield Pike<br>
+            Springdale, OH 45246<br>
+            Hours: 7 AM – 10 PM daily
+          </p>
+          <p class="addr-phone">
+            <a href="tel:5133767129">(513) 376-7129</a>
+          </p>
+          <div style="margin-top: 20px;">
+            <a href="tel:5133767129" class="btn-primary" style="width:100%; justify-content:center;">Call to Schedule a Pickup</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="cta-headline">Ready to<br><em>never do laundry</em><br>again?</h2>
+      <hr class="cta-rule">
+      <div class="cta-bottom">
+        <div class="cta-phone-block">
+          <span class="cta-phone-label">Call to schedule</span>
+          <span class="cta-phone-number"><a href="tel:5133767129">(513) 376-7129</a></span>
+        </div>
+        <div class="cta-actions">
+          <a href="tel:5133767129" class="btn-white">Call to Schedule</a>
+          <a href="https://mylaundryorder.com" target="_blank" rel="noopener" class="btn-white">Log In &amp; Order Online</a>
+          <a href="/locations/springdale" class="cta-location-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Springdale Location
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <h2>Common questions</h2>
+      <div class="faq-list" role="list">
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq1">
+            How do I schedule a laundry pickup?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer" id="faq1" aria-hidden="true">
+            <p>Call us at (513) 376-7129 to schedule your pickup. Our team at the Springdale location will work out a time that's convenient for you and confirm your service area.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq2">
+            What areas do you serve for laundry pickup and delivery?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer" id="faq2" aria-hidden="true">
+            <p>Pickup and delivery is available from our Springdale location, serving the greater Cincinnati area. Call us at (513) 376-7129 to confirm whether we cover your address — the quickest way to find out is to give us a call.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq3">
+            What detergent do you use?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer" id="faq3" aria-hidden="true">
+            <p>We use fresh commercial-grade detergent on every order. If you have a sensitivity or a preference, let us know when you schedule your pickup and we'll do our best to accommodate.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq4">
+            How is pricing determined?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer" id="faq4" aria-hidden="true">
+            <p>Pricing is based on the weight and volume of your laundry. Call us at (513) 376-7129 and we'll give you a clear quote before your first pickup — no surprises when we deliver.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq5">
+            How long does it take?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer" id="faq5" aria-hidden="true">
+            <p>We work with a quick turnaround. When you schedule your pickup, we'll give you an estimated delivery window based on your order and current volume.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq6">
+            Do I need to be home for pickup or delivery?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer" id="faq6" aria-hidden="true">
+            <p>We recommend being available for both pickup and delivery. Call us to talk through your situation — depending on your address and building setup, we can often work something out.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RELATED SERVICES -->
+  <section class="related-section">
+    <div class="container">
+      <h2 class="related-heading">More ways to use <em>Super Laundry</em></h2>
+      <div class="related-grid">
+        <a href="/services/wash-and-fold" class="related-card">
+          <div class="related-photo-wrap">
+            <img loading="lazy" src="/hubfs/244988351/images/gen-wash-fold-1.webp" alt="Wash and fold drop-off service" class="related-photo">
+          </div>
+          <div class="related-body">
+            <p class="related-card-label">Drop-Off Service</p>
+            <h3>Wash &amp; Fold Drop-Off</h3>
+            <p>Drop off your laundry in person and pick it up washed, dried, and folded. Available at 5 Cincinnati locations.</p>
+            <span class="related-cta">Learn more <span class="related-cta-arrow">→</span></span>
+          </div>
+        </a>
+        <a href="/services/24-hour-laundry" class="related-card">
+          <div class="related-photo-wrap">
+            <img loading="lazy" src="/hubfs/244988351/images/north-college-int2.webp" alt="24-hour laundry open all night" class="related-photo">
+          </div>
+          <div class="related-body">
+            <p class="related-card-label">24-Hour Laundry</p>
+            <h3>Open Any Time</h3>
+            <p>Four locations never close. Self-service laundry when you need it — midnight, 5 AM, or any hour in between.</p>
+            <span class="related-cta">Learn more <span class="related-cta-arrow">→</span></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-inner">
+        <p class="section-label">Stay Connected</p>
+        <h2>News, Deals &amp; Updates</h2>
+        <p>Be the first to hear about new locations, promotions, and community events like Laundry Love days.</p>
+        <form class="newsletter-form" id="newsletter-signup">
+          <input type="text" placeholder="Your name" name="firstname">
+          <input type="email" placeholder="Your email address" name="email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+        <div id="newsletter-thank-you" style="display:none; color:#1C4A25; font-size:16px; font-weight:600; padding:12px 0;">Thanks for subscribing!</div>
+        <p class="newsletter-fine">No spam. You can unsubscribe any time.</p>
+      </div>
+    </div>
+  </section>
+
+  {% include "SuperLaundry/partials/footer.html" %}
+
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const expanded = this.getAttribute('aria-expanded') === 'true';
+        const answerId = this.getAttribute('aria-controls');
+        const answer = document.getElementById(answerId);
+
+        // Close all
+        document.querySelectorAll('.faq-question').forEach(function(b) {
+          b.setAttribute('aria-expanded', 'false');
+        });
+        document.querySelectorAll('.faq-answer').forEach(function(a) {
+          a.classList.remove('open');
+          a.setAttribute('aria-hidden', 'true');
+        });
+
+        // Toggle current
+        if (!expanded) {
+          this.setAttribute('aria-expanded', 'true');
+          answer.classList.add('open');
+          answer.setAttribute('aria-hidden', 'false');
+        }
+      });
+    });
+
+    // Newsletter form — intercept submit, show thank you in place
+    var newsletterForm = document.getElementById('newsletter-signup');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var emailInput = newsletterForm.querySelector('[name="email"]');
+        if (!emailInput || !emailInput.value.trim()) { emailInput && emailInput.focus(); return; }
+        newsletterForm.style.display = 'none';
+        document.getElementById('newsletter-thank-you').style.display = 'block';
+      });
+    }
+  </script>
+
+  {{ standard_footer_includes }}
+
+</body>
+</html>

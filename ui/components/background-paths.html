@@ -1,0 +1,285 @@
+<!--
+  BACKGROUND PATHS — Reusable Component
+  ──────────────────────────────────────
+  Animated SVG path background with letter-by-letter title reveal.
+
+  TO CUSTOMIZE:
+  - Change --bp-accent to your brand color (used for stroke color)
+  - Change data-title on the section to set headline text
+  - Edit button text and href
+  - Set dark/light by adding class="dark" to the <section>
+
+  USAGE MODES:
+  1. STANDALONE HERO — use as-is with the .bp section
+  2. BACKGROUND LAYER — drop .bp-paths divs + script into any
+     section with position:relative. The paths sit behind content
+     when z-indexed properly. For best results with a background
+     image, layer like this:
+       - z-index: 0  → paths (behind everything)
+       - z-index: 1  → image/overlay (semi-transparent so paths show through)
+       - z-index: 2  → content (text, buttons)
+
+  PERFORMANCE NOTES:
+  - Keyframes animate stroke-dashoffset ONLY (no opacity).
+    Animating opacity on 72 paths causes repaint storms that
+    flash/flicker overlapping text and buttons.
+  - will-change + isolation: isolate on the container forces
+    the SVG into its own compositing layer.
+  - Stroke visibility is controlled via static stroke-opacity
+    per path (0.25 base, increasing per path).
+-->
+
+<style>
+  .bp {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #fff;
+    --bp-accent: #F25B19;
+  }
+
+  .bp.dark {
+    background: #0a0a0a;
+  }
+
+  /* SVG path layers */
+  .bp-paths {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    will-change: contents;
+    isolation: isolate;
+  }
+
+  .bp-paths svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .bp-paths path {
+    stroke: var(--bp-accent);
+    fill: none;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: bp-draw linear infinite;
+    will-change: stroke-dashoffset;
+  }
+
+  @keyframes bp-draw {
+    0%   { stroke-dashoffset: 1; }
+    50%  { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: -1; }
+  }
+
+  /* Content overlay */
+  .bp-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 900px;
+    padding: 0 24px;
+    animation: bp-fadeIn 2s ease both;
+  }
+
+  @keyframes bp-fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .bp-title {
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin-bottom: 40px;
+    color: transparent;
+  }
+
+  .bp-word {
+    display: inline-block;
+    margin-right: 0.25em;
+  }
+
+  .bp-word:last-child {
+    margin-right: 0;
+  }
+
+  .bp-letter {
+    display: inline-block;
+    background: linear-gradient(to right, #171717, rgba(64,64,64,0.8));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: bp-letterIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .bp.dark .bp-letter {
+    background: linear-gradient(to right, #fff, rgba(255,255,255,0.8));
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  @keyframes bp-letterIn {
+    from { opacity: 0; transform: translateY(80px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Button */
+  .bp-btn-wrap {
+    display: inline-block;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.08), rgba(255,255,255,0.08));
+    padding: 1px;
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .bp-btn-wrap:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  }
+
+  .bp.dark .bp-btn-wrap {
+    background: linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(0,0,0,0.1));
+  }
+
+  .bp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    border-radius: 15px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.95);
+    color: #000;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    text-decoration: none;
+  }
+
+  .bp.dark .bp-btn {
+    background: rgba(0,0,0,0.95);
+    color: #fff;
+    border-color: rgba(255,255,255,0.1);
+  }
+
+  .bp-btn:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+
+  .bp.dark .bp-btn:hover {
+    background: #000;
+    box-shadow: 0 4px 16px rgba(100,100,100,0.2);
+  }
+
+  .bp-btn-arrow {
+    opacity: 0.7;
+    transition: all 0.3s ease;
+  }
+
+  .bp-btn:hover .bp-btn-arrow {
+    opacity: 1;
+    transform: translateX(6px);
+  }
+
+  .bp-btn-label {
+    opacity: 0.9;
+  }
+
+  .bp-btn:hover .bp-btn-label {
+    opacity: 1;
+  }
+</style>
+
+<!-- ─── MARKUP ──────────────────────────────────────────── -->
+<!--
+  STANDALONE HERO: Use this section as-is.
+  BACKGROUND ONLY: Copy just the two .bp-paths divs + the
+  script into your own section. Set --bp-accent on the parent.
+-->
+
+<section class="bp" data-title="Background Paths">
+  <div class="bp-paths" id="bp-paths-1"></div>
+  <div class="bp-paths" id="bp-paths-2"></div>
+
+  <div class="bp-content">
+    <h1 class="bp-title" id="bp-title"></h1>
+
+    <div class="bp-btn-wrap">
+      <a href="#" class="bp-btn">
+        <span class="bp-btn-label">Discover Excellence</span>
+        <span class="bp-btn-arrow">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SCRIPT ──────────────────────────────────────────── -->
+<script>
+(function() {
+  var section = document.querySelector('.bp');
+  var title = section.getAttribute('data-title') || 'Background Paths';
+
+  // Generate title with per-letter animation delays
+  var titleEl = document.getElementById('bp-title');
+  var words = title.split(' ');
+  words.forEach(function(word, wi) {
+    var wordSpan = document.createElement('span');
+    wordSpan.className = 'bp-word';
+    word.split('').forEach(function(letter, li) {
+      var s = document.createElement('span');
+      s.className = 'bp-letter';
+      s.textContent = letter;
+      s.style.animationDelay = (wi * 0.1 + li * 0.03) + 's';
+      wordSpan.appendChild(s);
+    });
+    titleEl.appendChild(wordSpan);
+  });
+
+  // Generate SVG paths
+  function buildPaths(containerId, position) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 696 316');
+    svg.setAttribute('fill', 'none');
+    svg.setAttribute('preserveAspectRatio', 'none');
+
+    for (var i = 0; i < 36; i++) {
+      var p = position;
+      var d = 'M-' + (380 - i*5*p) + ' -' + (189 + i*6) +
+              'C-' + (380 - i*5*p) + ' -' + (189 + i*6) +
+              ' -' + (312 - i*5*p) + ' ' + (216 - i*6) +
+              ' ' + (152 - i*5*p) + ' ' + (343 - i*6) +
+              'C' + (616 - i*5*p) + ' ' + (470 - i*6) +
+              ' ' + (684 - i*5*p) + ' ' + (875 - i*6) +
+              ' ' + (684 - i*5*p) + ' ' + (875 - i*6);
+
+      var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', d);
+      path.setAttribute('stroke-width', (0.5 + i * 0.03).toFixed(2));
+      path.setAttribute('stroke-opacity', (0.25 + i * 0.02).toFixed(3));
+      path.setAttribute('pathLength', '1');
+      path.style.animationDuration = (20 + Math.random() * 10).toFixed(1) + 's';
+      path.style.animationDelay = (-Math.random() * 20).toFixed(1) + 's';
+
+      svg.appendChild(path);
+    }
+
+    container.appendChild(svg);
+  }
+
+  buildPaths('bp-paths-1', 1);
+  buildPaths('bp-paths-2', -1);
+})();
+</script>

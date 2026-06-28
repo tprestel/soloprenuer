@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Direction C — Super Laundry Cincinnati</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== DESIGN SYSTEM ===== */
+    :root {
+      --green-dark: #1C4A25;
+      --green: #2D7F3C;
+      --green-light: #4A9B58;
+      --green-pale: #EAF4EC;
+      --green-pale2: #F0F7F1;
+      --white: #FFFFFF;
+      --gray-50: #F8F9FA;
+      --gray-100: #F1F3F4;
+      --gray-200: #E4E7EB;
+      --gray-300: #CBD2D9;
+      --text-dark: #0F1710;
+      --text-body: #2D3A2E;
+      --text-muted: #52655A;
+      --shadow-sm: 0 1px 4px rgba(0,0,0,0.06), 0 2px 10px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.1);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --radius-lg: 20px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-body);
+      background: var(--white);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      color: var(--text-dark);
+      line-height: 1.15;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ===== REVIEW BANNER ===== */
+    .review-banner {
+      background: var(--green-dark);
+      border-bottom: 3px solid var(--green);
+      padding: 10px 24px;
+      text-align: center;
+    }
+    .review-banner p {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+    .review-banner span { color: #7DD88A; }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 0 var(--gray-200);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 64px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .nav-logo img { height: 38px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text-dark); }
+    .nav-cta {
+      background: var(--green) !important;
+      color: #fff !important;
+      padding: 9px 18px;
+      border-radius: 7px;
+      font-weight: 600 !important;
+      transition: background 0.15s !important;
+    }
+    .nav-cta:hover { background: var(--green-dark) !important; }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-dark);
+      border-radius: 2px;
+    }
+
+    /* ===== HERO — CLEAN GRID ===== */
+    .hero {
+      background: var(--white);
+      padding: 80px 0 72px;
+      overflow: hidden;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .hero-left {}
+    .hero-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      background: var(--green-pale);
+      padding: 5px 12px;
+      border-radius: 4px;
+      margin-bottom: 22px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 4.2vw, 58px);
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+    .hero-sub {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 460px;
+      margin-bottom: 36px;
+      line-height: 1.65;
+    }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--green);
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 13px 26px;
+      border-radius: 8px;
+      transition: background 0.15s, transform 0.15s;
+      box-shadow: 0 3px 12px rgba(45,127,60,0.3);
+    }
+    .btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-block;
+      background: var(--gray-100);
+      color: var(--text-dark);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 13px 26px;
+      border-radius: 8px;
+      transition: background 0.15s;
+    }
+    .btn-secondary:hover { background: var(--gray-200); }
+    .hero-proof {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .hero-proof-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .proof-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+    .hero-right {
+      position: relative;
+    }
+    .hero-photo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 240px 200px;
+      gap: 12px;
+    }
+    .hero-photo-grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--radius);
+    }
+    .hero-photo-grid img:first-child {
+      grid-row: span 2;
+    }
+    .hero-award-chip {
+      position: absolute;
+      bottom: -16px;
+      left: -20px;
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-award-icon { font-size: 28px; }
+    .hero-award-text strong {
+      display: block;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    .hero-award-text span {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ===== STAT BAR ===== */
+    .stat-bar {
+      background: var(--green-dark);
+      padding: 0;
+    }
+    .stat-bar-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: none;
+    }
+    .stat-item {
+      padding: 28px 32px;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+      display: block;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* ===== SECTIONS ===== */
+    .section { padding: 88px 0; }
+    .section-gray { background: var(--gray-50); }
+    .section-white { background: var(--white); }
+    .section-dark { background: var(--green-dark); }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 12px;
+    }
+    .section-tag-light { color: rgba(255,255,255,0.55); }
+    .section-title {
+      font-size: clamp(28px, 3.6vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 14px;
+    }
+    .section-title-light { color: #fff; }
+    .section-sub {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 540px;
+      line-height: 1.65;
+    }
+    .section-sub-light { color: rgba(255,255,255,0.68); }
+    .section-header { margin-bottom: 52px; }
+    .section-header-center { text-align: center; }
+    .section-header-center .section-sub { margin: 0 auto; }
+
+    /* ===== SERVICES ===== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .service-card {
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .service-card:hover {
+      border-color: var(--green);
+      box-shadow: 0 4px 20px rgba(45,127,60,0.1);
+    }
+    .service-card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .service-card-body { padding: 28px; }
+    .service-chip {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--green);
+      background: var(--green-pale);
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+    .service-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+    .service-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+    .service-avail {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .service-avail::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      flex-shrink: 0;
+    }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-dark);
+      transition: color 0.15s;
+    }
+    .btn-ghost:hover { color: var(--green); }
+
+    /* ===== LAUNDRY LOVE ===== */
+    .love-section { background: var(--green-dark); }
+    .love-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .love-right h2 {
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+    .love-right > p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .love-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .love-meta-item {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+    }
+    .love-meta-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.42);
+      margin-bottom: 5px;
+    }
+    .love-meta-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.4;
+    }
+    .love-locations {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .love-loc-pill {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.88);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 6px;
+    }
+    .btn-love-c {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 12px 20px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .btn-love-c:hover { background: rgba(255,255,255,0.18); }
+    .love-left { position: relative; }
+    .love-photo-main {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+    }
+    .love-photo-float {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 155px;
+      height: 155px;
+      border-radius: var(--radius);
+      object-fit: cover;
+      border: 4px solid var(--green-dark);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    }
+
+    /* ===== REWARDS ===== */
+    .rewards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .reward-card {
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .reward-card-a { background: var(--green-dark); }
+    .reward-card-b { background: linear-gradient(135deg, #1D5C30, #2D7F3C); }
+    .reward-card::after {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 240px; height: 240px;
+      background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .reward-top-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 12px;
+    }
+    .reward-card h3 {
+      font-size: 28px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+    .reward-card h3 mark {
+      background: transparent;
+      color: #A8E6B0;
+    }
+    .reward-card p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+    .btn-reward {
+      display: inline-block;
+      background: rgba(255,255,255,0.13);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.88);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 9px 18px;
+      border-radius: 7px;
+      transition: background 0.2s;
+    }
+    .btn-reward:hover { background: rgba(255,255,255,0.2); }
+
+    /* ===== LOCATIONS ===== */
+    .location-filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+    .filter-btn {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 7px;
+      border: 1.5px solid var(--gray-200);
+      background: var(--white);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-btn:hover { border-color: var(--green); color: var(--green); }
+    .filter-btn.active {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+    .locations-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .location-card {
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .location-card:hover {
+      border-color: var(--green-light);
+      box-shadow: var(--shadow-md);
+    }
+    .location-card.hidden { display: none; }
+    .location-photo {
+      width: 100%;
+      height: 155px;
+      object-fit: cover;
+    }
+    .location-body { padding: 20px; }
+    .location-name {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+    .location-hours {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .location-hours::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .location-addr {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    .location-tags {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .loc-tag {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 4px;
+      background: var(--green-pale2);
+      color: var(--green-dark);
+    }
+    .loc-tag-love { background: #FFF0F0; color: #B84040; }
+    .location-actions { display: flex; gap: 8px; }
+    .btn-loc-main {
+      flex: 1;
+      text-align: center;
+      background: var(--green);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 9px 8px;
+      border-radius: 7px;
+      transition: background 0.15s;
+    }
+    .btn-loc-main:hover { background: var(--green-dark); }
+    .btn-loc-ghost {
+      flex: 1;
+      text-align: center;
+      background: var(--gray-100);
+      color: var(--text-dark);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 9px 8px;
+      border-radius: 7px;
+      transition: background 0.15s;
+    }
+    .btn-loc-ghost:hover { background: var(--gray-200); }
+
+    /* ===== WHY CHOOSE ===== */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .why-card {
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      transition: border-color 0.2s;
+    }
+    .why-card:hover { border-color: var(--green-light); }
+    .why-icon-wrap {
+      width: 44px;
+      height: 44px;
+      background: var(--green-pale);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+    .why-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+    .why-card p { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .testimonial-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+    }
+    .testimonial-stars { color: #F5A623; font-size: 15px; margin-bottom: 14px; letter-spacing: 2px; }
+    .testimonial-text {
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+    .testimonial-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .testimonial-person { display: flex; align-items: center; gap: 10px; }
+    .testimonial-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--green-dark);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0;
+    }
+    .testimonial-name { font-size: 13px; font-weight: 700; color: var(--text-dark); }
+    .testimonial-loc { font-size: 11px; color: var(--text-muted); }
+    .google-mark {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .google-g { color: #4285F4; font-weight: 800; }
+
+    /* ===== HIRING ===== */
+    .hiring-strip {
+      background: var(--green-pale2);
+      border-top: 2px solid var(--green-pale);
+      border-bottom: 2px solid var(--green-pale);
+      padding: 22px 0;
+    }
+    .hiring-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .hiring-left { display: flex; align-items: center; gap: 14px; }
+    .hiring-emoji { font-size: 24px; }
+    .hiring-copy strong {
+      display: block;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    .hiring-copy span { font-size: 13px; color: var(--text-muted); }
+    .btn-hiring-c {
+      background: var(--green-dark);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 10px 22px;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .btn-hiring-c:hover { background: var(--green); }
+
+    /* ===== FAQ ===== */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0 40px;
+    }
+    .faq-item { border-bottom: 1px solid var(--gray-200); }
+    .faq-question {
+      width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 18px 0;
+      background: none; border: none; cursor: pointer; text-align: left;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px; font-weight: 600;
+      color: var(--text-dark);
+      transition: color 0.15s;
+    }
+    .faq-question:hover { color: var(--green); }
+    .faq-arrow { font-size: 15px; color: var(--green); flex-shrink: 0; transition: transform 0.2s; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-answer {
+      display: none;
+      padding: 0 0 18px;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-answer { display: block; }
+
+    /* ===== NEWSLETTER ===== */
+    .newsletter-section {
+      background: var(--gray-50);
+      padding: 72px 0;
+    }
+    .newsletter-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .newsletter-inner h2 {
+      font-size: clamp(24px, 3vw, 36px);
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .newsletter-inner p {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+    .newsletter-form { display: flex; flex-direction: column; gap: 10px; }
+    .newsletter-form input {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      padding: 13px 16px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 8px;
+      background: var(--white);
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .newsletter-form input:focus { border-color: var(--green); }
+    .newsletter-form button {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      background: var(--green);
+      color: #fff;
+      padding: 13px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .newsletter-form button:hover { background: var(--green-dark); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--text-dark);
+      padding: 64px 0 0;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand img {
+      height: 36px; width: auto;
+      mix-blend-mode: screen;
+      margin-bottom: 16px;
+    }
+    .footer-brand p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.52);
+      line-height: 1.65;
+      max-width: 260px;
+      margin-bottom: 20px;
+    }
+    .social-link {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 7px;
+      color: rgba(255,255,255,0.65);
+      font-size: 13px; font-weight: 700;
+      transition: background 0.15s;
+    }
+    .social-link:hover { background: var(--green); color: #fff; }
+    .footer-col h4 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 16px;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.9); }
+    .footer-contact { margin-top: 20px; }
+    .footer-contact-item {
+      display: flex; gap: 8px; align-items: flex-start;
+      font-size: 14px; color: rgba(255,255,255,0.55);
+      margin-bottom: 8px;
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 20px 0;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.50); }
+    .footer-bottom-links { display: flex; gap: 20px; list-style: none; }
+    .footer-bottom-links a {
+      font-size: 13px; color: rgba(255,255,255,0.50);
+      transition: color 0.15s;
+    }
+    .footer-bottom-links a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ===== MOBILE ===== */
+    @media screen and (max-width: 960px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo-grid { display: none; }
+      .hero-award-chip { display: none; }
+      .stat-bar-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .love-inner { grid-template-columns: 1fr; gap: 40px; }
+      .love-photo-float { display: none; }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .rewards-grid { grid-template-columns: 1fr; }
+    }
+
+    @media screen and (max-width: 640px) {
+      .section { padding: 56px 0; }
+      .container { padding: 0 20px; }
+      .hero { padding: 56px 0; }
+      .services-grid, .why-grid, .locations-grid { grid-template-columns: 1fr; }
+      .stat-bar-inner { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .hiring-inner { flex-direction: column; align-items: flex-start; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    @page { margin: 0; }
+    @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      html, body { height: auto !important; overflow: visible !important; }
+      body { padding: 0 !important; }
+      .review-banner { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- REVIEW BANNER -->
+  <div class="review-banner">
+    <p><span>Design Direction C — Clear Signal (Clean &amp; Professional)</span> &nbsp;·&nbsp; For Review Only &nbsp;·&nbsp; All copy is draft — we are approving visual direction, not final wording</p>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="../assets/logos/SuperLaundry_Logo.webp" alt="Super Laundry Cincinnati">
+      </a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#">News</a></li>
+        <li><a href="#">Partner</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">We're Hiring</a></li>
+        <li><a href="#locations" class="nav-cta">Find a Location</a></li>
+      </ul>
+      <button class="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <div class="hero-tagline">6 Locations Across Cincinnati</div>
+          <h1>Cincinnati's Biggest &amp; Best Laundromats</h1>
+          <p class="hero-sub">100+ commercial washers and dryers at every location. Open 24/7. No quarters needed — pay any way you want.</p>
+          <div class="hero-ctas">
+            <a href="#locations" class="btn-primary">Find a Location</a>
+            <a href="#services" class="btn-secondary">Our Services</a>
+          </div>
+          <div class="hero-proof">
+            <div class="hero-proof-item"><span class="proof-dot"></span> Open 24/7</div>
+            <div class="hero-proof-item"><span class="proof-dot"></span> 100+ Machines</div>
+            <div class="hero-proof-item"><span class="proof-dot"></span> Tap to Pay</div>
+            <div class="hero-proof-item"><span class="proof-dot"></span> Free Parking</div>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="hero-photo-grid">
+            <img src="../assets/images/bondhill3-web.jpg" alt="Bond Hill location">
+            <img src="../assets/images/springdale-web.jpg" alt="Springdale location">
+            <img src="../assets/images/avondale-web.jpg" alt="Avondale location">
+          </div>
+          <div class="hero-award-chip">
+            <span class="hero-award-icon">🏆</span>
+            <div class="hero-award-text">
+              <strong>Best Laundromat — Cincinnati 2025</strong>
+              <span>BusinessRate · Verified Google Reviews</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAT BAR -->
+  <div class="stat-bar">
+    <div class="container" style="padding:0">
+      <div class="stat-bar-inner">
+        <div class="stat-item">
+          <span class="stat-num">6</span>
+          <span class="stat-label">Locations</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">100+</span>
+          <span class="stat-label">Machines Each</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">1,700+</span>
+          <span class="stat-label">Google Reviews</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">24/7</span>
+          <span class="stat-label">Always Open</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="section section-white" id="services">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">What We Offer</p>
+        <h2 class="section-title">Three Ways to Get It Done</h2>
+        <p class="section-sub">Do it yourself, drop it off, or let us come to you. Available across our Cincinnati neighborhoods.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <img src="../assets/images/svc-self-service-web.jpg" alt="Self-service laundry" class="service-card-img">
+          <div class="service-card-body">
+            <span class="service-chip">Self-Service</span>
+            <h3>Do It Yourself</h3>
+            <p>100+ commercial machines per location — 2-load to 8-load capacity. Folding tables, carts, attendants. Available at all 6 locations.</p>
+            <p class="service-avail">All 6 locations</p>
+            <a href="/services/self-service" class="btn-ghost">Learn more →</a>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="../assets/images/svc-dropoff-web.jpg" alt="Wash dry fold drop-off" class="service-card-img">
+          <div class="service-card-body">
+            <span class="service-chip">Drop-Off</span>
+            <h3>Drop Off, Pick Up Clean</h3>
+            <p>Leave your laundry with us. Come back to it washed, dried, and folded. Shorten your laundry day — skip the wait.</p>
+            <p class="service-avail">All staffed locations</p>
+            <a href="/services/wash-and-fold" class="btn-ghost">Learn more →</a>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="../assets/images/svc-pickup-web.jpg" alt="Pickup and delivery" class="service-card-img">
+          <div class="service-card-body">
+            <span class="service-chip">Pickup &amp; Delivery</span>
+            <h3>We Come to You</h3>
+            <p>Schedule a pickup, we wash and fold everything, and deliver it back to your door. Currently Springdale — expanding.</p>
+            <p class="service-avail">Springdale · Expanding soon</p>
+            <a href="/services/pickup-delivery" class="btn-ghost">Learn more →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAUNDRY LOVE -->
+  <section class="section love-section">
+    <div class="container">
+      <div class="love-inner">
+        <div class="love-left">
+          <img src="../assets/images/westwood-ext.jpeg" alt="Westwood location" class="love-photo-main">
+          <img src="../assets/images/avondale-web.jpg" alt="Avondale location" class="love-photo-float">
+        </div>
+        <div class="love-right">
+          <p class="section-tag section-tag-light">Community</p>
+          <h2>Free Laundry Days for Those Who Need It</h2>
+          <p>Super Laundry partners with <strong style="color:#fff">Laundry Love Cincinnati</strong>, a nonprofit providing free laundry to families facing financial hardship. Every month, two of our locations open at no cost to neighbors who need it most.</p>
+          <div class="love-meta-grid">
+            <div class="love-meta-item">
+              <p class="love-meta-label">When</p>
+              <p class="love-meta-value">2nd Wednesday · 6–8 PM Monthly</p>
+            </div>
+            <div class="love-meta-item">
+              <p class="love-meta-label">How Much</p>
+              <p class="love-meta-value">Individuals: 2 loads · Families: 4 loads</p>
+            </div>
+          </div>
+          <div class="love-locations">
+            <span class="love-loc-pill">Westwood — 2455 Harrison Ave</span>
+            <span class="love-loc-pill">Avondale — 3545 Reading Rd</span>
+          </div>
+          <a href="/partner" class="btn-love-c">Learn About Laundry Love →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REWARDS -->
+  <section class="section section-gray">
+    <div class="container">
+      <div class="section-header section-header-center">
+        <p class="section-tag" style="justify-content:center">Rewards Program</p>
+        <h2 class="section-title">Earn Rewards Every Time You Wash</h2>
+        <p class="section-sub">Load up, come back, watch your balance grow. Every location, every time.</p>
+      </div>
+      <div class="rewards-grid">
+        <div class="reward-card reward-card-a">
+          <p class="reward-top-label">All Locations</p>
+          <h3>Load $20, Get <mark>$1 Free</mark></h3>
+          <p>Add $20 or more to your account and we automatically add a free dollar — every time, no minimum trips, no expiry.</p>
+          <a href="#" class="btn-reward">Get the App</a>
+        </div>
+        <div class="reward-card reward-card-b">
+          <p class="reward-top-label">Springdale Bonus</p>
+          <h3>Spend $30, Earn <mark>$3 Back</mark></h3>
+          <p>At Springdale, your rewards go further. Spend $30 and earn $3 back, on top of all the standard rewards program benefits.</p>
+          <a href="/locations/springdale" class="btn-reward">Visit Springdale</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATIONS -->
+  <section class="section section-white" id="locations">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Find Us</p>
+        <h2 class="section-title">6 Locations Across Cincinnati</h2>
+        <p class="section-sub">Avondale, Bond Hill, Westwood, North College Hill, Springdale, and Allison St. There's a Super Laundry near you.</p>
+      </div>
+      <div class="location-filters">
+        <button class="filter-btn active" data-filter="all">All Locations</button>
+        <button class="filter-btn" data-filter="open-24-7">Open 24/7</button>
+        <button class="filter-btn" data-filter="pickup-delivery">Pickup &amp; Delivery</button>
+        <button class="filter-btn" data-filter="drop-off">Drop-Off</button>
+        <button class="filter-btn" data-filter="rewards-program">Rewards Program</button>
+        <button class="filter-btn" data-filter="laundry-love">Laundry Love</button>
+      </div>
+      <div class="locations-grid" id="locationsGrid">
+
+        <div class="location-card" data-tags="drop-off pickup-delivery rewards-program">
+          <img src="../assets/images/springdale-web.jpg" alt="Springdale" class="location-photo">
+          <div class="location-body">
+            <p class="location-name">Springdale</p>
+            <p class="location-hours">7 AM – 10 PM Daily</p>
+            <p class="location-addr">11627 Springfield Pike · Springdale, OH 45246<br>(513) 376-7129</p>
+            <div class="location-tags">
+              <span class="loc-tag">Drop-Off</span>
+              <span class="loc-tag">Pickup &amp; Delivery</span>
+              <span class="loc-tag">Rewards</span>
+            </div>
+            <div class="location-actions">
+              <a href="#" class="btn-loc-main">Get Directions</a>
+              <a href="/locations/springdale" class="btn-loc-ghost">View Details</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="location-card" data-tags="open-24-7 drop-off rewards-program laundry-love">
+          <img src="../assets/images/avondale-web.jpg" alt="Avondale" class="location-photo">
+          <div class="location-body">
+            <p class="location-name">Avondale</p>
+            <p class="location-hours">Open 24/7</p>
+            <p class="location-addr">3545 Reading Rd · Cincinnati, OH<br>(513) 873-5939</p>
+            <div class="location-tags">
+              <span class="loc-tag">24/7</span>
+              <span class="loc-tag">Drop-Off</span>
+              <span class="loc-tag">Rewards</span>
+              <span class="loc-tag loc-tag-love">❤ Laundry Love</span>
+            </div>
+            <div class="location-actions">
+              <a href="#" class="btn-loc-main">Get Directions</a>
+              <a href="/locations/avondale" class="btn-loc-ghost">View Details</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="location-card" data-tags="open-24-7 drop-off rewards-program">
+          <img src="../assets/images/bondhill3-web.jpg" alt="Bond Hill" class="location-photo">
+          <div class="location-body">
+            <p class="location-name">Bond Hill</p>
+            <p class="location-hours">Open 24/7</p>
+            <p class="location-addr">4368 Reading Rd · Cincinnati, OH<br>(513) 873-5939</p>
+            <div class="location-tags">
+              <span class="loc-tag">24/7</span>
+              <span class="loc-tag">Drop-Off</span>
+              <span class="loc-tag">Rewards</span>
+            </div>
+            <div class="location-actions">
+              <a href="#" class="btn-loc-main">Get Directions</a>
+              <a href="/locations/bond-hill" class="btn-loc-ghost">View Details</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="location-card" data-tags="open-24-7 drop-off rewards-program laundry-love">
+          <img src="../assets/images/westwood-ext.jpeg" alt="Westwood" class="location-photo">
+          <div class="location-body">
+            <p class="location-name">Westwood</p>
+            <p class="location-hours">Open 24/7</p>
+            <p class="location-addr">2455 Harrison Ave · Cincinnati, OH<br>(513) 873-5939</p>
+            <div class="location-tags">
+              <span class="loc-tag">24/7</span>
+              <span class="loc-tag">Drop-Off</span>
+              <span class="loc-tag">Rewards</span>
+              <span class="loc-tag loc-tag-love">❤ Laundry Love</span>
+            </div>
+            <div class="location-actions">
+              <a href="#" class="btn-loc-main">Get Directions</a>
+              <a href="/locations/westwood" class="btn-loc-ghost">View Details</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="location-card" data-tags="open-24-7 drop-off rewards-program">
+          <img src="../assets/images/north-college-ext.jpeg" alt="North College Hill" class="location-photo">
+          <div class="location-body">
+            <p class="location-name">North College Hill</p>
+            <p class="location-hours">Open 24/7</p>
+            <p class="location-addr">Cincinnati, OH<br>(513) 873-5939</p>
+            <div class="location-tags">
+              <span class="loc-tag">24/7</span>
+              <span class="loc-tag">Drop-Off</span>
+              <span class="loc-tag">Rewards</span>
+            </div>
+            <div class="location-actions">
+              <a href="#" class="btn-loc-main">Get Directions</a>
+              <a href="/locations/north-college-hill" class="btn-loc-ghost">View Details</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="location-card" data-tags="rewards-program">
+          <img src="../assets/images/allison-web.jpg" alt="Allison St" class="location-photo">
+          <div class="location-body">
+            <p class="location-name">Allison St</p>
+            <p class="location-hours">6 AM – 11 PM Daily</p>
+            <p class="location-addr">Cincinnati, OH<br>(513) 873-5939</p>
+            <div class="location-tags">
+              <span class="loc-tag">Self-Service</span>
+              <span class="loc-tag">Coin-Operated</span>
+              <span class="loc-tag">Rewards</span>
+            </div>
+            <div class="location-actions">
+              <a href="#" class="btn-loc-main">Get Directions</a>
+              <a href="/locations/allison-st" class="btn-loc-ghost">View Details</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE -->
+  <section class="section section-gray">
+    <div class="container">
+      <div class="section-header section-header-center">
+        <p class="section-tag">Why Super Laundry</p>
+        <h2 class="section-title">Built for Cincinnati Neighborhoods</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon-wrap">🫧</div>
+          <h3>100+ Washers &amp; Dryers</h3>
+          <p>Every location has 100+ commercial machines — 2-load up to 8-load capacity. No wait, no cramped rows, no broken machines.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon-wrap">🕐</div>
+          <h3>Open 24/7</h3>
+          <p>Four of six locations are open around the clock. Nurses, shift workers, parents — we're here whenever you need us.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon-wrap">💳</div>
+          <h3>Pay Your Way</h3>
+          <p>CASH · CARD · TAP. Apple Pay, Google Pay, credit/debit, smart card, app, cash. No quarters needed at most locations.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon-wrap">🅿️</div>
+          <h3>Free Parking at the Door</h3>
+          <p>Pull up and load up. Free dedicated parking at every Super Laundry location — no hiking across a parking lot.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon-wrap">👋</div>
+          <h3>Friendly Attendants</h3>
+          <p>Real people on-site to help with machines, answer questions, and make your visit smooth. Always staffed.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon-wrap">📍</div>
+          <h3>6 Cincinnati Locations</h3>
+          <p>The largest independent laundromat network in the metro. Avondale, Bond Hill, Westwood, North College Hill, Springdale, Allison St.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section section-white">
+    <div class="container">
+      <div class="section-header section-header-center">
+        <p class="section-tag">Reviews</p>
+        <h2 class="section-title">1,700+ Google Reviews Across Cincinnati</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Best laundromat in the area, hands down. Machines are always clean and working, the attendants are helpful, and I love that I can pay with my phone. No more hunting for quarters."</p>
+          <div class="testimonial-footer">
+            <div class="testimonial-person">
+              <div class="testimonial-avatar">M</div>
+              <div>
+                <p class="testimonial-name">Marcus T.</p>
+                <p class="testimonial-loc">Avondale location</p>
+              </div>
+            </div>
+            <div class="google-mark"><span class="google-g">G</span> Google</div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Huge location with so many machines — I got all five kids' laundry done in one load on the big washer. Drop-off service is a lifesaver for the weeks I just can't deal with it myself."</p>
+          <div class="testimonial-footer">
+            <div class="testimonial-person">
+              <div class="testimonial-avatar">D</div>
+              <div>
+                <p class="testimonial-name">Danielle R.</p>
+                <p class="testimonial-loc">North College Hill</p>
+              </div>
+            </div>
+            <div class="google-mark"><span class="google-g">G</span> Google</div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Open at 3 AM, which is exactly what I need as a night shift worker. Clean, well-lit, safe to be in alone. They actually think about who uses a laundromat and when."</p>
+          <div class="testimonial-footer">
+            <div class="testimonial-person">
+              <div class="testimonial-avatar">J</div>
+              <div>
+                <p class="testimonial-name">James K.</p>
+                <p class="testimonial-loc">Bond Hill location</p>
+              </div>
+            </div>
+            <div class="google-mark"><span class="google-g">G</span> Google</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIRING -->
+  <div class="hiring-strip">
+    <div class="container">
+      <div class="hiring-inner">
+        <div class="hiring-left">
+          <span class="hiring-emoji">👋</span>
+          <div class="hiring-copy">
+            <strong>Join the Super Laundry Team</strong>
+            <span>We're hiring at multiple Cincinnati locations — flexible schedules, friendly environment.</span>
+          </div>
+        </div>
+        <a href="#" class="btn-hiring-c">See Open Positions</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="section section-white">
+    <div class="container">
+      <div class="section-header section-header-center">
+        <p class="section-tag">FAQ</p>
+        <h2 class="section-title">Common Questions</h2>
+      </div>
+      <div class="faq-grid">
+        <div>
+          <div class="faq-item">
+            <button class="faq-question">What are your hours?<span class="faq-arrow">▾</span></button>
+            <div class="faq-answer">Most locations are open 24/7. Springdale: 7 AM–10 PM daily. Allison St: 6 AM–11 PM daily.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Do I need quarters?<span class="faq-arrow">▾</span></button>
+            <div class="faq-answer">No quarters needed at most locations — we accept tap-to-pay, credit/debit, smart card, app, and cash. Allison St is coin-operated.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">How does drop-off wash-dry-fold work?<span class="faq-arrow">▾</span></button>
+            <div class="faq-answer">Drop off at any staffed location. Come back to laundry that's been washed, dried, and folded. Ask the attendant for turnaround time when you drop off.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Is pickup and delivery everywhere?<span class="faq-arrow">▾</span></button>
+            <div class="faq-answer">Currently available from Springdale. Expanding to more locations. Call (513) 873-5939 to schedule or check availability.</div>
+          </div>
+        </div>
+        <div>
+          <div class="faq-item">
+            <button class="faq-question">What size machines do you have?<span class="faq-arrow">▾</span></button>
+            <div class="faq-answer">100+ commercial washers and dryers per location — 2-load up to 8-load capacity. Great for comforters, blankets, and large family loads.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Is parking free?<span class="faq-arrow">▾</span></button>
+            <div class="faq-answer">Yes — every Super Laundry location has free dedicated parking right at the door.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">How does the rewards program work?<span class="faq-arrow">▾</span></button>
+            <div class="faq-answer">Load $20, get a free dollar added automatically. At Springdale, spend $30 and earn $3 back. Manage rewards via the mobile app.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Which locations offer wash-dry-fold?<span class="faq-arrow">▾</span></button>
+            <div class="faq-answer">All staffed locations: Springdale, Avondale, Bond Hill, Westwood, and North College Hill. Allison St is self-service and coin-operated.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-inner">
+        <p class="section-tag" style="justify-content:center;display:flex">Stay Connected</p>
+        <h2>News, Deals &amp; Community Events</h2>
+        <p>Be the first to hear about new locations, promotions, and Laundry Love days in your neighborhood.</p>
+        <form class="newsletter-form">
+          <input type="text" placeholder="Your name">
+          <input type="email" placeholder="Email address">
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="../assets/logos/SuperLaundry_Logo.webp" alt="Super Laundry Cincinnati">
+          <p>Cincinnati's Biggest &amp; Best Laundromats. 6 neighborhood locations — open 24/7, CASH · CARD · TAP.</p>
+          <a href="https://www.facebook.com/super-laundry-139540492777073" class="social-link" aria-label="Facebook">f</a>
+        </div>
+        <div class="footer-col">
+          <h4>Locations</h4>
+          <ul class="footer-links">
+            <li><a href="/locations/springdale">Springdale</a></li>
+            <li><a href="/locations/avondale">Avondale</a></li>
+            <li><a href="/locations/bond-hill">Bond Hill</a></li>
+            <li><a href="/locations/westwood">Westwood</a></li>
+            <li><a href="/locations/north-college-hill">North College Hill</a></li>
+            <li><a href="/locations/allison-st">Allison St</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="/services">Services</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Partner</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/store-policies">Store Policies</a></li>
+            <li><a href="/faq">FAQ</a></li>
+          </ul>
+          <div class="footer-contact">
+            <div class="footer-contact-item">📞 <a href="tel:5138735939" style="color:rgba(255,255,255,0.55)">(513) 873-5939</a></div>
+            <div class="footer-contact-item">✉ <a href="mailto:info@superlaundry24.com" style="color:rgba(255,255,255,0.55)">info@superlaundry24.com</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Super Laundry Cincinnati. All rights reserved.</p>
+        <ul class="footer-bottom-links">
+          <li><a href="/store-policies">Store Policies</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Location filter
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.location-card').forEach(card => {
+          if (filter === 'all') {
+            card.classList.remove('hidden');
+          } else {
+            const tags = (card.dataset.tags || '').split(' ');
+            card.classList.toggle('hidden', !tags.includes(filter));
+          }
+        });
+      });
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
