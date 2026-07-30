@@ -1096,6 +1096,70 @@
       .reviews-summary { gap: 12px; }
       .reviews-summary-divider { display: none; }
     }
+
+    /* ===== DROP-OFF LAUNDRY BANNER (evergreen) ===== */
+    .dof-band {
+      background: var(--green-dark);
+      /* lime rule guarantees separation even when the section above
+         is also dark green (e.g. Springdale's pickup highlight) */
+      border-top: 4px solid #B5D300;
+      padding: 52px 0;
+    }
+    .dof-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 44px;
+      align-items: center;
+    }
+    .dof-img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      display: block;
+    }
+    .dof-text h2 {
+      color: #fff;
+      font-size: clamp(24px, 2.8vw, 34px);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .dof-text p {
+      color: rgba(255,255,255,0.78);
+      font-size: 16px;
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+    .dof-avail {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 24px;
+    }
+    .dof-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #B5D300;
+      color: #1C4A25;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 26px;
+      border-radius: 8px;
+      min-height: 48px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .dof-cta:hover { background: #C9E81C; transform: translateY(-1px); }
+
+    @media screen and (max-width: 900px) {
+      .dof-inner { grid-template-columns: 1fr; gap: 28px; }
+    }
+    @media screen and (max-width: 600px) {
+      .dof-band { padding: 40px 0; }
+      .dof-cta { width: 100%; justify-content: center; }
+    }
+    /* ===== END DROP-OFF LAUNDRY BANNER ===== */
   </style>
   <link rel="canonical" href="https://www.superlaundry24.com/locations/north-college-hill">
   {{ standard_header_includes }}
@@ -1257,6 +1321,24 @@
         </div>
         <div class="pickup-highlight-photo">
           <img src="/hubfs/244988351/images/north-college-int.webp" alt="Inside Super Laundry North College Hill — open 24/7" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Drop-Off Laundry Banner -->
+  <section class="dof-band">
+    <div class="container">
+      <div class="dof-inner">
+        <img class="dof-img" src="/hubfs/244988351/images/promo-drop-off-laundry.webp" alt="We do drop off laundry at Super Laundry - wash, dry and fold service" loading="lazy" width="1672" height="941">
+        <div class="dof-text">
+          <h2>We do drop-off laundry</h2>
+          <p>Drop it off dirty, pick it up fresh. Bring your laundry in and we&rsquo;ll wash, dry, and fold it for you &mdash; no appointment needed.</p>
+          <p class="dof-avail">Available at this location during staffed hours.</p>
+          <a href="/services/wash-and-fold" class="dof-cta">
+            How drop-off works
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
         </div>
       </div>
     </div>

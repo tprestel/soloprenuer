@@ -321,6 +321,75 @@
     .hero-badge-icon { font-size: 16px; }
 
     /* ===== AWARD STRIP ===== */
+    /* ============================================================
+       GRAND OPENING HOMEPAGE CALLOUT - SPRINGDALE - JULY 28-30, 2026
+       >>> REMOVE THIS ENTIRE CSS BLOCK AFTER 7/30/2026 <<<
+       (also remove the .ho-* rules in the media query below)
+       ============================================================ */
+    .ho-promo {
+      background: var(--green-dark);
+      border-bottom: 4px solid #B5D300;
+      padding: 28px 24px;
+    }
+    .ho-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+    .ho-img {
+      width: 240px;
+      height: auto;
+      flex-shrink: 0;
+      border-radius: var(--radius-sm);
+      display: block;
+    }
+    .ho-text { flex: 1; min-width: 0; }
+    .ho-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #1C4A25;
+      background: #B5D300;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .ho-text h2 {
+      font-size: clamp(22px, 2.4vw, 30px);
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .ho-text p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .ho-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #B5D300;
+      color: #1C4A25;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 26px;
+      border-radius: 8px;
+      min-height: 48px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .ho-cta:hover { background: #C9E81C; transform: translateY(-1px); }
+    /* ===== END GRAND OPENING HOMEPAGE CALLOUT CSS ===== */
+
     .award-strip {
       background: var(--cream);
       border-bottom: 1px solid var(--border);
@@ -899,6 +968,10 @@
       .love-photo-accent { display: none; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .rewards-grid { grid-template-columns: 1fr; }
+      /* --- grand opening callout (remove after 7/30/2026) --- */
+      .ho-inner { flex-wrap: wrap; gap: 20px; }
+      .ho-img { width: 180px; }
+      .ho-cta { width: 100%; justify-content: center; }
     }
 
     @media screen and (max-width: 640px) {
@@ -913,6 +986,10 @@
       .hiring-inner { flex-direction: column; align-items: flex-start; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
       .testimonials-grid { grid-template-columns: 1fr; }
+      /* --- grand opening callout (remove after 7/30/2026) --- */
+      .ho-promo { padding: 24px; }
+      .ho-inner { flex-direction: column; align-items: flex-start; }
+      .ho-img { width: 100%; }
     }
   </style>
 
@@ -938,6 +1015,28 @@
       </div>
     </div>
   </section>
+
+  <!-- ============================================================
+       GRAND OPENING CALLOUT - SPRINGDALE - JULY 28-30, 2026
+       >>> REMOVE THIS ENTIRE SECTION AFTER 7/30/2026 <<<
+       Also remove: the .ho-* CSS block and the .ho-* rules in the
+       960px and 640px media queries.
+       ============================================================ -->
+  <section class="ho-promo">
+    <div class="ho-inner">
+      <img class="ho-img" src="/hubfs/244988351/images/promo-grand-opening-half-off.webp" alt="Super Laundry Springdale grand opening, July 28th through 30th - half off selected washers" loading="lazy" width="1672" height="941">
+      <div class="ho-text">
+        <span class="ho-eyebrow">We&rsquo;re Open!</span>
+        <h2>Our Springdale Grand Opening</h2>
+        <p>&frac12; off selected washers and a free taco with your wash &mdash; July 28, 29 &amp; 30 at 11627 Springfield Pike.</p>
+      </div>
+      <a href="/locations/springdale#grand-opening" class="ho-cta">
+        See the details
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </section>
+  <!-- ===== END GRAND OPENING CALLOUT ===== -->
 
   <!-- AWARD STRIP -->
   <div class="award-strip">

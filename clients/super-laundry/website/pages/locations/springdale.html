@@ -161,6 +161,43 @@
   }
   </script>
 
+  <!-- ===== GRAND OPENING EVENT SCHEMA — REMOVE AFTER 7/30/2026 ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Super Laundry Springdale Grand Opening",
+    "description": "Three-day grand opening at Super Laundry Springdale. Half off selected washers from 8 AM to 3 PM, and a free taco with your wash from 11 AM to 3 PM, July 28-30.",
+    "startDate": "2026-07-28T08:00:00-04:00",
+    "endDate": "2026-07-30T15:00:00-04:00",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "image": [
+      "https://www.superlaundry24.com/assets/images/promo-grand-opening-half-off.webp",
+      "https://www.superlaundry24.com/assets/images/promo-grand-opening-taco.webp"
+    ],
+    "location": {
+      "@type": "Place",
+      "name": "Super Laundry — Springdale",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "11627 Springfield Pike",
+        "addressLocality": "Springdale",
+        "addressRegion": "OH",
+        "postalCode": "45246",
+        "addressCountry": "US"
+      }
+    },
+    "organizer": {
+      "@type": "Organization",
+      "name": "Super Laundry Cincinnati",
+      "url": "https://www.superlaundry24.com"
+    },
+    "isAccessibleForFree": true
+  }
+  </script>
+  <!-- ===== END GRAND OPENING EVENT SCHEMA ===== -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1161,6 +1198,100 @@
       color: rgba(255,255,255,0.50);
     }
 
+    /* ============================================================
+       GRAND OPENING PROMO — SPRINGDALE ONLY - JULY 28-30, 2026
+       >>> REMOVE THIS ENTIRE CSS BLOCK AFTER 7/30/2026 <<<
+       (also remove the .go-* rules in the media query below)
+       ============================================================ */
+    .go-promo {
+      background: var(--cream);
+      /* the page hero above is also cream - this rule is what separates
+         the two, and it picks up the lime from the flyer art */
+      border-top: 4px solid #B5D300;
+      padding: 60px 0 64px;
+      /* offset for #grand-opening jump so the sticky nav doesn't cover the top */
+      scroll-margin-top: 84px;
+    }
+    .go-head {
+      max-width: 720px;
+      margin-bottom: 36px;
+    }
+    .go-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      background: var(--green-pale);
+      padding: 5px 12px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+    .go-promo h2 {
+      font-size: clamp(28px, 3.4vw, 42px);
+      line-height: 1.12;
+      margin-bottom: 16px;
+    }
+    .go-lede {
+      font-size: 17px;
+      color: var(--text-body);
+      line-height: 1.65;
+      margin-bottom: 22px;
+    }
+    .go-list {
+      list-style: none;
+      margin-bottom: 22px;
+    }
+    .go-list li {
+      font-size: 17px;
+      color: var(--text-dark);
+      line-height: 1.6;
+      padding: 5px 0;
+    }
+    .go-list strong { font-weight: 700; }
+    .go-time {
+      color: var(--green);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .go-note {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+    .go-note strong { color: var(--text-dark); font-weight: 600; }
+
+    .go-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    /* the flyers have near-white backgrounds - on cream they need an
+       edge, same radius/shadow treatment as the hero photo */
+    .go-images img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+    }
+
+    .go-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .go-fine {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 580px;
+    }
+    /* ===== END GRAND OPENING PROMO CSS ===== */
+
     /* ===== RESPONSIVE ===== */
     @media screen and (max-width: 900px) {
       .page-hero-inner { grid-template-columns: 1fr; }
@@ -1187,7 +1318,77 @@
       .footer-bottom { flex-direction: column; align-items: flex-start; }
       .reviews-summary { gap: 12px; }
       .reviews-summary-divider { display: none; }
+
+      /* --- grand opening promo (remove after 7/30/2026) --- */
+      .go-promo { padding: 40px 0 44px; }
+      .go-images { grid-template-columns: 1fr; gap: 18px; }
+      .go-foot { flex-direction: column; align-items: flex-start; }
+      .go-foot .btn-primary { width: 100%; justify-content: center; }
     }
+
+    /* ===== DROP-OFF LAUNDRY BANNER (evergreen) ===== */
+    .dof-band {
+      background: var(--green-dark);
+      /* lime rule guarantees separation even when the section above
+         is also dark green (e.g. Springdale's pickup highlight) */
+      border-top: 4px solid #B5D300;
+      padding: 52px 0;
+    }
+    .dof-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 44px;
+      align-items: center;
+    }
+    .dof-img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      display: block;
+    }
+    .dof-text h2 {
+      color: #fff;
+      font-size: clamp(24px, 2.8vw, 34px);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .dof-text p {
+      color: rgba(255,255,255,0.78);
+      font-size: 16px;
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+    .dof-avail {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 24px;
+    }
+    .dof-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #B5D300;
+      color: #1C4A25;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 26px;
+      border-radius: 8px;
+      min-height: 48px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .dof-cta:hover { background: #C9E81C; transform: translateY(-1px); }
+
+    @media screen and (max-width: 900px) {
+      .dof-inner { grid-template-columns: 1fr; gap: 28px; }
+    }
+    @media screen and (max-width: 600px) {
+      .dof-band { padding: 40px 0; }
+      .dof-cta { width: 100%; justify-content: center; }
+    }
+    /* ===== END DROP-OFF LAUNDRY BANNER ===== */
   </style>
   <link rel="canonical" href="https://www.superlaundry24.com/locations/springdale">
   {{ standard_header_includes }}
@@ -1307,6 +1508,42 @@
     </div>
   </div>
 
+  <!-- ============================================================
+       GRAND OPENING PROMO - SPRINGDALE ONLY - JULY 28-30, 2026
+       >>> REMOVE THIS ENTIRE SECTION AFTER 7/30/2026 <<<
+       Also remove: the Event schema in <head>, the .go-* CSS block,
+       and the .go-* rules in the 600px media query.
+       ============================================================ -->
+  <section class="go-promo" id="grand-opening">
+    <div class="container">
+
+      <div class="go-head">
+        <span class="go-eyebrow">We&rsquo;re Open!</span>
+        <h2>Our Springdale Grand Opening</h2>
+        <p class="go-lede">We&rsquo;re celebrating the grand opening of our Springdale location with three days of deals &mdash; Tuesday, July 28 through Thursday, July 30. Both offers run all three days.</p>
+        <ul class="go-list">
+          <li><strong>&frac12; off selected washers</strong> &mdash; <span class="go-time">8 AM to 3 PM</span></li>
+          <li><strong>Free taco with your wash</strong> &mdash; <span class="go-time">11 AM to 3 PM</span></li>
+        </ul>
+      </div>
+
+      <div class="go-images">
+        <img src="/hubfs/244988351/images/promo-grand-opening-half-off.webp" alt="Super Laundry Springdale grand opening, July 28th through 30th - half off selected washers from 8 AM to 3 PM" loading="lazy" width="1672" height="941">
+        <img src="/hubfs/244988351/images/promo-grand-opening-taco.webp" alt="Super Laundry Springdale grand opening - free taco with your wash on July 28th, 29th and 30th from 11 AM to 3 PM" loading="lazy" width="1672" height="941">
+      </div>
+
+      <div class="go-foot">
+        <p class="go-fine">Grand opening offers are good at the Springdale location only &mdash; 11627 Springfield Pike. Our five other Cincinnati locations are not running this promotion.</p>
+        <a href="https://www.google.com/maps/dir//11627+Springfield+Pike,+Springdale+OH+45246" target="_blank" rel="noopener" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Get Directions
+        </a>
+      </div>
+
+    </div>
+  </section>
+  <!-- ===== END GRAND OPENING PROMO ===== -->
+
   <!-- Services at This Location -->
   <section class="services-section">
     <div class="container">
@@ -1390,10 +1627,28 @@
             </div>
           </div>
           <a href="tel:5133767129" class="btn-white">Call to Schedule — (513) 376-7129</a>
-          <p style="margin-top:14px; font-size:13px; color:rgba(255,255,255,0.65);">Already have an account? <a href="https://mylaundryorder.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.9); text-decoration:underline;">Log in at mylaundryorder.com</a> to schedule online.</p>
+          <p style="margin-top:14px; font-size:13px; color:rgba(255,255,255,0.65);">Already have an account? <a href="https://www.mylaundryorder.com/?s=1764694270197x952659338183218000" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.9); text-decoration:underline;">Log in at mylaundryorder.com</a> to schedule online.</p>
         </div>
         <div class="pickup-highlight-photo">
           <img src="/hubfs/244988351/images/gen-pickup-1.webp" alt="Laundry pickup and delivery service" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Drop-Off Laundry Banner -->
+  <section class="dof-band">
+    <div class="container">
+      <div class="dof-inner">
+        <img class="dof-img" src="/hubfs/244988351/images/promo-drop-off-laundry.webp" alt="We do drop off laundry at Super Laundry - wash, dry and fold service" loading="lazy" width="1672" height="941">
+        <div class="dof-text">
+          <h2>We do drop-off laundry</h2>
+          <p>Drop it off dirty, pick it up fresh. Bring your laundry in and we&rsquo;ll wash, dry, and fold it for you &mdash; no appointment needed.</p>
+          <p class="dof-avail">Available at this location during staffed hours.</p>
+          <a href="/services/wash-and-fold" class="dof-cta">
+            How drop-off works
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
         </div>
       </div>
     </div>
